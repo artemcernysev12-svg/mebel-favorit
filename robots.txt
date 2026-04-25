@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /docs/
+Disallow: /catalog-data/
+Disallow: /stock-data/
+
+Sitemap: https://artemcernysev12-svg.github.io/mebel-favorit/sitemap.xml
