@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /docs/
 Disallow: /catalog-data/
 Disallow: /stock-data/
 
