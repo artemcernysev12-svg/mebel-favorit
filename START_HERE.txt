@@ -9,6 +9,6 @@
 - INSTRUKTSIYA_STATISTIKA.txt     — как подключить Метрику и админ-панель
 - CHANGELOG.txt                   — что нового в этой версии
 
-САЙТ: https://artemcernysev12-svg.github.io/mebel-favorit/
-АДМИН-ПАНЕЛЬ: https://artemcernysev12-svg.github.io/mebel-favorit/?admin=mebel2026
+САЙТ: https://xn----8sbbglbyuf1awzu4i.xn--p1ai/
+АДМИН-ПАНЕЛЬ: https://xn----8sbbglbyuf1awzu4i.xn--p1ai/?admin=mebel2026
    (код mebel2026 не забудь поменять — см. инструкцию)

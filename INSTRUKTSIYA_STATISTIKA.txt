@@ -47,7 +47,7 @@
 1. Зайди на https://webmaster.yandex.ru
 2. Войди по своему Яндекс-аккаунту
 3. Нажми "Добавить сайт"
-4. Введи: https://artemcernysev12-svg.github.io/mebel-favorit/
+4. Введи: https://xn----8sbbglbyuf1awzu4i.xn--p1ai/
 5. Яндекс предложит несколько способов подтверждения. Выбери:
    "Мета-тег" (он самый простой)
 6. Скопируй из инструкции часть, которая в кавычках после content=
@@ -66,7 +66,7 @@
 
 11. После этого в Вебмастере зайди в "Индексирование" → "Файлы Sitemap"
     и добавь ссылку:
-    https://artemcernysev12-svg.github.io/mebel-favorit/sitemap.xml
+    https://xn----8sbbglbyuf1awzu4i.xn--p1ai/sitemap.xml
 
 
 ===================================================================
@@ -78,7 +78,7 @@
 1. Зайди на https://search.google.com/search-console
 2. Войди по своему Google-аккаунту
 3. Нажми "Добавить ресурс" → "Префикс URL"
-4. Введи: https://artemcernysev12-svg.github.io/mebel-favorit/
+4. Введи: https://xn----8sbbglbyuf1awzu4i.xn--p1ai/
 5. Google предложит способы подтверждения. Выбери "HTML-тег".
 6. Скопируй значение content="..." (длинная строка)
 
@@ -97,7 +97,7 @@
 ===================================================================
 
 УЖЕ РАБОТАЕТ. Открывается по секретной ссылке:
-https://artemcernysev12-svg.github.io/mebel-favorit/?admin=mebel2026
+https://xn----8sbbglbyuf1awzu4i.xn--p1ai/?admin=mebel2026
 
 ВАЖНО: код "mebel2026" — стандартный, его НУЖНО поменять на свой,
 чтобы посторонние не могли посмотреть статистику.
@@ -110,7 +110,7 @@ https://artemcernysev12-svg.github.io/mebel-favorit/?admin=mebel2026
        const ADMIN_CODE = 'artem-favorit-2026';
 4. Сохрани файл.
 5. Теперь панель открывается только по адресу:
-   https://artemcernysev12-svg.github.io/mebel-favorit/?admin=artem-favorit-2026
+   https://xn----8sbbglbyuf1awzu4i.xn--p1ai/?admin=artem-favorit-2026
 
 ЧТО ПОКАЗЫВАЕТ ПАНЕЛЬ:
 - Счётчики действий: открыто карточек, нажатий ВК, звонков, кликов на Авито
@@ -156,7 +156,7 @@ https://artemcernysev12-svg.github.io/mebel-favorit/?admin=mebel2026
 • Диван угловой модульный раскладной
 • Артикул: BRS-150
 • Цена: 108 750 ₽
-• На сайте: https://artemcernysev12-svg.github.io/mebel-favorit/?item=4155668774
+• На сайте: https://xn----8sbbglbyuf1awzu4i.xn--p1ai/?item=4155668774
 • На Авито: https://www.avito.ru/...
 Подскажите наличие и доставку
 
