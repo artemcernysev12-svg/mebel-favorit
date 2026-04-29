@@ -5128,5 +5128,35 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 });
 </script>
+
+<!-- Цель Яндекс.Метрики: все клики по ссылкам Авито -> avito_click -->
+<script>
+(function () {
+  if (window.__AVITO_METRIKA_GOAL_BIND__) return;
+  window.__AVITO_METRIKA_GOAL_BIND__ = true;
+
+  const GOAL_ID = 'avito_click';
+  const isAvitoUrl = function (href) {
+    return /(^|\.)avito\.(ru|com)(\/|$|\?)/i.test(String(href || '').replace(/^https?:\/\//i, '').replace(/^www\./i, ''));
+  };
+
+  document.addEventListener('click', function (event) {
+    const link = event.target && event.target.closest ? event.target.closest('a[href]') : null;
+    if (!link) return;
+
+    const href = link.href || link.getAttribute('href') || '';
+    if (!isAvitoUrl(href)) return;
+
+    try {
+      if (window.statsTrack) {
+        window.statsTrack(GOAL_ID, { href: href });
+      } else if (typeof ym === 'function') {
+        ym(108770964, 'reachGoal', GOAL_ID);
+      }
+    } catch (_) {}
+  }, true);
+})();
+</script>
+
 </body>
 </html>
