@@ -9,6 +9,6 @@
 - INSTRUKTSIYA_STATISTIKA.txt     — как подключить Метрику и админ-панель
 - CHANGELOG.txt                   — что нового в этой версии
 
-САЙТ: https://xn----8sbbglbyuf1awzu4i.xn--p1ai/
-АДМИН-ПАНЕЛЬ: https://xn----8sbbglbyuf1awzu4i.xn--p1ai/?admin=mebel2026
+САЙТ: https://мебель-фаворит.рф/
+АДМИН-ПАНЕЛЬ: https://мебель-фаворит.рф/?admin=mebel2026
    (код mebel2026 не забудь поменять — см. инструкцию)
