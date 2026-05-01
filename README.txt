@@ -46,7 +46,7 @@ https://github.com/artemcernysev12-svg/mebel-favorit
 ШАГ 3: Подожди 1-2 минуты
 --------------------------
 GitHub Pages пересоберёт сайт. Открой:
-https://artemcernysev12-svg.github.io/mebel-favorit/
+https://мебель-фаворит.рф/
 
 ШАГ 4: Проверь основное
 ------------------------
@@ -71,18 +71,18 @@ https://artemcernysev12-svg.github.io/mebel-favorit/
 
 4. ПРОВЕРЬ АДМИН-ПАНЕЛЬ
    Открой:
-   https://artemcernysev12-svg.github.io/mebel-favorit/?admin=mebel2026
+   https://мебель-фаворит.рф/?admin=mebel2026
 
    Должна появиться панель справа со статистикой.
    ОБЯЗАТЕЛЬНО поменяй код "mebel2026" на свой —
    см. INSTRUKTSIYA_STATISTIKA.txt, часть 4.
 
 5. ПРОВЕРЬ ССЫЛКИ НА КАТЕГОРИИ
-   https://artemcernysev12-svg.github.io/mebel-favorit/?cat=Диваны
+   https://мебель-фаворит.рф/?cat=Диваны
    Должен сразу открыться раздел диванов (60 товаров).
 
 6. ПРОВЕРЬ ПРЕВЬЮ ДЛЯ СОЦСЕТЕЙ
-   Скинь ссылку https://artemcernysev12-svg.github.io/mebel-favorit/
+   Скинь ссылку https://мебель-фаворит.рф/
    себе в ВК или Telegram. Должна показаться красивая картинка-превью.
 
 
