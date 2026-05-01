@@ -3,4 +3,4 @@ Allow: /
 Disallow: /catalog-data/
 Disallow: /stock-data/
 
-Sitemap: https://мебель-фаворит.рф/sitemap.xml
+Sitemap: https://xn----8sbbglbyuf1awzu4i.xn--p1ai/sitemap.xml
