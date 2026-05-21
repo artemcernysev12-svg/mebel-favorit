@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /stock-data/
+
+Sitemap: https://мебель-фаворит.рф/sitemap.xml
