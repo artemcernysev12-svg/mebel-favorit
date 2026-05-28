@@ -1,12 +1,13 @@
 // Service Worker для Мебель Фаворит — V41
 // Стратегии:
 //   - HTML / index — network-first (свежий контент с фолбэком в кэш при оффлайне)
-//   - Статика (JS/CSS/шрифты/изображения собственного домена) — stale-while-revalidate
+//   - catalog.js и catalog-data/*.js — network-first (данные каталога всегда свежие)
+//   - Прочая статика (CSS/шрифты/изображения собственного домена) — stale-while-revalidate
 //   - Чужие домены (images.weserv.nl, fonts.gstatic.com) — cache-first
 //   - sitemap.xml / stock.xlsx — network-first без кэширования при ошибке
 // Версия кэша поднимается при обновлении сайта — старые кэши удаляются автоматически.
 
-const SW_VERSION = 'mf-v41-2';
+const SW_VERSION = 'mf-v41-3';
 const PRECACHE = SW_VERSION + '-precache';
 const RUNTIME  = SW_VERSION + '-runtime';
 
@@ -54,6 +55,25 @@ self.addEventListener('fetch', event => {
   if(url.pathname.includes('stock.xlsx') || url.pathname.includes('sitemap')){
     event.respondWith(
       fetch(req).catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // 1b. Данные каталога (catalog.js и catalog-data/*.js) — network-first.
+  // Эти файлы меняются при каждом обновлении ассортимента/фото, поэтому
+  // их нужно тянуть свежими сразу, а не через один заход (как было при
+  // stale-while-revalidate). Кэш используется только как офлайн-фолбэк.
+  const isCatalogData = url.pathname.endsWith('/catalog.js')
+                      || url.pathname.includes('/catalog-data/');
+  if(isCatalogData){
+    event.respondWith(
+      fetch(req).then(resp => {
+        if(resp && resp.status === 200){
+          const copy = resp.clone();
+          caches.open(RUNTIME).then(cache => cache.put(req, copy));
+        }
+        return resp;
+      }).catch(() => caches.match(req))
     );
     return;
   }
