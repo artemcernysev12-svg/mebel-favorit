@@ -6,7 +6,7 @@
 //   - sitemap.xml / stock.xlsx — network-first без кэширования при ошибке
 // Версия кэша поднимается при обновлении сайта — старые кэши удаляются автоматически.
 
-const SW_VERSION = 'mf-v41-1';
+const SW_VERSION = 'mf-v41-2';
 const PRECACHE = SW_VERSION + '-precache';
 const RUNTIME  = SW_VERSION + '-runtime';
 
