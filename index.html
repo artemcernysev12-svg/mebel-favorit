@@ -5228,7 +5228,6 @@ function openM(id, opts){
   }
 
   setPhoto(0);buildThs();
-  verifyPhotos();
   document.getElementById('mOv').classList.add('open');
   document.body.style.overflow='hidden';
   if(typeof updateSeoProduct === 'function') updateSeoProduct(it);
@@ -8189,47 +8188,18 @@ function photoNext(){ if(!mPh.length) return; setPhoto((mPhI+1) % mPh.length); }
 function photoPrev(){ if(!mPh.length) return; setPhoto((mPhI-1+mPh.length) % mPh.length); }
 
 // =============================================================
-// V41_2: Фоновая проверка фото галереи.
-// Карточка открывается мгновенно (первое фото 01.jpg показывается сразу),
-// а остальные ссылки из mPh проверяются в фоне через new Image().
-// Битые (404 — несуществующие фото из шаблона) тихо выпадают из mPh,
-// после чего перестраиваются превью и счётчик. Реальных запросов не
-// добавляет (эти фото и так грузились бы в галерее), карточку не блокирует.
+// V41_2d: verifyPhotos ОТКЛЮЧЕНА.
+// Раньше (когда pn у всех был =20) функция при открытии карточки
+// скачивала ВСЕ фото товара через new Image(), чтобы отсеять битые 404 —
+// это создавало пробку (все 14-20 фото грузились разом с github.io).
+// Теперь pn пересчитан по реальным файлам репозитория: галерея генерирует
+// ровно столько ссылок, сколько реальных фото, битых нет. Поэтому массовая
+// проверка не нужна — фото грузятся лениво по мере листания, как до правок.
+// Функция оставлена пустой для совместимости (вызовов уже нет).
+// Страховка от случайной битой ссылки — onerror на главном фото (setPhoto)
+// и на мини-превью (buildThs), которые скрывают/пропускают кадр без скачивания.
 // =============================================================
-let _photoCheckId = 0; // токен текущей проверки (защита от гонки при быстром перелистывании товаров)
-function verifyPhotos(){
-  const myId = ++_photoCheckId;        // запоминаем «свой» запуск
-  const candidates = mPh.slice();      // копия списка ссылок на момент открытия
-  if(candidates.length <= 1) return;   // одно фото (или ноль) — проверять нечего
-  const okList = [];                   // сюда собираем реально загрузившиеся
-  let done = 0;
-  candidates.forEach((url, idx)=>{
-    const im = new Image();
-    const finish = (ok)=>{
-      if(myId !== _photoCheckId) return; // открыли другой товар — игнорируем устаревший результат
-      if(ok) okList.push({ idx, url });
-      done++;
-      if(done === candidates.length){
-        // Все ссылки проверены — оставляем только живые, в исходном порядке
-        okList.sort((a,b)=>a.idx-b.idx);
-        const real = okList.map(o=>o.url);
-        if(real.length && real.length !== mPh.length){
-          const curUrl = mPh[mPhI];               // что сейчас показано
-          mPh = real;                             // обновляем галерею
-          let ni = mPh.indexOf(curUrl);           // пытаемся сохранить текущий кадр
-          if(ni < 0) ni = 0;
-          mPhI = ni;
-          buildThs();                             // перестраиваем превью
-          const cnt=document.getElementById('mCnt');
-          if(cnt) cnt.textContent=(mPhI+1)+' / '+mPh.length; // верный счётчик
-        }
-      }
-    };
-    im.onload  = ()=>finish(im.naturalWidth > 1); // 1x1 заглушки тоже отсекаем
-    im.onerror = ()=>finish(false);
-    im.src = url;
-  });
-}
+function verifyPhotos(){ /* отключено — см. комментарий выше */ }
 
 function closeM(){
   document.getElementById('mOv').classList.remove('open');
