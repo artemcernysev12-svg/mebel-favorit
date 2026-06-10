@@ -629,6 +629,23 @@
     bottom:14px !important;
   }
 }
+/* V41_34: сворачивание калькулятора и на десктопе (кнопка «Свернуть» + полоска) */
+@media(min-width:781px){
+  .mCalcPanel .mCalcHeadBtn-collapse{ display:inline-flex; align-items:center; justify-content:center; }
+  .mCalcPanel{ transition:max-height .25s ease; }
+  .mCalcPanel.dt-collapsed{ max-height:54px; overflow:hidden; }
+  .mCalcPanel.dt-collapsed .mCalcPanel-h,
+  .mCalcPanel.dt-collapsed .mCalcPanel-list,
+  .mCalcPanel.dt-collapsed .mCalcPanel-actions{ display:none !important; }
+  .mCalcPanel.dt-collapsed .mCalcCollapsed{
+    display:flex; width:100%; height:52px; padding:0 8px 0 14px;
+    background:transparent; border:none; color:#fff; align-items:center; gap:10px; cursor:pointer; font-family:var(--fb);
+  }
+  .mCalcPanel.dt-collapsed .mCalcCollapsed-i{ font-size:18px; flex-shrink:0; }
+  .mCalcPanel.dt-collapsed .mCalcCollapsed-meta{ flex:1; text-align:left; font-size:13px; font-weight:800; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+  .mCalcPanel.dt-collapsed .mCalcCollapsed-price{ font-family:var(--fh); font-size:14px; font-weight:800; color:var(--accent); flex-shrink:0; white-space:nowrap; }
+  .mCalcPanel.dt-collapsed .mCalcCollapsed-arrow{ flex-shrink:0; width:30px; height:30px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:var(--accent); color:#fff; font-size:13px; font-weight:800; margin-left:6px; }
+}
 
 #vkPrepDlg{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;padding:14px}
 #vkPrepDlg .vkp-bd{position:absolute;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);animation:vkpFade .2s ease}
@@ -2068,7 +2085,7 @@ if(document.readyState === 'loading'){
 <script src="catalog-data/bed-options.js?v=V41_1" defer></script>
 <script src="catalog-data/mattress-options.js?v=V41_18" defer></script>
 <script src="catalog-data/wardrobe-coupe.js?v=V41_4" defer></script>
-<script src="catalog-data/seat-options.js?v=V41_1" defer></script>
+<script src="catalog-data/seat-options.js?v=V41_33" defer></script>
 <script defer>
 // ========== ЛЕНИВАЯ ЗАГРУЗКА ТЯЖЁЛЫХ СКРИПТОВ ==========
 // kitchen-comp.js (~645 КБ) и kitchen-pools.js (~2.1 МБ) нужны
@@ -4116,6 +4133,20 @@ let BED_OPTION_CHOICE = {};
 // в отдельную опцию. По умолчанию — без сиденья; пользователь жмёт «Опции» → «с сиденьем».
 // SEAT_OPTION_CHOICE[tumbaId] = true|false  (true = добавить сиденье к цене)
 let SEAT_OPTION_CHOICE = {};
+// V41_33: выбор цвета варианта доп-опции (напр. куб для Тумбы ТВ Мэнкс — 1 из 3 цветов)
+let SEAT_OPTION_VARIANT = {};
+function getSeatVariants(opt){ return (opt && Array.isArray(opt.seatVariants) && opt.seatVariants.length) ? opt.seatVariants : null; }
+function getSeatVariantIndex(tumbaId){ return Number(SEAT_OPTION_VARIANT[String(tumbaId||'')]||0); }
+function getSeatVariantColor(opt, tumbaId){
+  const vs=getSeatVariants(opt);
+  if(!vs) return (opt && opt.seatColor) || '';
+  const i=getSeatVariantIndex(tumbaId);
+  return (vs[i] && vs[i].color) || (vs[0] && vs[0].color) || '';
+}
+function setSeatVariant(tumbaId, idx){
+  SEAT_OPTION_VARIANT[String(tumbaId||'')] = Number(idx)||0;
+  setSeatOptionChoice(tumbaId, true); // выбор цвета = включить опцию
+}
 function getSeatOption(tumbaId){
   if(!tumbaId || !window.__SEAT_OPTIONS__) return null;
   return window.__SEAT_OPTIONS__[String(tumbaId)] || null;
@@ -4135,9 +4166,11 @@ function getSeatOptionMessageInfo(it){
   if(!opt) return null;
   const tumbaPrice = Number(it.p || 0);
   const seatPrice = Number(opt.seatPrice || 0);
+  const vColor = getSeatVariantColor(opt, it.id);
+  const colorTag = (getSeatVariants(opt) && vColor) ? (' (' + vColor + ')') : '';
   return {
-    titleSuffix: ' + мягкое сиденье',
-    inlineSuffix: ' (С мягким сиденьем)',
+    titleSuffix: (opt.optSuffix||' + мягкое сиденье') + colorTag,
+    inlineSuffix: (opt.optInline||' (С мягким сиденьем)'),
     price: tumbaPrice + seatPrice,
     lines: [] // пусто — не добавляем отдельных строк, всё в названии
   };
@@ -4211,9 +4244,9 @@ function getSeatOptionShortBadge(it){
   const opt = getSeatOption(tumbaId);
   if(!opt) return '';
   if(isSeatOptionOn(tumbaId)){
-    return `<span class="kitCard-seatbadge on">+ Сиденье · ${Number(opt.seatPrice).toLocaleString('ru-RU')} ₽</span>`;
+    return `<span class="kitCard-seatbadge on">+ ${esc(opt.optBadge||'Сиденье')} · ${Number(opt.seatPrice).toLocaleString('ru-RU')} ₽</span>`;
   }
-  return `<span class="kitCard-seatbadge off">Сиденье — опция</span>`;
+  return `<span class="kitCard-seatbadge off">${esc(opt.optBadge||'Сиденье')} — опция</span>`;
 }
 
 function setSeatOptionChoice(tumbaId, on){
@@ -4225,6 +4258,9 @@ function setSeatOptionChoice(tumbaId, on){
   if(cur) renderKitComposition(cur);
   // Обновим обычную карточку тумбы (если открыта)
   refreshTumbaSeatOptionUI(tumbaId);
+  // V41_34: оперативно пересчитываем сетку модулей и корзину «Выбрано»
+  try{ if(typeof renderBuilderGrid === 'function') renderBuilderGrid(); }catch(_){}
+  try{ if(typeof renderCalcPanel === 'function') renderCalcPanel(); }catch(_){}
 }
 function updateSeatOptionPopup(tumbaId){
   const overlay = document.getElementById('seatOptionPopup');
@@ -4264,6 +4300,13 @@ function updateSeatOptionPopup(tumbaId){
     const stockHtml = seatOptionAvailabilityHtml(currentlyOn ? stockYes : stockNo);
     totalEl.innerHTML = `Итог: <b>${rub(totalPrice)}</b>${stockHtml}`;
   }
+  // Подсветка выбранного цвета варианта (куб и т.п.)
+  const ci = getSeatVariantIndex(tumbaId);
+  overlay.querySelectorAll('[data-seat-variant]').forEach(btn=>{
+    const onv = (Number(btn.getAttribute('data-seat-variant')) === ci);
+    btn.style.background = onv ? 'var(--accent,#0a7d55)' : '#fff';
+    btn.style.color = onv ? '#fff' : 'var(--ink,#222)';
+  });
 }
 
 // V40_128: Доп.опция сиденья в ОБЫЧНОЙ карточке тумбы — в стиле renderWardrobeAttic.
@@ -4311,11 +4354,11 @@ function updateTumbaSeatOptionSelection(it){
       detail.innerHTML = `
         <div><b>Итог:</b> ${esc(it.t || 'Тумба')}</div>
         <div class="waOpt-list">
-          <div>Комплектация: тумба + мягкое сиденье</div>
+          <div>Комплектация: ${esc(opt.optSelectedOn||'тумба + мягкое сиденье')}</div>
           <div style="margin-top:6px;color:var(--muted)">В комплекте:</div>
           <div>${esc(it.t || 'Тумба')} — 1 шт.</div>
           <div>${esc(opt.seatTitle || 'Мягкое сиденье')} — 1 шт.</div>
-          ${opt.seatColor ? `<div style="margin-top:6px;color:var(--muted)">Цвет сиденья: ${esc(opt.seatColor)}</div>` : ''}
+          ${(()=>{ const vc=getSeatVariantColor(opt,it.id); return vc ? `<div style="margin-top:6px;color:var(--muted)">${getSeatVariants(opt)?'Выбран цвет':'Цвет сиденья'}: ${esc(vc)}</div>` : ''; })()}
           <div style="margin-top:6px"><b>Наличие комплекта:</b> ${esc(stateLabel)}</div>
         </div>
         <div class="waOpt-foot">
@@ -4325,8 +4368,8 @@ function updateTumbaSeatOptionSelection(it){
       detail.innerHTML = `
         <div><b>Итог:</b> ${esc(it.t || 'Тумба')}</div>
         <div class="waOpt-list">
-          <div>Комплектация: только тумба</div>
-          <div style="margin-top:6px;color:var(--muted)">Мягкое сиденье можно добавить как доп. опцию.</div>
+          <div>Комплектация: ${esc(opt.optSelectedOff||'только тумба')}</div>
+          <div style="margin-top:6px;color:var(--muted)">${esc(opt.optAddHint||'Мягкое сиденье можно добавить как доп. опцию.')}</div>
         </div>
         <div class="waOpt-foot"><span class="waOpt-stock ${stateCls}">${esc(stateLabel)}</span></div>`;
     }
@@ -4334,7 +4377,7 @@ function updateTumbaSeatOptionSelection(it){
 
   // V40_131: Кнопка встроена прямо в блок итога (никуда не перемещается).
   // Для тумб с мультиобъявлением — ДОПОЛНИТЕЛЬНО монтируем копию рядом с селектом размера (как у Альте).
-  const label = on ? 'Выбрано: тумба + мягкое сиденье' : 'Выбрано: только тумба';
+  const label = on ? ('Выбрано: '+(opt.optSelectedOn||'тумба + мягкое сиденье')) : ('Выбрано: '+(opt.optSelectedOff||'только тумба'));
   const btnHtml = `<button type="button" class="wardrobeOpt-open" onclick="event.stopPropagation(); openMiniSeatOptionPopup(event,'${esc(it.id)}'); return false;">⚙️ Выбрать опции</button><div class="wardrobeOptCurrent">${esc(label)}</div>`;
 
   // V40_132: кнопка ТОЛЬКО внутри блока итога (правая колонка),
@@ -4375,9 +4418,9 @@ function openMiniSeatOptionPopup(ev, tumbaId){
       <input type="radio" name="seatOpt_${esc(tumbaId)}" value="off" ${!currentlyOn?'checked':''} onchange="setSeatOptionChoice('${esc(tumbaId)}', false)">
       <span>
         <div class="waOpt-choice-copy">
-          <div class="waOpt-choice-name">Только тумба</div>
+          <div class="waOpt-choice-name">${esc(opt.optBaseName||'Только тумба')}</div>
           <div class="waOpt-choice-price">+0 ₽</div>
-          <div class="waOpt-choice-meta">Базовая комплектация без мягкого сиденья.</div>
+          <div class="waOpt-choice-meta">${esc(opt.optBaseMeta||'Базовая комплектация без мягкого сиденья.')}</div>
           <span class="waOpt-choice-stock ${stockNoCls}" data-seat-stock="off">${esc(stockNo.label)}</span>
         </div>
       </span>
@@ -4387,13 +4430,22 @@ function openMiniSeatOptionPopup(ev, tumbaId){
       <input type="radio" name="seatOpt_${esc(tumbaId)}" value="on" ${currentlyOn?'checked':''} onchange="setSeatOptionChoice('${esc(tumbaId)}', true)">
       <span>
         <div class="waOpt-choice-copy">
-          <div class="waOpt-choice-name">Тумба + мягкое сиденье</div>
+          <div class="waOpt-choice-name">${esc(opt.optWithName||'Тумба + мягкое сиденье')}</div>
           <div class="waOpt-choice-price">+${rub(seatPrice)}</div>
           <div class="waOpt-choice-meta">${esc(opt.seatTitle)}${opt.seatColor?(' · '+esc(opt.seatColor)):''}</div>
           <span class="waOpt-choice-stock ${stockYesCls}" data-seat-stock="on">${esc(stockYes.label)}</span>
         </div>
       </span>
     </label>`;
+  const seatVariants = getSeatVariants(opt);
+  const curVarIdx = getSeatVariantIndex(tumbaId);
+  const variantPicker = seatVariants ? `
+    <div class="waOpt-variants" style="margin:10px 2px 0">
+      <div style="font-size:13px;color:var(--muted);margin:0 0 7px">${esc(opt.optWithName||'С опцией')} — выберите цвет:</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        ${seatVariants.map((v,i)=>`<button type="button" data-seat-variant="${i}" onclick="setSeatVariant('${esc(tumbaId)}',${i})" style="border:1px solid var(--line,#dcdcdc);background:${i===curVarIdx?'var(--accent,#0a7d55)':'#fff'};color:${i===curVarIdx?'#fff':'var(--ink,#222)'};border-radius:9px;padding:7px 13px;font-size:13px;font-weight:600;cursor:pointer">${esc(v.color)}</button>`).join('')}
+      </div>
+    </div>` : '';
   const totalPrice = tumbaPrice + (currentlyOn ? seatPrice : 0);
   const initialStockHtml = seatOptionAvailabilityHtml(currentlyOn ? stockYes : stockNo);
   overlay.innerHTML = `
@@ -4401,12 +4453,12 @@ function openMiniSeatOptionPopup(ev, tumbaId){
     <div class="wardrobeOpt-pop">
       <div class="wardrobeOpt-pop-h">
         <div>
-          <div class="wardrobeOpt-pop-title">Опции тумбы</div>
-          <div class="wardrobeOpt-pop-hint">Выберите: только тумба или тумба с мягким сиденьем. Итоговая цена справа пересчитается сразу.</div>
+          <div class="wardrobeOpt-pop-title">${esc(opt.optTitle||'Опции тумбы')}</div>
+          <div class="wardrobeOpt-pop-hint">${esc(opt.optHint||'Выберите: только тумба или тумба с мягким сиденьем. Итоговая цена справа пересчитается сразу.')}</div>
         </div>
         <button type="button" class="wardrobeOpt-close" onclick="closeMiniSeatOptionPopup()">×</button>
       </div>
-      <div class="waOpt-choices">${noChoice}${yesChoice}</div>
+      <div class="waOpt-choices">${noChoice}${yesChoice}</div>${variantPicker}
       <div class="wardrobeOpt-pop-actions">
         <div class="wardrobeOpt-pop-total" id="seatOptPopupTotal">Итог: <b>${rub(totalPrice)}</b>${initialStockHtml}</div>
         <button type="button" class="wardrobeOpt-done" onclick="closeMiniSeatOptionPopup()">Готово</button>
@@ -4678,7 +4730,7 @@ function getBedCardDisplayPrice(it, fallback){
     const pv = Number(v && v.price || 0);
     if(pv > 0) return pv;
   }
-  const pf = Number(fallback || (it && it.p) || 0);
+  const pf = Number((it && it.p) || fallback || 0);
   return pf > 0 ? pf : 0;
 }
 function getBedCardDisplayPriceText(it, fallback){
@@ -6065,11 +6117,14 @@ function renderKitVariantTabs(ownerId, groupKey, rows, activeRow){
   const bedBtn = (activeItem && shouldShowBedOptions(activeItem))
     ? `<button type="button" class="kitCard-bedopt" onclick="event.stopPropagation(); openMiniBedOptionPopup(event,'${esc(bedId)}'); return false;">Опции</button>`
     : '';
+  const seatBtn = (activeItem && shouldShowSeatOption(activeItem))
+    ? `<button type="button" class="kitCard-bedopt" onclick="event.stopPropagation(); openMiniSeatOptionPopup(event,'${esc(bedId)}'); return false;">Опции</button>`
+    : '';
   return `<div class="kitVariantSelect" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" onpointerdown="event.stopPropagation()" ontouchstart="event.stopPropagation()">
     <div class="kitVariantSelect-top"><div class="kitVariantSelect-label">${esc(meta.label || 'Вариант')}</div></div>
     <div class="kitVariantSelect-row">
       <select class="kitVariantSelectInput" data-kit-owner="${esc(ownerId)}" data-kit-group="${esc(groupKey)}" onclick="event.stopPropagation()" onmousedown="event.stopPropagation()" onpointerdown="event.stopPropagation()" ontouchstart="event.stopPropagation()">${opts}</select>
-      ${bedBtn}
+      ${bedBtn}${seatBtn}
     </div>
   </div>`;
 }
@@ -6993,7 +7048,7 @@ function renderKitComposition(it){
     const bedOptButton = (!variantTabs && modItem && shouldShowBedOptions(modItem))
       ? `<button type="button" class="kitCard-bedopt" onclick="event.stopPropagation(); openMiniBedOptionPopup(event,'${esc(modItem.id)}'); return false;">Опции</button>`
       : '';
-    const seatOptButton = (modItem && shouldShowSeatOption(modItem))
+    const seatOptButton = (!variantTabs && modItem && shouldShowSeatOption(modItem))
       ? `<button type="button" class="kitCard-bedopt" onclick="event.stopPropagation(); openMiniSeatOptionPopup(event,'${esc(modItem.id)}'); return false;">Опции</button>`
       : '';
     // Цена карточки: если выбрано «с сиденьем» — добавляем стоимость сиденья к цене тумбы
@@ -7069,7 +7124,13 @@ function hideCalcPanel(){
 function toggleCalcExpand(){
   const panel = document.getElementById('mCalcPanel');
   if(!panel) return;
-  panel.classList.toggle('expanded');
+  // На десктопе сворачиваем через класс dt-collapsed (по умолчанию развёрнут),
+  // на мобильном — через expanded (по умолчанию свёрнут).
+  if(window.matchMedia && window.matchMedia('(min-width:781px)').matches){
+    panel.classList.toggle('dt-collapsed');
+  } else {
+    panel.classList.toggle('expanded');
+  }
 }
 // Открыт ли калькулятор сейчас (есть ли в нём что-то).
 // Используется при отправке в ВК — если калькулятор активен, в сообщение
@@ -7257,7 +7318,8 @@ function calcSummary(){
     totalCount += qty;
     const linkedItem = m && m.id ? findItemById(m.id) : null;
     const currentPrice = linkedItem ? getBedCardDisplayPrice(linkedItem, m.price) : Number(m.price || 0);
-    if(currentPrice) totalSum += Number(currentPrice) * qty;
+    const seatX = (linkedItem && typeof getSeatOptionExtraPrice === 'function') ? getSeatOptionExtraPrice(linkedItem.id) : 0;
+    if(currentPrice || seatX) totalSum += (Number(currentPrice) + seatX) * qty;
     const g = moduleWidthGroup(m);
     const w = Number(m.width) || 0;
     if(g === 'top') widthTop += w * qty;
@@ -7314,8 +7376,10 @@ function renderCalcPanel(){
 
   listEl.innerHTML = items.map(({qty, m})=>{
     const linkedItem = m && m.id ? findItemById(m.id) : null;
-    const unitPrice = linkedItem ? getBedCardDisplayPrice(linkedItem, m.price) : Number(m.price || 0);
-    const priceTotal = unitPrice ? (Number(unitPrice) * qty).toLocaleString('ru-RU')+' ₽' : '—';
+    const unitBase = linkedItem ? getBedCardDisplayPrice(linkedItem, m.price) : Number(m.price || 0);
+    const unitSeatX = (linkedItem && typeof getSeatOptionExtraPrice === 'function') ? getSeatOptionExtraPrice(linkedItem.id) : 0;
+    const unitPrice = Number(unitBase) + unitSeatX;
+    const priceTotal = unitPrice ? (unitPrice * qty).toLocaleString('ru-RU')+' ₽' : '—';
     const mk = moduleKey(m);
     const detail = getModuleMessageDetails(m, linkedItem);
     const detailNote = detail ? `<div class="mCalcItem-note">${esc(detail)}</div>` : '';
@@ -7439,7 +7503,7 @@ function getBuilderTypeOrderForItem(it){
   const sh = String((it && (it.sheet || it.c || '')) || '').trim();
   if(sh === 'Кухни') return ['Шкафы навесные','Шкафы напольные','Тумбы под мойку','Пеналы','Шкафы для плиты','Столешницы','Комплектующие'];
   if(sh === 'Гарнитуры и комплекты') return ['Шкафы','Антресоли','Комоды','Полки','Тумбы ТВ','Стеллажи и этажерки','Надстройки'];
-  if(sh === 'Спальные гарнитуры') return ['Шкафы','Антресоли','Комоды','Тумбы','Кровати','Полки','Компьютерные столы','Гримерные столы','Стеллажи и этажерки','Зеркала'];
+  if(sh === 'Спальные гарнитуры') return ['Шкафы','Антресоли','Комоды','Тумбы','Кровати','Полки','Компьютерные столы','Гримерные столы','Стеллажи и этажерки','Зеркала','Надстройки'];
   if(sh === 'Прихожие и обувницы' || sh === 'Прихожие') return ['Шкафы','Антресоли','Комоды','Тумбы и обувницы','Прихожие и вешалки','Стеллажи и этажерки','Зеркала'];
   return [];
 }
@@ -7494,7 +7558,7 @@ function normalizeSystemBuilderType(rawType, linked, mod, ownerSheet){
     // В спальнях не показываем модули прихожих и надстройки; антресоли показываем отдельной плашкой.
     if(blob.includes('прихож') || blob.includes('вешал') || sheetBlob.includes('прихожие и обувницы') || sheetBlob.includes('гардеробные системы и вешалки')) return '';
     if(blob.includes('антресол')) return 'Антресоли';
-    if(blob.includes('надстрой')) return '';
+    if(blob.includes('надстрой')) return blob.includes('надстройка на стол') ? 'Надстройки' : '';
     if(blob.includes('консол') || blob.includes('гример') || blob.includes('туалетн') || blob.includes('макияж') || blob.includes('трюмо')) return 'Гримерные столы';
     if(titleBlob.includes('прикроват') || sheetBlob.includes('прикроватные тумбы')) return 'Тумбы';
     if(blob.includes('кровать') || blob.includes('кроват')) return 'Кровати';
@@ -7715,6 +7779,15 @@ function getModuleMessageDetails(m, linkedItem){
     }
   }
 
+  // V41_34: для доп-опции с выбором варианта (куб Мэнкс) — пишем выбранный цвет в деталь/сообщение
+  if(linkedItem && typeof shouldShowSeatOption==='function' && shouldShowSeatOption(linkedItem) && isSeatOptionOn(linkedItem.id)){
+    const sopt = getSeatOption(linkedItem.id);
+    if(sopt && getSeatVariants(sopt)){
+      const vcol = getSeatVariantColor(sopt, linkedItem.id);
+      if(vcol) addPlain((sopt.optBadge || 'Куб') + ': ' + vcol);
+    }
+  }
+
   return parts.join('; ');
 }
 
@@ -7780,7 +7853,7 @@ function formatModuleMessageLine(qty, m){
   if(linkedItem && typeof shouldShowSeatOption === 'function' && shouldShowSeatOption(linkedItem) && isSeatOptionOn(linkedItem.id)){
     const opt = getSeatOption(linkedItem.id);
     if(opt){
-      seatSuffix = ' (С мягким сиденьем)';
+      seatSuffix = (opt.optInline||' (С мягким сиденьем)');
       unitPrice = (Number(unitPrice) || 0) + (Number(opt.seatPrice) || 0);
     }
   }
@@ -8018,7 +8091,7 @@ function makeBuilderRowFromKitchenComp(row, fallbackType){
   const rowId = String(row.module_avito_id || row.module_item_id || '').trim();
   const rowItem = rowId ? findItemById_Soft(rowId) : null;
   const title = (rowItem && rowItem.t) || row.module_title || row.module_code || row.module_art || fallbackType || 'Модуль';
-  const price = Number(row.matched_price || row.price || (rowItem && rowItem.p) || 0) || null;
+  const price = Number((rowItem && rowItem.p) || row.matched_price || row.price || 0) || null;
   return {
     item_id: rowId || ('comp:' + String(row.kitchen_key || '') + ':' + String(row.order || '') + ':' + title),
     avito_id: rowId,
@@ -8484,7 +8557,9 @@ function renderBuilderGrid(){
   // Рендер карточек. Ограничим 120 штук для производительности
   list.innerHTML = arr.slice(0,120).map((m, idx) => {
     const linkedItem = m.linked ? findItemById(m.id) : null;
-    const priceTxt = linkedItem ? getBedCardDisplayPriceText(linkedItem, m.price) : (m.price ? (Number(m.price).toLocaleString('ru-RU')+' ₽') : '—');
+    const _gpBase = linkedItem ? getBedCardDisplayPrice(linkedItem, m.price) : Number(m.price || 0);
+    const _gpSeatX = (linkedItem && typeof getSeatOptionExtraPrice === 'function') ? getSeatOptionExtraPrice(linkedItem.id) : 0;
+    const priceTxt = (_gpBase + _gpSeatX) ? ((_gpBase + _gpSeatX).toLocaleString('ru-RU')+' ₽') : (m.price ? (Number(m.price).toLocaleString('ru-RU')+' ₽') : '—');
     const dims = formatModuleDims(m);
     const variantLabel = String(m.variantLabel || '').trim();
     const cardDetails = getModuleMessageDetails(m, linkedItem);
@@ -8500,18 +8575,21 @@ function renderBuilderGrid(){
     const clickAttr = m.linked ? `data-open="${esc(m.id)}"` : '';
     const bedOptBtn = (linkedItem && shouldShowBedOptions(linkedItem)) ? `<button type="button" class="kitCard-bedopt" data-bedopt="${esc(linkedItem.id)}">Опции</button>` : '';
     const bedOptSummary = (linkedItem && shouldShowBedOptions(linkedItem)) ? getBedOptionShortBadge(linkedItem) : '';
+    const seatOptBtn = (linkedItem && shouldShowSeatOption(linkedItem)) ? `<button type="button" class="kitCard-bedopt" data-seatopt="${esc(linkedItem.id)}">Опции</button>` : '';
+    const seatOptSummary = (linkedItem && shouldShowSeatOption(linkedItem)) ? getSeatOptionShortBadge(linkedItem) : '';
     return `<div class="kitCard${m.linked?'':' disabled'}${activeCls}" data-mk="${esc(mk)}" data-idx="${idx}" ${clickAttr}${hi?' style="box-shadow:0 0 0 2px rgba(45,125,255,.5) inset;border-color:var(--accent)"':''}>
       <div class="kitCard-ph">
         ${m.photo?`<img ${imgAttrs(m.photo, 400)}>`:'<div class="noph">📦</div>'}
         ${m.type?`<span class="kitCard-grp">${esc(m.type)}</span>`:''}
         ${chosenBadge}
         ${bedOptSummary}
+        ${seatOptSummary}
       </div>
       <div class="kitCard-body">
         <div class="kitCard-title">${esc(m.title||'—')}</div>
         ${renderModuleCardDetailsHtml(cardDetails)}
         <div class="kitCard-meta">${dims?dims:''}${m.factory?(dims?' · ':'')+esc(m.factory):''}</div>
-        ${bedOptBtn ? `<div class="kitCard-bedrow">${bedOptBtn}</div>` : ''}
+        ${(bedOptBtn||seatOptBtn) ? `<div class="kitCard-bedrow">${bedOptBtn}${seatOptBtn}</div>` : ''}
       </div>
       <div class="kitCard-foot">
         ${stockBadge}
@@ -8532,6 +8610,8 @@ function renderBuilderGrid(){
   list.onclick = function(ev){
     const bedBtn = ev.target.closest('[data-bedopt]');
     if(bedBtn){ openMiniBedOptionPopup(ev, bedBtn.dataset.bedopt); return; }
+    const seatBtn = ev.target.closest('[data-seatopt]');
+    if(seatBtn){ openMiniSeatOptionPopup(ev, seatBtn.dataset.seatopt); return; }
     const card = ev.target.closest('.kitCard');
     if(!card) return;
     const idx = Number(card.dataset.idx);
@@ -8603,6 +8683,7 @@ function closeM(){
   WARDROBE_ATTIC_CHOICE = {};
   BED_OPTION_CHOICE = {};
   SEAT_OPTION_CHOICE = {};
+  SEAT_OPTION_VARIANT = {};
   resetBuilderSession();
   const b=document.getElementById('mBack'); if(b) b.style.display='none';
   hideCalcPanel();
