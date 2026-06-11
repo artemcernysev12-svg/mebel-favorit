@@ -1392,35 +1392,35 @@
 <!-- Блок доверия: почему у нас -->
 <section class="why">
   <div class="why-in">
-    <div class="why-item">
+    <div class="why-item" style="cursor:pointer" onclick="favOpenBrands()">
       <div class="why-ico">🏭</div>
       <div class="why-txt">
         <div class="why-t">Фабричная мебель</div>
         <div class="why-s">Эра, Велес, Миф, Микон — напрямую с заводов</div>
       </div>
     </div>
-    <div class="why-item">
+    <div class="why-item" style="cursor:pointer" onclick="favOpenDelivery()">
       <div class="why-ico">🚚</div>
       <div class="why-txt">
         <div class="why-t">Доставка по Стерлитамаку</div>
         <div class="why-s">И районам до 60 км</div>
       </div>
     </div>
-    <div class="why-item">
+    <div class="why-item" style="cursor:pointer" onclick="favOpenAssembly()">
       <div class="why-ico">🔧</div>
       <div class="why-txt">
         <div class="why-t">Сборка</div>
         <div class="why-s">Профессиональная сборка на месте</div>
       </div>
     </div>
-    <div class="why-item">
+    <div class="why-item" style="cursor:pointer" onclick="favPodbor()">
       <div class="why-ico">📐</div>
       <div class="why-txt">
         <div class="why-t">Подбор под размер</div>
         <div class="why-s">Поможем выбрать то, что впишется</div>
       </div>
     </div>
-    <div class="why-item">
+    <div class="why-item" style="cursor:pointer" onclick="favOnline()">
       <div class="why-ico">💬</div>
       <div class="why-txt">
         <div class="why-t">Онлайн-консультация</div>
@@ -1552,7 +1552,7 @@
 
     <div class="fsep"></div>
     <div class="ftrow">
-      <button class="ftog" id="togSt" onclick="tog('os')" style="width:100%">✅ В наличии</button>
+      <button class="ftog favSw" id="togSt" onclick="tog('os')" style="width:100%"><span class="favSw-tr"><span class="favSw-kn"></span></span><span>Только в наличии</span></button>
     </div>
 
     <button class="btn-rst" onclick="resetAll()">✕ Сбросить все фильтры</button>
@@ -1570,7 +1570,7 @@
     </div>
     <div id="mSeriesTiles" style="display:none"></div>
     <div class="pgrid" id="pgrid"></div>
-    <div class="empty" id="empty" style="display:none"><div class="ei">🔍</div><h3>Ничего не найдено</h3><p>Попробуйте изменить фильтры</p></div>
+    <div class="empty" id="empty" style="display:none"><div class="ei">🔍</div><h3>Ничего не найдено</h3><p>Сбросьте фильтры или напишите нам — подберём под размер и бюджет.</p><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px"><button class="btn-prim" onclick="resetAll()">✕ Сбросить фильтры</button><button class="btn-sec" onclick="if(/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)){location.href='tel:+79930526654'}else{openPhoneDlg()}">📞 Подберём — позвоните</button></div></div>
     <div class="lm-w" id="lmW" style="display:none"><button class="btn-more" onclick="loadMore()">Показать ещё</button></div>
   </div>
 </div>
@@ -1662,6 +1662,99 @@
   .btn-ask{min-height:36px}
 }
 </style>
+
+<style>
+/* Бегунок-переключатель «Только в наличии» */
+.favSw{display:flex;align-items:center;justify-content:center;gap:9px;white-space:nowrap;padding:9px 8px}
+.favSw-tr{width:36px;height:20px;border-radius:12px;background:rgba(255,255,255,.16);position:relative;flex-shrink:0;transition:background .2s}
+.favSw-kn{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .2s}
+.ftog.on .favSw-tr{background:#22c55e}
+.ftog.on .favSw-kn{left:18px}
+/* Значок ⓘ сроков у статусов наличия */
+#mStock,.pc-stock{cursor:pointer}
+#mStock::after,.pc-stock::after{content:'i';display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#2d7dff;color:#fff;font-weight:800;font-style:normal;font-family:Arial,sans-serif;font-size:10.5px;line-height:1;margin-left:6px;flex-shrink:0;box-shadow:0 0 0 1.5px rgba(255,255,255,.4)}
+.pc-stock::after{width:13px;height:13px;font-size:9.5px;margin-left:5px;box-shadow:0 0 0 1px rgba(255,255,255,.45)}
+#mStock:hover::after,.pc-stock:hover::after{background:#5a9bff}
+/* Секция «Как мы работаем» */
+.favTrust{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:36px 18px;margin-top:28px}
+.favTrust-in{max-width:1700px;margin:0 auto}
+.favTrust-head{text-align:center;margin-bottom:22px}
+.favTrust-head h2{font-family:var(--fh);font-size:clamp(22px,2.5vw,30px);font-weight:700;margin:0 0 8px;letter-spacing:-.3px}
+.favTrust-head p{color:var(--muted);font-size:14px;margin:0;line-height:1.5}
+.favTrustGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.favTrustCard{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:15px 14px;cursor:pointer;transition:background .15s,border-color .15s,transform .15s}
+.favTrustCard:hover{background:rgba(255,255,255,.06);border-color:rgba(45,125,255,.35);transform:translateY(-2px)}
+.favTrustIco{width:42px;height:42px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:21px;background:rgba(45,125,255,.11);border-radius:11px}
+.favTrustTxt{min-width:0}
+.favTrustT{font-family:var(--fh);font-size:13.5px;font-weight:700;color:var(--text);margin:0 0 4px;line-height:1.25}
+.favTrustS{font-size:12px;color:var(--muted);line-height:1.45}
+.favTrustMore{display:inline-block;margin-top:7px;font-size:11.5px;font-weight:700;color:#7fb3ff}
+@media(max-width:1100px){.favTrustGrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.favTrustGrid{grid-template-columns:repeat(2,1fr)}.favTrust{padding:28px 14px}}
+@media(max-width:480px){.favTrustGrid{grid-template-columns:1fr}}
+</style>
+<section class="favTrust" id="favTrust">
+  <div class="favTrust-in">
+    <div class="favTrust-head">
+      <h2>🤝 Как мы работаем</h2>
+      <p>Доставка, сборка, оплата, гарантия и сроки — нажмите на карточку, чтобы узнать подробности</p>
+    </div>
+    <div class="favTrustGrid">
+      <div class="favTrustCard" onclick="favOpenDelivery()"><div class="favTrustIco">🚚</div><div class="favTrustTxt"><div class="favTrustT">Доставка</div><div class="favTrustS">По городу 800 ₽, грузчики от 900 ₽. За город — по прайсу.</div><span class="favTrustMore">Подробнее →</span></div></div>
+      <div class="favTrustCard" onclick="favOpenAssembly()"><div class="favTrustIco">🔧</div><div class="favTrustTxt"><div class="favTrustT">Сборка</div><div class="favTrustS">Корпусная — 10%, кухни — 15% от стоимости.</div><span class="favTrustMore">Подробнее →</span></div></div>
+      <div class="favTrustCard" onclick="favOpenPayment()"><div class="favTrustIco">💳</div><div class="favTrustTxt"><div class="favTrustT">Оплата</div><div class="favTrustS">Наличные, карта, кредитка, рассрочка от банка.</div><span class="favTrustMore">Подробнее →</span></div></div>
+      <div class="favTrustCard" onclick="favOpenWarranty()"><div class="favTrustIco">🛡️</div><div class="favTrustTxt"><div class="favTrustT">Гарантия</div><div class="favTrustS">Корпусная — 12 мес., мягкая — 18 мес.</div><span class="favTrustMore">Подробнее →</span></div></div>
+      <div class="favTrustCard" onclick="favOpenTerms()"><div class="favTrustIco">⏱️</div><div class="favTrustTxt"><div class="favTrustT">Сроки</div><div class="favTrustS">В наличии — 3–7 дней, под заказ — 2 нед.–30 раб. дней.</div><span class="favTrustMore">Подробнее →</span></div></div>
+    </div>
+  </div>
+</section>
+
+<style>
+.favRev{padding:36px 18px;border-bottom:1px solid var(--line)}
+.favRev-in{max-width:900px;margin:0 auto}
+.favRev-head{text-align:center;margin-bottom:18px}
+.favRev-head h2{font-family:var(--fh);font-size:clamp(22px,2.5vw,30px);font-weight:700;margin:0 0 8px;letter-spacing:-.3px}
+.favRev-head p{color:var(--muted);font-size:14px;margin:0;line-height:1.5}
+.favRevTabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.favRevTab{padding:9px 16px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);font-family:var(--fb);font-size:13px;font-weight:600;cursor:pointer;transition:background .15s,border-color .15s}
+.favRevTab:hover{background:rgba(255,255,255,.08)}
+.favRevTab.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.favRevBox{position:relative;background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--line);height:520px;max-width:768px;margin:0 auto}
+.favRevBox iframe{position:relative;width:100%;height:100%;border:none;z-index:1}
+.favRevLoad{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#555;font-size:14px;z-index:0}
+.favRevLinks{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px;align-items:center}
+.favRevLinks span{color:var(--muted);font-size:13px}
+.favRevLink{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);font-size:13px;font-weight:700;text-decoration:none;transition:background .15s,border-color .15s}
+.favRevLink:hover{background:rgba(255,255,255,.1);border-color:rgba(45,125,255,.35)}
+@media(max-width:600px){.favRevBox{height:440px}.favRev{padding:28px 14px}}
+</style>
+<section class="favRev" id="favRev">
+  <div class="favRev-in">
+    <div class="favRev-head">
+      <h2>⭐ Отзывы покупателей</h2>
+      <p>Живые отзывы с Яндекс Карт — обновляются автоматически. Выберите салон:</p>
+    </div>
+    <div class="favRevTabs">
+      <button type="button" class="favRevTab on" onclick="favRevSwitch(0)">Профсоюзная</button>
+      <button type="button" class="favRevTab" onclick="favRevSwitch(1)">Западная</button>
+      <button type="button" class="favRevTab" onclick="favRevSwitch(2)">Худайбердина</button>
+      <button type="button" class="favRevTab" onclick="favRevSwitch(3)">Раевский тракт</button>
+    </div>
+    <div class="favRevBox" id="favRevBox">
+      <div class="favRevLoad">Загружаем отзывы…</div>
+      <iframe id="favRevFrame" title="Отзывы на Яндекс Картах" loading="lazy"></iframe>
+    </div>
+    <div style="text-align:center;margin-top:12px">
+      <a class="favRevLink" id="favRevYaAll" href="https://yandex.ru/maps/org/favorit/52399533355/reviews/" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#FC3F1D"/><text x="12" y="17" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="800" fill="#fff">Я</text></svg> Больше отзывов на Яндекс Картах</a>
+    </div>
+    <div class="favRevLinks">
+      <span>Ещё отзывы:</span>
+      <a class="favRevLink" href="https://vk.com/reviews-77061353" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.4" fill="#0077FF"/><text x="12" y="16.4" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9.5" font-weight="800" fill="#fff">VK</text></svg> ВКонтакте</a>
+      <a class="favRevLink" href="https://www.avito.ru/brands/i257017886/all/mebel_i_interer?sellerId=226f97d91a3b3a4a9423d9a5cf17bb13" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="6.4" r="4.6" fill="#965eeb"/><circle cx="17.7" cy="5.1" r="3.1" fill="#00aaff"/><circle cx="6.5" cy="16.9" r="3.1" fill="#04e061"/><circle cx="16.3" cy="16.1" r="5.9" fill="#ff4053"/></svg> Авито</a>
+      <a class="favRevLink" id="favRev2gis" href="https://go.2gis.com/YGa4a" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="7" fill="#19AA1E"/><text x="12" y="15.8" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="7.2" font-weight="800" fill="#fff">2ГИС</text></svg> 2ГИС</a>
+    </div>
+  </div>
+</section>
 
 <section class="loc" id="loc">
   <div class="loc-in">
@@ -1885,7 +1978,7 @@ if(document.readyState === 'loading'){
 <footer>
   <div class="ft">
     <div class="ft-logo">Мебель<b>Фаворит</b> · Стерлитамак</div>
-    <div class="ft-copy">Каталог: <span id="ftUpd">—</span> · Товаров: <span id="ftCnt">—</span> · <span id="ftStock">остатки не загружены</span></div>
+    <div class="ft-copy">Каталог: <span id="ftUpd">—</span> · Товаров: <span id="ftCnt">—</span> · <span id="ftStock">наличие уточняйте</span></div>
     <div style="display:flex;gap:7px;flex-wrap:wrap">
       <a id="ftVk" class="ico-btn wa" href="#" target="_blank" rel="noopener" style="display:none" title="Мы в ВК">💬</a>
       <a id="ftPhone" class="ico-btn" href="#" style="display:none" title="Позвонить">📞</a>
@@ -1963,6 +2056,7 @@ if(document.readyState === 'loading'){
         <div class="mCta">
           <a href="#" class="cPhone" id="mAv" target="_blank" rel="noopener">🛒 Купить на Авито</a>
           <a href="#" class="cWa" id="mVk" target="_blank" rel="noopener" style="display:none">💬 Написать в ВК</a>
+          <a href="#" class="cWa" id="mPhoneBtn" onclick="if(/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)){location.href='tel:+79930526654'}else{openPhoneDlg()};return false;">📞 Позвонить</a>
         </div>
         <div class="mAvi" id="mAvi"></div>
       </div>
@@ -9122,7 +9216,7 @@ async function tryLoadStock(){
       await ensureXLSX();
       parseAndApplyStockBuffer(buf);
       const el=document.getElementById('ftStock');
-      if(el) el.textContent = 'авто: ' + path;
+      if(el) el.textContent = 'остатки обновляются автоматически';
       console.log('[stock] loaded from ' + path);
       return true;
     } catch(e){ lastErr = e; }
@@ -9649,6 +9743,161 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }, true); // capture-фаза, чтобы успеть до того, как ссылка откроется в новой вкладке
 });
+</script>
+<script>
+// ===== РЕЛИЗ 1 (V41_36): блок доверия + кликабельные плашки =====
+window.__DELIVERY_PRICES__ = [["Айгулево", 2800], ["Айдарали", 6500], ["Алатана, Забельское", 3200], ["Амзя", 3700], ["Антоновка", 4800], ["Аптиково", 4000], ["Аптиково нов.", 4200], ["Арметово Верх.", 4500], ["Арметово Ниж.", 4200], ["Асава-Зубово", 2500], ["Асанбашево", 3500], ["Ахмерово", 3000], ["Ахметрахимово", 4000], ["Ашкадар", 2300], ["Аючево", 3500], ["Б.Аксаково", 3300], ["Б.Куганак", 3200], ["Б.Озеро", 4600], ["Б/отдыха Шихан", 3000], ["Базиково", 4000], ["Байрак", 1800], ["Бельское", 3000], ["Бигиняш", 4000], ["Бишкаин", 5500], ["Боголюбовка", 4000], ["Буриказганово", 2500], ["Бурлы", 7000], ["Буруновка", 4000], ["Васильвка (Ишим)", 4000], ["Васильева (за Наум)", 2700], ["Веденовка", 3000], ["Верхнеахметово", 4200], ["Верхнее Юлдашево", 4000], ["Верхнеиткулово", 5200], ["Верхние легенды", 6000], ["Верхние услы", 3000], ["Веселое", 2500], ["Войновка", 5000], ["Восток", 2300], ["Григорьевка", 3800], ["Гумер", 5000], ["Дергачевка", 4600], ["Елембетово", 4000], ["Еслево", 2700], ["Забельское", 3200], ["Загородный", 1800], ["Заливное", 2300], ["Зирган", 4500], ["Златоножка", 4300], ["Ингинчеляр", 4800], ["Инзелга", 5000], ["Ишеево", 2500], ["Ишимбай", 3700], ["Ишпарсово", 3000], ["Казадаевка", 2000], ["Калкаш новый", 4000], ["Калкаш старый", 4300], ["Канакаево", 3000], ["Карайганово", 2500], ["Карасевка", 2700], ["Кармаскалы (Стерл)", 2700], ["Кебячево", 4300], ["Кинзябулатово  (Ишим)", 5000], ["Кияуково (Ишим)", 4300], ["Кононовский", 3200], ["Константиноградовка", 4500], ["Контюковка", 3000], ["Корнеевка", 4300], ["Косяковка", 2000], ["Красноусольск", 6000], ["Красный Яр", 3000], ["Куанак баш", 5500], ["Куганак большой", 3500], ["Куганак чувашский", 2800], ["Куезбашево", 5000], ["Кузьминовка (Аург)", 4000], ["Кузьминовка (Стерл)", 4000], ["Кузьминовка Аург", 4300], ["Кузьминовка Ишим", 4200], ["Кузьминовка Стерл", 4300], ["Кузяново", 4500], ["Кунакбаево", 3300], ["Курмантау", 7500], ["Кутлугуза", 5000], ["Кучербаево", 3000], ["Лебяжи Стер рассвет", 2700], ["Любовка ч.з.Хвойн", 2000], ["Любовка ч.з.Чуртан", 4000], ["Макарово (Ишим)", 5300], ["Максимовка", 5100], ["Малый Нагадак", 5800], ["Манеево", 4000], ["Мариинский", 2000], ["Мариинский новый", 2200], ["Маршановка", 2600], ["Марьевка", 2000], ["Марьевка верхнее", 2200], ["Медовый Барятино", 2000], ["Месели", 4000], ["Мраково (Гафур)", 4000], ["Муравей", 2300], ["Мурдашево", 4000], ["Мурзагулово", 5000], ["Мустафино", 6000], ["Наумкино", 5800], ["Наумовка", 2800], ["Нижнеарметово", 4200], ["Нижние услы", 3000], ["Николаевка (Стерл)", 3600], ["Новоаптиково", 4500], ["Новое Барятино", 2000], ["Новоивановка (Стерл)", 5000], ["Новоитекеево", 4500], ["Новый краснояр", 2700], ["Нордовка", 5500], ["Озерковка", 3300], ["Октябрьское (Стерл)", 3600], ["Октябрьское (Шахтау)", 2000], ["Отрадовка", 1800], ["Первомайский", 1600], ["Первомайское (Стерл)", 5000], ["Первомайское (Стерлиб)", 5000], ["Петровское", 3700], ["Подлесное", 2800], ["Покровка (За Куганак)", 3500], ["Покровка (на Салават)", 2500], ["Помряскино", 2500], ["Преображеновка", 2800], ["Рассвет сады", 2500], ["Рощинский", 2500], ["Русский саскуль", 4200], ["Рязановка", 2300], ["Сабашево", 4300], ["Садовка", 3000], ["Саитбаба", 9000], ["Сайраново", 5000], ["Салават", 3800], ["Салихово", 3200], ["Сарайса", 4500], ["Саратовка", 4800], ["Светлый", 3000], ["Семенкино", 3500], ["СНТ Ветеран", 2000], ["СНТ Водоканал", 2000], ["СНТ Ильмень", 2000], ["СНТ Калинка", 2000], ["СНТ Кобард", 2500], ["СНТ Машзавод", 2000], ["СНТ Тихий Ашкадар", 2000], ["СНТ Урняк", 3000], ["СНТ Черемушки", 2500], ["Соловьевка", 3800], ["Сосновка", 4000], ["Софипольское", 4700], ["Софьино", 5000], ["Староитекеево", 5000], ["Старомакарово", 4000], ["Стерлибашево", 5000], ["Строймаш", 1900], ["Сунгур", 3000], ["Табулда", 5500], ["Табынск", 5500], ["Тавричанка", 5000], ["Талалаевка", 3300], ["Талачево", 3000], ["Танеевка", 2800], ["Татарский нагадак", 6300], ["Татарский саскуль", 5000], ["Ташлыкуль", 4300], ["Толбазы центр", 4500], ["Тряпино", 6200], ["Тугаево Аург", 7000], ["Тугаево Гафр", 4600], ["Турмаево", 6000], ["Турсугали", 5600], ["Тюрюшля", 4000], ["Уразметово", 4500], ["Урман-бишкадак", 3000], ["Урняк", 3000], ["Услыбаш", 3700], ["Утякаево", 5000], ["Федоровка", 7200], ["Цапаловка", 4700], ["Чувашские карамылы", 5000], ["Чувашский куганак", 3000], ["Чувашский нагадак", 6300], ["Чуртан", 3600], ["Шахтау", 2300], ["Шеверли", 3700], ["Шланлы", 3600], ["Южное", 3400], ["Юлдашево", 4700], ["Юрактау", 3500], ["Янарусово", 4000], ["Янгискаин (Гафур)", 4500], ["Янгу-аул", 2500], ["Яр Бишкадак", 3500]];
+
+function favCloseInfo(){ var e=document.getElementById('favInfoDlg'); if(e) e.remove(); document.body.style.overflow=''; }
+function favOpenInfo(title, bodyHtml){
+  favCloseInfo();
+  var o=document.createElement('div'); o.id='favInfoDlg';
+  o.style.cssText='position:fixed;inset:0;z-index:3000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.7);backdrop-filter:blur(4px)';
+  var downOnOverlay=false;
+  o.addEventListener('mousedown',function(e){ downOnOverlay=(e.target===o); });
+  o.addEventListener('mouseup',function(e){ if(downOnOverlay && e.target===o) favCloseInfo(); downOnOverlay=false; });
+  o.innerHTML='<div style="background:#0d1220;border:1px solid rgba(45,125,255,.3);border-radius:18px;max-width:560px;width:100%;max-height:86vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 18px;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;background:#0d1220;z-index:2">'
+    +'<div style="font-family:\'Unbounded\',sans-serif;font-size:16px;font-weight:700;color:#e8edf8">'+title+'</div>'
+    +'<button onclick="favCloseInfo()" style="width:34px;height:34px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);color:#fff;font-size:18px;cursor:pointer">&times;</button></div>'
+    +'<div style="padding:16px 18px;color:#e8edf8;font-size:14px;line-height:1.55">'+bodyHtml+'</div></div>';
+  document.body.appendChild(o);
+  document.body.style.overflow='hidden';
+}
+function favPhoneAction(){ if(/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)){location.href='tel:+79930526654';}else{favCloseInfo(); if(typeof openPhoneDlg==='function') openPhoneDlg();} }
+function favContactBtns(){
+  return '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">'
+    +'<a href="#" onclick="favPhoneAction();return false;" style="flex:1;min-width:140px;text-align:center;padding:12px;background:#2d7dff;color:#fff;border-radius:12px;font-weight:700;text-decoration:none">\ud83d\udcde Позвонить</a>'
+    +'<a href="https://vk.com/club77061353" target="_blank" rel="noopener" style="flex:1;min-width:140px;text-align:center;padding:12px;background:rgba(37,211,102,.14);border:1px solid rgba(37,211,102,.3);color:#e8edf8;border-radius:12px;font-weight:700;text-decoration:none">\ud83d\udcac Написать в ВК</a></div>';
+}
+function favRenderDeliv(rows){
+  var el=document.getElementById('favDelivList'); if(!el) return;
+  if(!rows.length){ el.innerHTML='<div style="padding:14px;color:rgba(232,237,248,.6);font-size:13px">Посёлок не найден. Напишите или позвоните — подскажем стоимость.</div>'; return; }
+  el.innerHTML=rows.map(function(r){ return '<div style="display:flex;justify-content:space-between;gap:10px;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px"><span>'+r[0]+'</span><b style="color:#7fb3ff;white-space:nowrap">'+r[1].toLocaleString('ru-RU')+' \u20bd</b></div>'; }).join('');
+}
+function favLev(a,b,maxD){
+  if(a===b) return 0;
+  var m=a.length,n=b.length;
+  if(Math.abs(m-n)>maxD) return maxD+1;
+  var prev=[],cur=[],i,j;
+  for(j=0;j<=n;j++) prev[j]=j;
+  for(i=1;i<=m;i++){ cur[0]=i;
+    for(j=1;j<=n;j++){ cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1)); }
+    prev=cur.slice();
+  }
+  return prev[n];
+}
+function favFuzzyMatch(name,q){
+  if(name.indexOf(q)>-1) return true;
+  if(q.length<3) return false;
+  var tol = q.length>=5 ? 2 : 1; // длинные слова прощаем сильнее (салвт -> Салават)
+  for(var L=Math.max(1,q.length-tol);L<=q.length+tol;L++){
+    if(L>name.length) continue;
+    for(var s=0;s+L<=name.length;s++){
+      if(favLev(name.substr(s,L),q,tol)<=tol) return true;
+    }
+  }
+  return false;
+}
+function favFilterDeliv(q){
+  q=(q||'').toLowerCase().replace(/\u0451/g,'\u0435').trim();
+  // Если человек ищет сам Стерлитамак (в т.ч. с опечаткой) — подсказываем про город
+  if(q.length>=6 && favFuzzyMatch('стерлитамак', q)){
+    var el=document.getElementById('favDelivList');
+    if(el) el.innerHTML='<div style="padding:14px;font-size:13px">Стерлитамак — это наш город \ud83d\ude0a По городу: доставка <b>800 \u20bd</b>, грузчики <b>от 900 \u20bd</b>.</div>';
+    return;
+  }
+  var rows=window.__DELIVERY_PRICES__.filter(function(r){ return favFuzzyMatch(r[0].toLowerCase().replace(/\u0451/g,'\u0435'), q); });
+  favRenderDeliv(rows);
+}
+function favOpenDelivery(){
+  var body='<div style="background:rgba(45,125,255,.1);border:1px solid rgba(45,125,255,.25);border-radius:12px;padding:12px 14px;margin-bottom:14px">'
+    +'<div style="font-weight:700;margin-bottom:6px">По городу Стерлитамак</div>'
+    +'<div>Доставка — <b>800 \u20bd</b> &middot; Грузчики — <b>от 900 \u20bd</b></div></div>'
+    +'<div style="font-weight:700;margin-bottom:8px">Доставка за город — найдите свой посёлок:</div>'
+    +'<input id="favDelivSearch" type="search" placeholder="Начните вводить название…" oninput="favFilterDeliv(this.value)" style="width:100%;padding:11px 13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;color:#e8edf8;font-size:14px;outline:none;margin-bottom:10px">'
+    +'<div id="favDelivList" style="max-height:300px;overflow:auto;border:1px solid rgba(255,255,255,.08);border-radius:10px"></div>'
+    +'<div style="color:rgba(232,237,248,.6);font-size:12px;margin-top:10px">Цена указана до населённого пункта. Точную сумму подтвердим при заказе.</div>';
+  favOpenInfo('\ud83d\ude9a Доставка', body); favRenderDeliv(window.__DELIVERY_PRICES__);
+}
+function favOpenAssembly(){
+  favOpenInfo('\ud83d\udd27 Сборка',
+    '<div style="margin-bottom:12px">Стоимость сборки считается просто — это процент от цены мебели:</div>'
+    +'<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;margin-bottom:10px"><b>\ud83e\ude91 Вся мебель — 10%</b><br>Шкафы, кровати, комоды, стенки, прихожие, столы и любая другая мебель.<br><span style="color:rgba(232,237,248,.6);font-size:13px">Пример: шкаф за 20 000 \u20bd — сборка 2 000 \u20bd.</span></div>'
+    +'<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;margin-bottom:10px"><b>\ud83c\udf73 Исключение — кухни, 15%</b><br>С кухней работы всегда больше: установка по уровню, навеска верхних шкафов, подгонка под помещение.<br><span style="color:rgba(232,237,248,.6);font-size:13px">Пример: кухня за 40 000 \u20bd — сборка 6 000 \u20bd.</span></div>'
+    +'<div style="color:rgba(232,237,248,.65);font-size:13px">Точную стоимость назовём при заказе.</div>'
+    +favContactBtns());
+}
+function favOpenPayment(){
+  favOpenInfo('\ud83d\udcb3 Оплата',
+    '<div style="margin-bottom:12px">Платите так, как вам удобно:</div>'
+    +'<div style="margin-bottom:8px"><b>\ud83d\udcb5 Наличными</b> — в салоне или при получении.</div>'
+    +'<div style="margin-bottom:8px"><b>\ud83d\udcb3 Банковской картой</b> — любого банка.</div>'
+    +'<div style="margin-bottom:8px"><b>\ud83d\udcb3 Кредитной картой</b> — как обычной покупкой.</div>'
+    +'<div style="margin-bottom:8px"><b>\ud83c\udfe6 Рассрочка от банка</b> — оформим прямо в салоне, поможем с заявкой. Покупаете сейчас — платите по частям.</div>'
+    +favContactBtns());
+}
+function favOpenWarranty(){
+  favOpenInfo('\ud83d\udee1\ufe0f Гарантия',
+    '<div style="margin-bottom:12px">На всю мебель действует официальная гарантия фабрики-производителя.</div>'
+    +'<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;margin-bottom:10px"><b>\ud83e\ude91 Корпусная мебель — 12 месяцев</b><br>Шкафы, кровати, комоды, стенки, кухни, прихожие, столы.</div>'
+    +'<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;margin-bottom:10px"><b>\ud83d\udecb\ufe0f Мягкая мебель — 18 месяцев</b><br>Диваны, кресла, мягкие кровати.</div>'
+    +'<div style="color:rgba(232,237,248,.65);font-size:13px">Если найдёте заводской недостаток — свяжитесь с нами, решим вопрос по гарантии.</div>'
+    +favContactBtns());
+}
+function favOpenTerms(){
+  favOpenInfo('\u23f1\ufe0f Сроки',
+    '<div style="margin-bottom:12px">Когда вы получите мебель — зависит от того, есть ли она на складе:</div>'
+    +'<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:10px 12px;margin-bottom:10px"><b style="color:#4ade80">\ud83d\udfe2 «В наличии» — 3\u20137 дней</b><br>Товар уже на складе поставщика. Заказы мы формируем по средам, и к пятнице мебель приезжает в Стерлитамак — забирайте самовывозом или закажите доставку.<br><span style="color:rgba(232,237,248,.6);font-size:13px">Успели заказать до среды — получите уже в эту пятницу.</span></div>'
+    +'<div style="background:rgba(45,125,255,.08);border:1px solid rgba(45,125,255,.25);border-radius:10px;padding:10px 12px;margin-bottom:10px"><b style="color:#7fb3ff">\ud83d\udd35 «Под заказ» — обычно 2\u20134 недели</b><br>Фабрика изготовит мебель специально для вас — новую, прямо с производства, в заводской упаковке. Удобно, если нужен свой цвет или размер. Гарантия — такая же, как на товары в наличии.<br><span style="color:rgba(232,237,248,.6);font-size:13px">Точный срок назовём при заказе (максимум — 30 рабочих дней) и сообщим, как только мебель приедет.</span></div>'
+    +'<div style="color:rgba(232,237,248,.65);font-size:13px">Хотите узнать срок по конкретному товару? Позвоните или напишите — проверим.</div>'
+    +favContactBtns());
+}
+function favOpenContact(title, text){ favOpenInfo(title, '<div>'+text+'</div>'+favContactBtns()); }
+// Значок ⓘ: клик/тап по статусу наличия открывает окно «Сроки»; на ПК — подсказка при наведении
+document.addEventListener('click', function(e){
+  var t = e.target && e.target.closest ? e.target.closest('#mStock, .pc-stock') : null;
+  if(t){ e.preventDefault(); e.stopPropagation(); favOpenTerms(); }
+}, true);
+document.addEventListener('mouseover', function(e){
+  var t = e.target && e.target.closest ? e.target.closest('#mStock, .pc-stock') : null;
+  if(t && !t.title) t.title = 'Нажмите — расскажем про сроки получения';
+});
+function favOpenBrands(){ favOpenInfo('\ud83c\udfed Фабричная мебель',
+  '<div style="margin-bottom:12px">Мы продаём мебель российских фабрик — <b>Эра, Велес, Миф, Микон</b> и других — и работаем с ними напрямую, без посредников.</div>'
+  +'<div style="margin-bottom:8px"><b>\u2705 Честная цена</b> — без наценки перекупщиков.</div>'
+  +'<div style="margin-bottom:8px"><b>\u2705 Заводское качество</b> — фабричная упаковка, фурнитура и гарантия производителя.</div>'
+  +'<div style="margin-bottom:8px"><b>\u2705 Большой выбор</b> — почти 2000 моделей: от полки до целого гарнитура.</div>'
+  +'<div style="margin-bottom:8px"><b>\u2705 Поможем подобрать</b> — под ваш размер, цвет и бюджет.</div>'
+  +favContactBtns()); }
+function favPodbor(){ favOpenContact('\ud83d\udcd0 Подбор под размер', 'Поможем выбрать мебель, которая впишется в ваше пространство и бюджет. Напишите или позвоните — подберём варианты под ваши размеры.'); }
+function favOnline(){ favOpenContact('\ud83d\udcac Онлайн-консультация', 'Ответим на любой вопрос по мебели, наличию, доставке и оплате — в ВК или по телефону.'); }
+
+// ===== РЕЛИЗ 2: отзывы (виджет Яндекс Карт + 4 салона) =====
+var FAV_REVIEWS=[
+  ["Профсоюзная","52399533355","https://go.2gis.com/YGa4a"],
+  ["Западная","29241993370","https://go.2gis.com/hH41D"],
+  ["Худайбердина","64759751148","https://go.2gis.com/lJQib"],
+  ["Раевский тракт","138948846712","https://go.2gis.com/i8Zxd"]
+];
+function favRevSwitch(i){
+  var d=FAV_REVIEWS[i]; if(!d) return;
+  var tabs=document.querySelectorAll('.favRevTab');
+  for(var j=0;j<tabs.length;j++) tabs[j].classList.toggle('on', j===i);
+  var f=document.getElementById('favRevFrame');
+  if(f) f.src='https://yandex.ru/maps-reviews-widget/'+d[1]+'?comments';
+  var g=document.getElementById('favRev2gis'); if(g) g.href=d[2];
+  var y=document.getElementById('favRevYaAll'); if(y) y.href='https://yandex.ru/maps/org/favorit/'+d[1]+'/reviews/';
+}
+(function(){
+  var box=document.getElementById('favRevBox'); if(!box) return;
+  var loaded=false;
+  function load(){ if(loaded) return; loaded=true; favRevSwitch(0); }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ for(var k=0;k<es.length;k++){ if(es[k].isIntersecting){ load(); io.disconnect(); break; } } },{rootMargin:'300px'});
+    io.observe(box);
+  } else { load(); }
+})();
 </script>
 </body>
 </html>
