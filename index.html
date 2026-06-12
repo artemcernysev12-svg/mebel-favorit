@@ -1354,6 +1354,10 @@
 @media(max-width:991px){.ssug{max-height:46vh}.ssug-i{padding:12px 10px}.ssug-chip{padding:9px 14px;font-size:14px}
 #searchSugM{position:fixed;left:10px;right:10px;top:62px;max-height:min(50vh,calc(100vh - 80px))}}
 @media(min-width:861px){.mClose{position:fixed;top:18px;right:18px;width:42px;height:42px;font-size:18px;background:rgba(8,12,20,.88);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);border-radius:12px}}
+@media(max-width:860px){#sQGroup{display:none}
+header.hsx .logo,header.hsx .hdr-r{display:none}
+header.hsx .hdr-s{max-width:none}
+header.hsx .hdr-s input{font-size:15px}}
 </style>
 </head>
 <body>
@@ -1527,11 +1531,12 @@
     <div class="sb-cnt" id="sbCnt">— товаров</div>
     <div style="height:10px"></div>
 
-    <div class="fg">
+    <div class="fg" id="sQGroup">
       <label class="fl">Поиск</label>
       <div style="position:relative">
         <span style="position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px">🔍</span>
-        <input id="sQ" class="fi" style="padding-left:30px" type="text" placeholder="Название, цвет, модель...">
+        <input id="sQ" class="fi" style="padding-left:30px;padding-right:32px" type="text" placeholder="Название, цвет, модель...">
+        <button id="sQx" class="sclr" type="button" aria-label="Очистить поиск" style="display:none">&times;</button>
       </div>
     </div>
 
@@ -9117,12 +9122,35 @@ function favScoreItem(it, qtoks, ql){
   try{ if(getCatalogAvailability(it).available) sc+=3; }catch(_){ }
   return sc;
 }
+function favNegRefine(it, q){
+  // Понимание «без»: запрос «с зеркалом» отсеивает товары, где зеркало
+  // упомянуто ТОЛЬКО во фразе «без зеркала»; запрос «без зеркала» — наоборот.
+  // Срабатывает только при наличии таких фраз — остальное не трогает.
+  var qa=favTok(q), qt=favQTok(q);
+  if(!qt.length) return true;
+  var words=favItemTokens(it); // порядок слов сохранён — «без» стоит перед своим словом
+  for(var i=0;i<qt.length;i++){
+    var t=qt[i];
+    if(t==='без' || t.length<3) continue;
+    var qNeg=false;
+    for(var k=1;k<qa.length;k++){ if(qa[k]===t && qa[k-1]==='без'){ qNeg=true; break; } }
+    var pos=0, neg=0;
+    for(var j=0;j<words.length;j++){
+      if(!favTokenHit(words[j], t)) continue;
+      if(j>0 && words[j-1]==='без') neg++; else pos++;
+    }
+    if(pos+neg===0) continue; // слово сматчилось не по тексту товара — не вмешиваемся
+    if(qNeg){ if(!neg) return false; } // искали «без X» — нужна именно фраза «без X»
+    else if(!pos) return false;        // искали «X» — а в товаре только «без X»
+  }
+  return true;
+}
 function favItemMatchesQ(it, q){
   var qt=favQTok(q); if(!qt.length) return true;
   // Строгий режим: если хоть у кого-то слово в названии/категории — ищем только так.
   // Предохранитель: если сильных совпадений нет нигде (запрос «160», артикул) — широкий поиск.
-  if(favQueryMode(q)) return favQueryMatch(favItemStrongTokens(it), qt);
-  return favQueryMatch(favItemTokens(it), qt);
+  var hit = favQueryMode(q) ? favQueryMatch(favItemStrongTokens(it), qt) : favQueryMatch(favItemTokens(it), qt);
+  return hit && favNegRefine(it, q);
 }
 // История запросов
 function favHistGet(){ try{ var a=JSON.parse(localStorage.getItem('mf_search_hist')||'[]'); return Array.isArray(a)?a:[]; }catch(_){ return []; } }
@@ -9173,6 +9201,7 @@ function buildSearchSug(q, boxId){
   }
   // ===== подсказки по запросу =====
   var qtoks=favQTok(q); var ql=q.toLowerCase().replace(/\u0451/g,'\u0435');
+  var qMirror=/зеркал/.test(ql);
   var total=0; var catCnt={}; var top=[];
   for(var k=0;k<CAT.length;k++){
     var it=CAT[k]; if(!it.t) continue;
@@ -9204,7 +9233,8 @@ function buildSearchSug(q, boxId){
     h+='<div class="ssug-h">Товары</div>';
     prods.forEach(function(it){
       var av=false; try{ av=getCatalogAvailability(it).available; }catch(_){ }
-      var sub=[it.c, it.col].filter(Boolean).join(' \u00b7 ');
+      var mt=''; if(qMirror){ var ws=favItemTokens(it),mp=0,mn=0; for(var z=0;z<ws.length;z++){ if(ws[z].indexOf('зеркал')===0){ if(z>0&&ws[z-1]==='без') mn++; else mp++; } } mt=mp?'С зеркалом':(mn?'Без зеркала':''); }
+      var sub=[it.c, it.col, mt].filter(Boolean).join(' \u00b7 ');
       h+='<div class="ssug-i ssug-prod" data-id="'+esc(String(it.id))+'">'
         +(it.img?('<img class="ssug-img" src="'+esc(it.img)+'" alt="" loading="lazy">'):'<span class="ssug-img"></span>')
         +'<span class="ssug-mid"><span class="ssug-pt2">'+favHl(it.t,qtoks)+(av?'<i class="ssug-dot"></i>':'')+'</span>'
@@ -9233,7 +9263,7 @@ function favSyncQUrl(q){
   }catch(_){ }
 }
 function favSearchXSync(){
-  [['hQ','hQx'],['mssQ','mssQx']].forEach(function(p){
+  [['hQ','hQx'],['mssQ','mssQx'],['sQ','sQx']].forEach(function(p){
     var i=document.getElementById(p[0]), x=document.getElementById(p[1]);
     if(i&&x) x.style.display=i.value?'':'none';
   });
@@ -9241,10 +9271,11 @@ function favSearchXSync(){
 function favSearchClear(inpId){
   var i=document.getElementById(inpId); if(!i) return;
   i.value='';
-  if(typeof smartQ==='function') smartQ('');
+  if(window.smartQ) window.smartQ('');
   favSyncQUrl('');
   favSearchXSync();
-  buildSearchSug('', inpId==='mssQ'?'searchSugM':'searchSug'); // фокус остаётся, показываем zero-state
+  var sugBox={hQ:'searchSug', mssQ:'searchSugM'}[inpId];
+  if(sugBox) buildSearchSug('', sugBox); // фокус остаётся, показываем zero-state (у бокового sQ подсказок нет)
   i.focus();
 }
 
@@ -9699,12 +9730,20 @@ document.addEventListener('DOMContentLoaded',()=>{
   (function(){
     var sugTimer=0;
     function dSug(v, boxId){ clearTimeout(sugTimer); sugTimer=setTimeout(function(){ buildSearchSug(v, boxId); }, 160); }
+    var hdrEl=document.querySelector('header');
+    function hdrExpand(on){
+      if(!hdrEl) return;
+      clearTimeout(window.__HDR_X_T__);
+      if(on){ if(window.matchMedia&&window.matchMedia('(max-width:860px)').matches) hdrEl.classList.add('hsx'); }
+      else window.__HDR_X_T__=setTimeout(function(){ hdrEl.classList.remove('hsx'); },200);
+    }
     function bindSearch(inpId, boxId){
       var inp=document.getElementById(inpId); var box=document.getElementById(boxId);
+      var isHdr=(inpId==='hQ');
       if(inp){
         inp.addEventListener('input', function(e){ favSearchXSync(); dSug(e.target.value, boxId); });
-        inp.addEventListener('focus', function(e){ clearTimeout(window.__SUG_HIDE_T__); favSearchXSync(); buildSearchSug(e.target.value, boxId); }); // zero-state при ЛЮБОМ фокусе
-        inp.addEventListener('blur', function(){ window.__SUG_HIDE_T__=setTimeout(hideSearchSug, 200); });
+        inp.addEventListener('focus', function(e){ clearTimeout(window.__SUG_HIDE_T__); if(isHdr) hdrExpand(true); favSearchXSync(); buildSearchSug(e.target.value, boxId); }); // zero-state при ЛЮБОМ фокусе
+        inp.addEventListener('blur', function(){ window.__SUG_HIDE_T__=setTimeout(hideSearchSug, 200); if(isHdr) hdrExpand(false); });
         inp.addEventListener('keydown', function(e){
           if(e.key==='Enter'){ var ev=inp.value.trim(); favHistAdd(ev); favSyncQUrl(ev.length>=2?ev:''); hideSearchSug(); inp.blur(); goCat(); }
           else if(e.key==='Escape'){ hideSearchSug(); }
@@ -9726,6 +9765,14 @@ document.addEventListener('DOMContentLoaded',()=>{
     bindSearch('mssQ','searchSugM');
     var x1=document.getElementById('hQx'); if(x1) x1.addEventListener('click', function(){ favSearchClear('hQ'); });
     var x2=document.getElementById('mssQx'); if(x2) x2.addEventListener('click', function(){ favSearchClear('mssQ'); });
+    var x3=document.getElementById('sQx'); if(x3) x3.addEventListener('click', function(){ favSearchClear('sQ'); });
+    var sq=document.getElementById('sQ');
+    if(sq){
+      sq.addEventListener('input', favSearchXSync);
+      sq.addEventListener('keydown', function(e){
+        if(e.key==='Enter'){ var v=sq.value.trim(); favHistAdd(v); favSyncQUrl(v.length>=2?v:''); sq.blur(); goCat(); }
+      });
+    }
   })();
   document.getElementById('sQ').addEventListener('input', e => smartQ(e.target.value.trim()));
   document.getElementById('catSel').addEventListener('change', e => { setCat(e.target.value); if(window.matchMedia && !window.matchMedia('(max-width:991px)').matches) goCat(); });
