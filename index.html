@@ -1346,7 +1346,14 @@
 .hdr-s input{padding-right:34px}
 .mss-input{padding-right:34px}
 .mss-input::-webkit-search-cancel-button{display:none}
-@media(max-width:991px){.ssug{max-height:46vh}.ssug-i{padding:12px 10px}.ssug-chip{padding:9px 14px;font-size:14px}}
+.ssug-mid{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.ssug-pt2{font-size:13px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ssug-pt2 b{color:var(--accent)}
+.ssug-sub{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ssug-img{width:44px;height:44px}
+@media(max-width:991px){.ssug{max-height:46vh}.ssug-i{padding:12px 10px}.ssug-chip{padding:9px 14px;font-size:14px}
+#searchSugM{position:fixed;left:10px;right:10px;top:62px;max-height:min(50vh,calc(100vh - 80px))}}
+@media(min-width:861px){.mClose{position:fixed;top:18px;right:18px;width:42px;height:42px;font-size:18px;background:rgba(8,12,20,.88);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);border-radius:12px}}
 </style>
 </head>
 <body>
@@ -9060,6 +9067,27 @@ function favQueryMatch(words, qtoks){
   }
   return true;
 }
+function favQTok(q){
+  // Токены запроса: выкидываем однобуквенные предлоги («с», «и», «в»), цифры оставляем
+  return favTok(q).filter(function(t){ return t.length>1 || /[0-9]/.test(t); });
+}
+function favItemStrongTokens(it){
+  // «Сильные» поля: название, категория, цвет, фабрика. Характеристики комплектов — НЕ здесь.
+  if(!it.__ts) it.__ts=favTok([it.t,it.c,it.col,it.f].join(' '));
+  return it.__ts;
+}
+function favQueryMode(q){
+  // Есть ли в каталоге товары с сильным совпадением? Кэш по строке запроса.
+  var c=window.__Q_MODE__;
+  if(c && c.q===q) return c.strong;
+  var qt=favQTok(q); var strong=false;
+  if(qt.length){
+    var CAT=(window.CATALOG||[]);
+    for(var i=0;i<CAT.length;i++){ if(favQueryMatch(favItemStrongTokens(CAT[i]), qt)){ strong=true; break; } }
+  }
+  window.__Q_MODE__={q:q, strong:strong};
+  return strong;
+}
 function favItemTokens(it){
   if(!it.__tk) it.__tk=favTok([it.t,it.c,it.f,it.col].concat(Object.values(it.a||{})).join(' '));
   return it.__tk;
@@ -9090,7 +9118,10 @@ function favScoreItem(it, qtoks, ql){
   return sc;
 }
 function favItemMatchesQ(it, q){
-  var qt=favTok(q); if(!qt.length) return true;
+  var qt=favQTok(q); if(!qt.length) return true;
+  // Строгий режим: если хоть у кого-то слово в названии/категории — ищем только так.
+  // Предохранитель: если сильных совпадений нет нигде (запрос «160», артикул) — широкий поиск.
+  if(favQueryMode(q)) return favQueryMatch(favItemStrongTokens(it), qt);
   return favQueryMatch(favItemTokens(it), qt);
 }
 // История запросов
@@ -9123,7 +9154,7 @@ function buildSearchSug(q, boxId){
   q=(q||'').trim();
   var CAT=(window.CATALOG||[]);
   var h='';
-  if(!q){
+  if(q.length<2){ // с одной буквы — шум; держим стартовый список
     // ===== zero-state: история + популярное + категории =====
     var hist=favHistGet();
     if(hist.length){
@@ -9141,11 +9172,11 @@ function buildSearchSug(q, boxId){
     box.innerHTML=h; box.style.display=''; return;
   }
   // ===== подсказки по запросу =====
-  var qtoks=favTok(q); var ql=q.toLowerCase().replace(/\u0451/g,'\u0435');
+  var qtoks=favQTok(q); var ql=q.toLowerCase().replace(/\u0451/g,'\u0435');
   var total=0; var catCnt={}; var top=[];
   for(var k=0;k<CAT.length;k++){
     var it=CAT[k]; if(!it.t) continue;
-    if(!favQueryMatch(favItemTokens(it), qtoks)) continue;
+    if(!favItemMatchesQ(it, q)) continue;
     total++;
     if(it.c) catCnt[it.c]=(catCnt[it.c]||0)+1;
     var sc=favScoreItem(it, qtoks, ql);
@@ -9156,7 +9187,10 @@ function buildSearchSug(q, boxId){
     }
   }
   var prods=top.map(function(x){ return x.it; });
-  var cats=Object.keys(catCnt).sort(function(a,b){ return catCnt[b]-catCnt[a]; }).slice(0,4);
+  var cats=Object.keys(catCnt).sort(function(a,b){
+    var ma=favQueryMatch(favTok(a),qtoks)?0:1, mb=favQueryMatch(favTok(b),qtoks)?0:1;
+    return (ma-mb) || (catCnt[b]-catCnt[a]); // сначала совпавшие по названию, потом крупные
+  }).slice(0,4);
   if(!total && !cats.length){
     // честная пустая выдача (у nonton тут пусто — делаем лучше)
     var cc2=favCatCounts(); var top4=Object.keys(cc2).sort(function(a,b){ return cc2[b]-cc2[a]; }).slice(0,4);
@@ -9170,9 +9204,11 @@ function buildSearchSug(q, boxId){
     h+='<div class="ssug-h">Товары</div>';
     prods.forEach(function(it){
       var av=false; try{ av=getCatalogAvailability(it).available; }catch(_){ }
+      var sub=[it.c, it.col].filter(Boolean).join(' \u00b7 ');
       h+='<div class="ssug-i ssug-prod" data-id="'+esc(String(it.id))+'">'
         +(it.img?('<img class="ssug-img" src="'+esc(it.img)+'" alt="" loading="lazy">'):'<span class="ssug-img"></span>')
-        +'<span class="ssug-pt">'+favHl(it.t,qtoks)+(av?'<i class="ssug-dot"></i>':'')+'</span>'
+        +'<span class="ssug-mid"><span class="ssug-pt2">'+favHl(it.t,qtoks)+(av?'<i class="ssug-dot"></i>':'')+'</span>'
+        +(sub?('<span class="ssug-sub">'+esc(sub)+'</span>'):'')+'</span>'
         +'<span class="ssug-pp">'+(Number(it.p)||0).toLocaleString('ru-RU')+' \u20bd</span></div>';
     });
   }
@@ -9598,6 +9634,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 
   function smartQ(v){
+    if(v && v.trim().length<2) v=''; // одна буква — не фильтруем каталог (шум)
     const wasEmpty = !S.q;
     const isEmpty  = !v;
 
@@ -9657,6 +9694,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
   }
 
+  window.smartQ = smartQ; // нужен глобально: favSearchClear, восстановление ?q=
   document.getElementById('hQ').addEventListener('input', e => smartQ(e.target.value.trim()));
   (function(){
     var sugTimer=0;
@@ -9668,7 +9706,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         inp.addEventListener('focus', function(e){ clearTimeout(window.__SUG_HIDE_T__); favSearchXSync(); buildSearchSug(e.target.value, boxId); }); // zero-state при ЛЮБОМ фокусе
         inp.addEventListener('blur', function(){ window.__SUG_HIDE_T__=setTimeout(hideSearchSug, 200); });
         inp.addEventListener('keydown', function(e){
-          if(e.key==='Enter'){ favHistAdd(inp.value); favSyncQUrl(inp.value.trim()); hideSearchSug(); inp.blur(); goCat(); }
+          if(e.key==='Enter'){ var ev=inp.value.trim(); favHistAdd(ev); favSyncQUrl(ev.length>=2?ev:''); hideSearchSug(); inp.blur(); goCat(); }
           else if(e.key==='Escape'){ hideSearchSug(); }
         });
       }
