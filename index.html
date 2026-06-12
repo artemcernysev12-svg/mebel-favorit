@@ -1359,12 +1359,14 @@ header.hsx .logo,header.hsx .hdr-r{display:none}
 header.hsx .hdr-s{max-width:none}
 header.hsx .hdr-s input{font-size:15px}}
 /* v41_64: тач-зоны ≥42-44px (аудит: по 26px-кнопке палец не попадает) */
-.favCartQty button{width:42px;height:42px;border-radius:11px;font-size:18px}
 .favCartDel{min-width:42px;min-height:42px;display:inline-flex;align-items:center;justify-content:center;top:-4px;right:-8px;font-size:17px;padding:0}
 .sb-close{min-width:44px;min-height:44px;padding:8px 12px;font-size:15px}
 @media(max-width:860px){.mob-sticky-search .mss-btn{width:44px;height:44px}.mob-sticky-search .mss-btn-i{font-size:18px}
 .favDlgX{width:44px!important;height:44px!important;font-size:20px!important;border-radius:12px!important}}
 @media(max-width:480px){.favDlgT{font-size:13px!important}}
+.mob-sticky-search.msx a,.mob-sticky-search.msx .mss-btn{display:none!important}
+.mob-sticky-search.msx .mss-input-wrap{flex:1 1 100%}
+.mob-sticky-search.msx .mss-input{width:100%;font-size:15px}
 </style>
 </head>
 <body>
@@ -1730,7 +1732,7 @@ header.hsx .hdr-s input{font-size:15px}}
 .bIco{width:18px;height:18px;vertical-align:-4px;border-radius:4px}
 .bIco-lg{width:21px;height:21px;vertical-align:-5px}
 .favCartQty{display:inline-flex;align-items:center;gap:8px}
-.favCartQty button{width:26px;height:26px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:#fff;font-size:14px;cursor:pointer}
+.favCartQty button{width:42px;height:42px;border-radius:11px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:#fff;font-size:18px;cursor:pointer}
 
 /* Значок ⓘ сроков — только в карточке товара */
 #mStock{cursor:pointer}
@@ -9738,19 +9740,26 @@ document.addEventListener('DOMContentLoaded',()=>{
     var sugTimer=0;
     function dSug(v, boxId){ clearTimeout(sugTimer); sugTimer=setTimeout(function(){ buildSearchSug(v, boxId); }, 160); }
     var hdrEl=document.querySelector('header');
+    var mssBar=document.querySelector('.mob-sticky-search');
     function hdrExpand(on){
       if(!hdrEl) return;
       clearTimeout(window.__HDR_X_T__);
       if(on){ if(window.matchMedia&&window.matchMedia('(max-width:860px)').matches) hdrEl.classList.add('hsx'); }
       else window.__HDR_X_T__=setTimeout(function(){ hdrEl.classList.remove('hsx'); },200);
     }
+    function mssExpand(on){
+      if(!mssBar) return;
+      clearTimeout(window.__MSS_X_T__);
+      if(on) mssBar.classList.add('msx');
+      else window.__MSS_X_T__=setTimeout(function(){ mssBar.classList.remove('msx'); },200);
+    }
     function bindSearch(inpId, boxId){
       var inp=document.getElementById(inpId); var box=document.getElementById(boxId);
       var isHdr=(inpId==='hQ');
       if(inp){
         inp.addEventListener('input', function(e){ favSearchXSync(); dSug(e.target.value, boxId); });
-        inp.addEventListener('focus', function(e){ clearTimeout(window.__SUG_HIDE_T__); if(isHdr) hdrExpand(true); favSearchXSync(); buildSearchSug(e.target.value, boxId); }); // zero-state при ЛЮБОМ фокусе
-        inp.addEventListener('blur', function(){ window.__SUG_HIDE_T__=setTimeout(hideSearchSug, 200); if(isHdr) hdrExpand(false); });
+        inp.addEventListener('focus', function(e){ clearTimeout(window.__SUG_HIDE_T__); if(isHdr) hdrExpand(true); if(inpId==='mssQ') mssExpand(true); favSearchXSync(); buildSearchSug(e.target.value, boxId); }); // zero-state при ЛЮБОМ фокусе
+        inp.addEventListener('blur', function(){ window.__SUG_HIDE_T__=setTimeout(hideSearchSug, 200); if(isHdr) hdrExpand(false); if(inpId==='mssQ') mssExpand(false); });
         inp.addEventListener('keydown', function(e){
           if(e.key==='Enter'){ var ev=inp.value.trim(); favHistAdd(ev); favSyncQUrl(ev.length>=2?ev:''); hideSearchSug(); inp.blur(); goCat(); }
           else if(e.key==='Escape'){ hideSearchSug(); }
@@ -10401,7 +10410,7 @@ function favLeadForm(withCart, preset){
       +'<div id="favPayNote" style="display:none;font-size:11.5px;color:rgba(232,237,248,.55);margin:0 0 10px"></div>'
       +'<div id="favSumBox" style="display:none;border-top:1px solid rgba(255,255,255,.1);padding-top:8px;margin:2px 0 10px;font-size:13px"></div>';
   }
-  favOpenInfo('\ud83d\udce8 Оформить заявку',
+  favOpenInfo('Оформить заявку',
     cartNote
     +'<input id="favLeadName" type="text" placeholder="Ваше ФИО (Фамилия Имя Отчество)" value="'+esc(pr.fio)+'" style="'+inp+'">'
     +'<input id="favLeadPhone" type="tel" placeholder="Телефон, например 8 912 345-67-89" value="'+esc(pr.p1)+'" style="'+inp+'">'
