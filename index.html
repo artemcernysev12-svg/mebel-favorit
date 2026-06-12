@@ -1329,6 +1329,23 @@
 .ssug-cat span:last-child{font-weight:600}
 .ssug-prod span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ssug-all{color:var(--accent)}
+.ssug-img{flex:none;width:40px;height:40px;border-radius:8px;object-fit:cover;background:rgba(255,255,255,.06)}
+.ssug-pt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ssug-pt b{color:var(--accent)}
+.ssug-pp{flex:none;font-weight:800;color:#7fb3ff;font-size:13px;white-space:nowrap}
+.ssug-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#4ade80;margin-left:6px;vertical-align:1px}
+.ssug-n{margin-left:auto;font-size:11.5px;color:var(--muted)}
+.ssug-chips{display:flex;flex-wrap:wrap;gap:7px;padding:4px 10px 10px}
+.ssug-chip{padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.05);font-size:13px;cursor:pointer;color:var(--text)}
+.ssug-chip:hover{background:var(--card-h)}
+.ssug-clr{font-size:11px;color:var(--muted);cursor:pointer;text-transform:none;letter-spacing:0}
+.ssug-clr:hover{color:var(--text)}
+.ssug-empty{padding:14px 12px 6px;font-size:13.5px;color:var(--muted);line-height:1.5}
+.sclr{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:var(--text);font-size:15px;line-height:1;cursor:pointer;z-index:2;padding:0}
+.sclr:hover{background:rgba(255,255,255,.2)}
+.hdr-s input{padding-right:34px}
+.mss-input{padding-right:34px}
+.mss-input::-webkit-search-cancel-button{display:none}
 </style>
 </head>
 <body>
@@ -1336,7 +1353,7 @@
 <header>
   <div class="hdr">
     <a href="#" class="logo"><div class="logo-i">🛋️</div>Мебель<b>Фаворит</b></a>
-    <div class="hdr-s"><span class="si">🔍</span><input id="hQ" type="text" placeholder="Поиск по каталогу..." autocomplete="off"><div id="searchSug" class="ssug" style="display:none"></div></div>
+    <div class="hdr-s"><span class="si">🔍</span><input id="hQ" type="text" placeholder="Поиск по каталогу..." autocomplete="off"><button id="hQx" class="sclr" type="button" aria-label="Очистить поиск" style="display:none">&times;</button><div id="searchSug" class="ssug" style="display:none"></div></div>
     <div class="hdr-r">
       <div class="hdr-city">📍 Стерлитамак</div>
       <div class="hdr-actions">
@@ -1359,9 +1376,11 @@
       <span class="mss-logo-i">🛋️</span>
       <span class="mss-logo-t"><span>Мебель</span><b>Фаворит</b></span>
     </a>
-    <div class="mss-input-wrap">
+    <div class="mss-input-wrap" style="position:relative">
       <span class="mss-icon">🔍</span>
       <input type="search" id="mssQ" class="mss-input" placeholder="Поиск..." autocomplete="off"/>
+      <button id="mssQx" class="sclr" type="button" aria-label="Очистить поиск" style="display:none">&times;</button>
+      <div id="searchSugM" class="ssug" style="display:none"></div>
     </div>
     <button type="button" class="mss-btn" onclick="favCartOpen()" aria-label="Корзина" style="margin-right:6px">
       <span class="mss-btn-i">🛒</span>
@@ -3628,10 +3647,7 @@ function inRange(it, dim, mn, mx){
 function matchesCurrentFilters(it, opts){
   opts = opts || {};
   if(S.cat && it.c!==S.cat) return false;
-  if(S.q){
-    const q=S.q.toLowerCase().replace(/ё/g,'е');
-    if(![it.t,it.c,it.f,it.col,...Object.values(it.a||{})].join(' ').toLowerCase().replace(/ё/g,'е').includes(q)) return false;
-  }
+  if(S.q && !favItemMatchesQ(it, S.q)) return false;
   if(S.fac && it.f!==S.fac) return false;
   if(opts.excludeRange!=='price'){
     if(S.pMin!=='' && !(it.p>= +S.pMin)) return false;
@@ -9016,29 +9032,143 @@ function setupSidebarSwipeClose(){
 function goCat(){ if(window.__restoreRAF__){ cancelAnimationFrame(window.__restoreRAF__); window.__restoreRAF__=0; } var a=document.getElementById('catAnchor'); if(a) a.scrollIntoView({behavior:'smooth'}); }
 
 function _isDesktop(){ return !(window.matchMedia && window.matchMedia('(max-width:991px)').matches); }
-function buildSearchSug(q){
-  var box=document.getElementById('searchSug'); if(!box) return;
+// ===== ПОИСК v41_59: уровень маркетплейсов (по исследованию Озон/ВБ/nonton) =====
+// Токены + порядок слов не важен + префиксы + опечатки (1, для длинных слов 2) +
+// zero-state (история+популярное+категории) + фото в подсказках + крестик очистки.
+function favTok(s){ return String(s||'').toLowerCase().replace(/\u0451/g,'\u0435').split(/[^a-z\u0430-\u044f0-9]+/).filter(Boolean); }
+function favTokenHit(word, tok){
+  if(word.indexOf(tok)===0) return true; // префикс: «угл» → «угловой»
+  var t=tok.length;
+  if(t>=4 && typeof favLev==='function'){
+    var d=(t>=8?2:1); // короткие слова — 1 опечатка, длинные — до 2
+    if(favLev(word, tok, d)<=d) return true;
+  }
+  return false;
+}
+function favQueryMatch(words, qtoks){
+  for(var i=0;i<qtoks.length;i++){
+    var hit=false;
+    for(var j=0;j<words.length;j++){ if(favTokenHit(words[j], qtoks[i])){ hit=true; break; } }
+    if(!hit) return false; // КАЖДОЕ слово запроса должно найтись (порядок не важен)
+  }
+  return true;
+}
+function favItemTokens(it){
+  if(!it.__tk) it.__tk=favTok([it.t,it.c,it.f,it.col].concat(Object.values(it.a||{})).join(' '));
+  return it.__tk;
+}
+function favItemMatchesQ(it, q){
+  var qt=favTok(q); if(!qt.length) return true;
+  return favQueryMatch(favItemTokens(it), qt);
+}
+// История запросов
+function favHistGet(){ try{ var a=JSON.parse(localStorage.getItem('mf_search_hist')||'[]'); return Array.isArray(a)?a:[]; }catch(_){ return []; } }
+function favHistAdd(q){
+  q=String(q||'').trim(); if(q.length<2) return;
+  try{
+    var a=favHistGet().filter(function(x){ return x.toLowerCase()!==q.toLowerCase(); });
+    a.unshift(q); localStorage.setItem('mf_search_hist', JSON.stringify(a.slice(0,6)));
+  }catch(_){ }
+}
+function favHistClear(){ try{ localStorage.removeItem('mf_search_hist'); }catch(_){ } }
+var FAV_POPULAR_Q=['Диван','Шкаф-купе','Кровать','Кухня','Прихожая','Комод','Стол'];
+function favHl(title, qtoks){
+  var h=esc(title);
+  qtoks.forEach(function(t){
+    if(t.length<2) return;
+    var re=new RegExp('('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','i');
+    if(re.test(h)) h=h.replace(re,'<b>$1</b>');
+  });
+  return h;
+}
+function favCatCounts(){
+  var CAT=(window.CATALOG||[]); var m={};
+  CAT.forEach(function(i){ if(i.c) m[i.c]=(m[i.c]||0)+1; });
+  return m;
+}
+function buildSearchSug(q, boxId){
+  var box=document.getElementById(boxId||'searchSug'); if(!box) return;
   q=(q||'').trim();
-  if(q.length<1){ box.style.display='none'; box.innerHTML=''; return; }
-  var ql=q.toLowerCase();
   var CAT=(window.CATALOG||[]);
-  var present=[]; CAT.forEach(function(i){ if(i.c && present.indexOf(i.c)<0) present.push(i.c); });
-  var cats=present.filter(function(c){ return String(c).toLowerCase().indexOf(ql)>=0; }).slice(0,6);
-  var prods=[]; for(var k=0;k<CAT.length;k++){ var it=CAT[k]; if(it.t && String(it.t).toLowerCase().indexOf(ql)>=0){ prods.push(it); if(prods.length>=5) break; } }
   var h='';
-  if(cats.length){ h+='<div class="ssug-h">Категории</div>'; cats.forEach(function(c){ h+='<div class="ssug-i ssug-cat" data-cat="'+esc(c)+'"><span class="ssug-ic">\uD83D\uDCC2</span><span>'+esc(c)+'</span></div>'; }); }
-  if(prods.length){ h+='<div class="ssug-h">Товары</div>'; prods.forEach(function(it){ h+='<div class="ssug-i ssug-prod" data-id="'+esc(String(it.id))+'"><span class="ssug-ic">\uD83D\uDD0D</span><span>'+esc(it.t)+'</span></div>'; }); }
-  h+='<div class="ssug-i ssug-all" data-all="1"><span class="ssug-ic">\uD83D\uDD0E</span><span>Искать «'+esc(q)+'» во всех категориях</span></div>';
+  if(!q){
+    // ===== zero-state: история + популярное + категории =====
+    var hist=favHistGet();
+    if(hist.length){
+      h+='<div class="ssug-h" style="display:flex;justify-content:space-between;align-items:center">История <span class="ssug-clr" data-clr="1">Очистить</span></div>';
+      hist.forEach(function(x){ h+='<div class="ssug-i ssug-q" data-q="'+esc(x)+'"><span class="ssug-ic">\ud83d\udd52</span><span>'+esc(x)+'</span></div>'; });
+    }
+    h+='<div class="ssug-h">Часто ищут</div><div class="ssug-chips">';
+    FAV_POPULAR_Q.forEach(function(x){ h+='<span class="ssug-chip" data-q="'+esc(x)+'">'+esc(x)+'</span>'; });
+    h+='</div>';
+    var cc=favCatCounts(); var cats0=Object.keys(cc).sort(function(a,b){ return cc[b]-cc[a]; }).slice(0,6);
+    if(cats0.length){
+      h+='<div class="ssug-h">Категории</div>';
+      cats0.forEach(function(c){ h+='<div class="ssug-i ssug-cat" data-cat="'+esc(c)+'"><span class="ssug-ic">\ud83d\udcc2</span><span>'+esc(c)+'</span><span class="ssug-n">'+cc[c]+'</span></div>'; });
+    }
+    box.innerHTML=h; box.style.display=''; return;
+  }
+  // ===== подсказки по запросу =====
+  var qtoks=favTok(q); var ql=q.toLowerCase().replace(/\u0451/g,'\u0435');
+  var present=[]; CAT.forEach(function(i){ if(i.c && present.indexOf(i.c)<0) present.push(i.c); });
+  var cats=present.filter(function(c){ return favQueryMatch(favTok(c), qtoks); }).slice(0,4);
+  var b0=[],b1=[],b2=[]; var total=0;
+  for(var k=0;k<CAT.length;k++){
+    var it=CAT[k]; if(!it.t) continue;
+    if(!favQueryMatch(favItemTokens(it), qtoks)) continue;
+    total++;
+    if(b0.length+b1.length+b2.length<25){
+      var tl=String(it.t).toLowerCase().replace(/\u0451/g,'\u0435');
+      if(tl.indexOf(ql)===0) b0.push(it); else if(tl.indexOf(ql)>0) b1.push(it); else b2.push(it);
+    }
+  }
+  var prods=b0.concat(b1,b2).slice(0,5);
+  if(!total && !cats.length){
+    // честная пустая выдача (у nonton тут пусто — делаем лучше)
+    var cc2=favCatCounts(); var top4=Object.keys(cc2).sort(function(a,b){ return cc2[b]-cc2[a]; }).slice(0,4);
+    h='<div class="ssug-empty">Ничего не найдено по «'+esc(q)+'».<br>Проверьте опечатки — или загляните в категории:</div><div class="ssug-chips">';
+    top4.forEach(function(c){ h+='<span class="ssug-chip" data-cat="'+esc(c)+'">'+esc(c)+'</span>'; });
+    h+='</div>';
+    box.innerHTML=h; box.style.display=''; return;
+  }
+  if(cats.length){ h+='<div class="ssug-h">Категории</div>'; cats.forEach(function(c){ h+='<div class="ssug-i ssug-cat" data-cat="'+esc(c)+'"><span class="ssug-ic">\ud83d\udcc2</span><span>'+favHl(c,qtoks)+'</span></div>'; }); }
+  if(prods.length){
+    h+='<div class="ssug-h">Товары</div>';
+    prods.forEach(function(it){
+      var av=false; try{ av=getCatalogAvailability(it).available; }catch(_){ }
+      h+='<div class="ssug-i ssug-prod" data-id="'+esc(String(it.id))+'">'
+        +(it.img?('<img class="ssug-img" src="'+esc(it.img)+'" alt="" loading="lazy">'):'<span class="ssug-img"></span>')
+        +'<span class="ssug-pt">'+favHl(it.t,qtoks)+(av?'<i class="ssug-dot"></i>':'')+'</span>'
+        +'<span class="ssug-pp">'+(Number(it.p)||0).toLocaleString('ru-RU')+' \u20bd</span></div>';
+    });
+  }
+  h+='<div class="ssug-i ssug-all" data-all="1"><span class="ssug-ic">\ud83d\udd0e</span><span>Все результаты («'+esc(q)+'») — '+total+'</span></div>';
   box.innerHTML=h; box.style.display='';
 }
-function hideSearchSug(){ var box=document.getElementById('searchSug'); if(box) box.style.display='none'; }
+function hideSearchSug(){ ['searchSug','searchSugM'].forEach(function(id){ var b=document.getElementById(id); if(b) b.style.display='none'; }); }
 function goToCatFromSug(cat){
   hideSearchSug();
   S.q=''; ['hQ','sQ','mssQ'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+  favSearchXSync();
   setCat(cat);
   if(_isDesktop()) goCat();
 }
 function openProdFromSug(id){ hideSearchSug(); if(typeof openM==='function') openM(id); }
+function favSearchXSync(){
+  [['hQ','hQx'],['mssQ','mssQx']].forEach(function(p){
+    var i=document.getElementById(p[0]), x=document.getElementById(p[1]);
+    if(i&&x) x.style.display=i.value?'':'none';
+  });
+}
+function favSearchClear(inpId){
+  var i=document.getElementById(inpId); if(!i) return;
+  i.value='';
+  if(typeof smartQ==='function') smartQ('');
+  favSearchXSync();
+  buildSearchSug('', inpId==='mssQ'?'searchSugM':'searchSug'); // фокус остаётся, показываем zero-state
+  i.focus();
+}
+
 
 
 function applyShopConfig(){
@@ -9478,21 +9608,35 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   document.getElementById('hQ').addEventListener('input', e => smartQ(e.target.value.trim()));
   (function(){
-    var hQel=document.getElementById('hQ'); var sugBox=document.getElementById('searchSug');
-    if(hQel){
-      hQel.addEventListener('input', function(e){ buildSearchSug(e.target.value); });
-      hQel.addEventListener('focus', function(e){ if(e.target.value.trim()) buildSearchSug(e.target.value); });
-      hQel.addEventListener('blur', function(){ setTimeout(hideSearchSug, 200); });
-      hQel.addEventListener('keydown', function(e){ if(e.key==='Enter'){ hideSearchSug(); if(_isDesktop()) goCat(); } else if(e.key==='Escape'){ hideSearchSug(); } });
+    var sugTimer=0;
+    function dSug(v, boxId){ clearTimeout(sugTimer); sugTimer=setTimeout(function(){ buildSearchSug(v, boxId); }, 160); }
+    function bindSearch(inpId, boxId){
+      var inp=document.getElementById(inpId); var box=document.getElementById(boxId);
+      if(inp){
+        inp.addEventListener('input', function(e){ favSearchXSync(); dSug(e.target.value, boxId); });
+        inp.addEventListener('focus', function(e){ favSearchXSync(); buildSearchSug(e.target.value, boxId); }); // zero-state сразу
+        inp.addEventListener('blur', function(){ setTimeout(hideSearchSug, 200); });
+        inp.addEventListener('keydown', function(e){
+          if(e.key==='Enter'){ favHistAdd(inp.value); hideSearchSug(); inp.blur(); if(_isDesktop()) goCat(); }
+          else if(e.key==='Escape'){ hideSearchSug(); }
+        });
+      }
+      if(box){
+        box.addEventListener('click', function(e){
+          var cat=e.target.closest('[data-cat]'), prod=e.target.closest('.ssug-prod'),
+              all=e.target.closest('.ssug-all'), qel=e.target.closest('[data-q]'), clr=e.target.closest('[data-clr]');
+          if(clr){ favHistClear(); buildSearchSug('', boxId); inp&&inp.focus(); }
+          else if(qel){ var v=qel.getAttribute('data-q'); if(inp){ inp.value=v; } smartQ(v); favSearchXSync(); favHistAdd(v); buildSearchSug(v, boxId); }
+          else if(cat) goToCatFromSug(cat.getAttribute('data-cat'));
+          else if(prod){ favHistAdd(inp?inp.value:''); openProdFromSug(prod.getAttribute('data-id')); }
+          else if(all){ favHistAdd(inp?inp.value:''); hideSearchSug(); if(_isDesktop()) goCat(); }
+        });
+      }
     }
-    if(sugBox){
-      sugBox.addEventListener('click', function(e){
-        var cat=e.target.closest('.ssug-cat'), prod=e.target.closest('.ssug-prod'), all=e.target.closest('.ssug-all');
-        if(cat) goToCatFromSug(cat.getAttribute('data-cat'));
-        else if(prod) openProdFromSug(prod.getAttribute('data-id'));
-        else if(all){ hideSearchSug(); if(_isDesktop()) goCat(); }
-      });
-    }
+    bindSearch('hQ','searchSug');
+    bindSearch('mssQ','searchSugM');
+    var x1=document.getElementById('hQx'); if(x1) x1.addEventListener('click', function(){ favSearchClear('hQ'); });
+    var x2=document.getElementById('mssQx'); if(x2) x2.addEventListener('click', function(){ favSearchClear('mssQ'); });
   })();
   document.getElementById('sQ').addEventListener('input', e => smartQ(e.target.value.trim()));
   document.getElementById('catSel').addEventListener('change', e => { setCat(e.target.value); if(window.matchMedia && !window.matchMedia('(max-width:991px)').matches) goCat(); });
@@ -9892,7 +10036,7 @@ function favOpenWarranty(){
 function favOpenTerms(){
   favOpenInfo('\u23f1\ufe0f Сроки',
     '<div style="margin-bottom:12px">Когда вы получите мебель — зависит от того, есть ли она на складе:</div>'
-    +'<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:10px 12px;margin-bottom:10px"><b style="color:#4ade80">\ud83d\udfe2 «В наличии» — 3\u20137 дней</b><br>Товар уже на складе поставщика. Заказы мы формируем по средам, и к пятнице мебель приезжает в Стерлитамак — забирайте самовывозом или закажите доставку.<br><span style="color:rgba(232,237,248,.6);font-size:13px">Успели заказать до среды — получите уже в эту пятницу.</span></div>'
+    +'<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:10px 12px;margin-bottom:10px"><b style="color:#4ade80">\ud83d\udfe2 «В наличии» — 3\u20137 дней</b><br>Товар уже на складе поставщика. Заказы мы формируем по средам, и к пятнице мебель приезжает в Стерлитамак. Заберёте сами или доставим — как вам удобно.<br><span style="color:#4ade80;font-size:13px">'+(function(){ try{ return 'Ближайший привоз — пятница, '+favRuDate(favNextBatch().fri)+'.'; }catch(_){ return 'Успели заказать до среды — получите уже в эту пятницу.'; } })()+'</span></div>'
     +'<div style="background:rgba(45,125,255,.08);border:1px solid rgba(45,125,255,.25);border-radius:10px;padding:10px 12px;margin-bottom:10px"><b style="color:#7fb3ff">\ud83d\udd35 «Под заказ» — обычно 2\u20134 недели</b><br>Фабрика изготовит мебель специально для вас — новую, прямо с производства, в заводской упаковке. Удобно, если нужен свой цвет или размер. Гарантия — такая же, как на товары в наличии.<br><span style="color:rgba(232,237,248,.6);font-size:13px">Точный срок назовём при заказе (максимум — 30 рабочих дней) и сообщим, как только мебель приедет.</span></div>'
     +'<div style="color:rgba(232,237,248,.65);font-size:13px">Хотите узнать срок по конкретному товару? Позвоните или напишите — проверим.</div>'
     +favContactBtns());
@@ -9931,8 +10075,8 @@ function favLeadSend(text, cb){
     if(FAV_TG.proxy){ url=FAV_TG.proxy; payload={text:text}; }
     else { url='https://api.telegram.org/bot'+FAV_TG.token+'/sendMessage'; payload={chat_id:FAV_TG.chat, text:text, disable_web_page_preview:true}; }
     fetch(url,{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)})
-      .then(function(r){return r.json();}).then(function(j){ cb(!!(j&&(j.ok||j.sent))); }).catch(function(){ cb(false); });
-  }catch(_){ cb(false); }
+      .then(function(r){return r.json();}).then(function(j){ cb(!!(j&&(j.ok||j.sent)), j&&j.error); }).catch(function(){ cb(false,'network'); });
+  }catch(_){ cb(false,'network'); }
 }
 function favLeadNo(){ var d=new Date(); function z(n){return (n<10?'0':'')+n;} return z(d.getDate())+z(d.getMonth()+1)+String(d.getFullYear()).slice(2)+'-'+z(d.getHours())+z(d.getMinutes()); }
 function favProfileLoad(){ try{ var o=JSON.parse(localStorage.getItem('mf_lead_profile')||'{}'); return (o&&typeof o==='object'&&!Array.isArray(o))?o:{}; }catch(_){ return {}; } }
@@ -9972,10 +10116,17 @@ function favLeadTimingText(){
   var m=favCartStockSummary();
   var b=favNextBatch();
   if(m==='stock'){
-    var day=favSterlNow().getDay();
-    if(b.wedToday) return '\u23f1\ufe0f Все товары <b>в наличии</b>. Успейте оформить сегодня до 16:00 — и мебель будет в Стерлитамаке уже в пятницу, <b>'+favRuDate(b.fri)+'</b>. Выдача и доставка — с пятницы, как вам удобно.';
-    if(day===1||day===2) return '\u23f1\ufe0f Все товары <b>в наличии</b>. Закажите сегодня — и мебель будет в Стерлитамаке уже в эту пятницу, <b>'+favRuDate(b.fri)+'</b>. Заявки на этот привоз принимаем до среды, 16:00.';
-    return '\u23f1\ufe0f Все товары <b>в наличии</b>. Оформите до среды, '+favRuDate(b.wed)+' (16:00) — и мебель будет в Стерлитамаке в пятницу, <b>'+favRuDate(b.fri)+'</b>. Выдача и доставка — с пятницы, как вам удобно.';
+    var day=favSterlNow().getDay(); var FRI='<b>'+favRuDate(b.fri)+'</b>';
+    if(b.wedToday) return '\u23f1\ufe0f Все товары <b>в наличии</b>. Успейте оформить сегодня до 16:00 — и мебель будет в Стерлитамаке уже в пятницу, '+FRI+'. Выдача и доставка — с пятницы, как вам удобно.';
+    if(day===1||day===2) return '\u23f1\ufe0f Все товары <b>в наличии</b>. Закажите сегодня — и мебель будет в Стерлитамаке уже в эту пятницу, '+FRI+'. Заявки на этот привоз принимаем до среды, 16:00.';
+    var sells={
+      4:'Оформите заявку сегодня — закрепим мебель за вами из ближайшего привоза: она будет в Стерлитамаке в пятницу, '+FRI+'.',
+      5:'Сегодня пятница — день привоза в Стерлитамак. Ваша мебель приедет следующим рейсом, в пятницу, '+FRI+'. Оформите заявку — забронируем.',
+      6:'Выходные — отличное время выбрать без спешки. Оформите заявку — и мебель будет в Стерлитамаке в пятницу, '+FRI+'.',
+      0:'Оформите заявку сегодня — в понедельник утром возьмём её в работу, и мебель будет в Стерлитамаке в пятницу, '+FRI+'.',
+      3:'Оформите заявку сейчас — закрепим мебель за вами из ближайшего привоза: пятница, '+FRI+'.'
+    };
+    return '\u23f1\ufe0f Все товары <b>в наличии</b>. '+sells[day];
   }
   if(m==='order') return '\u23f1\ufe0f Товары <b>под заказ</b> — фабрика изготовит специально для вас. Обычно это 2\u20134 недели, максимум 30 рабочих дней. Примерный срок сориентируем при звонке.';
   if(m==='mixed') return '\u23f1\ufe0f Часть товаров <b>в наличии</b> — ближайший привоз в Стерлитамак в пятницу, <b>'+favRuDate(b.fri)+'</b>. Часть <b>под заказ</b> — обычно 2\u20134 недели. Можно получать по мере готовности или всё сразу — обсудим при звонке.';
@@ -10028,7 +10179,7 @@ function favPayPick(v){
     var sel=(b.dataset.v===v);
     b.style.cssText=b.dataset.base+(sel?'background:rgba(45,125,255,.18);border:1px solid rgba(45,125,255,.55);color:#fff':'background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);color:#e8edf8');
   });
-  var notes={'При получении':'Наличными или картой, когда получите заказ','Картой':'Оплата картой — терминал в салоне','Рассрочка':'Рассрочка — оформление в салоне'};
+  var notes={'При получении':'Наличными при получении заказа','Картой':'Оплата картой — терминал в салоне','Рассрочка':'Рассрочка — оформление в салоне'};
   var n=document.getElementById('favPayNote'); if(n){ n.textContent=notes[v]||''; n.style.display=notes[v]?'block':'none'; }
   var e=document.getElementById('favLeadErr'); if(e) e.style.display='none';
   favSumUpdate();
@@ -10196,7 +10347,7 @@ function favLeadSubmit(withCart){
   }
   var msg=L.join('\n');
   var btn=document.getElementById('favLeadBtn'); if(btn){ btn.disabled=true; btn.textContent='Отправляем\u2026'; }
-  favLeadSend(msg, function(ok){
+  var finish=function(ok, errCode){
     if(ok){
       try{ localStorage.setItem('mf_lead_ts', String(Date.now())); }catch(_){ }
       try{ localStorage.setItem('mf_lead_last', JSON.stringify({sig:sig, ts:Date.now()})); }catch(_){ }
@@ -10209,11 +10360,17 @@ function favLeadSubmit(withCart){
       favOpenInfo('\u2705 Заявка \u2116'+no+' отправлена', '<div style="text-align:center;padding:6px 0 2px">Спасибо, '+frn+'! Мы получили вашу заявку и перезвоним в рабочее время.</div>'+favMoreBtn());
     } else {
       window.__LEAD_FAIL_TEXT__=msg;
-      favOpenInfo('\u26a0\ufe0f Не получилось отправить', '<div>Похоже, нет связи. Скопируйте текст заявки и отправьте нам в ВК — или просто позвоните, всё оформим по телефону.</div>'
-        +'<button id="favLeadCopyBtn" onclick="favLeadCopyFail()" style="width:100%;margin-top:12px;padding:12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:#fff;font-weight:700;cursor:pointer">\ud83d\udccb Скопировать заявку</button>'
+      window.__LEAD_RETRY__=function(){ var rb=document.getElementById('favLeadRetryBtn'); if(rb){ rb.disabled=true; rb.textContent='Отправляем\u2026'; } favLeadSend(msg, finish); };
+      var info = (errCode==='too_fast')
+        ? 'Заявки уходят слишком часто — это защита от спама. Подождите минутку и нажмите «Отправить ещё раз».'
+        : 'Похоже, нет связи. Попробуйте отправить ещё раз — или скопируйте текст заявки и отправьте нам в ВК, или просто позвоните, всё оформим по телефону.';
+      favOpenInfo('\u26a0\ufe0f Не получилось отправить', '<div>'+info+'</div>'
+        +'<button id="favLeadRetryBtn" onclick="window.__LEAD_RETRY__&&window.__LEAD_RETRY__()" style="width:100%;margin-top:14px;padding:13px;border-radius:12px;border:none;background:#2d7dff;color:#fff;font-weight:800;font-size:15px;cursor:pointer">\ud83d\udd04 Отправить ещё раз</button>'
+        +'<button id="favLeadCopyBtn" onclick="favLeadCopyFail()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:#fff;font-weight:700;cursor:pointer">\ud83d\udccb Скопировать заявку</button>'
         +favContactBtns());
     }
-  });
+  };
+  favLeadSend(msg, finish);
 }
 function favLeadCopyFail(){
   var t=window.__LEAD_FAIL_TEXT__||'';
