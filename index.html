@@ -358,18 +358,18 @@
 
   /* СОСТОЯНИЕ: пользователь скроллит ВНИЗ.
      Прячем sticky-поиск и нижнюю контакт-панель — освобождаем экран. */
-  body.scrolled-down .mob-sticky-search{
+  body.search-hidden .mob-sticky-search{
     transform:translateY(-100%);
     opacity:0;
     pointer-events:none;
   }
-  body.scrolled-down .mob-contact{
+  body.bar-hidden .mob-contact{
     transform:translateY(120%);
     transition:transform .28s ease;
     opacity:0;
     pointer-events:none;
   }
-  body.scrolled-down .toTop{
+  body.bar-hidden .toTop{
     bottom:16px !important;
     transition:bottom .28s ease;
   }
@@ -629,8 +629,8 @@
     margin-left:6px;
     box-shadow:0 4px 10px rgba(45,125,255,.5);
   }
-  /* Когда нижняя контакт-панель спрятана (scrolled-down) — опускаем калькулятор ниже */
-  body.scrolled-down .mCalcPanel{
+  /* Когда нижняя контакт-панель спрятана — опускаем калькулятор ниже */
+  body.bar-hidden .mCalcPanel{
     bottom:14px !important;
   }
 }
@@ -9062,12 +9062,19 @@ function setupSidebarSwipeClose(){
 }
 function goCat(){
   if(window.__restoreRAF__){ cancelAnimationFrame(window.__restoreRAF__); window.__restoreRAF__=0; }
-  // на мобильном прячем клавиатуру (иначе скролл считается под ней) и целимся в первый товар
+  // прячем клавиатуру (на телефоне скролл иначе считается под ней)
   try{ if(document.activeElement && document.activeElement.blur) document.activeElement.blur(); }catch(_){ }
   setTimeout(function(){
     var grid=document.getElementById('pgrid');
-    var target=(grid&&grid.firstElementChild)?grid:document.getElementById('catAnchor');
-    if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    // целимся в ПЕРВЫЙ ТОВАР (как просил владелец стрелкой), иначе в заголовок «Найдено»
+    var target=(grid&&grid.firstElementChild) ? grid.firstElementChild
+             : (grid || document.getElementById('catAnchor') || document.getElementById('rTitle'));
+    if(!target) return;
+    // учитываем высоту липкой шапки/строки, чтобы товар не уехал под неё
+    var isMobile=window.matchMedia&&window.matchMedia('(max-width:860px)').matches;
+    var offset=isMobile?70:90;
+    var y=target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
   }, 60);
 }
 
@@ -9272,7 +9279,7 @@ function goToCatFromSug(cat){
   S.q=''; ['hQ','sQ','mssQ'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
   favSearchXSync(); favSyncQUrl('');
   setCat(cat);
-  if(_isDesktop()) goCat();
+  goCat(); // листаем к товарам и на ПК, и на телефоне
 }
 function openProdFromSug(id){ hideSearchSug(); if(typeof openM==='function') openM(id); }
 function favSyncQUrl(q){
@@ -9982,11 +9989,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     const body = document.body;
     let lastY = window.pageYOffset;
     let ticking = false;
-    let idleTimer = null;
+    let searchIdleTimer = null;
     const stickyEl = document.getElementById('mobStickySearch');
     const SCROLL_THRESHOLD = 12; // минимальное движение, чтобы не дёргаться
-    const IDLE_MS = 900; // через сколько после остановки скролла раскрываем обратно
-    const SCROLLED_DOWN_THRESHOLD = 100; // от какой высоты начинаем «прятать» шапку
+    const SEARCH_IDLE_MS = 10000; // поиск сам возвращается через 10с простоя
+    const SCROLLED_DOWN_THRESHOLD = 100; // от какой высоты начинаем «прятать»
 
     const onScroll = ()=>{
       const y = window.pageYOffset;
@@ -9994,33 +10001,33 @@ document.addEventListener('DOMContentLoaded',()=>{
       const isMobile = window.matchMedia('(max-width:860px)').matches;
 
       if(isMobile){
-        // Sticky-поиск ВСЕГДА виден на мобиле. Раньше он включался только в зоне
-        // каталога — но это создавало мерцание у верха страницы и было неудобно
-        // (пользователь не мог воспользоваться поиском с самого начала).
         if(stickyEl) stickyEl.classList.add('shown');
 
-        // Логика "скроллю вниз" → прячем шапку и нижнюю панель.
-        // Активна везде, кроме самого верха страницы.
         if(Math.abs(delta) > SCROLL_THRESHOLD){
           if(delta > 0 && y > SCROLLED_DOWN_THRESHOLD){
-            body.classList.add('scrolled-down');
+            // листаем ВНИЗ → прячем и поиск, и нижнюю панель
+            body.classList.add('search-hidden');
+            body.classList.add('bar-hidden');
           } else if(delta < 0){
-            body.classList.remove('scrolled-down');
+            // листаем ВВЕРХ → сразу возвращаем обе (нижняя остаётся, пока снова не вниз)
+            body.classList.remove('search-hidden');
+            body.classList.remove('bar-hidden');
           }
           lastY = y;
         }
         // У самого верха — всегда полный интерфейс
         if(y <= SCROLLED_DOWN_THRESHOLD){
-          body.classList.remove('scrolled-down');
+          body.classList.remove('search-hidden');
+          body.classList.remove('bar-hidden');
         }
-        // Через IDLE_MS после остановки скролла — раскрываем обратно
-        clearTimeout(idleTimer);
-        idleTimer = setTimeout(()=>{
-          body.classList.remove('scrolled-down');
-        }, IDLE_MS);
+        // ТОЛЬКО поиск: через 10с простоя возвращаем (нижнюю панель НЕ трогаем — она по направлению)
+        clearTimeout(searchIdleTimer);
+        searchIdleTimer = setTimeout(()=>{
+          body.classList.remove('search-hidden');
+        }, SEARCH_IDLE_MS);
       } else {
-        // На десктопе ничего не сворачиваем
-        body.classList.remove('scrolled-down');
+        body.classList.remove('search-hidden');
+        body.classList.remove('bar-hidden');
         if(stickyEl) stickyEl.classList.remove('shown');
       }
       ticking = false;
