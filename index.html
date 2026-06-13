@@ -288,6 +288,7 @@
   border:1px solid var(--line);
   border-radius:10px;
   color:var(--text);
+  font-size:16px;
   font-family:var(--fb);
   font-size:16px; /* >=16 чтобы iOS не зумил */
   outline:none;
@@ -1319,7 +1320,9 @@
 .mst-ic{flex:none;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px}
 .mst-n{font-weight:600;font-size:14px;color:var(--text)}
 .mst-d{font-size:12px;color:var(--muted);line-height:1.3}
-#catAnchor{scroll-margin-top:76px}
+#catAnchor{scroll-margin-top:120px}
+html,body{overflow-x:hidden;max-width:100%}
+@media(max-width:860px){.hdr-s input,.mss-input,.fi,input[type=text],input[type=tel],input[type=search],textarea{font-size:16px}}
 .hdr-s{position:relative}
 .ssug{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--bg2);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 44px rgba(0,0,0,.55);z-index:200;max-height:64vh;overflow-y:auto;overscroll-behavior:contain;padding:6px}
 .ssug-h{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding:8px 10px 4px}
@@ -1366,7 +1369,7 @@ header.hsx .hdr-s input{font-size:15px}}
 @media(max-width:480px){.favDlgT{font-size:13px!important}}
 .mob-sticky-search.msx a,.mob-sticky-search.msx .mss-btn{display:none!important}
 .mob-sticky-search.msx .mss-input-wrap{flex:1 1 100%}
-.mob-sticky-search.msx .mss-input{width:100%;font-size:15px}
+.mob-sticky-search.msx .mss-input{width:100%;font-size:16px}
 </style>
 </head>
 <body>
@@ -9057,7 +9060,16 @@ function setupSidebarSwipeClose(){
     startY = null; lastY = null;
   }, {passive:true});
 }
-function goCat(){ if(window.__restoreRAF__){ cancelAnimationFrame(window.__restoreRAF__); window.__restoreRAF__=0; } var a=document.getElementById('catAnchor'); if(a) a.scrollIntoView({behavior:'smooth'}); }
+function goCat(){
+  if(window.__restoreRAF__){ cancelAnimationFrame(window.__restoreRAF__); window.__restoreRAF__=0; }
+  // на мобильном прячем клавиатуру (иначе скролл считается под ней) и целимся в первый товар
+  try{ if(document.activeElement && document.activeElement.blur) document.activeElement.blur(); }catch(_){ }
+  setTimeout(function(){
+    var grid=document.getElementById('pgrid');
+    var target=(grid&&grid.firstElementChild)?grid:document.getElementById('catAnchor');
+    if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 60);
+}
 
 function _isDesktop(){ return !(window.matchMedia && window.matchMedia('(max-width:991px)').matches); }
 // ===== ПОИСК v41_59: уровень маркетплейсов (по исследованию Озон/ВБ/nonton) =====
@@ -10185,10 +10197,26 @@ function favOpenWarranty(){
     +'<div style="color:rgba(232,237,248,.65);font-size:13px">Если найдёте заводской недостаток — свяжитесь с нами, решим вопрос по гарантии.</div>'
     +favContactBtns());
 }
-function favOpenTerms(){
+function favDaysUntil(d){
+  try{ var n=favSterlNow(); var a=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+    var b=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+    return Math.round((b-a)/86400000); }catch(_){ return 0; }
+}
+function favDaysWord(n){ var a=Math.abs(n)%100, b=a%10; if(a>10&&a<20)return 'дней'; if(b>1&&b<5)return 'дня'; if(b===1)return 'день'; return 'дней'; }
+function favStockHeadline(){
+  // Для карточки товара: «привезём в пятницу, 19 июня (через 5 дней)» — живой календарь
+  try{ var b=favNextBatch(); var dn=favDaysUntil(b.fri);
+    var tail = dn>0 ? (' (через '+dn+' '+favDaysWord(dn)+')') : '';
+    return 'привезём в Стерлитамак в пятницу, '+favRuDate(b.fri)+tail;
+  }catch(_){ return 'ближайший привоз — в пятницу'; }
+}
+function favOpenTerms(forItem){
+  var stockBlock = forItem
+    ? '<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:10px 12px;margin-bottom:10px"><b style="color:#4ade80">\ud83d\udfe2 В наличии — '+favStockHeadline()+'</b><br>Товар уже на складе поставщика. Заказы мы формируем по средам, и к пятнице мебель приезжает в Стерлитамак. Заберёте сами или доставим — как вам удобно.</div>'
+    : '<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:10px 12px;margin-bottom:10px"><b style="color:#4ade80">\ud83d\udfe2 «В наличии» — 3\u20137 дней</b><br>Товар уже на складе поставщика. Заказы мы формируем по средам, и к пятнице мебель приезжает в Стерлитамак. Заберёте сами или доставим — как вам удобно.<br><span style="color:#4ade80;font-size:13px">'+(function(){ try{ return 'Ближайший привоз — пятница, '+favRuDate(favNextBatch().fri)+'.'; }catch(_){ return 'Успели заказать до среды — получите уже в эту пятницу.'; } })()+'</span></div>';
   favOpenInfo('\u23f1\ufe0f Сроки',
     '<div style="margin-bottom:12px">Когда вы получите мебель — зависит от того, есть ли она на складе:</div>'
-    +'<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:10px 12px;margin-bottom:10px"><b style="color:#4ade80">\ud83d\udfe2 «В наличии» — 3\u20137 дней</b><br>Товар уже на складе поставщика. Заказы мы формируем по средам, и к пятнице мебель приезжает в Стерлитамак. Заберёте сами или доставим — как вам удобно.<br><span style="color:#4ade80;font-size:13px">'+(function(){ try{ return 'Ближайший привоз — пятница, '+favRuDate(favNextBatch().fri)+'.'; }catch(_){ return 'Успели заказать до среды — получите уже в эту пятницу.'; } })()+'</span></div>'
+    +stockBlock
     +'<div style="background:rgba(45,125,255,.08);border:1px solid rgba(45,125,255,.25);border-radius:10px;padding:10px 12px;margin-bottom:10px"><b style="color:#7fb3ff">\ud83d\udd35 «Под заказ» — обычно 2\u20134 недели</b><br>Фабрика изготовит мебель специально для вас — новую, прямо с производства, в заводской упаковке. Удобно, если нужен свой цвет или размер. Гарантия — такая же, как на товары в наличии.<br><span style="color:rgba(232,237,248,.6);font-size:13px">Точный срок назовём при заказе (максимум — 30 рабочих дней) и сообщим, как только мебель приедет.</span></div>'
     +'<div style="color:rgba(232,237,248,.65);font-size:13px">Хотите узнать срок по конкретному товару? Позвоните или напишите — проверим.</div>'
     +favContactBtns());
@@ -10197,7 +10225,7 @@ function favOpenContact(title, text){ favOpenInfo(title, '<div>'+text+'</div>'+f
 // Значок ⓘ: клик/тап по статусу наличия открывает окно «Сроки»; на ПК — подсказка при наведении
 document.addEventListener('click', function(e){
   var t = e.target && e.target.closest ? e.target.closest('#mStock') : null;
-  if(t){ e.preventDefault(); e.stopPropagation(); favOpenTerms(); }
+  if(t){ e.preventDefault(); e.stopPropagation(); favOpenTerms(true); }
 }, true);
 document.addEventListener('mouseover', function(e){
   var t = e.target && e.target.closest ? e.target.closest('#mStock') : null;
