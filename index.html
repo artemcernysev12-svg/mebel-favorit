@@ -9084,17 +9084,18 @@ function goCat(){
   // прячем клавиатуру (на телефоне скролл иначе считается под ней)
   try{ if(document.activeElement && document.activeElement.blur) document.activeElement.blur(); }catch(_){ }
   setTimeout(function(){
-    var grid=document.getElementById('pgrid');
-    // целимся в ПЕРВЫЙ ТОВАР (как просил владелец стрелкой), иначе в заголовок «Найдено»
-    var target=(grid&&grid.firstElementChild) ? grid.firstElementChild
-             : (grid || document.getElementById('catAnchor') || document.getElementById('rTitle'));
+    // Целимся в ЗАГОЛОВОК категории («Кровати»/«Матрасы») — он виден над товарами
+    // и всегда на месте (не зависит от числа товаров — у матрасов больше не съезжает вниз).
+    var target=document.getElementById('rTitle')
+            || document.querySelector('.rbar')
+            || document.getElementById('catAnchor')
+            || document.getElementById('pgrid');
     if(!target) return;
-    // учитываем высоту липкой шапки/строки, чтобы товар не уехал под неё
     var isMobile=window.matchMedia&&window.matchMedia('(max-width:860px)').matches;
-    var offset=isMobile?70:90;
+    var offset=isMobile?78:100; // чуть больше — заголовок не прячется под липкую шапку
     var y=target.getBoundingClientRect().top + window.pageYOffset - offset;
     window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
-  }, 60);
+  }, 120); // ждём перерисовку грида (важно для матрасов: серия меняет список)
 }
 
 function _isDesktop(){ return !(window.matchMedia && window.matchMedia('(max-width:991px)').matches); }
