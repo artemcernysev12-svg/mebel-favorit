@@ -1314,6 +1314,15 @@
 <style id="mSeriesCss">
 .mst-h{font-family:var(--fh);font-size:15px;margin:2px 0 12px;color:var(--text)}
 .mst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:18px}
+.mst-toggle{display:none}
+@media(max-width:860px){
+  .mst-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .mst-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:10px;cursor:pointer;color:var(--text)}
+  .mst-toggle .mst-h{margin:0}
+  .mst-chev{transition:transform .2s ease;color:var(--muted);font-size:13px}
+  .mst-toggle[aria-expanded="true"] .mst-chev{transform:rotate(180deg)}
+  #mSeriesTiles.mst-collapsed .mst-grid{display:none}
+}
 .mst{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:11px 13px;cursor:pointer;transition:background .15s,border-color .15s}
 .mst:hover{background:var(--card-h);border-color:var(--accent)}
 .mst.active{border-color:var(--accent);background:var(--card-h)}
@@ -4872,7 +4881,7 @@ var MAT_SERIES=[
 ];
 function renderMattressSeriesTiles(){
   var box=document.getElementById('mSeriesTiles'); if(!box||box.dataset.built) return;
-  var h='<div class="mst-h">Серии матрасов</div><div class="mst-grid">';
+  var h='<button type="button" class="mst-toggle" onclick="toggleMatSeries()" aria-expanded="false"><span class="mst-h">Серии матрасов</span><span class="mst-chev">\u25be</span></button><div class="mst-grid">';
   var _ord=(typeof FACET_VALUE_ORDER!=='undefined'&&FACET_VALUE_ORDER['Серия'])||[];
   var _arr=MAT_SERIES.slice().sort(function(a,b){var ia=_ord.indexOf(a.n),ib=_ord.indexOf(b.n);if(ia<0)ia=999;if(ib<0)ib=999;return ia-ib;});
   _arr.forEach(function(s){
@@ -4881,6 +4890,16 @@ function renderMattressSeriesTiles(){
       +'<div><div class="mst-n">'+s.n+'</div><div class="mst-d">'+s.d+'</div></div></div>';
   });
   h+='</div>'; box.innerHTML=h; box.dataset.built='1';
+  // На телефоне блок серий по умолчанию свёрнут (длинный список мешает дойти до товаров)
+  if(window.matchMedia && window.matchMedia('(max-width:860px)').matches){
+    box.classList.add('mst-collapsed');
+  }
+}
+function toggleMatSeries(){
+  var box=document.getElementById('mSeriesTiles'); if(!box) return;
+  var btn=box.querySelector('.mst-toggle');
+  var collapsed=box.classList.toggle('mst-collapsed');
+  if(btn) btn.setAttribute('aria-expanded', collapsed?'false':'true');
 }
 function updateMattressSeriesTiles(){
   var box=document.getElementById('mSeriesTiles'); if(!box) return;
@@ -4897,7 +4916,7 @@ function selectMattressSeries(series){
   var sel=document.getElementById('catSel'); if(sel) sel.value='Матрасы';
   if(typeof updateFactoryOptions==='function') updateFactoryOptions('Матрасы');
   page=1; buildFacets(); apply();
-  if(window.__restoreRAF__){cancelAnimationFrame(window.__restoreRAF__);window.__restoreRAF__=0;} var pg=document.getElementById('pgrid'); if(pg) pg.scrollIntoView({behavior:'smooth',block:'start'});
+  goCat(); // листаем к товарам с учётом липкой шапки (на ПК больше не улетает вниз)
 }
 function getItemInitialPriceText(it){
   if(hasMattressOptions(it)) return 'от ' + rub(mattressMinPrice(it));
@@ -9789,7 +9808,7 @@ document.addEventListener('DOMContentLoaded',()=>{
           var cat=e.target.closest('[data-cat]'), prod=e.target.closest('.ssug-prod'),
               all=e.target.closest('.ssug-all'), qel=e.target.closest('[data-q]'), clr=e.target.closest('[data-clr]');
           if(clr){ clearTimeout(window.__SUG_HIDE_T__); favHistClear(); buildSearchSug('', boxId); if(inp){ inp.focus(); } }
-          else if(qel){ var v=qel.getAttribute('data-q'); if(inp){ inp.value=v; } smartQ(v); favSearchXSync(); favHistAdd(v); buildSearchSug(v, boxId); }
+          else if(qel){ var v=qel.getAttribute('data-q'); if(inp){ inp.value=v; } smartQ(v); favSearchXSync(); favHistAdd(v); favSyncQUrl(v.length>=2?v:''); hideSearchSug(); if(inp) inp.blur(); goCat(); }
           else if(cat) goToCatFromSug(cat.getAttribute('data-cat'));
           else if(prod){ favHistAdd(inp?inp.value:''); openProdFromSug(prod.getAttribute('data-id')); }
           else if(all){ var av=inp?inp.value.trim():''; favHistAdd(av); favSyncQUrl(av); hideSearchSug(); goCat(); }
@@ -10005,26 +10024,20 @@ document.addEventListener('DOMContentLoaded',()=>{
 
         if(Math.abs(delta) > SCROLL_THRESHOLD){
           if(delta > 0 && y > SCROLLED_DOWN_THRESHOLD){
-            // листаем ВНИЗ → прячем и поиск, и нижнюю панель
-            body.classList.add('search-hidden');
+            // листаем ВНИЗ → прячем ТОЛЬКО нижнюю панель (поиск всегда виден)
             body.classList.add('bar-hidden');
           } else if(delta < 0){
-            // листаем ВВЕРХ → сразу возвращаем обе (нижняя остаётся, пока снова не вниз)
-            body.classList.remove('search-hidden');
+            // листаем ВВЕРХ → возвращаем нижнюю панель
             body.classList.remove('bar-hidden');
           }
           lastY = y;
         }
         // У самого верха — всегда полный интерфейс
         if(y <= SCROLLED_DOWN_THRESHOLD){
-          body.classList.remove('search-hidden');
           body.classList.remove('bar-hidden');
         }
-        // ТОЛЬКО поиск: через 10с простоя возвращаем (нижнюю панель НЕ трогаем — она по направлению)
-        clearTimeout(searchIdleTimer);
-        searchIdleTimer = setTimeout(()=>{
-          body.classList.remove('search-hidden');
-        }, SEARCH_IDLE_MS);
+        // Поиск теперь всегда виден — таймер возврата не нужен.
+        body.classList.remove('search-hidden');
       } else {
         body.classList.remove('search-hidden');
         body.classList.remove('bar-hidden');
