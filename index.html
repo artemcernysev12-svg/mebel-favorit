@@ -1321,7 +1321,7 @@
 .mst-n{font-weight:600;font-size:14px;color:var(--text)}
 .mst-d{font-size:12px;color:var(--muted);line-height:1.3}
 #catAnchor{scroll-margin-top:120px}
-html,body{overflow-x:hidden;max-width:100%}
+body{max-width:100vw}
 @media(max-width:860px){.hdr-s input,.mss-input,.fi,input[type=text],input[type=tel],input[type=search],textarea{font-size:16px}}
 .hdr-s{position:relative}
 .ssug{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--bg2);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 44px rgba(0,0,0,.55);z-index:200;max-height:64vh;overflow-y:auto;overscroll-behavior:contain;padding:6px}
@@ -9911,10 +9911,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     let sx = null, sy = null, sTime = 0;
     let lastTapTime = 0; // для определения двойного тапа
 
+    var pvPinched = false; // был ли pinch-zoom двумя пальцами (нативный)
     pvStage.addEventListener('touchstart', e=>{
-      // Жесты обрабатываем только если ОДНИМ пальцем.
-      // Если двумя — это pinch-zoom, его обрабатывает браузер сам через CSS touch-action.
-      if(e.touches.length !== 1){ sx = sy = null; return; }
+      // Если коснулись двумя пальцами — это pinch-zoom. Запоминаем: картинка
+      // могла остаться увеличенной, поэтому листание/закрытие свайпом выключаем,
+      // пока пользователь явно не вернёт масштаб (двойной тап / новый одиночный жест без сдвига).
+      if(e.touches.length !== 1){ pvPinched = true; sx = sy = null; return; }
       sx = e.changedTouches[0].clientX;
       sy = e.changedTouches[0].clientY;
       sTime = Date.now();
@@ -9932,11 +9934,13 @@ document.addEventListener('DOMContentLoaded',()=>{
       if(dt < 300 && adx < 10 && ady < 10){
         const now = Date.now();
         if(now - lastTapTime < 300){
-          // Двойной тап — переключаем зум ×2
+          // Двойной тап — переключаем зум ×2 и сбрасываем pinch-флаг
           pvToggleZoom();
+          pvPinched = false;
           lastTapTime = 0; // сбрасываем чтобы тройной тап не считался
         } else {
           lastTapTime = now;
+          pvPinched = false; // одиночный тап = «закончил рассматривать», вернём листание
         }
         sx = sy = null;
         return;
@@ -9945,7 +9949,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       // СВАЙП ВНИЗ (вертикальный жест вниз, > вертикальной*1.4) — закрыть.
       // Только если фото НЕ в зуме, иначе пользователь скорее всего двигает увеличенную картинку.
       const img = document.getElementById('pvImg');
-      const isZoomed = img && img.classList.contains('zoomed');
+      const isZoomed = (img && img.classList.contains('zoomed')) || pvPinched;
       if(!isZoomed && dy > 80 && ady > adx * 1.4){
         pvClose();
         sx = sy = null;
