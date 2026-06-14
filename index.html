@@ -810,6 +810,11 @@
 }
 .pvStage img.zoomed{
   transform:scale(2);
+  cursor:grab;
+}
+.pvStage img.panning{
+  transition:none;
+  cursor:grabbing;
 }
 /* Стрелки на десктопе (на мобиле скрываются медиа-запросом ниже) */
 .pv-ar{
@@ -1331,7 +1336,8 @@
 .mst-d{font-size:12px;color:var(--muted);line-height:1.3}
 #catAnchor{scroll-margin-top:120px}
 body{max-width:100vw}
-@media(max-width:860px){.hdr-s input,.mss-input,.fi,input[type=text],input[type=tel],input[type=search],textarea{font-size:16px}}
+input,textarea,select{font-size:16px}
+@media(max-width:860px){.hdr-s input,.mss-input,.fi,input,textarea,select{font-size:16px !important}}
 .hdr-s{position:relative}
 .ssug{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--bg2);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 44px rgba(0,0,0,.55);z-index:200;max-height:64vh;overflow-y:auto;overscroll-behavior:contain;padding:6px}
 .ssug-h{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding:8px 10px 4px}
@@ -8919,7 +8925,7 @@ function pvOpen(i){
   if(!mPh.length) return;
   const ov=document.getElementById('pvOv'), img=document.getElementById('pvImg'), cnt=document.getElementById('pvCnt');
   img.src = mPh[i] || mPh[0];
-  img.classList.remove('zoomed'); // сбрасываем зум при открытии
+  if(typeof pvSetZoom==='function') pvSetZoom(false); // сбрасываем зум при открытии
   cnt.textContent = (i+1)+' / '+mPh.length;
   window.__PVI__ = i;
   ov.classList.add('open');
@@ -8931,8 +8937,7 @@ function pvOpen(i){
 function pvClose(){
   document.getElementById('pvOv').classList.remove('open');
   // Сбрасываем zoom — иначе при следующем открытии он останется
-  const img = document.getElementById('pvImg');
-  if(img) img.classList.remove('zoomed');
+  if(typeof pvSetZoom==='function') pvSetZoom(false);
   // Восстанавливаем скролл, но только если модалка товара тоже не открыта
   if(!document.getElementById('mOv').classList.contains('open')){
     document.body.style.overflow = '';
@@ -8949,7 +8954,7 @@ function pvNext(){
   if(!mPh.length) return;
   window.__PVI__ = ((window.__PVI__||0)+1) % mPh.length;
   const img = document.getElementById('pvImg');
-  img.classList.remove('zoomed'); // при переключении сбрасываем зум
+  pvSetZoom(false); // при переключении сбрасываем зум
   img.src = mPh[window.__PVI__];
   document.getElementById('pvCnt').textContent = (window.__PVI__+1)+' / '+mPh.length;
   // синхронизируем модалку
@@ -8959,16 +8964,41 @@ function pvPrev(){
   if(!mPh.length) return;
   window.__PVI__ = (window.__PVI__ -1 + mPh.length) % mPh.length;
   const img = document.getElementById('pvImg');
-  img.classList.remove('zoomed');
+  pvSetZoom(false);
   img.src = mPh[window.__PVI__];
   document.getElementById('pvCnt').textContent = (window.__PVI__+1)+' / '+mPh.length;
   setPhoto(window.__PVI__);
 }
 // Двойной тап — переключает зум (быстрый ×2 без pinch-жестов)
-function pvToggleZoom(){
-  const img = document.getElementById('pvImg');
-  if(img) img.classList.toggle('zoomed');
+var pvZoom={on:false, scale:2, x:0, y:0};
+function pvApplyTransform(){
+  var img=document.getElementById('pvImg'); if(!img) return;
+  if(pvZoom.on){
+    img.style.transform='translate('+pvZoom.x+'px,'+pvZoom.y+'px) scale('+pvZoom.scale+')';
+  } else {
+    img.style.transform='';
+  }
 }
+function pvClampPan(){
+  // не даём утащить картинку дальше её краёв
+  var img=document.getElementById('pvImg'); if(!img) return;
+  var r=img.getBoundingClientRect();
+  var stage=img.parentElement.getBoundingClientRect();
+  // максимально допустимое смещение = сколько картинка вылезает за сцену / 2
+  var maxX=Math.max(0,(r.width-stage.width)/2);
+  var maxY=Math.max(0,(r.height-stage.height)/2);
+  if(pvZoom.x> maxX) pvZoom.x= maxX;
+  if(pvZoom.x<-maxX) pvZoom.x=-maxX;
+  if(pvZoom.y> maxY) pvZoom.y= maxY;
+  if(pvZoom.y<-maxY) pvZoom.y=-maxY;
+}
+function pvSetZoom(on){
+  var img=document.getElementById('pvImg'); if(!img) return;
+  pvZoom.on=on; pvZoom.x=0; pvZoom.y=0;
+  img.classList.toggle('zoomed', on);
+  pvApplyTransform();
+}
+function pvToggleZoom(){ pvSetZoom(!pvZoom.on); }
 // ESC закрывает просмотрщик, стрелки листают
 document.addEventListener('keydown', e => {
   if(!window.__PV_OPEN__) return;
@@ -9769,7 +9799,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     dApply();
 
     if(wasEmpty){
-      requestAnimationFrame(_smartScrollToCatalog);
+      goCat(); // единая прокрутка к заголовку каталога — и на ПК, и на телефоне
     }
   }
 
@@ -9937,20 +9967,36 @@ document.addEventListener('DOMContentLoaded',()=>{
     // Жесты на мобильном
     let sx = null, sy = null, sTime = 0;
     let lastTapTime = 0; // для определения двойного тапа
+    let panStartX=0, panStartY=0, panOrigX=0, panOrigY=0, panning=false;
 
-    var pvPinched = false; // был ли pinch-zoom двумя пальцами (нативный)
     pvStage.addEventListener('touchstart', e=>{
-      // Если коснулись двумя пальцами — это pinch-zoom. Запоминаем: картинка
-      // могла остаться увеличенной, поэтому листание/закрытие свайпом выключаем,
-      // пока пользователь явно не вернёт масштаб (двойной тап / новый одиночный жест без сдвига).
-      if(e.touches.length !== 1){ pvPinched = true; sx = sy = null; return; }
-      sx = e.changedTouches[0].clientX;
-      sy = e.changedTouches[0].clientY;
-      sTime = Date.now();
+      // Два пальца — отдаём родному зуму браузера, свои жесты гасим
+      if(e.touches.length !== 1){ sx = sy = null; panning=false; return; }
+      var t=e.changedTouches[0];
+      sx = t.clientX; sy = t.clientY; sTime = Date.now();
+      if(pvZoom.on){
+        // В зуме — начинаем тащить картинку (pan)
+        panning=true; panStartX=t.clientX; panStartY=t.clientY;
+        panOrigX=pvZoom.x; panOrigY=pvZoom.y;
+        var img=document.getElementById('pvImg'); if(img) img.classList.add('panning');
+      }
+    }, {passive:true});
+
+    pvStage.addEventListener('touchmove', e=>{
+      // Перетаскивание увеличенной картинки пальцем
+      if(panning && pvZoom.on && e.touches.length===1){
+        var t=e.changedTouches[0];
+        pvZoom.x = panOrigX + (t.clientX - panStartX);
+        pvZoom.y = panOrigY + (t.clientY - panStartY);
+        pvClampPan();
+        pvApplyTransform();
+      }
     }, {passive:true});
 
     pvStage.addEventListener('touchend', e=>{
-      if(sx === null || sy === null) return;
+      var img=document.getElementById('pvImg');
+      if(img) img.classList.remove('panning');
+      if(sx === null || sy === null){ panning=false; return; }
       const dx = e.changedTouches[0].clientX - sx;
       const dy = e.changedTouches[0].clientY - sy;
       const dt = Date.now() - sTime;
@@ -9961,30 +10007,24 @@ document.addEventListener('DOMContentLoaded',()=>{
       if(dt < 300 && adx < 10 && ady < 10){
         const now = Date.now();
         if(now - lastTapTime < 300){
-          // Двойной тап — переключаем зум ×2 и сбрасываем pinch-флаг
-          pvToggleZoom();
-          pvPinched = false;
-          lastTapTime = 0; // сбрасываем чтобы тройной тап не считался
+          pvToggleZoom(); // двойной тап — зум вкл/выкл
+          lastTapTime = 0;
         } else {
           lastTapTime = now;
-          pvPinched = false; // одиночный тап = «закончил рассматривать», вернём листание
         }
-        sx = sy = null;
+        sx = sy = null; panning=false;
         return;
       }
 
-      // СВАЙП ВНИЗ (вертикальный жест вниз, > вертикальной*1.4) — закрыть.
-      // Только если фото НЕ в зуме, иначе пользователь скорее всего двигает увеличенную картинку.
-      const img = document.getElementById('pvImg');
-      const isZoomed = (img && img.classList.contains('zoomed')) || pvPinched;
-      if(!isZoomed && dy > 80 && ady > adx * 1.4){
-        pvClose();
-        sx = sy = null;
-        return;
-      }
+      // Если был pan (двигали увеличенную картинку) — НЕ листаем и не закрываем
+      if(panning){ panning=false; sx = sy = null; return; }
 
-      // СВАЙП ВЛЕВО/ВПРАВО — листаем (только если не в зуме)
-      if(!isZoomed && adx > 40 && adx > ady * 1.4){
+      // СВАЙП ВНИЗ — закрыть (только вне зума)
+      if(!pvZoom.on && dy > 80 && ady > adx * 1.4){
+        pvClose(); sx = sy = null; return;
+      }
+      // СВАЙП ВЛЕВО/ВПРАВО — листать (только вне зума)
+      if(!pvZoom.on && adx > 40 && adx > ady * 1.4){
         if(dx < 0) pvNext(); else pvPrev();
       }
       sx = sy = null;
