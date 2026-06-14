@@ -1337,7 +1337,13 @@
 #catAnchor{scroll-margin-top:120px}
 body{max-width:100vw}
 input,textarea,select{font-size:16px}
-@media(max-width:860px){.hdr-s input,.mss-input,.fi,input,textarea,select{font-size:16px !important}}
+@media(max-width:860px){.hdr-s input,.mss-input,.fi,input,textarea,select{font-size:16px !important}
+/* крестик очистки поиска — зона нажатия крупнее для пальца (визуально кружок прежний) */
+.sclr{width:40px;height:40px;background:transparent}
+.sclr::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.12);z-index:-1}
+.sclr{display:flex!important;align-items:center;justify-content:center}
+/* селекты вариантов в комплектах/кухнях — 16px, чтобы iOS не зумил */
+.kitVariantSelect select,.kitVariantSelect-row select,.facet-search input,.cbf input{font-size:16px !important}}
 .hdr-s{position:relative}
 .ssug{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--bg2);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 44px rgba(0,0,0,.55);z-index:200;max-height:64vh;overflow-y:auto;overscroll-behavior:contain;padding:6px}
 .ssug-h{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding:8px 10px 4px}
@@ -4927,6 +4933,8 @@ function selectMattressSeries(series){
   var sel=document.getElementById('catSel'); if(sel) sel.value='Матрасы';
   if(typeof updateFactoryOptions==='function') updateFactoryOptions('Матрасы');
   page=1; buildFacets(); apply();
+  // Адрес: ?series=Элит (сняли серию — остаётся ?cat=Матрасы)
+  if(!window.__ROUTING__){ if(cur===series) favSetUrl({cat:'Матрасы'}, true); else favSetUrl({cat:'Матрасы', series:series}, true); }
   goCat(); // листаем к товарам с учётом липкой шапки (на ПК больше не улетает вниз)
 }
 function getItemInitialPriceText(it){
@@ -5873,6 +5881,8 @@ function openM(id, opts){
   setPhoto(0);buildThs();
   document.getElementById('mOv').classList.add('open');
   document.body.style.overflow='hidden';
+  // Адрес: ?item=ID — карточкой можно поделиться, «Назад» вернёт в каталог
+  if(!window.__ROUTING__){ favSetUrl({item:it.id}, true); }
   if(typeof updateSeoProduct === 'function') updateSeoProduct(it);
   const restoreTop = Number(opts && opts.restoreScrollTop);
   const sc = getModalScrollEl();
@@ -8879,15 +8889,17 @@ function closeM(){
   if(window.__BACK_TO_CART__){ window.__BACK_TO_CART__=false; try{ setTimeout(function(){ favCartOpen(); },0); }catch(_){ } }
   // V41: убираем динамические SEO-теги при закрытии карточки
   try{ removeProductJsonLd(); restoreBaseCanonical(); }catch(_){}
-  // Убираем ?item=... из адресной строки, чтобы при обновлении страницы
-  // не открывалась снова та же карточка. ?cat=... оставляем — пользователь
-  // может вернуться в ту же категорию.
+  // Убираем ?item=... из адреса. Если в истории остался шаг с карточкой —
+  // заменяем на текущее состояние каталога (?cat=… или чистый).
   try{
-    const url = new URL(window.location.href);
-    if(url.searchParams.has('item')){
-      url.searchParams.delete('item');
-      const newUrl = url.pathname + (url.search || '') + (url.hash || '');
-      window.history.replaceState(null, '', newUrl);
+    if(!window.__ROUTING__){
+      var pp=new URLSearchParams(window.location.search);
+      if(pp.has('item')){
+        var keepCat=pp.get('cat'), keepQ=(pp.get('q')||'').trim();
+        if(keepQ) favSetUrl({q:keepQ}, false);
+        else if(keepCat) favSetUrl({cat:keepCat}, false);
+        else favSetUrl({}, false);
+      }
     }
   }catch(_){}
   // Выбор вариантов в составе комплекта живёт только пока открыта модалка.
@@ -9339,6 +9351,49 @@ function goToCatFromSug(cat){
   goCat(); // листаем к товарам и на ПК, и на телефоне
 }
 function openProdFromSug(id){ hideSearchSug(); if(typeof openM==='function') openM(id); }
+// ====== ДИПЛИНКИ (человекопонятные ссылки) v41_75 ======
+// Единая точка смены адресной строки. push=true добавляет шаг в историю
+// браузера (тогда работает кнопка «Назад»); push=false — тихо заменяет.
+window.__ROUTING__ = false; // защита от зацикливания при применении адреса
+function favSetUrl(params, push){
+  try{
+    var u=new URL(window.location.href);
+    ['cat','item','q','series','cart'].forEach(function(k){ u.searchParams.delete(k); });
+    Object.keys(params||{}).forEach(function(k){
+      var v=params[k];
+      if(v===true) u.searchParams.set(k,'1');
+      else if(v!==undefined && v!==null && String(v)!=='') u.searchParams.set(k,String(v));
+    });
+    var url=u.pathname+(u.search||'')+(u.hash||'');
+    if(push) window.history.pushState(null,'',url);
+    else window.history.replaceState(null,'',url);
+  }catch(_){ }
+}
+// Применить текущий адрес к состоянию сайта (вызывается при загрузке и при «Назад»)
+function favApplyUrl(){
+  if(window.__ROUTING__) return;
+  window.__ROUTING__=true;
+  try{
+    var p=new URLSearchParams(window.location.search);
+    var item=p.get('item'), cart=p.get('cart'), series=p.get('series');
+    var cat=p.get('cat'), q=(p.get('q')||'').trim();
+    // Закрываем то, что не соответствует адресу
+    var mOv=document.getElementById('mOv');
+    if(!item && mOv && mOv.classList.contains('open')){ if(typeof closeM==='function') closeM(); }
+    if(!cart){ var dlg=document.getElementById('favInfoDlg'); if(dlg && typeof favCloseInfo==='function') favCloseInfo(); }
+    // Применяем поиск/категорию
+    if(q){ ['hQ','mssQ','sQ'].forEach(function(id){ var el=document.getElementById(id); if(el) el.value=q; }); if(typeof smartQ==='function') smartQ(q); }
+    else if(cat){ var sel=document.getElementById('catSel'); if(sel){ var opt=Array.from(sel.options).find(function(o){return o.value===cat;}); if(opt && typeof setCat==='function') setCat(cat); } }
+    if(series && typeof selectMattressSeries==='function'){ selectMattressSeries(series); }
+    // Открываем карточку/корзину
+    if(item && typeof openM==='function'){ var it=(window.CATALOG||[]).find(function(x){return String(x.id)===String(item);}); if(it){ setTimeout(function(){ openM(it.id); },50); } }
+    else if(cart && typeof favCartOpen==='function'){ setTimeout(function(){ favCartOpen(); },50); }
+  }catch(_){ }
+  window.__ROUTING__=false;
+}
+// Кнопка «Назад»/«Вперёд» браузера
+window.addEventListener('popstate', function(){ favApplyUrl(); });
+
 function favSyncQUrl(q){
   // ?q=диван в адресной строке: ссылкой можно поделиться, поиск переживает обновление страницы
   try{
@@ -9667,7 +9722,9 @@ document.addEventListener('DOMContentLoaded',()=>{
     const catParam = params.get('cat');
     const itemParam = params.get('item');
     const qParam = (params.get('q')||'').trim();
-    if(!catParam && !itemParam && !qParam) return;
+    const seriesParam = params.get('series');
+    const cartParam = params.get('cart');
+    if(!catParam && !itemParam && !qParam && !seriesParam && !cartParam) return;
 
     // Ждём готовности каталога. Проверяем каждые 50мс, максимум 8 секунд.
     let attempts = 0;
@@ -9703,14 +9760,24 @@ document.addEventListener('DOMContentLoaded',()=>{
           if(typeof favSearchXSync==='function') favSearchXSync();
           setTimeout(()=>{ const a=document.getElementById('catAnchor'); if(a) a.scrollIntoView({behavior:'smooth'}); }, 150);
         }
+        if(seriesParam && typeof selectMattressSeries==='function'){
+          window.__ROUTING__=true;
+          try{ selectMattressSeries(seriesParam); }catch(_){}
+          window.__ROUTING__=false;
+        }
         if(itemParam){
           const it = window.CATALOG.find(x => String(x.id) === String(itemParam));
           if(it){
             // Небольшая задержка чтобы успели отрисоваться карточки и сетка
-            setTimeout(()=>openM(it.id, {msize: params.get('msize'), mfab: params.get('mfab')}), 200);
+            window.__ROUTING__=true;
+            setTimeout(()=>{ try{ openM(it.id, {msize: params.get('msize'), mfab: params.get('mfab')}); }catch(_){} window.__ROUTING__=false; }, 200);
           } else {
             console.warn('[router] товар не найден:', itemParam);
           }
+        }
+        if(cartParam && typeof favCartOpen==='function'){
+          window.__ROUTING__=true;
+          setTimeout(()=>{ try{ favCartOpen(); }catch(_){} window.__ROUTING__=false; }, 250);
         }
       }catch(err){
         console.warn('[router] ошибка применения URL-параметров:', err);
@@ -9736,7 +9803,15 @@ document.addEventListener('DOMContentLoaded',()=>{
   // было видно, что что-то реально происходит.
   let userPickedCat = S.cat || '';
   const _origSetCat = setCat;
-  setCat = function(cat){ userPickedCat = cat || ''; return _origSetCat(cat); };
+  setCat = function(cat){
+    userPickedCat = cat || '';
+    var r = _origSetCat(cat);
+    // Обновляем адрес: ?cat=Кровати (но не во время применения адреса и не затирая активный поиск)
+    if(!window.__ROUTING__ && !S.q){
+      if(cat) favSetUrl({cat:cat}, true); else favSetUrl({}, true);
+    }
+    return r;
+  };
 
   function _smartScrollToCatalog(){
     if(window.matchMedia && !window.matchMedia('(max-width:991px)').matches) return;
@@ -10170,7 +10245,9 @@ document.addEventListener('DOMContentLoaded', function () {
 // ===== РЕЛИЗ 1 (V41_36): блок доверия + кликабельные плашки =====
 window.__DELIVERY_PRICES__ = [["Айгулево", 2800], ["Айдарали", 6500], ["Алатана, Забельское", 3200], ["Амзя", 3700], ["Антоновка", 4800], ["Аптиково", 4000], ["Аптиково нов.", 4200], ["Арметово Верх.", 4500], ["Арметово Ниж.", 4200], ["Асава-Зубово", 2500], ["Асанбашево", 3500], ["Ахмерово", 3000], ["Ахметрахимово", 4000], ["Ашкадар", 2300], ["Аючево", 3500], ["Б.Аксаково", 3300], ["Б.Куганак", 3200], ["Б.Озеро", 4600], ["Б/отдыха Шихан", 3000], ["Базиково", 4000], ["Байрак", 1800], ["Бельское", 3000], ["Бигиняш", 4000], ["Бишкаин", 5500], ["Боголюбовка", 4000], ["Буриказганово", 2500], ["Бурлы", 7000], ["Буруновка", 4000], ["Васильвка (Ишим)", 4000], ["Васильева (за Наум)", 2700], ["Веденовка", 3000], ["Верхнеахметово", 4200], ["Верхнее Юлдашево", 4000], ["Верхнеиткулово", 5200], ["Верхние легенды", 6000], ["Верхние услы", 3000], ["Веселое", 2500], ["Войновка", 5000], ["Восток", 2300], ["Григорьевка", 3800], ["Гумер", 5000], ["Дергачевка", 4600], ["Елембетово", 4000], ["Еслево", 2700], ["Забельское", 3200], ["Загородный", 1800], ["Заливное", 2300], ["Зирган", 4500], ["Златоножка", 4300], ["Ингинчеляр", 4800], ["Инзелга", 5000], ["Ишеево", 2500], ["Ишимбай", 3700], ["Ишпарсово", 3000], ["Казадаевка", 2000], ["Калкаш новый", 4000], ["Калкаш старый", 4300], ["Канакаево", 3000], ["Карайганово", 2500], ["Карасевка", 2700], ["Кармаскалы (Стерл)", 2700], ["Кебячево", 4300], ["Кинзябулатово  (Ишим)", 5000], ["Кияуково (Ишим)", 4300], ["Кононовский", 3200], ["Константиноградовка", 4500], ["Контюковка", 3000], ["Корнеевка", 4300], ["Косяковка", 2000], ["Красноусольск", 6000], ["Красный Яр", 3000], ["Куанак баш", 5500], ["Куганак большой", 3500], ["Куганак чувашский", 2800], ["Куезбашево", 5000], ["Кузьминовка (Аург)", 4000], ["Кузьминовка (Стерл)", 4000], ["Кузьминовка Аург", 4300], ["Кузьминовка Ишим", 4200], ["Кузьминовка Стерл", 4300], ["Кузяново", 4500], ["Кунакбаево", 3300], ["Курмантау", 7500], ["Кутлугуза", 5000], ["Кучербаево", 3000], ["Лебяжи Стер рассвет", 2700], ["Любовка ч.з.Хвойн", 2000], ["Любовка ч.з.Чуртан", 4000], ["Макарово (Ишим)", 5300], ["Максимовка", 5100], ["Малый Нагадак", 5800], ["Манеево", 4000], ["Мариинский", 2000], ["Мариинский новый", 2200], ["Маршановка", 2600], ["Марьевка", 2000], ["Марьевка верхнее", 2200], ["Медовый Барятино", 2000], ["Месели", 4000], ["Мраково (Гафур)", 4000], ["Муравей", 2300], ["Мурдашево", 4000], ["Мурзагулово", 5000], ["Мустафино", 6000], ["Наумкино", 5800], ["Наумовка", 2800], ["Нижнеарметово", 4200], ["Нижние услы", 3000], ["Николаевка (Стерл)", 3600], ["Новоаптиково", 4500], ["Новое Барятино", 2000], ["Новоивановка (Стерл)", 5000], ["Новоитекеево", 4500], ["Новый краснояр", 2700], ["Нордовка", 5500], ["Озерковка", 3300], ["Октябрьское (Стерл)", 3600], ["Октябрьское (Шахтау)", 2000], ["Отрадовка", 1800], ["Первомайский", 1600], ["Первомайское (Стерл)", 5000], ["Первомайское (Стерлиб)", 5000], ["Петровское", 3700], ["Подлесное", 2800], ["Покровка (За Куганак)", 3500], ["Покровка (на Салават)", 2500], ["Помряскино", 2500], ["Преображеновка", 2800], ["Рассвет сады", 2500], ["Рощинский", 2500], ["Русский саскуль", 4200], ["Рязановка", 2300], ["Сабашево", 4300], ["Садовка", 3000], ["Саитбаба", 9000], ["Сайраново", 5000], ["Салават", 3800], ["Салихово", 3200], ["Сарайса", 4500], ["Саратовка", 4800], ["Светлый", 3000], ["Семенкино", 3500], ["СНТ Ветеран", 2000], ["СНТ Водоканал", 2000], ["СНТ Ильмень", 2000], ["СНТ Калинка", 2000], ["СНТ Кобард", 2500], ["СНТ Машзавод", 2000], ["СНТ Тихий Ашкадар", 2000], ["СНТ Урняк", 3000], ["СНТ Черемушки", 2500], ["Соловьевка", 3800], ["Сосновка", 4000], ["Софипольское", 4700], ["Софьино", 5000], ["Староитекеево", 5000], ["Старомакарово", 4000], ["Стерлибашево", 5000], ["Строймаш", 1900], ["Сунгур", 3000], ["Табулда", 5500], ["Табынск", 5500], ["Тавричанка", 5000], ["Талалаевка", 3300], ["Талачево", 3000], ["Танеевка", 2800], ["Татарский нагадак", 6300], ["Татарский саскуль", 5000], ["Ташлыкуль", 4300], ["Толбазы центр", 4500], ["Тряпино", 6200], ["Тугаево Аург", 7000], ["Тугаево Гафр", 4600], ["Турмаево", 6000], ["Турсугали", 5600], ["Тюрюшля", 4000], ["Уразметово", 4500], ["Урман-бишкадак", 3000], ["Урняк", 3000], ["Услыбаш", 3700], ["Утякаево", 5000], ["Федоровка", 7200], ["Цапаловка", 4700], ["Чувашские карамылы", 5000], ["Чувашский куганак", 3000], ["Чувашский нагадак", 6300], ["Чуртан", 3600], ["Шахтау", 2300], ["Шеверли", 3700], ["Шланлы", 3600], ["Южное", 3400], ["Юлдашево", 4700], ["Юрактау", 3500], ["Янарусово", 4000], ["Янгискаин (Гафур)", 4500], ["Янгу-аул", 2500], ["Яр Бишкадак", 3500]];
 
-function favCloseInfo(){ var e=document.getElementById('favInfoDlg'); if(e) e.remove(); document.body.style.overflow=''; }
+function favCloseInfo(){ var e=document.getElementById('favInfoDlg'); if(e) e.remove(); document.body.style.overflow='';
+  try{ if(!window.__ROUTING__){ var pp=new URLSearchParams(window.location.search); if(pp.has('cart')){ var kc=pp.get('cat'), kq=(pp.get('q')||'').trim(); if(kq) favSetUrl({q:kq}, false); else if(kc) favSetUrl({cat:kc}, false); else favSetUrl({}, false); } } }catch(_){}
+}
 function favOpenInfo(title, bodyHtml, headerExtra){
   favCloseInfo();
   var o=document.createElement('div'); o.id='favInfoDlg';
@@ -10668,6 +10745,7 @@ function favCartOpenItem(idx){
   window.__BACK_TO_CART__=true; // после закрытия карточки вернём корзину (сбрасывается в openM/closeM)
 }
 function favCartOpen(){
+  if(!window.__ROUTING__){ favSetUrl({cart:true}, true); }
   var keys=Object.keys(SITE_CART);
   var body;
   if(!keys.length){
