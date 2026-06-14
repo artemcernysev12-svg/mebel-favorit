@@ -3927,8 +3927,13 @@ function apply(){
   if(typeof updateMattressSeriesTiles==='function') updateMattressSeriesTiles();
   if(typeof updateSeoForState === 'function') updateSeoForState();
   if(typeof window!=='undefined' && window.matchMedia && !window.matchMedia('(max-width:991px)').matches){
-    if(window.__restoreRAF__) cancelAnimationFrame(window.__restoreRAF__);
-    window.__restoreRAF__=requestAnimationFrame(function(){ window.scrollTo(0, __sy); window.__restoreRAF__=0; });
+    if(window.__goCatPending__){
+      // Мы намеренно листаем к каталогу (поиск/категория/чип) — НЕ возвращаем позицию назад
+      if(window.__restoreRAF__){ cancelAnimationFrame(window.__restoreRAF__); window.__restoreRAF__=0; }
+    } else {
+      if(window.__restoreRAF__) cancelAnimationFrame(window.__restoreRAF__);
+      window.__restoreRAF__=requestAnimationFrame(function(){ window.scrollTo(0, __sy); window.__restoreRAF__=0; });
+    }
   }
 }
 
@@ -9111,6 +9116,7 @@ function setupSidebarSwipeClose(){
 }
 function goCat(){
   if(window.__restoreRAF__){ cancelAnimationFrame(window.__restoreRAF__); window.__restoreRAF__=0; }
+  window.__goCatPending__ = true; // dApply не должен возвращать позицию назад, пока листаем
   // прячем клавиатуру (на телефоне скролл иначе считается под ней)
   try{ if(document.activeElement && document.activeElement.blur) document.activeElement.blur(); }catch(_){ }
   setTimeout(function(){
@@ -9120,11 +9126,12 @@ function goCat(){
             || document.querySelector('.rbar')
             || document.getElementById('catAnchor')
             || document.getElementById('pgrid');
-    if(!target) return;
+    if(!target){ window.__goCatPending__=false; return; }
     var isMobile=window.matchMedia&&window.matchMedia('(max-width:860px)').matches;
     var offset=isMobile?78:100; // чуть больше — заголовок не прячется под липкую шапку
     var y=target.getBoundingClientRect().top + window.pageYOffset - offset;
     window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
+    setTimeout(function(){ window.__goCatPending__=false; }, 400); // снимаем флаг после прокрутки
   }, 120); // ждём перерисовку грида (важно для матрасов: серия меняет список)
 }
 
