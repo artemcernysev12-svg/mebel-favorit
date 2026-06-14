@@ -10772,7 +10772,6 @@ function favCartOpenItem(idx){
   window.__BACK_TO_CART__=true; // после закрытия карточки вернём корзину (сбрасывается в openM/closeM)
 }
 function favCartOpen(){
-  if(!window.__ROUTING__){ favWriteUrl({cart:true}, true); }
   var keys=Object.keys(SITE_CART);
   var body;
   if(!keys.length){
@@ -10807,6 +10806,9 @@ function favCartOpen(){
       +'</div>';
   }
   favOpenInfo('\ud83d\uded2 Корзина', body);
+  // URL пишем ПОСЛЕ favOpenInfo: внутри него favCloseInfo стирает cart, поэтому
+  // запись до вызова самоотменялась (баг приёмки v41_76).
+  if(!window.__ROUTING__){ favWriteUrl({cart:true}, true); }
 }
 function favCartAddFromModal(){
   var it=window.__CUR_ITEM__; if(!it){ favCartOpen(); return; }
