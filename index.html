@@ -9712,24 +9712,100 @@ function parseAndApplyStockBuffer(buf){
 
 const dApply=deb(()=>{page=1;apply()},260);
 document.addEventListener('DOMContentLoaded',()=>{
-  // V41: регистрация Service Worker для PWA / оффлайн / ускорения повторных загрузок.
-  // SW грузит ресурсы по разным стратегиям (см. sw.js).
+  // V41_78: МЯГКОЕ автообновление сайта (A+B). Когда залита новая версия:
+  //  - новая SW готовится в фоне, НЕ перебивая текущую страницу;
+  //  - показываем ненавязчивую плашку «Обновить» (B);
+  //  - тихо применяем при следующем естественном действии: переход/открытие
+  //    или закрытие карточки/смена категории (A) — человек не замечает рывка;
+  //  - плюс фоновая проверка обновления раз в 30 минут (для открытых вкладок).
   if('serviceWorker' in navigator && location.protocol === 'https:'){
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js').then(reg => {
-        // При обнаружении новой версии — мягко обновляемся
+        window.__SW_REG__ = reg;
+
+        // Активировать готовую новую версию (по клику на плашку или при действии)
+        window.favApplyUpdate = function(){
+          if(window.__SW_APPLYING__) return;
+          var waiting = reg.waiting;
+          if(waiting){ window.__SW_APPLYING__ = true; waiting.postMessage({type:'SKIP_WAITING'}); }
+        };
+
+        // Новая версия установилась и ждёт — НЕ перебиваем резко, готовим мягко
+        function onWaiting(){
+          if(!reg.waiting || !navigator.serviceWorker.controller) return;
+          window.__SW_UPDATE_READY__ = true;
+          showUpdateBanner();          // B: ненавязчивая плашка
+          armSoftUpdateOnAction();     // A: применить при следующем действии
+        }
+
         reg.addEventListener('updatefound', () => {
           const nw = reg.installing;
           if(nw){
             nw.addEventListener('statechange', () => {
               if(nw.state === 'installed' && navigator.serviceWorker.controller){
-                nw.postMessage({type:'SKIP_WAITING'});
+                onWaiting();
               }
             });
           }
         });
+        // Если новая версия уже ждала на момент загрузки
+        if(reg.waiting && navigator.serviceWorker.controller){ onWaiting(); }
+
+        // Когда новая SW взяла управление — один раз плавно перечитываем страницу
+        var refreshed = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if(refreshed) return; refreshed = true;
+          window.location.reload();
+        });
+
+        // C-страховка: фоновая проверка обновления раз в 30 мин (для висящих вкладок)
+        setInterval(() => { try{ reg.update(); }catch(_){} }, 30*60*1000);
+        // и при возвращении на вкладку
+        document.addEventListener('visibilitychange', () => {
+          if(document.visibilityState === 'visible'){ try{ reg.update(); }catch(_){} }
+        });
       }).catch(err => console.warn('[sw] register failed', err));
     });
+  }
+
+  // A: применить готовое обновление при следующем естественном действии.
+  // Вешаем «одноразовые» слушатели на навигацию по сайту — как только человек
+  // что-то делает, тихо переключаемся на новую версию.
+  function armSoftUpdateOnAction(){
+    if(window.__SW_ARMED__) return; window.__SW_ARMED__ = true;
+    var fire = function(){
+      if(!window.__SW_UPDATE_READY__) return;
+      // небольшая задержка, чтобы действие человека успело отработать
+      setTimeout(function(){ if(window.favApplyUpdate) window.favApplyUpdate(); }, 250);
+    };
+    // навигационные точки: открытие/закрытие карточки, popstate, выбор категории
+    window.addEventListener('popstate', fire, {once:false});
+    ['openM','closeM','setCat','favCartOpen'].forEach(function(fn){
+      if(typeof window[fn] === 'function'){
+        var orig = window[fn];
+        window[fn] = function(){ var r = orig.apply(this, arguments); fire(); return r; };
+      }
+    });
+  }
+
+  // B: ненавязчивая плашка «Доступна новая версия»
+  function showUpdateBanner(){
+    if(document.getElementById('favUpd')) return;
+    var b = document.createElement('div');
+    b.id = 'favUpd';
+    b.innerHTML = '<span>Доступна новая версия сайта</span>'
+      + '<button type="button" id="favUpdBtn">Обновить</button>';
+    b.style.cssText = 'position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(120%);'
+      + 'z-index:5000;display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:13px;'
+      + 'background:rgba(13,18,32,.96);backdrop-filter:blur(10px);border:1px solid rgba(255,213,77,.4);'
+      + 'box-shadow:0 8px 30px rgba(0,0,0,.5);color:#fff;font-family:var(--fb);font-size:13.5px;'
+      + 'max-width:calc(100vw - 28px);transition:transform .35s ease';
+    var btn = b.querySelector('#favUpdBtn');
+    btn.style.cssText = 'padding:8px 16px;border:none;border-radius:9px;background:linear-gradient(180deg,#ffd34d,#ffc107);'
+      + 'color:#1a1200;font-family:var(--fb);font-weight:800;font-size:13px;cursor:pointer;white-space:nowrap';
+    btn.onclick = function(){ if(window.favApplyUpdate) window.favApplyUpdate(); };
+    document.body.appendChild(b);
+    requestAnimationFrame(function(){ b.style.transform = 'translateX(-50%) translateY(0)'; });
   }
 
   // V40_62: Глобальный fallback для картинок. Раньше его задача была подменять

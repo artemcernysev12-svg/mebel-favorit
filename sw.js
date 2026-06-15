@@ -7,7 +7,7 @@
 //   - sitemap.xml / stock.xlsx — network-first без кэширования при ошибке
 // Версия кэша поднимается при обновлении сайта — старые кэши удаляются автоматически.
 
-const SW_VERSION = 'mf-v41-60';
+const SW_VERSION = 'mf-v41-61';
 const PRECACHE = SW_VERSION + '-precache';
 const RUNTIME  = SW_VERSION + '-runtime';
 
@@ -30,7 +30,9 @@ self.addEventListener('install', event => {
       Promise.all(PRECACHE_URLS.map(url => 
         cache.add(url).catch(err => console.warn('[sw] precache skip', url, err.message))
       ))
-    ).then(() => self.skipWaiting())
+    )
+    // НЕ зовём skipWaiting автоматически: новая версия ждёт мягкого применения
+    // (по плашке «Обновить» или при следующем действии — см. index.html A+B).
   );
 });
 
