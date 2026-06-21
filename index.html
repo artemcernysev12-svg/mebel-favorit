@@ -6407,34 +6407,37 @@ function getCompositeAvailability(it){
     return {loaded:false, available:false, qty:null, className:'nodata', label:'Остатки не загружены', badgeLabel:'', fromComposition:true};
   }
   const smartRows = getSmartKitCompositionRows(comp, it && it.id);
+  // Наличие комплекта = наличие ВСЕХ модулей. Остаток модуля считаем так же,
+  // как в составе комплекта (getKitCompRowStockQty): по связанному товару, либо
+  // по component_arts / module_art. Готовые кухни (напр. Хозяюшка) идут по
+  // component_arts без прямого item_id — иначе ложно показывали «под заказ».
   let totalRequired = 0;
-  let knownRows = 0;
+  let inStockUnits = 0;
   let minKits = null;
+  let anyRow = false;
   for(const row of smartRows){
     if(!row) continue;
+    anyRow = true;
     const need = Math.max(1, Number(row.qty) || 1);
     totalRequired += need;
     const modItem = findItemById(row.module_avito_id || row.module_item_id);
-    if(!modItem) continue;
-    knownRows++;
-    const stockQty = Math.max(0, Number(modItem._stockQty) || 0);
+    const stockQty = Math.max(0, Number(getKitCompRowStockQty(row, modItem)) || 0);
+    inStockUnits += Math.min(need, stockQty);
     const kits = Math.floor(stockQty / need);
     minKits = minKits === null ? kits : Math.min(minKits, kits);
   }
-  if(!totalRequired) return null;
-  if(minKits !== null && knownRows === smartRows.length){
-    const available = minKits > 0;
-    return {
-      loaded:true,
-      available,
-      qty:minKits,
-      className: available ? 'instock' : 'preorder',
-      label: available ? ('✓ В наличии — ' + minKits + ' компл.') : 'Под заказ',
-      badgeLabel: available ? 'В наличии' : '',
-      fromComposition:true
-    };
-  }
-  return {loaded:true, available:false, qty:null, className:'nodata', label:'Нет данных по части модулей', badgeLabel:'', fromComposition:true};
+  if(!anyRow || !totalRequired) return null;
+  const available = inStockUnits === totalRequired;
+  const qty = available ? Math.max(0, minKits || 0) : 0;
+  return {
+    loaded:true,
+    available,
+    qty,
+    className: available ? 'instock' : 'preorder',
+    label: available ? ('✓ В наличии — ' + qty + ' компл.') : 'Под заказ',
+    badgeLabel: available ? 'В наличии' : '',
+    fromComposition:true
+  };
 }
 function getDisplayAvailability(it){
   const compState = getCompositeAvailability(it);
