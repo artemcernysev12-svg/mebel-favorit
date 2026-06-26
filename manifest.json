@@ -1,0 +1,37 @@
+{
+  "name": "Мебель Фаворит",
+  "short_name": "Мебель Фаворит",
+  "description": "Мебель в Стерлитамаке: кухни, шкафы, диваны, кровати. Доставка, сборка, рассрочка. Каталог с поиском и наличием.",
+  "lang": "ru",
+  "dir": "ltr",
+  "start_url": "./?utm_source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#080c14",
+  "theme_color": "#080c14",
+  "categories": [
+    "shopping",
+    "business"
+  ],
+  "icons": [
+    {
+      "src": "assets/logo-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo-main.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

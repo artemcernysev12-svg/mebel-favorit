@@ -11,6 +11,12 @@
      Apple-touch-icon — для iOS-домашнего экрана: используем тот же PNG. -->
 <link rel="icon" type="image/png" href="assets/logo-icon.png"/>
 <link rel="apple-touch-icon" href="assets/logo-icon.png"/>
+<!-- PWA: web app manifest + iOS-метатеги установки на домашний экран (с v41_98). -->
+<link rel="manifest" href="manifest.json"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Мебель Фаворит"/>
 <!-- Подтверждение прав в Яндекс.Вебмастере и Google Search Console.
      Дублируем подтверждение через мета-теги (помимо файлов yandex_*.html
      и google*.html в корне) — так Я.Метрика и Search Console смогут
@@ -44,7 +50,7 @@
 <meta property="og:title" content="Мебель Фаворит — Стерлитамак, каталог мебели"/>
 <meta property="og:description" content="Каталог мебели в Стерлитамаке: шкафы, кухни, диваны, кровати. Доставка по Стерлитамаку и районам до 60 км."/>
 <meta property="og:url" content="https://мебель-фаворит.рф/"/>
-<meta property="og:image" content="https://мебель-фаворит.рф/og-preview.jpg?v=V41_1"/>
+<meta property="og:image" content="https://мебель-фаворит.рф/og-preview.jpg?v=369e2ee7"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
 
@@ -52,8 +58,23 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Мебель Фаворит — Стерлитамак"/>
 <meta name="twitter:description" content="Каталог мебели в Стерлитамаке: шкафы, кухни, диваны, кровати."/>
-<meta name="twitter:image" content="https://мебель-фаворит.рф/og-preview.jpg?v=V41_1"/>
+<meta name="twitter:image" content="https://мебель-фаворит.рф/og-preview.jpg?v=369e2ee7"/>
 
+<!-- WebSite + SearchAction (v41_100): поле поиска по сайту прямо в выдаче Google (sitelinks searchbox). -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://мебель-фаворит.рф/",
+  "name": "Мебель Фаворит",
+  "inLanguage": "ru",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": { "@type": "EntryPoint", "urlTemplate": "https://мебель-фаворит.рф/?q={search_term_string}" },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
 <!-- Структурированные данные для Яндекса/Google: магазин с адресом, телефоном, контактами.
      В department перечислены все 4 салона в Стерлитамаке — Яндекс/Google смогут
      показать их в локальной выдаче и на карте. -->
@@ -75,7 +96,7 @@
     "@type": "City",
     "name": "Стерлитамак"
   },
-  "image": "https://мебель-фаворит.рф/og-preview.jpg?v=V41_1",
+  "image": "https://мебель-фаворит.рф/og-preview.jpg?v=369e2ee7",
   "priceRange": "₽₽",
   "sameAs": [
     "https://vk.com/im/convo/-77061353",
@@ -166,7 +187,7 @@
      Это решает блокировку Cloudflare без VPN и устраняет внешний кэш
      прокси, из-за которого новые фото долго не подменялись. -->
 <!-- Preload каталога: он всё равно нужен сразу, но начнёт качаться параллельно с HTML -->
-<link rel="preload" href="catalog.js?v=V41_22" as="script">
+<link rel="preload" href="catalog.js?v=e6f7f3a6" as="script">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/golos.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -1578,7 +1599,7 @@ header.hsx .hdr-s input{font-size:15px}}
   <aside class="sidebar" id="sidebar">
     <div class="sb-head">
       <div class="sb-title">Фильтры</div>
-      <button class="sb-close" onclick="closeSB()">✕</button>
+      <button class="sb-close" onclick="closeSB()" aria-label="Закрыть">✕</button>
     </div>
     <div class="sb-cnt" id="sbCnt">— товаров</div>
     <div style="height:10px"></div>
@@ -2166,7 +2187,7 @@ if(document.readyState === 'loading'){
         <div id="mTumbaSeatOptionTools" class="wardrobeOptTools" style="display:none"></div>
       </div>
       <div class="mInf">
-        <button class="mClose" onclick="closeM()">✕</button>
+        <button class="mClose" onclick="closeM()" aria-label="Закрыть">✕</button>
         <div class="mCat" id="mCat"></div>
         <div class="mTitle" id="mTit"></div>
         <div class="mPrice" id="mPri"></div>
@@ -2302,12 +2323,12 @@ if(document.readyState === 'loading'){
      только при открытии карточек шкафов и кроватей — функции, которые
      их используют, уже имеют защиту (if(!window.__WARDROBE_ATTIC__) return null).
      V40_56: ранее эти три скрипта были без defer и блокировали парсер на ~346 КБ. -->
-<script src="catalog.js?v=V41_22" defer></script>
-<script src="catalog-data/wardrobe-attic.js?v=V41_1" defer></script>
-<script src="catalog-data/bed-options.js?v=V41_1" defer></script>
-<script src="catalog-data/mattress-options.js?v=V41_18" defer></script>
-<script src="catalog-data/wardrobe-coupe.js?v=V41_4" defer></script>
-<script src="catalog-data/seat-options.js?v=V41_33" defer></script>
+<script src="catalog.js?v=e6f7f3a6" defer></script>
+<script src="catalog-data/wardrobe-attic.js?v=863c3206" defer></script>
+<script src="catalog-data/bed-options.js?v=3d45aa60" defer></script>
+<script src="catalog-data/mattress-options.js?v=609cef0a" defer></script>
+<script src="catalog-data/wardrobe-coupe.js?v=8293ba42" defer></script>
+<script src="catalog-data/seat-options.js?v=36a6cae4" defer></script>
 <script defer>
 // ========== ЛЕНИВАЯ ЗАГРУЗКА ТЯЖЁЛЫХ СКРИПТОВ ==========
 // kitchen-comp.js (~645 КБ) и kitchen-pools.js (~2.1 МБ) нужны
@@ -2336,9 +2357,9 @@ function itemNeedsKitchenData(it){
 async function ensureKitchenData(){
   if(typeof window.__KITCHEN_COMP__ !== 'undefined' && typeof window.__KITCHEN_POOL__ !== 'undefined' && typeof window.__AGAVA_MODULES__ !== 'undefined') return;
   await Promise.all([
-    loadScriptOnce('catalog-data/kitchen-comp.js?v=V41_5'),
-    loadScriptOnce('catalog-data/kitchen-pools.js?v=V41_5'),
-    loadScriptOnce('catalog-data/agava-modules.js?v=V41_4')
+    loadScriptOnce('catalog-data/kitchen-comp.js?v=01844a0b'),
+    loadScriptOnce('catalog-data/kitchen-pools.js?v=4ef74692'),
+    loadScriptOnce('catalog-data/agava-modules.js?v=9b91d0ce')
   ]);
 }
 async function ensureXLSX(){
@@ -2437,7 +2458,7 @@ function seoApply({title, description, url, image, type}){
   title = seoCleanText(title || 'Мебель Фаворит — Стерлитамак, каталог мебели', 100);
   description = seoCleanText(description || 'Каталог мебели в Стерлитамаке: шкафы, кухни, диваны, кровати. Доставка по Стерлитамаку и районам до 60 км.', 180);
   url = url || SEO_BASE_URL;
-  image = image || (SEO_BASE_URL + 'og-preview.jpg?v=V41_1');
+  image = image || (SEO_BASE_URL + 'og-preview.jpg?v=369e2ee7');
   document.title = title;
   seoSetMeta('meta[name="description"]', 'content', description);
   seoSetLink('canonical', url);
@@ -2472,7 +2493,7 @@ function seoSetProductJsonLd(it){
     description: seoItemDescription(it),
     sku: String(it.art || it.id || ''),
     category: it.c || '',
-    image: it.img ? [it.img] : [SEO_BASE_URL + 'og-preview.jpg?v=V41_1'],
+    image: it.img ? [it.img] : [SEO_BASE_URL + 'og-preview.jpg?v=369e2ee7'],
     brand: it.f ? {'@type':'Brand', name: it.f} : undefined,
     offers: offer
   };
@@ -2510,7 +2531,7 @@ function updateSeoProduct(it){
     title: seoItemTitle(it),
     description: seoItemDescription(it),
     url,
-    image: it.img || (SEO_BASE_URL + 'og-preview.jpg?v=V41_1'),
+    image: it.img || (SEO_BASE_URL + 'og-preview.jpg?v=369e2ee7'),
     type: 'product'
   });
   seoSetProductJsonLd(it);
@@ -2694,7 +2715,7 @@ function renderAdminPanel(){
           <div class="admin-t">📊 Статистика админа</div>
           <div class="admin-sub">Этот браузер · с ${esc(startDate)} · событий: ${totalEvents}</div>
         </div>
-        <button class="admin-close" id="adminClose">✕</button>
+        <button class="admin-close" id="adminClose" aria-label="Закрыть">✕</button>
       </div>
       <div class="admin-body">
         <div class="admin-section">
@@ -4232,7 +4253,7 @@ function openWardrobeOptionWindow(it){
           <div class="wardrobeOpt-pop-title">Опции шкафа</div>
           <div class="wardrobeOpt-pop-hint">Выберите: только шкаф или шкаф с антресолью. Итоговая цена справа пересчитается сразу.</div>
         </div>
-        <button type="button" class="wardrobeOpt-close" onclick="closeWardrobeOptionWindow()">×</button>
+        <button type="button" class="wardrobeOpt-close" onclick="closeWardrobeOptionWindow()" aria-label="Закрыть">×</button>
       </div>
       <div class="waOpt-choices" style="margin-top:12px">
         <label class="waOpt-choice" data-choice="base">
@@ -4686,7 +4707,7 @@ function openMiniSeatOptionPopup(ev, tumbaId){
           <div class="wardrobeOpt-pop-title">${esc(opt.optTitle||'Опции тумбы')}</div>
           <div class="wardrobeOpt-pop-hint">${esc(opt.optHint||'Выберите: только тумба или тумба с мягким сиденьем. Итоговая цена справа пересчитается сразу.')}</div>
         </div>
-        <button type="button" class="wardrobeOpt-close" onclick="closeMiniSeatOptionPopup()">×</button>
+        <button type="button" class="wardrobeOpt-close" onclick="closeMiniSeatOptionPopup()" aria-label="Закрыть">×</button>
       </div>
       <div class="waOpt-choices">${noChoice}${yesChoice}</div>${variantPicker}
       <div class="wardrobeOpt-pop-actions">
@@ -5296,7 +5317,7 @@ function renderBedOptionTools(it){
           <div class="bedOpt-pop-title">Опции кровати</div>
           <div class="bedOpt-pop-hint">Выберите основание и дополнительные функции. Итоговая цена пересчитается.</div>
         </div>
-        <button type="button" class="bedOpt-close" onclick="closeBedOptionWindow()">×</button>
+        <button type="button" class="bedOpt-close" onclick="closeBedOptionWindow()" aria-label="Закрыть">×</button>
       </div>
       <div class="bedOpt-sub">Основание</div>
       <div class="bedOpt-grid">${baseHtml}</div>
@@ -5704,7 +5725,7 @@ function openMiniBedOptionPopup(ev, id){
           <div class="bedOpt-pop-title">Опции кровати</div>
           <div class="bedOpt-pop-hint">Выберите основание и дополнительные функции. Итоговая цена пересчитается.</div>
         </div>
-        <button type="button" class="bedOpt-close" onclick="closeMiniBedOptionPopup()">×</button>
+        <button type="button" class="bedOpt-close" onclick="closeMiniBedOptionPopup()" aria-label="Закрыть">×</button>
       </div>
       <div class="bedOpt-sub">Основание</div>
       <div class="bedOpt-grid">${baseHtml}</div>
@@ -6327,7 +6348,7 @@ function syncKitVariantCard(ownerId, groupKey, itemId){
       img.dataset.orig = payload.photo;
       img.alt = payload.title || '';
     }else if(ph){
-      ph.insertAdjacentHTML('afterbegin', `<img ${imgAttrs(payload.photo, 400)}>`);
+      ph.insertAdjacentHTML('afterbegin', `<img ${imgAttrs(payload.photo, 400)} alt="${esc(payload.title||'')}">`);
       const no = ph.querySelector('.noph'); if(no) no.remove();
     }
   }
@@ -6918,7 +6939,7 @@ function renderMulti(it){
         const extra = optionExtra(v);
         const sub = hasAltConfigs ? extra : '';
         const priceTxt = v.p ? (Number(v.p).toLocaleString('ru-RU')+' ₽') : 'Цена по запросу';
-        const img = v.img ? `<img class="mMulti-color-img" ${imgAttrs(v.img, 300)}>` : '<div class="mMulti-color-img"></div>';
+        const img = v.img ? `<img class="mMulti-color-img" ${imgAttrs(v.img, 300)} alt="">` : '<div class="mMulti-color-img"></div>';
         const click = isCurrent ? '' : `onclick="navOpen('${esc(v.id)}')"`;
         const stockHtml = variantStockHtml(v);
         return `<div class="mMulti-color${isCurrent?' current':''}" ${click} ${isCurrent?'style="cursor:default"':''}>
@@ -7306,7 +7327,7 @@ function renderKitComposition(it){
 
     return `<div class="kitCard${clickable?'':' disabled'}" data-kit-owner="${esc(ownerId)}" data-kit-group="${esc(group.key)}" data-kit-item="${esc(String(row.module_avito_id || row.module_item_id || ''))}" ${click}>
       <div class="kitCard-ph">
-        ${photo?`<img ${imgAttrs(photo, 400)}>`:'<div class="noph">📦</div>'}
+        ${photo?`<img ${imgAttrs(photo, 400)} alt="">`:'<div class="noph">📦</div>'}
         ${row.group?`<span class="kitCard-grp">${esc(row.group)}</span>`:''}
         <span class="kitCard-qty">×${qty}</span>
         ${bedOptSummary}
@@ -8827,7 +8848,7 @@ function renderBuilderGrid(){
     const seatOptSummary = (linkedItem && shouldShowSeatOption(linkedItem)) ? getSeatOptionShortBadge(linkedItem) : '';
     return `<div class="kitCard${m.linked?'':' disabled'}${activeCls}" data-mk="${esc(mk)}" data-idx="${idx}" ${clickAttr}${hi?' style="box-shadow:0 0 0 2px rgba(45,125,255,.5) inset;border-color:var(--accent)"':''}>
       <div class="kitCard-ph">
-        ${m.photo?`<img ${imgAttrs(m.photo, 400)}>`:'<div class="noph">📦</div>'}
+        ${m.photo?`<img ${imgAttrs(m.photo, 400)} alt="${esc(m.type||'')}">`:'<div class="noph">📦</div>'}
         ${m.type?`<span class="kitCard-grp">${esc(m.type)}</span>`:''}
         ${chosenBadge}
         ${bedOptSummary}
@@ -8889,7 +8910,7 @@ function setPhoto(i){
   document.querySelectorAll('.mth').forEach((el,j)=>el.classList.toggle('on',j===i));
   const cnt=document.getElementById('mCnt'); if(cnt) cnt.textContent=(i+1)+' / '+mPh.length;
 }
-function buildThs(){document.getElementById('mThs').innerHTML=mPh.map((s,i)=>`<div class="mth ${i===0?'on':''}" onclick="event.stopPropagation();setPhoto(${i})"><img ${imgAttrs(s, 150)} onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=this.dataset.orig||this.src;}else{this.parentElement.style.display='none';}"></div>`).join('')}
+function buildThs(){document.getElementById('mThs').innerHTML=mPh.map((s,i)=>`<div class="mth ${i===0?'on':''}" onclick="event.stopPropagation();setPhoto(${i})"><img ${imgAttrs(s, 150)} alt="" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=this.dataset.orig||this.src;}else{this.parentElement.style.display='none';}"></div>`).join('')}
 function photoNext(){ if(!mPh.length) return; setPhoto((mPhI+1) % mPh.length); }
 function photoPrev(){ if(!mPh.length) return; setPhoto((mPhI-1+mPh.length) % mPh.length); }
 
@@ -10977,6 +10998,34 @@ function favRevSwitch(i){
     var io=new IntersectionObserver(function(es){ for(var k=0;k<es.length;k++){ if(es[k].isIntersecting){ load(); io.disconnect(); break; } } },{rootMargin:'300px'});
     io.observe(box);
   } else { load(); }
+})();
+</script>
+<script>
+/* === Фокус-ловушка модалок (a11y, v41_100) ===
+   Tab/Shift+Tab при открытой карточке/форме/шторке цикл внутри неё, не убегает на страницу под ней.
+   Аддитивно: один keydown в capture, open-функции не трогаем. Если модалка не открыта — не вмешивается. */
+(function(){
+  function isVis(el){ if(!el) return false; var s=getComputedStyle(el); return s.display!=='none' && s.visibility!=='hidden' && (el.offsetWidth>0||el.offsetHeight>0); }
+  function activeModal(){
+    var dlg=document.getElementById('favInfoDlg'); if(isVis(dlg)) return dlg;                 // форма заявки / инфо-окна (z-index 3000)
+    var phone=document.getElementById('phoneDlg'); if(phone && phone.classList.contains('open') && isVis(phone)) return phone;
+    var mov=document.getElementById('mOv'); if(mov && mov.classList.contains('open')) return document.getElementById('mMain')||mov; // карточка товара
+    if(document.body.classList.contains('fo')){ var sb=document.getElementById('sidebar'); if(sb && isVis(sb)) return sb; }          // шторка фильтров
+    return null;
+  }
+  function focusables(c){
+    var sel='a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+    return Array.prototype.filter.call(c.querySelectorAll(sel), function(el){ return (el.offsetWidth>0||el.offsetHeight>0) && getComputedStyle(el).visibility!=='hidden'; });
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key!=='Tab' && e.keyCode!==9) return;
+    var modal=activeModal(); if(!modal) return;
+    var f=focusables(modal); if(!f.length) return;
+    var first=f[0], last=f[f.length-1], a=document.activeElement;
+    if(!modal.contains(a)){ e.preventDefault(); (e.shiftKey?last:first).focus(); return; }   // фокус был на странице — вернуть внутрь
+    if(e.shiftKey){ if(a===first){ e.preventDefault(); last.focus(); } }
+    else { if(a===last){ e.preventDefault(); first.focus(); } }
+  }, true);
 })();
 </script>
 </body>
