@@ -7,7 +7,7 @@
 //   - sitemap.xml / stock.xlsx — network-first без кэширования при ошибке
 // Версия кэша поднимается при обновлении сайта — старые кэши удаляются автоматически.
 
-const SW_VERSION = 'mf-v41-85';
+const SW_VERSION = 'mf-v41-86';
 const PRECACHE = SW_VERSION + '-precache';
 const RUNTIME  = SW_VERSION + '-runtime';
 
@@ -17,7 +17,6 @@ const PRECACHE_URLS = [
   '/index.html',
   '/catalog.js',
   '/catalog-data/wardrobe-attic.js',
-  '/catalog-data/bed-options.js',
   '/catalog-data/wardrobe-coupe.js',
   '/catalog-data/seat-options.js',
   '/og-preview.jpg',

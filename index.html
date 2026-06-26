@@ -2325,8 +2325,8 @@ if(document.readyState === 'loading'){
      V40_56: ранее эти три скрипта были без defer и блокировали парсер на ~346 КБ. -->
 <script src="catalog.js?v=e6f7f3a6" defer></script>
 <script src="catalog-data/wardrobe-attic.js?v=863c3206" defer></script>
-<script src="catalog-data/bed-options.js?v=3d45aa60" defer></script>
-<script src="catalog-data/mattress-options.js?v=609cef0a" defer></script>
+<!-- bed-options.js (261КБ) + mattress-options.js (172КБ) с v41_102 грузятся ЛЕНИВО (requestIdleCallback),
+     не на критическом пути — см. блок «ленивая дозагрузка опций кроватей/матрасов» перед </body>. -->
 <script src="catalog-data/wardrobe-coupe.js?v=8293ba42" defer></script>
 <script src="catalog-data/seat-options.js?v=36a6cae4" defer></script>
 <script defer>
@@ -11026,6 +11026,29 @@ function favRevSwitch(i){
     if(e.shiftKey){ if(a===first){ e.preventDefault(); last.focus(); } }
     else { if(a===last){ e.preventDefault(); first.focus(); } }
   }, true);
+})();
+</script>
+<script>
+/* === Ленивая дозагрузка опций кроватей/матрасов (производительность, v41_102) ===
+   bed-options.js (261КБ) + mattress-options.js (172КБ) нужны списку (цена «от» у кроватей, фильтры матрасов)
+   и карточкам — но НЕ блокируют первую отрисовку. Грузим их в простое (requestIdleCallback) сразу после
+   первого рендера, затем мягко перерисовываем грид. Функции loadScriptOnce/enrichMattressFacets/renderGrid
+   глобальны (объявлены в основном блоке). Если уже загружены — не вмешиваемся. */
+(function(){
+  function go(){
+    if(typeof loadScriptOnce!=='function') { setTimeout(go,300); return; }
+    var jobs=[];
+    if(typeof window.__BED_OPTIONS__==='undefined') jobs.push(loadScriptOnce('catalog-data/bed-options.js?v=3d45aa60'));
+    if(typeof window.__MATTRESS_OPTIONS__==='undefined') jobs.push(loadScriptOnce('catalog-data/mattress-options.js?v=609cef0a'));
+    if(!jobs.length) return;
+    Promise.all(jobs).then(function(){
+      try{ if(typeof enrichMattressFacets==='function') enrichMattressFacets(); }catch(_){}
+      try{ if(typeof renderGrid==='function') renderGrid(); }catch(_){}          // обновить цены «от» у кроватей
+    }).catch(function(){});
+  }
+  function schedule(){ if('requestIdleCallback' in window) requestIdleCallback(go,{timeout:1500}); else setTimeout(go,600); }
+  if(document.readyState==='complete') schedule();
+  else window.addEventListener('load', schedule, {once:true});
 })();
 </script>
 </body>
