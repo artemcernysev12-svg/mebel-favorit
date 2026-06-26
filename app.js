@@ -607,6 +607,16 @@ function imgAttrs(src, w){
   if(!src) return '';
   return `src="${esc(src)}" data-orig="${esc(src)}" loading="lazy" decoding="async" referrerpolicy="no-referrer"`;
 }
+// Этап 1 (v41_104): лёгкое WebP-превью 500px для плиток/подсказок.
+// Первое фото товара .../items/{id}/01.jpg -> .../items/{id}/thumb.webp (генерируется в репо catalog-favorit1).
+// data-orig = полный JPG: если превью нет/не грузится, глобальный onerror подставит оригинал (graceful fallback).
+function thumbU(src){
+  return /\/items\/[^/]+\/[^/]+\.(?:jpe?g|png)$/i.test(src||'') ? src.replace(/\/[^/]+$/, '/thumb.webp') : (src||'');
+}
+function imgAttrsThumb(src){
+  if(!src) return '';
+  return `src="${esc(thumbU(src))}" data-orig="${esc(src)}" loading="lazy" decoding="async" referrerpolicy="no-referrer"`;
+}
 
 function digitsOnly(v){return String(v||'').replace(/\D+/g,'')}
 function phoneHref(v){
@@ -1735,7 +1745,7 @@ function renderGrid(){
     }
     if(it.a){['Основной цвет','Цвет','Наполнение','Зеркало','Исполнение','Материал','Тип шкафов','Тип стола','Подвид товара'].forEach(k=>addCardChip(it.a[k]))}
     return`<div class="pcard" onclick="openM('${esc(it.id)}')">
-<div class="pc-img">${(()=>{ const stockState=getCatalogAvailability(it); return `${it.img?`<img ${imgAttrs(it.img, 500)} alt="${esc(it.t)}" data-cat="${esc(it.c)}">`:`<div class="pc-ph">${CI[it.c]||'📦'}</div>`}${stockState.available?'<span class="pc-stock">В наличии</span>':''}${it.pn>1?`<span class="pc-phocount">${it.pn} фото</span>`:''}`; })()}</div>
+<div class="pc-img">${(()=>{ const stockState=getCatalogAvailability(it); return `${it.img?`<img ${imgAttrsThumb(it.img)} alt="${esc(it.t)}" data-cat="${esc(it.c)}">`:`<div class="pc-ph">${CI[it.c]||'📦'}</div>`}${stockState.available?'<span class="pc-stock">В наличии</span>':''}${it.pn>1?`<span class="pc-phocount">${it.pn} фото</span>`:''}`; })()}</div>
 <div class="pc-body">
 <div class="pc-cat">${esc(it.c)}</div>
 <div class="pc-title">${esc(it.t)}</div>
@@ -7044,7 +7054,7 @@ function buildSearchSug(q, boxId){
       var mt=''; if(qMirror){ var ws=favItemTokens(it),mp=0,mn=0; for(var z=0;z<ws.length;z++){ if(ws[z].indexOf('зеркал')===0){ if(z>0&&ws[z-1]==='без') mn++; else mp++; } } mt=mp?'С зеркалом':(mn?'Без зеркала':''); }
       var sub=[it.c, it.col, mt].filter(Boolean).join(' \u00b7 ');
       h+='<div class="ssug-i ssug-prod" data-id="'+esc(String(it.id))+'">'
-        +(it.img?('<img class="ssug-img" src="'+esc(it.img)+'" alt="" loading="lazy">'):'<span class="ssug-img"></span>')
+        +(it.img?('<img class="ssug-img" src="'+esc(thumbU(it.img))+'" data-orig="'+esc(it.img)+'" alt="" loading="lazy">'):'<span class="ssug-img"></span>')
         +'<span class="ssug-mid"><span class="ssug-pt2">'+favHl(it.t,qtoks)+(av?'<i class="ssug-dot"></i>':'')+'</span>'
         +(sub?('<span class="ssug-sub">'+esc(sub)+'</span>'):'')+'</span>'
         +'<span class="ssug-pp">'+(Number(it.p)||0).toLocaleString('ru-RU')+' \u20bd</span></div>';

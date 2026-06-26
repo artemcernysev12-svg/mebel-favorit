@@ -197,7 +197,7 @@
 
 
 
-  <link rel="preload" href="app.js?v=d972fb3f" as="script">
+  <link rel="preload" href="app.js?v=caa4883e" as="script">
 </head>
 <body>
 
@@ -928,7 +928,7 @@ if(document.readyState === 'loading'){
      не на критическом пути — см. блок «ленивая дозагрузка опций кроватей/матрасов» перед </body>. -->
 <script src="catalog-data/wardrobe-coupe.js?v=8293ba42" defer></script>
 <script src="catalog-data/seat-options.js?v=36a6cae4" defer></script>
-<script src="app.js?v=d972fb3f"></script>
+<script src="app.js?v=caa4883e"></script>
 
 <!-- Универсальная цель Метрики "avito_click" + "lead_any".
      Скрипт находит на странице ВСЕ ссылки на Авито (avito.ru, avito.com)
@@ -1576,7 +1576,7 @@ function favRevSwitch(i){
   function activeModal(){
     var dlg=document.getElementById('favInfoDlg'); if(isVis(dlg)) return dlg;                 // форма заявки / инфо-окна (z-index 3000)
     var phone=document.getElementById('phoneDlg'); if(phone && phone.classList.contains('open') && isVis(phone)) return phone;
-    var mov=document.getElementById('mOv'); if(mov && mov.classList.contains('open')) return document.getElementById('mMain')||mov; // карточка товара
+    var mov=document.getElementById('mOv'); if(mov && mov.classList.contains('open')) return mov; // карточка товара (вся модалка — кнопки размер/цвет/×/корзина/контакты вне #mMain)
     if(document.body.classList.contains('fo')){ var sb=document.getElementById('sidebar'); if(sb && isVis(sb)) return sb; }          // шторка фильтров
     return null;
   }
