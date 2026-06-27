@@ -187,7 +187,7 @@
      Это решает блокировку Cloudflare без VPN и устраняет внешний кэш
      прокси, из-за которого новые фото долго не подменялись. -->
 <!-- Preload каталога: он всё равно нужен сразу, но начнёт качаться параллельно с HTML -->
-<link rel="preload" href="catalog.js?v=344c5339" as="script">
+<link rel="preload" href="catalog.js?v=2dd1e56e" as="script">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/golos.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css?v=46ee52fb">
@@ -922,7 +922,7 @@ if(document.readyState === 'loading'){
      только при открытии карточек шкафов и кроватей — функции, которые
      их используют, уже имеют защиту (if(!window.__WARDROBE_ATTIC__) return null).
      V40_56: ранее эти три скрипта были без defer и блокировали парсер на ~346 КБ. -->
-<script src="catalog.js?v=344c5339" defer></script>
+<script src="catalog.js?v=2dd1e56e" defer></script>
 <script src="catalog-data/wardrobe-attic.js?v=863c3206" defer></script>
 <!-- bed-options.js (261КБ) + mattress-options.js (172КБ) с v41_102 грузятся ЛЕНИВО (requestIdleCallback),
      не на критическом пути — см. блок «ленивая дозагрузка опций кроватей/матрасов» перед </body>. -->
