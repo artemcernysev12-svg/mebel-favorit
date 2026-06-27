@@ -611,7 +611,7 @@ function imgAttrs(src, w){
 // Первое фото товара .../items/{id}/01.jpg -> .../items/{id}/thumb.webp (генерируется в репо catalog-favorit1).
 // data-orig = полный JPG: если превью нет/не грузится, глобальный onerror подставит оригинал (graceful fallback).
 function thumbU(src){
-  return /\/items\/[^/]+\/[^/]+\.(?:jpe?g|png)$/i.test(src||'') ? src.replace(/\/[^/]+$/, '/thumb.webp') : (src||'');
+  return /\/items\/.+\/[^/]+\.(?:jpe?g|png|webp)$/i.test(src||'') ? src.replace(/\/[^/]+$/, '/thumb.webp') : (src||'');
 }
 function imgAttrsThumb(src){
   if(!src) return '';
@@ -3472,11 +3472,12 @@ function openM(id, opts){
   // и "Собрать из модулей" дорисовываем, как только данные пришли.
   const needsKitchen = itemNeedsKitchenData(it);
 
-  const base=it.img?it.img.replace(/\/\d+\.jpg$/,'/'):null;
+  const _ext=(it.img && /\.webp$/i.test(it.img))?'webp':'jpg';
+  const base=it.img?it.img.replace(/\/\d+\.(?:jpe?g|png|webp)$/i,'/'):null;
   mPh=it.img?[it.img]:[];
   // Количество фото берём из pn (pre-computed), иначе пробуем до 14
   const maxN = it.pn || 14;
-  if(base) for(let n=2;n<=maxN;n++) mPh.push(base+String(n).padStart(2,'0')+'.jpg');
+  if(base) for(let n=2;n<=maxN;n++) mPh.push(base+String(n).padStart(2,'0')+'.'+_ext);
   mPhI=0;
   document.getElementById('mCat').textContent=it.c||'';
   document.getElementById('mTit').textContent=it.t;
