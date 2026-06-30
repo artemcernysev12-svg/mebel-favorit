@@ -21,3 +21,8 @@ Desktop.ini
 # Temporary files
 *.tmp
 *.temp
+
+# Внутренние dev-файлы — НЕ деплоить (с .nojekyll GitHub больше не прячет _-папки сам)
+_КУХНЯ-НЕ-ЗАЛИВАТЬ/
+*.BAK_*
+index.html.BAK_*
