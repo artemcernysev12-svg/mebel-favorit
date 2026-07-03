@@ -1084,7 +1084,9 @@ function initHero(){
     photos.forEach((src,i)=>{
       const img = document.createElement('img');
       img.loading='lazy'; img.decoding='async'; img.referrerPolicy='no-referrer';
-      img.alt=cat; img.dataset.orig=src; img.src=imgU(src, 400);
+      // V41_115 (LCP): герой грузит лёгкие thumb.webp (~10-20КБ), не полные фото 60-106КБ.
+      // data-orig = полный файл — глобальный onerror подставит его, если thumb отсутствует.
+      img.alt=cat; img.dataset.orig=src; img.src=thumbU(src);
       if(i===0) img.classList.add('on');
       ph.appendChild(img);
     });
