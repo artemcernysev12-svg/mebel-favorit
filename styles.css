@@ -1398,3 +1398,8 @@ a.favRevCard-src:hover{background:rgba(45,125,255,.15)}
 /* V41_114: бейдж «Подарок» на фото (плитка + модалка) */
 .pc-gift{position:absolute;top:34px;left:7px;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:800;background:rgba(229,52,123,.92);color:#fff;letter-spacing:.3px;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.12);text-transform:uppercase}
 .mGal-gift{position:absolute;top:12px;left:12px;z-index:3;background:#e5347b;color:#fff;font-size:12px;font-weight:800;letter-spacing:.4px;padding:4px 12px;border-radius:6px;text-transform:uppercase;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+
+/* V41_114: чипы подходящих размеров на плитке матраса (при активном фильтре по размеру) */
+.pc-msizes{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.pcms{display:inline-block;padding:1px 7px;border-radius:6px;border:1px solid var(--line);background:rgba(255,255,255,.05);font-size:11px;color:var(--muted)}
+.pcms.in{border-color:rgba(52,211,153,.45);color:#34d399;background:rgba(52,211,153,.08);font-weight:700}

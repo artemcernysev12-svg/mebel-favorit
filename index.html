@@ -187,17 +187,17 @@
      Это решает блокировку Cloudflare без VPN и устраняет внешний кэш
      прокси, из-за которого новые фото долго не подменялись. -->
 <!-- Preload каталога: он всё равно нужен сразу, но начнёт качаться параллельно с HTML -->
-<link rel="preload" href="catalog.js?v=2cc7902a" as="script">
+<link rel="preload" href="catalog.js?v=f8ace84c" as="script">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/golos.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=ce436428">
+<link rel="stylesheet" href="styles.css?v=193dd704">
 
 
 
 
 
 
-  <link rel="preload" href="app.js?v=26b1f5a7" as="script">
+  <link rel="preload" href="app.js?v=5e226b51" as="script">
 </head>
 <body>
 
@@ -923,13 +923,13 @@ if(document.readyState === 'loading'){
      только при открытии карточек шкафов и кроватей — функции, которые
      их используют, уже имеют защиту (if(!window.__WARDROBE_ATTIC__) return null).
      V40_56: ранее эти три скрипта были без defer и блокировали парсер на ~346 КБ. -->
-<script src="catalog.js?v=2cc7902a" defer></script>
+<script src="catalog.js?v=f8ace84c" defer></script>
 <script src="catalog-data/wardrobe-attic.js?v=863c3206" defer></script>
 <!-- bed-options.js (261КБ) + mattress-options.js (172КБ) с v41_102 грузятся ЛЕНИВО (requestIdleCallback),
      не на критическом пути — см. блок «ленивая дозагрузка опций кроватей/матрасов» перед </body>. -->
 <script src="catalog-data/wardrobe-coupe.js?v=8293ba42" defer></script>
 <script src="catalog-data/seat-options.js?v=36a6cae4" defer></script>
-<script src="app.js?v=26b1f5a7"></script>
+<script src="app.js?v=5e226b51"></script>
 
 <!-- Универсальная цель Метрики "avito_click" + "lead_any".
      Скрипт находит на странице ВСЕ ссылки на Авито (avito.ru, avito.com)
@@ -1134,7 +1134,12 @@ function favDocToggle(){ var l=document.getElementById('favLeadDocList'); if(l) 
 function favDocPick(v){ var sp=document.getElementById('favLeadDocVal'); if(sp){ sp.dataset.v=v; sp.innerHTML=favDocIcon(v)+' '+v; } var l=document.getElementById('favLeadDocList'); if(l) l.style.display='none'; var e=document.getElementById('favLeadErr'); if(e) e.style.display='none'; }
 function favLeadToggleP2(){ var c=document.getElementById('favLeadNoMsg'); var w=document.getElementById('favLeadP2Wrap'); if(c&&w){ w.style.display=c.checked?'block':'none'; } }
 function favCartStock(e){
-  try{ var it=e&&e.id?findItemById(e.id):null; if(it&&typeof getCatalogAvailability==='function'){ return getCatalogAvailability(it).available?1:0; } }catch(_){ }
+  try{
+    if(e&&e.mv&&typeof mattressArtQty==='function'&&typeof STOCK!=='undefined'&&STOCK&&STOCK.loaded){
+      var q=0; (e.va||[]).forEach(function(a){ q+=mattressArtQty(a); }); return q>0?1:0; // V41_114: наличие по варианту матраса (без арта = под заказ)
+    }
+    var it=e&&e.id?findItemById(e.id):null; if(it&&typeof getCatalogAvailability==='function'){ return getCatalogAvailability(it).available?1:0; }
+  }catch(_){ }
   return -1;
 }
 function favCartStockSummary(){
@@ -1430,7 +1435,7 @@ function favCartSave(){ try{ localStorage.setItem('mf_cart_v1', JSON.stringify(S
 function favCartCount(){ var n=0; for(var k in SITE_CART){ n+=Number(SITE_CART[k].qty)||0; } return n; }
 function favCartTotal(){ var s=0; for(var k in SITE_CART){ var e=SITE_CART[k]; s+=(Number(e.price)||0)*(Number(e.qty)||0); } return s; }
 function favCartBadge(){ var n=favCartCount(); ['hdrCartN','hdrCartN2'].forEach(function(id){ var el=document.getElementById(id); if(el){ el.textContent=n>99?'99+':n; el.style.display=n>0?'inline-flex':'none'; } }); }
-function favCartAdd(it){ if(!it||!it.id) return; var key=String(it.id)+'|'+(it.detail||''); if(SITE_CART[key]){ SITE_CART[key].qty=(Number(SITE_CART[key].qty)||0)+(Number(it.qty)||1); } else { SITE_CART[key]={id:String(it.id),title:String(it.title||''),price:Number(it.price)||0,detail:String(it.detail||''),img:String(it.img||''),qty:Number(it.qty)||1}; } favCartSave(); }
+function favCartAdd(it){ if(!it||!it.id) return; var key=String(it.id)+'|'+(it.detail||''); if(SITE_CART[key]){ SITE_CART[key].qty=(Number(SITE_CART[key].qty)||0)+(Number(it.qty)||1); } else { SITE_CART[key]={id:String(it.id),title:String(it.title||''),price:Number(it.price)||0,detail:String(it.detail||''),img:String(it.img||''),qty:Number(it.qty)||1,va:(it.va&&it.va.length)?it.va:undefined,mv:it.mv?1:undefined}; } favCartSave(); }
 function favCartQtyCh(idx,d){ var keys=Object.keys(SITE_CART); var key=keys[idx]; var e=SITE_CART[key]; if(!e) return; e.qty=(Number(e.qty)||0)+d; if(e.qty<=0) delete SITE_CART[key]; favCartSave(); favCartOpen(); }
 function favCartRemoveIdx(idx){ var keys=Object.keys(SITE_CART); delete SITE_CART[keys[idx]]; favCartSave(); favCartOpen(); }
 function favCartClear(){ SITE_CART={}; favCartSave(); favCartOpen(); }
@@ -1507,7 +1512,19 @@ function favCartAddFromModal(){
   try{ price=Number(getBedCardDisplayPrice(it, it.p))||0; }catch(_){ price=Number(it.p)||0; }
   var ex=0; try{ if(typeof getSeatOptionExtraPrice==='function') ex=Number(getSeatOptionExtraPrice(it.id))||0; }catch(_){ }
   var det=''; try{ det=String(getModuleMessageDetails({id:it.id,title:it.t}, it)||''); }catch(_){ }
-  favCartAdd({id:it.id, title:it.t||'', price:price+ex, detail:det, img:it.img||''});
+  var mArts=null; // V41_114: матрас — кладём в корзину ВЫБРАННЫЙ вариант (размер+ткань+подарок)
+  try{
+    if(typeof hasMattressOptions==='function' && hasMattressOptions(it)){
+      var mRec=getMattressOptions(it), mCh=getMattressChoice(it,mRec), mV=findMattressVariant(mRec,mCh.size,mCh.ftype);
+      if(mV){
+        price=Number(mV.price)||price; ex=0;
+        var mGift=(typeof mattressGiftActive==='function')?mattressGiftActive(mV):'';
+        det=mV.size+', '+((mV.fabric||'')+' '+(mV.ftype||'')).trim()+(mGift?(' · '+(mGift==='+Подушка'?'Подушка':'Чехол')+' в подарок'):'');
+        mArts=[]; try{ mArts=(typeof mattressVariantArts==='function')?mattressVariantArts(mV).map(function(x){return x.a;}).filter(Boolean):[]; }catch(_){ }
+      }
+    }
+  }catch(_){ }
+  favCartAdd({id:it.id, title:it.t||'', price:price+ex, detail:det, img:it.img||'', va:mArts||undefined, mv:mArts!==null?1:undefined});
   // Подтверждение на кнопке: «✓ Добавлено», затем открываем корзину
   var btn=document.getElementById('mAddCart');
   if(btn){

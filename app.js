@@ -1425,7 +1425,13 @@ function matchesCurrentFilters(it, opts){
   if(opts.excludeRange!=='d' && !inRange(it,'d',S.dMin,S.dMax)) return false;
   if(S.op && !it.img) return false;
   if(S.od && !(it.w||it.h||it.d)) return false;
-  if(S.os && !getCatalogAvailability(it).available) return false;
+  if(S.os){
+    // V41_114: матрас + фильтр по размеру — «в наличии» должен быть ПОДХОДЯЩИЙ размер,
+    // а не любой вариант карточки.
+    const mctx=(it.c==='Матрасы' && typeof mattressFilterContext==='function')?mattressFilterContext(it):null;
+    if(mctx){ if(!mctx.inStockCount) return false; }
+    else if(!getCatalogAvailability(it).available) return false;
+  }
   if(S.oa && !it.avito) return false;
   if(Object.keys(S.attrs).length){
     for(const [k,vals] of Object.entries(S.attrs)){
@@ -1749,7 +1755,9 @@ function renderGrid(){
 <div class="pc-body">
 <div class="pc-cat">${esc(it.c)}</div>
 <div class="pc-title">${esc(it.t)}</div>
-${dims?`<div class="pc-meta">📐 ${dims}</div>`:''}
+${(()=>{ const mts=(it.c==='Матрасы'&&typeof mattressTileSizes==='function')?mattressTileSizes(it):null;
+  if(mts) return `<div class="pc-meta pc-msizes">📐 ${mts.sizes.map(s=>`<span class="pcms${s.inStock?' in':''}">${mts.stockLoaded&&s.inStock?'✓ ':''}${esc(s.size)}</span>`).join('')}</div>`;
+  return dims?`<div class="pc-meta">📐 ${dims}</div>`:''; })()}
 ${it.f?`<div class="pc-meta">🏭 ${esc(it.f)}</div>`:''}
 ${chips.length?`<div class="pc-chips">${chips.map(c=>`<span class="pch">${esc(c)}</span>`).join('')}</div>`:''}
 </div>
@@ -2659,7 +2667,13 @@ function selectMattressSeries(series){
   goCat(); // листаем к товарам с учётом липкой шапки (на ПК больше не улетает вниз)
 }
 function getItemInitialPriceText(it){
-  if(hasMattressOptions(it)) return 'от ' + rub(mattressMinPrice(it));
+  if(hasMattressOptions(it)){
+    // V41_114: при активном фильтре по размеру плитка показывает цену ПОДХОДЯЩЕГО размера;
+    // «от» — только при примерном (открытом) диапазоне. Точный размер → точная цена.
+    const ctx=(typeof mattressFilterContext==='function')?mattressFilterContext(it):null;
+    if(ctx && ctx.price) return (ctx.approx?'от ':'') + rub(ctx.price);
+    return 'от ' + rub(mattressMinPrice(it));
+  }
   if(hasWardrobeCoupe(it)) return rub(getWardrobeCoupePrice(it));
   if(hasWardrobeAtticOption(it)) return 'от ' + rub((getWardrobeAttic(it).base && getWardrobeAttic(it).base.price) || it.p);
   if(hasBedOptions(it)) return getBedInitialPriceText(it);
@@ -3127,6 +3141,67 @@ function mattressTileGift(it){
   if(typeof STOCK==='undefined' || !STOCK || !STOCK.loaded) return false;
   return rec.variants.some(function(v){ return !!mattressGiftActive(v); });
 }
+// ===== V41_114: умный фильтр по размеру для матрасов =====
+function mattressSizeFilterActive(){
+  if(typeof S==='undefined' || !S) return false;
+  return (S.wMin!=='' || S.wMax!=='' || S.dMin!=='' || S.dMax!=='');
+}
+function mattressVariantMatchesFilter(v){
+  if(S.wMin!=='' && !(Number(v.w)>=+S.wMin)) return false;
+  if(S.wMax!=='' && !(Number(v.w)<=+S.wMax)) return false;
+  if(S.dMin!=='' && !(Number(v.l)>=+S.dMin)) return false;
+  if(S.dMax!=='' && !(Number(v.l)<=+S.dMax)) return false;
+  return true;
+}
+function mattressFilterContext(it){
+  // Контекст активного фильтра по размеру: какие варианты карточки подходят,
+  // что из них в наличии, какую цену показывать на плитке.
+  // null = фильтр по размеру не задан ИЛИ это не матрас с вариантами.
+  if(!mattressSizeFilterActive()) return null;
+  const rec=getMattressOptions(it);
+  if(!rec || !rec.variants || !rec.variants.length) return null;
+  const matched=rec.variants.filter(mattressVariantMatchesFilter);
+  if(!matched.length) return null;
+  const stockLoaded=(typeof STOCK!=='undefined' && STOCK && STOCK.loaded);
+  const inStock=stockLoaded?matched.filter(mattressVariantInStock):[];
+  // Пул для цены: при «Только в наличии» — подходящие В НАЛИЧИИ, иначе все подходящие.
+  const pool=(S.os && inStock.length)?inStock:matched;
+  let price=Infinity;
+  pool.forEach(function(v){ const p=Number(v.price)||0; if(p>0 && p<price) price=p; });
+  if(price===Infinity) price=0;
+  // «от» — только при ПРИМЕРНОМ размере (открытый диапазон ширины) или разных ценах в пуле.
+  const exactW=(S.wMin!=='' && S.wMax!=='' && +S.wMin===+S.wMax);
+  const distinct=new Set(pool.map(function(v){ return Number(v.price)||0; }));
+  const approx=!exactW || distinct.size>1;
+  // Размеры для пометки на плитке (уникальные, по возрастанию)
+  const seen={}, sizes=[];
+  matched.slice().sort(function(a,b){ return ((a.w||0)-(b.w||0))||((a.l||0)-(b.l||0)); }).forEach(function(v){
+    if(!seen[v.size]){ seen[v.size]=1; sizes.push({size:v.size, inStock:stockLoaded && matched.some(function(x){ return x.size===v.size && mattressVariantInStock(x); })}); }
+  });
+  const bestSize=(sizes.find(function(s){ return s.inStock; })||sizes[0]).size;
+  return {matched:matched, inStockCount:inStock.length, price:price, approx:approx, sizes:sizes, bestSize:bestSize, stockLoaded:stockLoaded};
+}
+function mattressTileSizes(it){
+  // Чипы размеров на плитке. Показываем когда активен фильтр по размеру И/ИЛИ «Только в наличии».
+  // При включённом «Только в наличии» — ТОЛЬКО размеры, которые реально на складе (правило заказчика).
+  const sizeF=mattressSizeFilterActive();
+  const osF=!!(typeof S!=='undefined' && S && S.os);
+  if(!sizeF && !osF) return null;
+  const rec=getMattressOptions(it);
+  if(!rec || !rec.variants || !rec.variants.length) return null;
+  const stockLoaded=(typeof STOCK!=='undefined' && STOCK && STOCK.loaded);
+  let pool=sizeF?rec.variants.filter(mattressVariantMatchesFilter):rec.variants.slice();
+  if(!pool.length) return null;
+  const seen={}, sizes=[];
+  pool.slice().sort(function(a,b){ return ((a.w||0)-(b.w||0))||((a.l||0)-(b.l||0)); }).forEach(function(v){
+    if(seen[v.size]) return; seen[v.size]=1;
+    const inSt=stockLoaded && pool.some(function(x){ return x.size===v.size && mattressVariantInStock(x); });
+    if(osF && !inSt) return; // фильтр наличия — серые «под заказ» прячем
+    sizes.push({size:v.size, inStock:inSt});
+  });
+  if(!sizes.length) return null;
+  return {sizes:sizes, stockLoaded:stockLoaded};
+}
 function mattressVariantInStock(v){ return mattressVariantQty(v)>0; }
 function mattressMaxQty(it){
   const rec=getMattressOptions(it); if(!rec) return 0;
@@ -3162,6 +3237,25 @@ function findMattressVariant(rec, size, ftype){
 function mattressDefaultChoice(it, rec){
   const sizes = mattressSortedSizes(rec);
   let size = sizes.find(s=>mattressSizeInStock(rec,s)) || sizes[0];
+  // V41_114: если активен фильтр по размеру — предвыбираем ПОДХОДЯЩИЙ размер.
+  // «Только в наличии» ВЫКЛ → уважаем запрос: МИНИМАЛЬНАЯ подходящая ширина
+  // (внутри неё: в наличии → длина 200 → первый), даже если под заказ.
+  // «Только в наличии» ВКЛ → первый подходящий размер В НАЛИЧИИ.
+  try{
+    const ctx=(typeof mattressFilterContext==='function')?mattressFilterContext(it):null;
+    if(ctx && ctx.matched && ctx.matched.length){
+      const ms=ctx.matched.slice().sort(function(a,b){ return ((a.w||0)-(b.w||0))||((a.l||0)-(b.l||0)); });
+      let pick=null;
+      if(S.os){
+        pick=ms.find(function(v){ return mattressVariantInStock(v); })||ms[0];
+      } else {
+        const minW=ms[0].w;
+        const grp=ms.filter(function(v){ return v.w===minW; });
+        pick=grp.find(function(v){ return mattressVariantInStock(v); })||grp.find(function(v){ return v.l===200; })||grp[0];
+      }
+      if(pick && sizes.indexOf(pick.size)>=0) size=pick.size;
+    }
+  }catch(_){}
   const fabs = mattressFabricsForSize(rec, size);
   let ftype = fabs.find(f=>mattressVariantInStock(findMattressVariant(rec,size,f))) || fabs[0];
   return {size:size, ftype:ftype};
@@ -3301,9 +3395,12 @@ function renderMattressOptions(it, opts){
     return '<button type="button" class="mOptChip'+on+'" onclick="selectMattressSize('+it.id+','+i+')"><span class="mOptDot'+(st?' in':'')+'"></span>'+esc(s)+'</button>';
   }).join('');
   const fabChips=fabs.map((f,i)=>{
-    const st=mattressVariantInStock(findMattressVariant(rec,ch.size,f));
+    const fv=findMattressVariant(rec,ch.size,f);
+    const st=mattressVariantInStock(fv);
     const on=(f===ch.ftype)?' on':'';
-    return '<button type="button" class="mOptChip'+on+'" onclick="selectMattressFabric('+it.id+','+i+')"><span class="mOptDot'+(st?' in':'')+'"></span>'+esc(f)+'</button>';
+    // V41_114: подпись = слово ткани + чехол («Трикотаж (100)», «Жаккард белый (100)»)
+    const lbl=(((fv&&fv.fabric)?fv.fabric+' ':'')+f).trim();
+    return '<button type="button" class="mOptChip'+on+'" onclick="selectMattressFabric('+it.id+','+i+')"><span class="mOptDot'+(st?' in':'')+'"></span>'+esc(lbl)+'</button>';
   }).join('');
   const statusHtml = !stockLoaded ? '<span class="mOptStatus">Остатки не загружены</span>' : (inStock ? ('<span class="mOptStatus in">\u2713 В наличии — '+curQty+' шт.</span>') : '<span class="mOptStatus out">Под заказ</span>');
   const giftKind=(stockLoaded && cur)?mattressGiftActive(cur):'';
@@ -3539,6 +3636,18 @@ function openM(id, opts){
   renderWardrobeAttic(it);
   renderWardrobeCoupeKit(it);
   renderTumbaSeatOption(it);
+   try{
+     // V41_114: при ОТКРЫТИИ карточки из отфильтрованного списка предвыбираем подходящий
+     // размер заново — кэш выбора с прошлого открытия не должен перебивать текущий фильтр.
+     if(typeof mattressFilterContext==='function' && hasMattressOptions(it) && (!opts || (!opts.msize && !opts.mfab))){
+       const _ctx=mattressFilterContext(it);
+       if(_ctx){
+         const _ch=window.__MATTRESS_CHOICE__[String(it.id)];
+         const _ok=_ch && _ctx.matched.some(function(v){ return v.size===_ch.size && (!S.os || mattressVariantInStock(v)); });
+         if(!_ok) window.__MATTRESS_CHOICE__[String(it.id)]=mattressDefaultChoice(it, getMattressOptions(it));
+       }
+     }
+   }catch(_){}
    try{ renderMattressOptions(it, opts); }catch(_){}
 
   // Кнопка Авито: ведёт на объявление товара
