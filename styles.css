@@ -1403,3 +1403,19 @@ a.favRevCard-src:hover{background:rgba(45,125,255,.15)}
 .pc-msizes{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
 .pcms{display:inline-block;padding:1px 7px;border-radius:6px;border:1px solid var(--line);background:rgba(255,255,255,.05);font-size:11px;color:var(--muted)}
 .pcms.in{border-color:rgba(52,211,153,.45);color:#34d399;background:rgba(52,211,153,.08);font-weight:700}
+
+/* V41_117: мобильный первый экран — компактный герой-коллаж (LCP на телефоне) */
+
+/* V41_117: «Популярные категории» на мобиле — яркий фото-стиль как в герое (решение заказчика):
+   фото в полную силу, компактная плашка-название, счётчик поверх фото, без описаний/иконок */
+@media(max-width:860px){
+.tilex{min-height:150px;padding:0}
+.tilex-photos img.on{opacity:1;filter:saturate(1.03)}
+.tilex::after{background:linear-gradient(180deg,transparent 62%,rgba(7,10,16,.42) 100%)}
+.tilex-body{justify-content:flex-end;padding:8px}
+.tilex-top{position:absolute;top:8px;right:8px;left:auto}
+.tilex-ico{display:none}
+.tilex-desc{display:none}
+.tilex-title{margin-top:0;display:inline-block;align-self:flex-start;background:rgba(8,12,20,.85);backdrop-filter:blur(6px);padding:5px 11px;border-radius:16px;font-size:12.5px;border:1px solid var(--line);color:#fff}
+.tilex-count{background:rgba(8,12,20,.78) !important;color:#ffd54f !important;border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(6px)}
+}
