@@ -188,7 +188,7 @@
      Это решает блокировку Cloudflare без VPN и устраняет внешний кэш
      прокси, из-за которого новые фото долго не подменялись. -->
 <!-- Preload каталога: он всё равно нужен сразу, но начнёт качаться параллельно с HTML -->
-<link rel="preload" href="catalog.js?v=f8ace84c" as="script">
+<link rel="preload" href="catalog.js?v=f8ace84c" as="fetch">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/golos.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css?v=193dd704">
@@ -198,7 +198,7 @@
 
 
 
-  <link rel="preload" href="app.js?v=76ea7b75" as="script">
+  <link rel="preload" href="app.js?v=03abc8a9" as="script">
 </head>
 <body>
 
@@ -931,13 +931,43 @@ if(document.readyState === 'loading'){
      только при открытии карточек шкафов и кроватей — функции, которые
      их используют, уже имеют защиту (if(!window.__WARDROBE_ATTIC__) return null).
      V40_56: ранее эти три скрипта были без defer и блокировали парсер на ~346 КБ. -->
-<script src="catalog.js?v=f8ace84c" defer></script>
+<script>
+/* V41_115 (TBT): каталог парсится в Web Worker — главный поток не блокируется 2.2МБ.
+   Готово -> window.CATALOG + событие catalog-ready. Фолбэк: обычный <script defer>. */
+(function(){
+  var URL_='catalog.js?v=f8ace84c';
+  var settled=false;
+  function ready(arr,meta){
+    if(settled) return; settled=true;
+    window.CATALOG=arr; if(meta) window.CATALOG_META=meta;
+    try{ document.dispatchEvent(new CustomEvent('catalog-ready')); }catch(_){}
+  }
+  function fallback(){
+    if(settled) return; settled=true;
+    var s=document.createElement('script'); s.src=URL_; s.defer=true;
+    s.onload=function(){ try{ document.dispatchEvent(new CustomEvent('catalog-ready')); }catch(_){} };
+    document.head.appendChild(s);
+  }
+  try{
+    var w=new Worker('catalog-worker.js?v=7a26db3b');
+    var to=setTimeout(function(){ try{w.terminate();}catch(_){} fallback(); }, 15000);
+    w.onmessage=function(e){
+      clearTimeout(to);
+      var d=e.data||{};
+      if(d.ok && Array.isArray(d.catalog) && d.catalog.length){ ready(d.catalog, d.meta); } else { fallback(); }
+      try{w.terminate();}catch(_){}
+    };
+    w.onerror=function(){ clearTimeout(to); try{w.terminate();}catch(_){} fallback(); };
+    w.postMessage({url:URL_});
+  }catch(_){ fallback(); }
+})();
+</script>
 <script src="catalog-data/wardrobe-attic.js?v=863c3206" defer></script>
 <!-- bed-options.js (261КБ) + mattress-options.js (172КБ) с v41_102 грузятся ЛЕНИВО (requestIdleCallback),
      не на критическом пути — см. блок «ленивая дозагрузка опций кроватей/матрасов» перед </body>. -->
 <script src="catalog-data/wardrobe-coupe.js?v=8293ba42" defer></script>
 <script src="catalog-data/seat-options.js?v=36a6cae4" defer></script>
-<script src="app.js?v=76ea7b75"></script>
+<script src="app.js?v=03abc8a9"></script>
 
 <!-- Универсальная цель Метрики "avito_click" + "lead_any".
      Скрипт находит на странице ВСЕ ссылки на Авито (avito.ru, avito.com)
@@ -1637,6 +1667,14 @@ function favRevSwitch(i){
     Promise.all(jobs).then(function(){
       try{ if(typeof enrichMattressFacets==='function') enrichMattressFacets(); }catch(_){}
       try{ if(typeof applyMattressStock==='function') applyMattressStock(); }catch(_){}   // V41_114: наличие матрасов после ленивой дозагрузки
+      try{ // V41_115: если карточка МАТРАСА уже открыта по диплинку — дорисовать блок вариантов
+        var _it=window.__CUR_ITEM__;
+        var _ov=document.getElementById('mOv');
+        if(_it && _ov && _ov.classList.contains('open') && typeof hasMattressOptions==='function' && hasMattressOptions(_it) && typeof renderMattressOptions==='function'){
+          var _o=null; try{ var _p=new URLSearchParams(location.search); _o={msize:_p.get('msize'),mfab:_p.get('mfab')}; }catch(_){ }
+          renderMattressOptions(_it,_o);
+        }
+      }catch(_){}
       try{ if(typeof renderGrid==='function') renderGrid(); }catch(_){}          // обновить цены «от» у кроватей
     }).catch(function(){});
   }

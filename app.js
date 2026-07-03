@@ -7713,8 +7713,18 @@ document.addEventListener('DOMContentLoaded',()=>{
   }, true); // capture: error не bubblится
 
   applyShopConfig();
-  initStats();
-  initHero(); buildPopularTiles(); buildQuickFactories(); initScrollTools(); initSelects(); buildFacets(); apply();
+  // V41_115 (TBT): каталог теперь приходит из Web Worker ПОСЛЕ DOMContentLoaded.
+  // Каталожный UI стартует по событию catalog-ready (или сразу, если каталог уже есть —
+  // путь фолбэка со <script defer>). Статичный герой из HTML виден всё время ожидания.
+  function startCatalogUI(){
+    initStats();
+    initHero(); buildPopularTiles(); buildQuickFactories(); initScrollTools(); initSelects(); buildFacets(); apply();
+    // Остатки могли загрузиться РАНЬШЕ каталога — доприменить
+    try{ if(typeof STOCK!=='undefined' && STOCK && STOCK.loaded) applyStock(); }catch(_){}
+    try{ if(typeof enrichMattressFacets==='function') enrichMattressFacets(); }catch(_){}
+  }
+  if(Array.isArray(window.CATALOG) && window.CATALOG.length){ startCatalogUI(); }
+  else { document.addEventListener('catalog-ready', startCatalogUI, {once:true}); }
 
   // Если в адресе ?admin=КОД — открываем панель статистики
   if(isAdminMode()){
