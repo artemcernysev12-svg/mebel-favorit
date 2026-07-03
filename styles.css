@@ -1390,3 +1390,7 @@ a.favRevCard-src:hover{background:rgba(45,125,255,.15)}
 .favRevArrow-l{left:18px}.favRevArrow-r{right:18px}
 @media(max-width:760px){.favRevArrow{display:none}.favRevCard{width:260px}}
 @media(max-width:600px){.favRevBox{height:440px}.favRev{padding:28px 14px}}
+
+/* V41_114: бейдж «Подарок» у матрасов Корона (как на сайте фабрики) */
+.mGiftBadge{display:inline-block;background:#e5347b;color:#fff;font-size:12px;font-weight:800;letter-spacing:.3px;padding:3px 10px;border-radius:5px;margin-left:12px;vertical-align:middle;text-transform:uppercase}
+.mGiftText{color:#ef5a95;font-weight:700;font-size:14px;margin-left:8px;vertical-align:middle}

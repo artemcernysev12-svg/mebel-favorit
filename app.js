@@ -3087,12 +3087,37 @@ function hasMattressOptions(it){
   const r=getMattressOptions(it);
   return !!(r && r.variants && r.variants.length);
 }
-function mattressVariantQty(v){
-  if(!v || !v.art) return 0;
+function mattressArtQty(raw){
+  // Остаток по одному артикулу (через stock.xlsx).
+  if(!raw) return 0;
   if(typeof STOCK==='undefined' || !STOCK || !STOCK.map) return 0;
   let q=0;
-  try{ artVariants(v.art).forEach(function(a){ if(Object.prototype.hasOwnProperty.call(STOCK.map,a)) q+=Number(STOCK.map[a])||0; }); }catch(_){}
+  try{ artVariants(raw).forEach(function(a){ if(Object.prototype.hasOwnProperty.call(STOCK.map,a)) q+=Number(STOCK.map[a])||0; }); }catch(_){}
   return Math.max(0, q);
+}
+function mattressVariantArts(v){
+  // V41_114: вариант может держать несколько артикулов (партия с подарком + базовая).
+  if(!v) return [];
+  if(v.arts && v.arts.length) return v.arts;
+  return v.art ? [{a:v.art, g:''}] : [];
+}
+function mattressVariantQty(v){
+  let q=0;
+  mattressVariantArts(v).forEach(function(x){ q+=mattressArtQty(x.a); });
+  return q;
+}
+function mattressActiveArt(v){
+  // Активный артикул варианта: подарочные идут в списке первыми,
+  // берём первый С ОСТАТКОМ; если ни один не в наличии — первый в списке.
+  const list=mattressVariantArts(v);
+  if(!list.length) return null;
+  for(let i=0;i<list.length;i++){ if(mattressArtQty(list[i].a)>0) return list[i]; }
+  return list[0];
+}
+function mattressGiftActive(v){
+  // Подарок показываем ТОЛЬКО когда подарочная партия реально в наличии.
+  const a=mattressActiveArt(v);
+  return (a && a.g && mattressArtQty(a.a)>0) ? a.g : '';
 }
 function mattressVariantInStock(v){ return mattressVariantQty(v)>0; }
 function mattressMaxQty(it){
@@ -3175,8 +3200,9 @@ function mattressVkMessage(it, v){
   const price=(Number(v.price)||0).toLocaleString('ru-RU');
   const link=mattressVariantLink(it, v);
   const tail=(fab+' '+grade).trim();
+  const gift=mattressGiftActive(v); // «(+Чехол)»/«(+Подушка)» — только когда подарочная партия в наличии
   return 'Здравствуйте! Интересует товар:\n'
-       + '\u2022 ('+(it.f||'Корона')+') '+it.t+' '+sizeMm+(tail?(' '+tail):'')+'\n'
+       + '\u2022 ('+(it.f||'Корона')+') '+it.t+' '+sizeMm+(tail?(' '+tail):'')+(gift?(' ('+gift+')'):'')+'\n'
        + '\u2022 Цена: '+price+' \u20bd\n'
        + '\u2022 Ссылка: '+link+'\n'
        + 'Подскажите как сделать заказ?';
@@ -3271,12 +3297,14 @@ function renderMattressOptions(it, opts){
     return '<button type="button" class="mOptChip'+on+'" onclick="selectMattressFabric('+it.id+','+i+')"><span class="mOptDot'+(st?' in':'')+'"></span>'+esc(f)+'</button>';
   }).join('');
   const statusHtml = !stockLoaded ? '<span class="mOptStatus">Остатки не загружены</span>' : (inStock ? ('<span class="mOptStatus in">\u2713 В наличии — '+curQty+' шт.</span>') : '<span class="mOptStatus out">Под заказ</span>');
+  const giftKind=(stockLoaded && cur)?mattressGiftActive(cur):'';
+  const giftHtml=giftKind?('<span class="mGiftBadge">Подарок</span><span class="mGiftText">'+(giftKind==='+Подушка'?'Подушка':'Защитный чехол')+' в подарок!</span>'):'';
   const vk=cur?mattressVkMessage(it,cur):'';
   box.innerHTML=
     '<div class="mOptBlock">'
     + '<div class="mOptLabel">Размер, см</div><div class="mOptSizeGrid">'+sizeChips+'</div>'
     + '<div class="mOptLabel">Ткань</div><div class="mOptChips">'+fabChips+'</div>'
-    + '<div class="mOptSummary">'+statusHtml+'</div>'
+    + '<div class="mOptSummary">'+statusHtml+giftHtml+'</div>'
     + '</div>';
   box.style.display='';
   const pri=document.getElementById('mPri');
