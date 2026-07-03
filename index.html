@@ -190,14 +190,14 @@
 <link rel="preload" href="catalog.js?v=2cc7902a" as="script">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/golos.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=46ee52fb">
+<link rel="stylesheet" href="styles.css?v=ce436428">
 
 
 
 
 
 
-  <link rel="preload" href="app.js?v=7c323396" as="script">
+  <link rel="preload" href="app.js?v=26b1f5a7" as="script">
 </head>
 <body>
 
@@ -762,6 +762,7 @@ if(document.readyState === 'loading'){
           <div class="mGal-ar left"  id="mArL" title="Предыдущее"><span>‹</span></div>
           <div class="mGal-ar right" id="mArR" title="Следующее"><span>›</span></div>
           <div class="mGal-cnt" id="mCnt">—</div>
+          <div class="mGal-gift" id="mGiftPhoto" style="display:none">Подарок</div>
           <button class="mGal-zoom" id="mZoom" title="Открыть крупно">⛶</button>
         </div>
         <div class="mThs" id="mThs"></div>
@@ -928,7 +929,7 @@ if(document.readyState === 'loading'){
      не на критическом пути — см. блок «ленивая дозагрузка опций кроватей/матрасов» перед </body>. -->
 <script src="catalog-data/wardrobe-coupe.js?v=8293ba42" defer></script>
 <script src="catalog-data/seat-options.js?v=36a6cae4" defer></script>
-<script src="app.js?v=7c323396"></script>
+<script src="app.js?v=26b1f5a7"></script>
 
 <!-- Универсальная цель Метрики "avito_click" + "lead_any".
      Скрипт находит на странице ВСЕ ссылки на Авито (avito.ru, avito.com)
@@ -1606,10 +1607,11 @@ function favRevSwitch(i){
     if(typeof loadScriptOnce!=='function') { setTimeout(go,300); return; }
     var jobs=[];
     if(typeof window.__BED_OPTIONS__==='undefined') jobs.push(loadScriptOnce('catalog-data/bed-options.js?v=3d45aa60'));
-    if(typeof window.__MATTRESS_OPTIONS__==='undefined') jobs.push(loadScriptOnce('catalog-data/mattress-options.js?v=609cef0a'));
+    if(typeof window.__MATTRESS_OPTIONS__==='undefined') jobs.push(loadScriptOnce('catalog-data/mattress-options.js?v=59e1260f'));
     if(!jobs.length) return;
     Promise.all(jobs).then(function(){
       try{ if(typeof enrichMattressFacets==='function') enrichMattressFacets(); }catch(_){}
+      try{ if(typeof applyMattressStock==='function') applyMattressStock(); }catch(_){}   // V41_114: наличие матрасов после ленивой дозагрузки
       try{ if(typeof renderGrid==='function') renderGrid(); }catch(_){}          // обновить цены «от» у кроватей
     }).catch(function(){});
   }
