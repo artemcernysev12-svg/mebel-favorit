@@ -7022,47 +7022,13 @@ function _isDesktop(){ return !(window.matchMedia && window.matchMedia('(max-wid
 // ===== ПОИСК v41_59: уровень маркетплейсов (по исследованию Озон/ВБ/nonton) =====
 // Токены + порядок слов не важен + префиксы + опечатки (1, для длинных слов 2) +
 // zero-state (история+популярное+категории) + фото в подсказках + крестик очистки.
-function favTok(s){ return String(s||'').toLowerCase().replace(/\u0451/g,'\u0435').replace(/([0-9])[x\u0445]([0-9])/g,'$1 $2').split(/[^a-z\u0430-\u044f0-9]+/).filter(Boolean); } // \u00ab160\u0445200\u00bb\u2192\u00ab160 200\u00bb
-// === Улучшения поиска (перенос из ПРОТОТИП-НОНТОН, 08.07): стеммер, раскладка
-// EN→RU, синонимы. Делают поиск устойчивее к формам слова («шкафы»↔«шкаф»),
-// к ошибке раскладки («Lbdfy»→«Диван») и к словам, которых нет в каталоге
-// («софа»→«диван»). Старое поведение не убирают — только добавляют новые
-// способы «поймать» товар. ===
-var FAV_NOSTEM={"купе":1,"трюмо":1,"бюро":1,"пенал":1,"люкс":1,"парк":1};
-function favStem(w){ // лёгкий русский стеммер: угловой/угловые→угл, шкафы→шкаф, зеркалом→зеркал
-  if(!w || w.length<4 || /[0-9a-z]/.test(w)) return w;
-  if(FAV_NOSTEM[w]) return w;
-  var s=w;
-  s=s.replace(/(ейш|ейше)$/,'');
-  s=s.replace(/(ыми|ими|ого|его|ому|ему|ая|яя|ою|ею|ые|ие|ый|ий|ой|ое|ее|ым|им|ую|юю|ых|их|ом|ем|го)$/,'');
-  s=s.replace(/(ами|ями|ах|ях|ов|ев|ам|ям|ей|ом|ем|ью|ье|а|я|о|е|ы|и|у|ю|ь)$/,''); // без ия/ие/ии/ию — не путать «софа»↔«София», «серия»
-  return s.length<3?w:s;
-}
-var FAV_ENRU={q:"й",w:"ц",e:"у",r:"к",t:"е",y:"н",u:"г",i:"ш",o:"щ",p:"з","[":"х","]":"ъ",a:"ф",s:"ы",d:"в",f:"а",g:"п",h:"р",j:"о",k:"л",l:"д",";":"ж","'":"э",z:"я",x:"ч",c:"с",v:"м",b:"и",n:"т",m:"ь",",":"б",".":"ю","`":"ё"};
-function favEnru(s){ s=String(s==null?'':s).toLowerCase(); var o='',i,ch; for(i=0;i<s.length;i++){ ch=s.charAt(i); o+=(FAV_ENRU[ch]!=null?FAV_ENRU[ch]:ch); } return o; }
-var FAV_SYN={}; // слова, которых нет в каталоге → ведём к аналогу (ключ и значение стеммированы)
-[["софа","диван"],["канапе","диван"],["кушетка","диван"],["шифоньер","шкаф"],["тумбочка","тумба"],["табурет","стул"],["горка","витрина"],["стенка","гостиная"]].forEach(function(p){ FAV_SYN[favStem(p[0])]=favStem(p[1]); });
-
-function favTokenHit0(word, tok){
+function favTok(s){ return String(s||'').toLowerCase().replace(/\u0451/g,'\u0435').split(/[^a-z\u0430-\u044f0-9]+/).filter(Boolean); }
+function favTokenHit(word, tok){
   if(word.indexOf(tok)===0) return true; // префикс: «угл» → «угловой»
   var t=tok.length;
-  if(t>=4 && Math.max(word.length,t)>=5 && typeof favLev==='function'){
-    var d=(t>=8?2:1); // короткие слова — 1 опечатка, длинные — до 2; одно из слов ≥5 → «стул»≠«стол»
-    if(Math.abs(word.length-t)<=d && favLev(word, tok, d)<=d) return true;
-  }
-  return false;
-}
-function favTokenHit(word, tok){
-  if(favTokenHit0(word, tok)) return true;
-  if(/^[0-9]+$/.test(tok)) return false; // цифры — без морфологии/раскладки
-  var ws=favStem(word), ts=favStem(tok);
-  if(ws===ts) return true;                              // формы слова: «шкафы»↔«шкаф»
-  if(ts.length>=4 && ws.indexOf(ts)===0) return true;   // стем-префикс (≥4: «соф» не цепляет «софт»)
-  var syn=FAV_SYN[ts];                                  // синоним запроса → аналог в каталоге
-  if(syn && (ws===syn || word.indexOf(syn)===0)) return true;
-  if(/[a-z]/.test(tok)){                                // неверная раскладка: «lbdfy»→«диван»
-    var e=favEnru(tok);
-    if(e!==tok && favTokenHit0(word, e)) return true;
+  if(t>=4 && typeof favLev==='function'){
+    var d=(t>=8?2:1); // короткие слова — 1 опечатка, длинные — до 2
+    if(favLev(word, tok, d)<=d) return true;
   }
   return false;
 }
@@ -7115,7 +7081,6 @@ function favScoreItem(it, qtoks, ql){
       var w=tw[j];
       if(w===tok) best=Math.max(best, j===0?55:40);
       else if(w.indexOf(tok)===0) best=Math.max(best, j===0?45:30);
-      else if(favStem(w)===favStem(tok)) best=Math.max(best, j===0?44:30); // форма слова: «шкафы»→«шкаф»
       else if(best<18 && favTokenHit(w,tok)) best=18;
     }
     sc+=(best||2); // нашлось только в характеристиках — 2 очка
