@@ -93,6 +93,9 @@ function seoUrl(params){
   Object.entries(params || {}).forEach(([k,v])=>{ if(v !== undefined && v !== null && String(v) !== '') u.searchParams.set(k, String(v)); });
   return u.toString();
 }
+// ЧПУ-адреса для живого SEO (canonical/og:url/JSON-LD) — совпадают со статическими страницами товара/категории
+function seoUrlItem(it){ try{ if(typeof chpuItemPath==='function'){ var p=chpuItemPath(it); if(p && p.charAt(0)==='/' && p!=='/' && p.indexOf('?')===-1) return SEO_BASE_URL.replace(/\/$/,'')+p; } }catch(_){} return seoUrl({item: it && it.id}); }
+function seoUrlCat(cat){ try{ if(typeof chpuCatPath==='function'){ var p=chpuCatPath(cat); if(p && p.charAt(0)==='/' && p!=='/' && p.indexOf('?')===-1) return SEO_BASE_URL.replace(/\/$/,'')+p; } }catch(_){} return seoUrl({cat: cat}); }
 function seoSetMeta(selector, attr, value){
   if(value === undefined || value === null) return;
   let el = document.querySelector(selector);
@@ -150,7 +153,7 @@ function seoSetProductJsonLd(it){
   const offer = {
     '@type': 'Offer',
     priceCurrency: 'RUB',
-    url: seoUrl({item: it.id}),
+    url: seoUrlItem(it),
     availability: (it._inStock || (it._stockQty && Number(it._stockQty) > 0)) ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder'
   };
   if(it.p) offer.price = String(Number(it.p));
@@ -188,13 +191,13 @@ function updateSeoCategory(cat, count){
   seoApply({
     title: name + ' — купить в Стерлитамаке | Мебель Фаворит',
     description: name + ' в каталоге Мебель Фаворит. ' + (n ? ('Найдено ' + n + ' товаров. ') : '') + 'Поможем подобрать мебель по размерам, цвету и бюджету. Доставка по Стерлитамаку и районам до 60 км.',
-    url: seoUrl({cat}),
+    url: seoUrlCat(cat),
     type: 'website'
   });
 }
 function updateSeoProduct(it){
   if(!it) return;
-  const url = seoUrl({item: it.id});
+  const url = seoUrlItem(it);
   seoApply({
     title: seoItemTitle(it),
     description: seoItemDescription(it),
@@ -1076,9 +1079,11 @@ function initHero(){
     const photos = pickPhotos(cat, 4);
     if(!photos.length) return;
 
-    const tile = document.createElement('div');
+    const tile = document.createElement('a');
     tile.className = 'hi-c';
-    tile.onclick = ()=>{ setCat(cat); goCat(); };
+    tile.href = (typeof chpuCatPath==='function') ? chpuCatPath(cat) : '#';
+    tile.style.textDecoration='none'; tile.style.color='inherit';
+    tile.onclick = (e)=> chpuTileNav(e, cat);
 
     const ph = document.createElement('div'); ph.className='hi-ph';
     photos.forEach((src,i)=>{
@@ -1134,12 +1139,12 @@ function buildPopularTiles(){
   POP.forEach(([cat, title, desc])=>{
     const items = CATALOG.filter(i=>i.c===cat);
     if(!items.length) return;
-    const tile = document.createElement('div');
+    const tile = document.createElement('a');
     tile.className='tilex';
-    tile.setAttribute('role','button');
-    tile.tabIndex=0;
+    tile.href = (typeof chpuCatPath==='function') ? chpuCatPath(cat) : '#';
+    tile.style.textDecoration='none'; tile.style.color='inherit';
     tile.setAttribute('aria-label', 'Открыть категорию ' + title);
-    tile.addEventListener('click', ()=>{ setCat(cat); goCat(); });
+    tile.addEventListener('click', (e)=>{ chpuTileNav(e, cat); });
     tile.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); setCat(cat); goCat(); } });
 
     const photosWrap = document.createElement('div');
@@ -1752,7 +1757,7 @@ function renderGrid(){
       if(chips.length<3) chips.push(s);
     }
     if(it.a){['Основной цвет','Цвет','Наполнение','Зеркало','Исполнение','Материал','Тип шкафов','Тип стола','Подвид товара'].forEach(k=>addCardChip(it.a[k]))}
-    return`<div class="pcard" onclick="openM('${esc(it.id)}')">
+    return`<a class="pcard" href="${esc(chpuItemPath(it))}" onclick="return pcardNav(event,'${esc(it.id)}')">
 <div class="pc-img">${(()=>{ const stockState=getCatalogAvailability(it); return `${it.img?`<img ${imgAttrsThumb(it.img)} alt="${esc(it.t)}" data-cat="${esc(it.c)}">`:`<div class="pc-ph">${CI[it.c]||'📦'}</div>`}${stockState.available?'<span class="pc-stock">В наличии</span>':''}${(stockState.available&&typeof mattressTileGift==='function'&&mattressTileGift(it))?'<span class="pc-gift">Подарок</span>':''}${it.pn>1?`<span class="pc-phocount">${it.pn} фото</span>`:''}`; })()}</div>
 <div class="pc-body">
 <div class="pc-cat">${esc(it.c)}</div>
@@ -1763,8 +1768,8 @@ ${(()=>{ const mts=(it.c==='Матрасы'&&typeof mattressTileSizes==='functio
 ${it.f?`<div class="pc-meta">🏭 ${esc(it.f)}</div>`:''}
 ${chips.length?`<div class="pc-chips">${chips.map(c=>`<span class="pch">${esc(c)}</span>`).join('')}</div>`:''}
 </div>
-<div class="pc-foot"><div class="pc-price">${pr}</div><button class="btn-ask" onclick="event.stopPropagation();openM('${esc(it.id)}')">Узнать</button></div>
-</div>`;
+<div class="pc-foot"><div class="pc-price">${pr}</div><button class="btn-ask" onclick="event.preventDefault();event.stopPropagation();openM('${esc(it.id)}')">Узнать</button></div>
+</a>`;
   }).join('');
   adaptCardImages(g);
 }
@@ -2013,7 +2018,7 @@ function updateWardrobeAtticSelection(it){
           <div style="margin-top:6px"><b>Наличие комплекта:</b> ${esc(state.loaded ? state.label : 'Остатки не загружены')}</div>
         </div>
         <div class="waOpt-foot">
-          ${a.atticId ? `<button type="button" class="waOpt-link" onclick="navOpen('${esc(a.atticId)}')">Посмотреть антресоль</button>` : ''}
+          ${a.atticId ? `<a class="waOpt-link" href="${esc(chpuItemPathById(a.atticId))}" onclick="return chpuNavCard(event,'${esc(a.atticId)}')">Посмотреть антресоль</a>` : ''}
           <span class="waOpt-stock ${state.available ? 'ok' : 'none'}">${esc(state.loaded ? state.label : 'Остатки не загружены')}</span>
         </div>`;
     }else{
@@ -3294,8 +3299,14 @@ function mattressInitialPrice(it){
   return (v && v.price) || it.p;
 }
 function mattressVariantLink(it, v){
-  try{ return 'https://мебель-фаворит.рф/?item='+encodeURIComponent(it.id)+'&msize='+encodeURIComponent(v.size)+'&mfab='+encodeURIComponent(v.ftype); }
-  catch(_){ return 'https://мебель-фаворит.рф/?item='+((it&&it.id)||''); }
+  // ЧПУ-ссылка на статическую страницу товара (в шаринге VK/TG превью покажет фото матраса,
+  // а не общий логотип); размер/ткань остаются query-наложением. Фолбэк — старый ?item=.
+  var base='https://мебель-фаворит.рф';
+  try{
+    var p=(typeof chpuItemPath==='function' && it)?chpuItemPath(it):('/?item='+encodeURIComponent(it.id));
+    var sep=(p.indexOf('?')===-1)?'?':'&';
+    return base+p+sep+'msize='+encodeURIComponent(v.size)+'&mfab='+encodeURIComponent(v.ftype);
+  }catch(_){ return base+'/?item='+((it&&it.id)||''); }
 }
 function mattressVkMessage(it, v){
   const fab=(v.fabric||'').toLowerCase();
@@ -3591,6 +3602,7 @@ function miniBedSetAddon(id, addon, checked){
 
 function openM(id, opts){
   const it=findItemById(id);if(!it)return;
+  chpuDropSeoBlock(true); // карточка открывается — статический SEO-блок больше не нужен
   window.__BACK_TO_CART__=false; // флаг возврата в корзину ставится ПОСЛЕ этого вызова в favCartOpenItem
   opts = opts || {};
   if(document.getElementById('mOv').classList.contains('open')) saveBuilderSession();
@@ -3802,6 +3814,8 @@ const SITE_ORIGIN = (function(){
 })();
 function getItemCanonicalUrl(it){
   if(!it || !it.id) return SITE_ORIGIN + '/';
+  // ЧПУ: живой каноникал/og:url/JSON-LD должны совпадать со статической страницей товара
+  try{ if(typeof chpuItemPath==='function'){ var p=chpuItemPath(it); if(p && p.charAt(0)==='/' && p!=='/' && p.indexOf('?')===-1) return SITE_ORIGIN + p; } }catch(_){}
   return SITE_ORIGIN + '/?item=' + encodeURIComponent(it.id);
 }
 function injectProductJsonLd(it){
@@ -4768,9 +4782,13 @@ function renderMulti(it){
         const sub = hasAltConfigs ? extra : '';
         const priceTxt = v.p ? (Number(v.p).toLocaleString('ru-RU')+' ₽') : 'Цена по запросу';
         const img = v.img ? `<img class="mMulti-color-img" ${imgAttrs(v.img, 300)} alt="">` : '<div class="mMulti-color-img"></div>';
-        const click = isCurrent ? '' : `onclick="navOpen('${esc(v.id)}')"`;
+        const isLink = !isCurrent;
+        const wtag = isLink ? 'a' : 'div';
+        const wattr = isLink
+          ? ` href="${esc(chpuItemPath(v))}" onclick="return chpuNavCard(event,'${esc(v.id)}')"`
+          : ' style="cursor:default"';
         const stockHtml = variantStockHtml(v);
-        return `<div class="mMulti-color${isCurrent?' current':''}" ${click} ${isCurrent?'style="cursor:default"':''}>
+        return `<${wtag} class="mMulti-color${isCurrent?' current':''}"${wattr}>
           ${img}
           <div class="mMulti-color-body">
             <div class="mMulti-color-name">${esc(name)}${isCurrent?' · текущий':''}</div>
@@ -4778,7 +4796,7 @@ function renderMulti(it){
             <div class="mMulti-color-price">${priceTxt}</div>
             ${stockHtml}
           </div>
-        </div>`;
+        </${wtag}>`;
       }).join('');
     }
 
@@ -6768,8 +6786,9 @@ function closeM(){
   try{
     if(!window.__ROUTING__){
       var pp=new URLSearchParams(window.location.search);
-      if(pp.has('item')){
-        favWriteUrl(null, false); // убираем item, оставляем контекст каталога (cat/q/series)
+      var _isItemUrl=false; try{ _isItemUrl = !!(chpuParseLocation().item); }catch(_){}
+      if(_isItemUrl || pp.has('item')){
+        favWriteUrl(null, false); // убираем item (из ЧПУ-пути или ?item=), оставляем контекст каталога (cat/q/series)
       }
     }
   }catch(_){}
@@ -7198,7 +7217,7 @@ function buildSearchSug(q, boxId){
     var cc=favCatCounts(); var cats0=Object.keys(cc).sort(function(a,b){ return cc[b]-cc[a]; }).slice(0,6);
     if(cats0.length){
       h+='<div class="ssug-h">Категории</div>';
-      cats0.forEach(function(c){ h+='<div class="ssug-i ssug-cat" data-cat="'+esc(c)+'"><span class="ssug-ic">\ud83d\udcc2</span><span>'+esc(c)+'</span><span class="ssug-n">'+cc[c]+'</span></div>'; });
+      cats0.forEach(function(c){ h+='<a class="ssug-i ssug-cat" href="'+esc(chpuCatPath(c))+'" data-cat="'+esc(c)+'"><span class="ssug-ic">\ud83d\udcc2</span><span>'+esc(c)+'</span><span class="ssug-n">'+cc[c]+'</span></a>'; });
     }
     box.innerHTML=h; box.style.display=''; return;
   }
@@ -7231,18 +7250,18 @@ function buildSearchSug(q, boxId){
     h+='</div>';
     box.innerHTML=h; box.style.display=''; return;
   }
-  if(cats.length){ h+='<div class="ssug-h">Категории</div>'; cats.forEach(function(c){ h+='<div class="ssug-i ssug-cat" data-cat="'+esc(c)+'"><span class="ssug-ic">\ud83d\udcc2</span><span>'+favHl(c,qtoks)+'</span><span class="ssug-n">'+catCnt[c]+'</span></div>'; }); }
+  if(cats.length){ h+='<div class="ssug-h">Категории</div>'; cats.forEach(function(c){ h+='<a class="ssug-i ssug-cat" href="'+esc(chpuCatPath(c))+'" data-cat="'+esc(c)+'"><span class="ssug-ic">\ud83d\udcc2</span><span>'+favHl(c,qtoks)+'</span><span class="ssug-n">'+catCnt[c]+'</span></a>'; }); }
   if(prods.length){
     h+='<div class="ssug-h">Товары</div>';
     prods.forEach(function(it){
       var av=false; try{ av=getCatalogAvailability(it).available; }catch(_){ }
       var mt=''; if(qMirror){ var ws=favItemTokens(it),mp=0,mn=0; for(var z=0;z<ws.length;z++){ if(ws[z].indexOf('зеркал')===0){ if(z>0&&ws[z-1]==='без') mn++; else mp++; } } mt=mp?'С зеркалом':(mn?'Без зеркала':''); }
       var sub=[it.c, it.col, mt].filter(Boolean).join(' \u00b7 ');
-      h+='<div class="ssug-i ssug-prod" data-id="'+esc(String(it.id))+'">'
+      h+='<a class="ssug-i ssug-prod" href="'+esc(chpuItemPath(it))+'" data-id="'+esc(String(it.id))+'">'
         +(it.img?('<img class="ssug-img" src="'+esc(thumbU(it.img))+'" data-orig="'+esc(it.img)+'" alt="" loading="lazy">'):'<span class="ssug-img"></span>')
         +'<span class="ssug-mid"><span class="ssug-pt2">'+favHl(it.t,qtoks)+(av?'<i class="ssug-dot"></i>':'')+'</span>'
         +(sub?('<span class="ssug-sub">'+esc(sub)+'</span>'):'')+'</span>'
-        +'<span class="ssug-pp">'+(Number(it.p)||0).toLocaleString('ru-RU')+' \u20bd</span></div>';
+        +'<span class="ssug-pp">'+(Number(it.p)||0).toLocaleString('ru-RU')+' \u20bd</span></a>';
     });
   }
   h+='<div class="ssug-i ssug-all" data-all="1"><span class="ssug-ic">\ud83d\udd0e</span><span>Все результаты («'+esc(q)+'») — '+total+'</span></div>';
@@ -7273,15 +7292,112 @@ function favCurrentCtx(){
   }
   return ctx;
 }
-// Собрать и записать адрес: контекст + опциональное наложение
+// ============================================================
+// ЧПУ-РОУТИНГ (v41_125): человекочитаемые адреса вместо ?cat=/?item=
+//   категория → /{слаг-категории}/            (напр. /divany/)
+//   товар     → /{слаг-категории}/{слаг}-{id}/ (напр. /divany/divan-barselona-8123795103/)
+// Карты слагов приходят из chpu-routes.js (генерится build-chpu.py из catalog.js),
+// поэтому пути в адресной строке ВСЕГДА совпадают с именами сгенерированных папок.
+// Поиск/серия/корзина/матрас-опции остаются query-наложением (?q=, ?series=, ?cart=).
+// ============================================================
+function chpuCatSlug(cat){ return (window.CHPU_CAT2SLUG && window.CHPU_CAT2SLUG[cat]) || ''; }
+function chpuSlugToCat(slug){ return (window.CHPU_SLUG2CAT && window.CHPU_SLUG2CAT[slug]) || ''; }
+function chpuItemPath(it){
+  if(!it) return '/';
+  var cs=chpuCatSlug(it.c); if(!cs) return '/';
+  var nm=(window.CHPU_ITEMSLUG && window.CHPU_ITEMSLUG[it.id]) || 'tovar';
+  return '/'+cs+'/'+nm+'-'+it.id+'/';
+}
+function chpuCatPath(cat){ var cs=chpuCatSlug(cat); return cs ? ('/'+cs+'/') : '/'; }
+// Клик по карточке-ссылке: обычный левый клик — открыть модалку на месте;
+// Ctrl/Cmd/Shift/Alt (и средняя/правая кнопка — нативно) — открыть ЧПУ-URL в новой вкладке.
+function pcardNav(e, id){
+  if(e && (e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)) return true; // не мешаем браузеру открыть вкладку
+  if(e) e.preventDefault();
+  try{ openM(id); }catch(_){}
+  return false;
+}
+// То же для плиток-категорий (обычный клик — фильтр на месте, модиф. — новая вкладка /категория/).
+function chpuTileNav(e, cat){
+  if(e && (e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)) return true;
+  if(e) e.preventDefault();
+  try{ setCat(cat); goCat(); }catch(_){}
+  return false;
+}
+// Для карточек-ссылок ВНУТРИ модалки (варианты цвета/размера): обычный клик — перейти внутри
+// модалки (navOpen, со стеком «назад»); модиф./средняя/правая — открыть ЧПУ-URL в новой вкладке.
+function chpuNavCard(e, id){
+  if(e && (e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)) return true;
+  if(e) e.preventDefault();
+  try{ navOpen(id); }catch(_){}
+  return false;
+}
+// Фаза-2: статический SEO-блок (контент товара/категории в HTML для поисковиков).
+// Убираем его, как только приложение отрисовало свой интерфейс — чтобы не дублировался.
+// full=true — снести блок целиком (страница ТОВАРА: контент даёт открытая карточка).
+// full=false — страница КАТЕГОРИИ: оставляем крошки/H1/описание (полезно и людям, и Google,
+// который исполняет JS), убираем только список товаров — его дублирует живая сетка.
+function chpuDropSeoBlock(full){
+  try{
+    var b=document.getElementById('chpuSeoBlock'); if(!b) return;
+    var list=b.querySelector('.chpu-seo-list');
+    if(!full && list){
+      list.remove();
+      var more=b.querySelector('.chpu-seo-more'); if(more) more.remove();
+      return;
+    }
+    b.remove();
+  }catch(_){ }
+}
+// Путь товара по id (когда под рукой только id, а не объект): ищем в CATALOG.
+function chpuItemPathById(id){
+  try{ var it=(window.CATALOG||[]).find(function(x){return String(x.id)===String(id);}); return it?chpuItemPath(it):'/'; }catch(_){ return '/'; }
+}
+// Разобрать pathname в {cat?, item?}. ID товара — хвостовое число слага (…-8123795103).
+function chpuParsePath(pathname){
+  var segs=String(pathname||'/').split('/').filter(Boolean);
+  if(!segs.length) return {};
+  var last=segs[segs.length-1];
+  var m=last.match(/-(\d{5,})$/);
+  if(m) return { item:m[1], cat: chpuSlugToCat(segs[0]) };
+  return { cat: chpuSlugToCat(segs[0]) };
+}
+// Единая точка чтения адреса: ЧПУ-путь + query-наложения + старые ?cat=/?item= (легаси).
+function chpuParseLocation(){
+  var out={ q:'', series:'', cart:'', item:'', cat:'', msize:'', mfab:'', admin:'', legacy:false };
+  var sp; try{ sp=new URLSearchParams(location.search); }catch(_){ sp=new URLSearchParams(); }
+  out.q=(sp.get('q')||'').trim(); out.series=sp.get('series')||''; out.cart=sp.get('cart')||'';
+  out.msize=sp.get('msize')||''; out.mfab=sp.get('mfab')||''; out.admin=sp.get('admin')||'';
+  var p=chpuParsePath(location.pathname);
+  if(p.item){ out.item=p.item; out.cat=p.cat||''; }
+  else if(p.cat){ out.cat=p.cat; }
+  // старые ссылки ?item=/?cat= (реклама, выдача, ранее расшаренное) — редиректим на ЧПУ
+  var legItem=sp.get('item'), legCat=sp.get('cat');
+  if(legItem){ out.item=legItem; out.legacy=true; }
+  if(legCat){ out.cat=legCat; out.legacy=true; }
+  return out;
+}
+// Собрать и записать адрес: контекст (cat/q/series) + опциональное наложение (item/cart)
 function favWriteUrl(overlay, push){
   try{
-    var ctx=favCurrentCtx();
-    var u=new URL(window.location.href);
-    ['cat','item','q','series','cart'].forEach(function(k){ u.searchParams.delete(k); });
-    Object.keys(ctx).forEach(function(k){ u.searchParams.set(k, String(ctx[k])); });
-    if(overlay){ Object.keys(overlay).forEach(function(k){ var v=overlay[k]; if(v===true) u.searchParams.set(k,'1'); else if(v) u.searchParams.set(k,String(v)); }); }
-    var url=u.pathname+(u.search||'')+(u.hash||'');
+    var ctx=favCurrentCtx();                 // {q} | {cat?, series?}
+    var path='/';
+    // Стартуем от ТЕКУЩИХ параметров адреса и удаляем только те, которыми управляем сами.
+    // Так переживают utm_*, yclid, gclid, admin и любые чужие метки — это важно для рекламы
+    // и аналитики (иначе метка терялась при первом же переходе внутри сайта).
+    var qs; try{ qs=new URLSearchParams(location.search); }catch(_){ qs=new URLSearchParams(); }
+    ['cat','item','q','series','cart','msize','mfab'].forEach(function(k){ qs.delete(k); });
+    var curItem=(overlay && overlay.item) ? (window.CATALOG||[]).find(function(x){return String(x.id)===String(overlay.item);}) : null;
+    if(curItem){ path=chpuItemPath(curItem); }
+    else if(ctx.cat){ path=chpuCatPath(ctx.cat); }
+    if(ctx.q) qs.set('q', ctx.q);
+    if(ctx.series) qs.set('series', ctx.series);
+    if(overlay){
+      if(overlay.cart && !curItem) qs.set('cart','1');
+      if(overlay.msize) qs.set('msize', String(overlay.msize));
+      if(overlay.mfab) qs.set('mfab', String(overlay.mfab));
+    }
+    var url=path+(qs.toString()?('?'+qs.toString()):'');
     if(push) window.history.pushState(null,'',url); else window.history.replaceState(null,'',url);
   }catch(_){ }
 }
@@ -7289,10 +7405,14 @@ function favWriteUrl(overlay, push){
 function favApplyUrl(){
   if(window.__ROUTING__) return;
   window.__ROUTING__=true;
+  var __startHref=location.href;
+  // Если во время применения (окно 40мс до openM/favCartOpen) пришёл новый popstate — он будет
+  // отброшен guard'ом выше; поэтому по завершении сверяем адрес и до-применяем свежий (без рассинхрона).
+  function __finish(){ window.__ROUTING__=false; if(location.href!==__startHref){ setTimeout(favApplyUrl,0); } }
   try{
-    var p=new URLSearchParams(window.location.search);
-    var item=p.get('item'), cart=p.get('cart'), series=p.get('series');
-    var cat=p.get('cat'), q=(p.get('q')||'').trim();
+    var L=chpuParseLocation();
+    var item=L.item, cart=L.cart, series=L.series;
+    var cat=L.cat, q=L.q;
 
     // 1) Сначала восстанавливаем КОНТЕКСТ каталога (что под наложением)
     if(q){
@@ -7317,17 +7437,20 @@ function favApplyUrl(){
 
     if(item){
       var it=(window.CATALOG||[]).find(function(x){return String(x.id)===String(item);});
-      if(it){ if(dlg && typeof favCloseInfo==='function') favCloseInfo(); setTimeout(function(){ openM(it.id); },40); }
+      if(it){ if(dlg && typeof favCloseInfo==='function') favCloseInfo();
+        // __ROUTING__ снимаем ВНУТРИ таймаута: иначе openM (через 40мс) увидит false и запушит дубль в историю.
+        setTimeout(function(){ try{ openM(it.id, {msize:L.msize, mfab:L.mfab}); }catch(_){} __finish(); },40);
+      } else { __finish(); }
     } else if(cart){
       if(cardOpen && typeof closeM==='function') closeM();
-      setTimeout(function(){ if(typeof favCartOpen==='function') favCartOpen(); },40);
+      setTimeout(function(){ try{ if(typeof favCartOpen==='function') favCartOpen(); }catch(_){} __finish(); },40);
     } else {
       // наложения нет — закрываем открытое
       if(cardOpen && typeof closeM==='function') closeM();
       if(dlg && typeof favCloseInfo==='function') favCloseInfo();
+      __finish();
     }
-  }catch(_){ }
-  window.__ROUTING__=false;
+  }catch(_){ __finish(); }
 }
 window.addEventListener('popstate', function(){ favApplyUrl(); });
 
@@ -7757,6 +7880,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     // Остатки могли загрузиться РАНЬШЕ каталога — доприменить
     try{ if(typeof STOCK!=='undefined' && STOCK && STOCK.loaded) applyStock(); }catch(_){}
     try{ if(typeof enrichMattressFacets==='function') enrichMattressFacets(); }catch(_){}
+    // Интерфейс отрисован — статический SEO-блок больше не нужен. На СТРАНИЦЕ ТОВАРА оставляем
+    // его до открытия карточки (её откроет роутер), чтобы не мелькал экран без контента.
+    try{ if(!(typeof chpuParseLocation==='function' && chpuParseLocation().item)) chpuDropSeoBlock(false); }
+    catch(_){ chpuDropSeoBlock(false); }
   }
   if(Array.isArray(window.CATALOG) && window.CATALOG.length){ startCatalogUI(); }
   else { document.addEventListener('catalog-ready', startCatalogUI, {once:true}); }
@@ -7778,11 +7905,15 @@ document.addEventListener('DOMContentLoaded',()=>{
     let params;
     try{ params = new URLSearchParams(window.location.search); }
     catch(_){ return; }
-    const catParam = params.get('cat');
-    const itemParam = params.get('item');
-    const qParam = (params.get('q')||'').trim();
-    const seriesParam = params.get('series');
-    const cartParam = params.get('cart');
+    // ЧПУ: категория/товар берём из пути (/{кат}/{слаг}-{id}/); q/series/cart/msize/mfab — из query.
+    // Старые ?cat=/?item= тоже поддерживаем и после применения редиректим на ЧПУ.
+    const L = (typeof chpuParseLocation==='function') ? chpuParseLocation() : {};
+    const catParam = L.cat || params.get('cat');
+    const itemParam = L.item || params.get('item');
+    const qParam = (L.q || params.get('q') || '').trim();
+    const seriesParam = L.series || params.get('series');
+    const cartParam = L.cart || params.get('cart');
+    window.__CHPU_LEGACY__ = !!(L && L.legacy);
     if(!catParam && !itemParam && !qParam && !seriesParam && !cartParam) return;
 
     // Ждём готовности каталога. Проверяем каждые 50мс, максимум 8 секунд.
@@ -7804,7 +7935,8 @@ document.addEventListener('DOMContentLoaded',()=>{
           // Проверяем что такая категория реально есть
           const opt = Array.from(catSel.options).find(o=>o.value === catParam);
           if(opt){
-            setCat(catParam);
+            // ЧПУ: при инициализации адрес уже правильный (из пути) — не даём setCat переписать его
+            window.__ROUTING__=true; try{ setCat(catParam); } finally { window.__ROUTING__=false; }
             // Прокручиваем к каталогу
             setTimeout(()=>{
               const a = document.getElementById('catAnchor');
@@ -7837,6 +7969,11 @@ document.addEventListener('DOMContentLoaded',()=>{
         if(cartParam && typeof favCartOpen==='function'){
           window.__ROUTING__=true;
           setTimeout(()=>{ try{ favCartOpen(); }catch(_){} window.__ROUTING__=false; }, 250);
+        }
+        // Пришли по СТАРОЙ ссылке ?item=/?cat= → мягко переписываем адрес на ЧПУ,
+        // чтобы старые ссылки из рекламы/выдачи работали и склеивались с новым URL.
+        if(window.__CHPU_LEGACY__){
+          setTimeout(function(){ try{ favWriteUrl(itemParam?{item:itemParam}:null, false); }catch(_){} }, 350);
         }
       }catch(err){
         console.warn('[router] ошибка применения URL-параметров:', err);
@@ -7976,6 +8113,10 @@ document.addEventListener('DOMContentLoaded',()=>{
       }
       if(box){
         box.addEventListener('click', function(e){
+          // Подсказки-ссылки (товар/категория): модиф./средняя кнопка — новая вкладка (не мешаем);
+          // обычный клик — работаем на месте (без навигации по href).
+          var aLink=e.target.closest('a[href]');
+          if(aLink){ if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey) return; e.preventDefault(); }
           var cat=e.target.closest('[data-cat]'), prod=e.target.closest('.ssug-prod'),
               all=e.target.closest('.ssug-all'), qel=e.target.closest('[data-q]'), clr=e.target.closest('[data-clr]');
           if(clr){ clearTimeout(window.__SUG_HIDE_T__); favHistClear(); buildSearchSug('', boxId); if(inp){ inp.focus(); } }
