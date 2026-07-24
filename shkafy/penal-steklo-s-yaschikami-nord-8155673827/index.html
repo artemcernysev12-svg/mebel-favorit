@@ -191,7 +191,7 @@
      Это решает блокировку Cloudflare без VPN и устраняет внешний кэш
      прокси, из-за которого новые фото долго не подменялись. -->
 <!-- Preload каталога: он всё равно нужен сразу, но начнёт качаться параллельно с HTML -->
-<link rel="preload" href="catalog.js?v=a5a3c0dc" as="fetch">
+<link rel="preload" href="catalog.js?v=14adb7e6" as="fetch">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/golos.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css?v=9f333781">
@@ -953,7 +953,7 @@ if(document.readyState === 'loading'){
 /* V41_115 (TBT): каталог парсится в Web Worker — главный поток не блокируется 2.2МБ.
    Готово -> window.CATALOG + событие catalog-ready. Фолбэк: обычный <script defer>. */
 (function(){
-  var URL_='catalog.js?v=a5a3c0dc';
+  var URL_='catalog.js?v=14adb7e6';
   var settled=false;
   function ready(arr,meta){
     if(settled) return; settled=true;
@@ -985,7 +985,7 @@ if(document.readyState === 'loading'){
      не на критическом пути — см. блок «ленивая дозагрузка опций кроватей/матрасов» перед </body>. -->
 <script src="catalog-data/wardrobe-coupe.js?v=8293ba42" defer></script>
 <script src="catalog-data/seat-options.js?v=36a6cae4" defer></script>
-<script src="/chpu-routes.js?v=39060267"></script>
+<script src="/chpu-routes.js?v=b42c2ea0"></script>
 <script src="app.js?v=d8199a04"></script>
 
 <!-- Универсальная цель Метрики "avito_click" + "lead_any".
