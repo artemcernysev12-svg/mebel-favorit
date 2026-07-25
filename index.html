@@ -193,7 +193,7 @@
      Это решает блокировку Cloudflare без VPN и устраняет внешний кэш
      прокси, из-за которого новые фото долго не подменялись. -->
 <!-- Preload каталога: он всё равно нужен сразу, но начнёт качаться параллельно с HTML -->
-<link rel="preload" href="catalog.js?v=53d15720" as="fetch">
+<link rel="preload" href="catalog.js?v=b2f0ea0b" as="fetch">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/golos.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css?v=9f333781">
@@ -953,7 +953,7 @@ if(document.readyState === 'loading'){
 /* V41_115 (TBT): каталог парсится в Web Worker — главный поток не блокируется 2.2МБ.
    Готово -> window.CATALOG + событие catalog-ready. Фолбэк: обычный <script defer>. */
 (function(){
-  var URL_='catalog.js?v=53d15720';
+  var URL_='catalog.js?v=b2f0ea0b';
   var settled=false;
   function ready(arr,meta){
     if(settled) return; settled=true;
