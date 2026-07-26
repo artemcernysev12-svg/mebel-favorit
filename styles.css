@@ -1440,3 +1440,9 @@ a.favRevCard-src:hover{background:rgba(45,125,255,.15)}
 .tilex-title{margin-top:0;display:inline-block;align-self:flex-start;background:rgba(8,12,20,.85);backdrop-filter:blur(6px);padding:5px 11px;border-radius:16px;font-size:12.5px;border:1px solid var(--line);color:#fff}
 .tilex-count{background:rgba(8,12,20,.78) !important;color:#ffd54f !important;border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(6px)}
 }
+
+/* V41_130: понятные основные цвета в фильтре ТВ-тумб */
+.facet-color-opt{min-height:40px}
+.facet-color-dot{width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.78);box-shadow:0 0 0 1px rgba(255,255,255,.2);flex:0 0 22px}
+.facet-color-opt:has(input:checked) .facet-color-dot{box-shadow:0 0 0 2px var(--accent)}
+@media(max-width:991px){.optl{min-height:44px}.facet-color-opt{min-height:48px}.facet-color-dot{width:26px;height:26px;flex-basis:26px}}

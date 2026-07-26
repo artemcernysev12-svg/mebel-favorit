@@ -1292,7 +1292,7 @@ const USEFUL_ATTRS_BY_CATEGORY = {
   'Шкафы и буфеты':['Название модели','Наполнение','Зеркало','Исполнение','Тип шкафов','Тип дверей','Количество створок','Форма','Материал'],
   'Комоды и тумбы':['Тип комодов','Материал','Что есть у товара'],
   'Тумбы':['Подтип тумбы','Материал','Что есть у товара'],
-  'Тумбы под телевизор':['Подтип тумбы','Тип расположения','Материал'],
+  'Тумбы под телевизор':['Тип расположения','Материал','Кол-во ящиков','Ниша','Основной цвет','Распашные дверцы'],
   'Прикроватные тумбы':['Подтип тумбы','Материал','Что есть у товара'],
   'Прихожие и обувницы':['Тип прихожих и обувниц','Материал','Что есть у товара'],
   'Гардеробные системы и вешалки':['Тип гардеробов','Тип размещения','Материал'],
@@ -1367,16 +1367,54 @@ function getUsefulAttrPairs(it, limit){
 }
 
 const FACET_SKIP_KEYS = new Set(['вид товара','контактное лицо','поместится ли товар в одну коробку?','глубина кухни','глубина нижних шкафов','ширина','высота','глубина','название мультиобъявления','шаблон ссылок github']);
+const FACET_EXCLUDE_BY_CATEGORY = {
+  'Тумбы под телевизор': new Set([
+    'арт поставщика',
+    'название модели',
+    'подвид товара',
+    'цвет от производителя',
+    // Это тот же размер, что «Длина под ТВ» в диапазоне От–До выше.
+    'длина под тв (см)'
+  ])
+};
 const FACET_DYNAMIC_EXCLUDE = new Set(['Гарнитуры и комплекты','Спальные гарнитуры','Прихожие и обувницы']);
 const FACET_SEARCHABLE_KEYS = new Set(['цвет от производителя']);
 
-function facetValueParts(raw){
+function isFacetExcluded(cat, key){
+  const blocked = FACET_EXCLUDE_BY_CATEGORY[cat];
+  return !!(blocked && blocked.has(facetNorm(key)));
+}
+function facetValueParts(raw, key){
   const val = String(raw===undefined||raw===null?'':raw).trim();
   if(!val) return [];
+  // В Excel основной цвет бывает составным: «Коричневый\Белый» или
+  // «Белый / Серый». В фильтре покупателю нужны отдельные понятные цвета.
+  if(facetNorm(key)==='основной цвет'){
+    return val.split(/[\\\/|,;]+/).map(x=>x.trim()).filter(Boolean);
+  }
   return val.includes('|') ? val.split('|').map(x=>x.trim()).filter(Boolean) : [val];
 }
 function facetNorm(v){
   return String(v===undefined||v===null?'':v).toLowerCase().replace(/ё/g,'е').replace(/\s+/g,' ').trim();
+}
+const FACET_COLOR_SWATCH = {
+  'бежевый':'#d7c4a5',
+  'белый':'#f5f5f2',
+  'бирюзовый':'#36b8b2',
+  'голубой':'#71b7df',
+  'зеленый':'#3f7657',
+  'золотой':'linear-gradient(135deg,#f1d17a,#a87520)',
+  'коричневый':'#8a5a3b',
+  'серебристый':'linear-gradient(135deg,#f2f4f6,#929aa3)',
+  'серый':'#777d87',
+  'черный':'#20242b'
+};
+function facetColorSwatch(value){
+  return FACET_COLOR_SWATCH[facetNorm(value)] || '#8a93a3';
+}
+function updateCategoryRangeLabels(){
+  const widthLabel=document.getElementById('wFilterLabel');
+  if(widthLabel) widthLabel.textContent=S.cat==='Тумбы под телевизор' ? 'Длина под ТВ, см' : 'Ширина, см';
 }
 function isDynamicFacetCategory(cat){
   return !!cat && !FACET_DYNAMIC_EXCLUDE.has(cat);
@@ -1444,7 +1482,7 @@ function matchesCurrentFilters(it, opts){
     for(const [k,vals] of Object.entries(S.attrs)){
       if(opts.excludeAttr && opts.excludeAttr===k) continue;
       if(!vals || !vals.length) continue;
-      const pts = facetValueParts(it.a && it.a[k]);
+      const pts = facetValueParts(it.a && it.a[k], k);
       if(!pts.length) return false;
       if(!vals.some(v=>pts.includes(v))) return false;
     }
@@ -1452,6 +1490,7 @@ function matchesCurrentFilters(it, opts){
   return true;
 }
 function updateRangeHints(){
+  updateCategoryRangeLabels();
   const defs = {
     price:['pMin','pMax','От','До'],
     w:['wMin','wMax','От','До'],
@@ -1507,9 +1546,9 @@ function buildFacets(){
     if(!it.a) return;
     Object.entries(it.a).forEach(([k,v])=>{
       const keyNorm = String(k).toLowerCase().trim();
-      if(!v || FACET_SKIP_KEYS.has(keyNorm)) return;
+      if(!v || FACET_SKIP_KEYS.has(keyNorm) || isFacetExcluded(S.cat, k)) return;
       if(!km.has(k)) km.set(k,new Set());
-      facetValueParts(v).forEach(p=>{ if(p) km.get(k).add(p); });
+      facetValueParts(v, k).forEach(p=>{ if(p) km.get(k).add(p); });
     });
   });
 
@@ -1542,7 +1581,7 @@ function buildFacets(){
 
     const counts = new Map();
     sourceItems.forEach(it=>{
-      facetValueParts(it.a && it.a[key]).forEach(val=>{
+      facetValueParts(it.a && it.a[key], key).forEach(val=>{
         counts.set(val, (counts.get(val)||0)+1);
       });
     });
@@ -1559,7 +1598,10 @@ function buildFacets(){
 
     const sum=document.createElement('summary');
     const hintVal = dynamic ? enabledCount : allValues.length;
-    sum.innerHTML=`<span>${esc(key)}</span><span class="fhint">${hintVal}</span>`;
+    const facetLabel = S.cat==='Тумбы под телевизор' && facetNorm(key)==='основной цвет'
+      ? 'Основные цвета'
+      : key;
+    sum.innerHTML=`<span>${esc(facetLabel)}</span><span class="fhint">${hintVal}</span>`;
     det.appendChild(sum);
 
     const body=document.createElement('div');
@@ -1590,10 +1632,15 @@ function buildFacets(){
       const id='c'+Math.random().toString(36).slice(2);
       const lb=document.createElement('label');
       lb.className='optl' + (disabled ? ' off' : '');
+      const isMainColor = S.cat==='Тумбы под телевизор' && facetNorm(key)==='основной цвет';
+      if(isMainColor) lb.className += ' facet-color-opt';
       lb.setAttribute('for',id);
       lb.dataset.text = facetNorm(formatFacetValue(S.cat, key, v));
       const displayValue = formatFacetValue(S.cat, key, v);
-      lb.innerHTML=`<input id="${id}" type="checkbox" data-attr="${esc(key)}" value="${esc(v)}"${checked?' checked':''}${disabled?' disabled':''}><span class="optt">${esc(displayValue)}</span><span class="optc">${cnt}</span>`;
+      const colorDot = isMainColor
+        ? `<span class="facet-color-dot" style="background:${facetColorSwatch(displayValue)}" aria-hidden="true"></span>`
+        : '';
+      lb.innerHTML=`<input id="${id}" type="checkbox" data-attr="${esc(key)}" value="${esc(v)}"${checked?' checked':''}${disabled?' disabled':''}>${colorDot}<span class="optt">${esc(displayValue)}</span><span class="optc">${cnt}</span>`;
       list.appendChild(lb);
     });
 
