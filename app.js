@@ -1746,8 +1746,9 @@ function buildFacets(){
     sum.innerHTML=`<span>${esc(facetLabel)}</span><span class="fhint">${hintVal}</span>`;
     det.appendChild(sum);
 
+    const isMainColorFacet = S.cat==='Тумбы под телевизор' && facetNorm(key)==='основной цвет';
     const body=document.createElement('div');
-    body.className='fbody';
+    body.className='fbody' + (isMainColorFacet ? ' facet-color-body' : '');
 
     let searchInput = null;
     if(searchable){
@@ -1759,6 +1760,7 @@ function buildFacets(){
     }
 
     const list = document.createElement('div');
+    if(isMainColorFacet) list.className='facet-color-grid';
     body.appendChild(list);
 
     const empty = document.createElement('div');
@@ -1775,18 +1777,37 @@ function buildFacets(){
       const id='c'+Math.random().toString(36).slice(2);
       const lb=document.createElement('label');
       lb.className='optl' + (disabled ? ' off' : '') + (compatible ? ' compatible' : '');
-      const isMainColor = S.cat==='Тумбы под телевизор' && facetNorm(key)==='основной цвет';
+      const isMainColor = isMainColorFacet;
       if(isMainColor) lb.className += ' facet-color-opt';
       lb.setAttribute('for',id);
-      if(compatible) lb.title=`Можно добавить: ${formatFacetValue(S.cat,key,v)} — ${cnt} товаров`;
       lb.dataset.text = facetNorm(formatFacetValue(S.cat, key, v));
       const displayValue = formatFacetValue(S.cat, key, v);
+      if(isMainColor){
+        lb.title = compatible
+          ? `Можно добавить: ${displayValue} — ${cnt} товаров`
+          : `${checked ? 'Выбрано: ' : ''}${displayValue} — ${cnt} товаров`;
+      }else if(compatible){
+        lb.title=`Можно добавить: ${displayValue} — ${cnt} товаров`;
+      }
       const colorDot = isMainColor
-        ? `<span class="facet-color-dot" style="background:${facetColorSwatch(displayValue)}" aria-hidden="true"></span>`
+        ? `<span class="facet-color-dot" style="background:${facetColorSwatch(displayValue)}" aria-hidden="true"><span class="facet-color-check"></span></span>`
         : '';
-      lb.innerHTML=`<input id="${id}" type="checkbox" data-attr="${esc(key)}" value="${esc(v)}"${checked?' checked':''}${disabled?' disabled':''}>${colorDot}<span class="optt">${esc(displayValue)}</span><span class="optc">${cnt}</span>`;
+      const ariaLabel = isMainColor
+        ? ` aria-label="${esc(displayValue)}: ${cnt} товаров${checked ? ', выбран' : compatible ? ', можно сочетать' : ''}"`
+        : '';
+      lb.innerHTML=`<input id="${id}" type="checkbox" data-attr="${esc(key)}" value="${esc(v)}"${ariaLabel}${checked?' checked':''}${disabled?' disabled':''}>${colorDot}<span class="optt">${esc(displayValue)}</span><span class="optc">${cnt}</span>`;
       list.appendChild(lb);
     });
+
+    if(isMainColorFacet){
+      const selection=document.createElement('div');
+      selection.className='facet-color-selection';
+      selection.setAttribute('aria-live','polite');
+      selection.innerHTML=selected.length
+        ? `<span>Выбрано:</span> ${selected.map(value=>esc(formatFacetValue(S.cat,key,value))).join(', ')}`
+        : '<span>Можно выбрать несколько сочетающихся цветов</span>';
+      body.insertBefore(selection,empty);
+    }
 
     function applySearchFilter(){
       const query = facetNorm(searchInput ? searchInput.value : '');

@@ -1441,16 +1441,33 @@ a.favRevCard-src:hover{background:rgba(45,125,255,.15)}
 .tilex-count{background:rgba(8,12,20,.78) !important;color:#ffd54f !important;border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(6px)}
 }
 
-/* V41_131: точные сочетания материалов/цветов и отдельная длина под ТВ */
-.facet-color-opt{min-height:40px}
-.facet-color-dot{width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.78);box-shadow:0 0 0 1px rgba(255,255,255,.2);flex:0 0 22px}
-.facet-color-opt:has(input:checked) .facet-color-dot{box-shadow:0 0 0 2px var(--accent)}
+/* V41_132: компактная современная сетка основных цветов ТВ-тумб */
+.facet-color-body{max-height:none;overflow:visible;padding:10px 8px 12px}
+.facet-color-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px 5px}
+.facet-color-opt{position:relative;min-width:0;min-height:46px;padding:2px;border-radius:12px;justify-content:center;gap:0;transition:background .2s ease,box-shadow .2s ease,opacity .2s ease}
+.facet-color-opt:hover{background:rgba(255,255,255,.06)}
+.facet-color-opt input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.facet-color-dot{position:relative;width:32px;height:32px;border-radius:50%;border:2px solid rgba(255,255,255,.82);box-shadow:0 0 0 1px rgba(255,255,255,.18),0 3px 10px rgba(0,0,0,.2);flex:0 0 32px;transition:box-shadow .2s ease,transform .15s ease}
+.facet-color-opt:active .facet-color-dot{transform:scale(.94)}
+.facet-color-check{position:absolute;inset:7px;border-radius:50%;background:rgba(7,12,21,.78);opacity:0;transform:scale(.65);transition:opacity .18s ease,transform .18s ease}
+.facet-color-check::after{content:"";position:absolute;left:5px;top:2px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.facet-color-opt:has(input:checked){background:rgba(45,125,255,.14);box-shadow:inset 0 0 0 1px rgba(45,125,255,.38)}
+.facet-color-opt:has(input:checked) .facet-color-dot{box-shadow:0 0 0 3px var(--accent),0 0 14px rgba(45,125,255,.42)}
+.facet-color-opt:has(input:checked) .facet-color-check{opacity:1;transform:scale(1)}
+.facet-color-opt input:focus-visible+.facet-color-dot{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--accent)}
+.facet-color-opt .optt{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.facet-color-opt .optc{position:absolute;top:-3px;right:0;min-width:18px;height:18px;padding:0 4px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:#182133;border:1px solid rgba(255,255,255,.14);color:#c8d2e3;font-size:9px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.facet-color-opt.off{opacity:.3;cursor:not-allowed}
+.facet-color-selection{margin-top:9px;padding-top:8px;border-top:1px solid rgba(255,255,255,.07);color:#b9c5d8;font-size:10.5px;line-height:1.45}
+.facet-color-selection span{color:var(--muted)}
 .optl.compatible{margin:2px 0;padding-left:6px;padding-right:6px;border-radius:8px;background:rgba(45,125,255,.1);box-shadow:inset 0 0 0 1px rgba(45,125,255,.24)}
 .optl.compatible .optt{color:#a9c9ff;font-weight:700}
+.facet-color-opt.compatible{margin:0;padding:2px;background:rgba(45,125,255,.08);box-shadow:inset 0 0 0 1px rgba(45,125,255,.18)}
 .facet-color-opt.compatible .facet-color-dot{box-shadow:0 0 0 2px var(--accent),0 0 12px rgba(45,125,255,.45)}
 .facet-range-body{padding-top:10px}
 .facet-range-row{align-items:start}
 .facet-range-field{display:flex;flex-direction:column;gap:5px;min-width:0;color:var(--muted);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.45px}
 .facet-range-field .fi{min-width:0;text-transform:none;letter-spacing:normal;font-weight:400}
 .facet-range-help{margin-top:8px;color:var(--muted);font-size:11px;line-height:1.4}
-@media(max-width:991px){.optl{min-height:44px;touch-action:manipulation}.facet-color-opt{min-height:48px}.facet-color-dot{width:26px;height:26px;flex-basis:26px}.facet-range-field .fi{min-height:44px}}
+@media(max-width:991px){.optl{min-height:44px;touch-action:manipulation}.facet-color-opt{min-height:48px}.facet-color-dot{width:34px;height:34px;flex-basis:34px}.facet-color-check{inset:8px}.facet-color-check::after{left:5px;top:2px;width:6px;height:10px}.facet-range-field .fi{min-height:44px}}
+@media(prefers-reduced-motion:reduce){.facet-color-opt,.facet-color-dot,.facet-color-check{transition:none}}
