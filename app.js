@@ -498,7 +498,7 @@ const CI={
   'Прикроватные тумбы':'🌙','Зеркала':'🪞','Кухни':'🍳','Кухонные модули':'🔧','Комплектующие':'⚙️',
   'Диваны':'🛋️','Кресла':'💺','Подвесные кресла':'🪑','Матрасы':'🛌','Стулья':'🪑','Подставки':'📦'
 };
-const S={q:'',cat:'',fac:'',sort:'',pMin:'',pMax:'',wMin:'',wMax:'',hMin:'',hMax:'',dMin:'',dMax:'',op:false,od:false,os:false,oa:false,attrs:{},facetSearch:{}};
+const S={q:'',cat:'',fac:'',sort:'',pMin:'',pMax:'',wMin:'',wMax:'',hMin:'',hMax:'',dMin:'',dMax:'',tvLenMin:'',tvLenMax:'',op:false,od:false,os:false,oa:false,attrs:{},facetSearch:{}};
 let page=1,filtered=[],mPh=[],mPhI=0;
 
 // Глобальный тост
@@ -1047,6 +1047,8 @@ function setCat(cat){
   S.cat=cat;
   S.attrs={};
   S.facetSearch={};
+  S.tvLenMin='';
+  S.tvLenMax='';
   document.getElementById('catSel').value=cat;
   updateFactoryOptions(cat);
   page=1;buildFacets();apply();
@@ -1373,7 +1375,7 @@ const FACET_EXCLUDE_BY_CATEGORY = {
     'название модели',
     'подвид товара',
     'цвет от производителя',
-    // Это тот же размер, что «Длина под ТВ» в диапазоне От–До выше.
+    // Для этого поля ниже строится отдельная плашка-диапазон.
     'длина под тв (см)'
   ])
 };
@@ -1397,6 +1399,54 @@ function facetValueParts(raw, key){
 function facetNorm(v){
   return String(v===undefined||v===null?'':v).toLowerCase().replace(/ё/g,'е').replace(/\s+/g,' ').trim();
 }
+function facetNormalizedSet(raw, key){
+  return new Set(facetValueParts(raw, key).map(facetNorm).filter(Boolean));
+}
+function sameFacetSet(left, right){
+  if(left.size!==right.size) return false;
+  for(const value of left){ if(!right.has(value)) return false; }
+  return true;
+}
+function isTvCombinationFacet(cat, key){
+  if(cat!=='Тумбы под телевизор') return false;
+  const normalized=facetNorm(key);
+  return normalized==='материал' || normalized==='основной цвет';
+}
+function tvCombinationTargetSet(key, selected){
+  const target=new Set((selected || []).map(facetNorm).filter(Boolean));
+  // В каталоге МДФ и стекло всегда используются вместе с корпусом ЛДСП.
+  // Поэтому выбор «МДФ» означает точный состав «ЛДСП + МДФ»,
+  // а выбор «Стекло» — «ЛДСП + Стекло».
+  if(facetNorm(key)==='материал' && (target.has('мдф') || target.has('стекло'))){
+    target.add('лдсп');
+  }
+  return target;
+}
+function tvCombinationMatches(it, key, selected){
+  const target=tvCombinationTargetSet(key, selected);
+  if(!target.size) return true;
+  const actual=facetNormalizedSet(it && it.a && it.a[key], key);
+  // Цвета работают как логическое И: каждый выбранный цвет обязан
+  // присутствовать у товара. Так любой цвет можно выбрать первым,
+  // а затем добавить только реально существующий цвет-компаньон.
+  if(facetNorm(key)==='основной цвет'){
+    for(const value of target){ if(!actual.has(value)) return false; }
+    return true;
+  }
+  // Материал — точный состав: чистый ЛДСП не смешиваем с МДФ/стеклом.
+  return sameFacetSet(actual, target);
+}
+function tvLengthValue(it){
+  const raw=it && it.a && it.a['Длина под ТВ (см)'];
+  const value=Number(String(raw===undefined||raw===null?'':raw).replace(',','.'));
+  return Number.isFinite(value) && value>0 ? value : NaN;
+}
+function inTvLengthRange(it, mn, mx){
+  if(mn==='' && mx==='') return true;
+  const value=tvLengthValue(it);
+  if(!Number.isFinite(value)) return false;
+  return (mn==='' || value>=+mn) && (mx==='' || value<=+mx);
+}
 const FACET_COLOR_SWATCH = {
   'бежевый':'#d7c4a5',
   'белый':'#f5f5f2',
@@ -1414,7 +1464,7 @@ function facetColorSwatch(value){
 }
 function updateCategoryRangeLabels(){
   const widthLabel=document.getElementById('wFilterLabel');
-  if(widthLabel) widthLabel.textContent=S.cat==='Тумбы под телевизор' ? 'Длина под ТВ, см' : 'Ширина, см';
+  if(widthLabel) widthLabel.textContent='Ширина, см';
 }
 function isDynamicFacetCategory(cat){
   return !!cat && !FACET_DYNAMIC_EXCLUDE.has(cat);
@@ -1468,6 +1518,7 @@ function matchesCurrentFilters(it, opts){
   if(opts.excludeRange!=='w' && !inRange(it,'w',S.wMin,S.wMax)) return false;
   if(opts.excludeRange!=='h' && !inRange(it,'h',S.hMin,S.hMax)) return false;
   if(opts.excludeRange!=='d' && !inRange(it,'d',S.dMin,S.dMax)) return false;
+  if(!opts.excludeTvLength && S.cat==='Тумбы под телевизор' && !inTvLengthRange(it,S.tvLenMin,S.tvLenMax)) return false;
   if(S.op && !it.img) return false;
   if(S.od && !(it.w||it.h||it.d)) return false;
   if(S.os){
@@ -1482,6 +1533,10 @@ function matchesCurrentFilters(it, opts){
     for(const [k,vals] of Object.entries(S.attrs)){
       if(opts.excludeAttr && opts.excludeAttr===k) continue;
       if(!vals || !vals.length) continue;
+      if(isTvCombinationFacet(S.cat, k)){
+        if(!tvCombinationMatches(it,k,vals)) return false;
+        continue;
+      }
       const pts = facetValueParts(it.a && it.a[k], k);
       if(!pts.length) return false;
       if(!vals.some(v=>pts.includes(v))) return false;
@@ -1526,6 +1581,84 @@ function updateRangeHints(){
       maxEl.removeAttribute('title');
     }
   });
+}
+
+function buildTvLengthRangeFacet(){
+  if(S.cat!=='Тумбы под телевизор') return null;
+  const facetKey='Длина под ТВ, см';
+  const sourceItems=CATALOG.filter(it=>matchesCurrentFilters(it,{excludeTvLength:true}));
+  const values=sourceItems.map(tvLengthValue).filter(Number.isFinite);
+  const availableMin=values.length ? Math.min(...values) : null;
+  const availableMax=values.length ? Math.max(...values) : null;
+  const active=S.tvLenMin!=='' || S.tvLenMax!=='';
+
+  const det=document.createElement('details');
+  det.className='facet facet-range';
+  det.open=(S.openFacets && S.openFacets.has(facetKey)) || active;
+  det.addEventListener('toggle', function(){
+    if(!S.openFacets) S.openFacets=new Set();
+    if(det.open) S.openFacets.add(facetKey);
+    else S.openFacets.delete(facetKey);
+  });
+
+  const sum=document.createElement('summary');
+  const summaryRange=active
+    ? `${S.tvLenMin || (availableMin===null ? '…' : Math.round(availableMin))}–${S.tvLenMax || (availableMax===null ? '…' : Math.round(availableMax))}`
+    : (availableMin===null ? '—' : `${Math.round(availableMin)}–${Math.round(availableMax)}`);
+  sum.innerHTML=`<span>${facetKey}</span><span class="fhint">${summaryRange}</span>`;
+  det.appendChild(sum);
+
+  const body=document.createElement('div');
+  body.className='fbody facet-range-body';
+  const minValue=esc(S.tvLenMin);
+  const maxValue=esc(S.tvLenMax);
+  const minPlaceholder=availableMin===null ? 'От' : `От ${Math.round(availableMin)}`;
+  const maxPlaceholder=availableMax===null ? 'До' : `До ${Math.round(availableMax)}`;
+  const rangeAttrs=availableMin===null
+    ? ''
+    : ` min="${Math.round(availableMin)}" max="${Math.round(availableMax)}"`;
+  body.innerHTML=`
+    <div class="frow facet-range-row">
+      <label class="facet-range-field">
+        <span>От</span>
+        <input id="tvLenMin" class="fi" type="number" inputmode="numeric"
+          aria-label="Длина под ТВ от, сантиметры" placeholder="${minPlaceholder}"
+          value="${minValue}"${rangeAttrs}>
+      </label>
+      <label class="facet-range-field">
+        <span>До</span>
+        <input id="tvLenMax" class="fi" type="number" inputmode="numeric"
+          aria-label="Длина под ТВ до, сантиметры" placeholder="${maxPlaceholder}"
+          value="${maxValue}"${rangeAttrs}>
+      </label>
+    </div>
+    <div class="facet-range-help">${availableMin===null ? 'Нет значений для выбранных фильтров' : `Доступно: ${Math.round(availableMin)}–${Math.round(availableMax)} см`}</div>`;
+
+  const minInput=body.querySelector('#tvLenMin');
+  const maxInput=body.querySelector('#tvLenMax');
+  function syncState(){
+    S.tvLenMin=minInput.value;
+    S.tvLenMax=maxInput.value;
+  }
+  function commitRange(){
+    syncState();
+    page=1;
+    setTimeout(()=>apply(),0);
+  }
+  [minInput,maxInput].forEach(input=>{
+    input.addEventListener('input',syncState);
+    input.addEventListener('change',commitRange);
+    input.addEventListener('keydown',event=>{
+      if(event.key==='Enter'){
+        event.preventDefault();
+        commitRange();
+        input.blur();
+      }
+    });
+  });
+
+  det.appendChild(body);
+  return det;
 }
 
 function buildFacets(){
@@ -1580,11 +1713,20 @@ function buildFacets(){
       : catItems;
 
     const counts = new Map();
-    sourceItems.forEach(it=>{
-      facetValueParts(it.a && it.a[key], key).forEach(val=>{
-        counts.set(val, (counts.get(val)||0)+1);
+    const exactCombinationFacet=isTvCombinationFacet(S.cat,key);
+    if(exactCombinationFacet){
+      allValues.forEach(val=>{
+        const candidate=selected.includes(val) ? selected : selected.concat(val);
+        const count=sourceItems.reduce((total,it)=>total+(tvCombinationMatches(it,key,candidate)?1:0),0);
+        counts.set(val,count);
       });
-    });
+    }else{
+      sourceItems.forEach(it=>{
+        facetValueParts(it.a && it.a[key], key).forEach(val=>{
+          counts.set(val, (counts.get(val)||0)+1);
+        });
+      });
+    }
 
     const enabledCount = allValues.reduce((acc, val)=>{
       const cnt = counts.get(val)||0;
@@ -1629,12 +1771,14 @@ function buildFacets(){
       const cnt = counts.get(v) || 0;
       const checked = selected.includes(v);
       const disabled = dynamic && !checked && cnt===0;
+      const compatible = exactCombinationFacet && selected.length>0 && !checked && cnt>0;
       const id='c'+Math.random().toString(36).slice(2);
       const lb=document.createElement('label');
-      lb.className='optl' + (disabled ? ' off' : '');
+      lb.className='optl' + (disabled ? ' off' : '') + (compatible ? ' compatible' : '');
       const isMainColor = S.cat==='Тумбы под телевизор' && facetNorm(key)==='основной цвет';
       if(isMainColor) lb.className += ' facet-color-opt';
       lb.setAttribute('for',id);
+      if(compatible) lb.title=`Можно добавить: ${formatFacetValue(S.cat,key,v)} — ${cnt} товаров`;
       lb.dataset.text = facetNorm(formatFacetValue(S.cat, key, v));
       const displayValue = formatFacetValue(S.cat, key, v);
       const colorDot = isMainColor
@@ -1666,6 +1810,13 @@ function buildFacets(){
     det.appendChild(body);
     box.appendChild(det);
     added++;
+    if(S.cat==='Тумбы под телевизор' && keyNorm==='материал'){
+      const tvLengthFacet=buildTvLengthRangeFacet();
+      if(tvLengthFacet){
+        box.appendChild(tvLengthFacet);
+        added++;
+      }
+    }
   });
 
   S.attrs = nextAttrs;
@@ -1828,9 +1979,9 @@ function tog(k){S[k]=!S[k];
   page=1;apply();}
 
 function resetAll(){
-  ['q','cat','fac','sort','pMin','pMax','wMin','wMax','hMin','hMax','dMin','dMax'].forEach(k=>S[k]='');
+  ['q','cat','fac','sort','pMin','pMax','wMin','wMax','hMin','hMax','dMin','dMax','tvLenMin','tvLenMax'].forEach(k=>S[k]='');
   S.op=false;S.od=false;S.os=false;S.oa=false;S.attrs={};S.facetSearch={};
-  ['hQ','sQ','catSel','facSel','sortSel','pMin','pMax','wMin','wMax','hMin','hMax','dMin','dMax'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  ['hQ','sQ','catSel','facSel','sortSel','pMin','pMax','wMin','wMax','hMin','hMax','dMin','dMax','tvLenMin','tvLenMax'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
   ['togPh','togDm','togSt','togAv'].forEach(id=>{const el=document.getElementById(id); if(el) el.classList.remove('on');});
   document.getElementById('attrBox').innerHTML='<div class="fhints">Выберите категорию — появятся дополнительные фильтры по параметрам товара</div>';
   updateFactoryOptions('');
@@ -6973,6 +7124,7 @@ function countActiveFilters(){
   if(S.wMin || S.wMax) n++;
   if(S.hMin || S.hMax) n++;
   if(S.dMin || S.dMax) n++;
+  if(S.tvLenMin || S.tvLenMax) n++;
   if(S.inStock) n++;
   if(S.attrs){
     for(const k in S.attrs){
