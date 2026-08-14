@@ -933,6 +933,8 @@ a.ssug-i,a.ssug-cat,a.ssug-prod,a.waOpt-link{text-decoration:none}
 .chpu-links summary::-webkit-details-marker{display:none}
 .chpu-links summary::before{content:'▸ ';color:var(--accent)}
 .chpu-links details[open] summary::before{content:'▾ '}
+.chpu-links-h1{font-size:14px;font-weight:600;color:var(--muted);margin:0 0 4px}
+.chpu-links-desc{margin:0 0 8px;color:var(--muted)}
 .chpu-links-filters{margin:10px 0 2px;color:var(--muted)}
 .chpu-links-filters a{color:var(--text);text-decoration:none;border-bottom:1px dotted var(--line)}
 .chpu-links .chpu-seo-list{margin-top:10px;columns:3}
