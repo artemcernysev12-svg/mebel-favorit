@@ -1,5 +1,25 @@
 User-agent: *
 Allow: /
 Disallow: /stock-data/
+# Служебные наложения интерфейса (поиск, корзина, админ, опции матраса, серия) —
+# это не страницы, в индексе не нужны. Шаблоны точные: ловим параметр и в начале
+# строки запроса (?q=) и в середине (&q=), не задевая похожие имена.
+# ВАЖНО: старые ?item= и ?cat= НЕ закрываем — через них поисковик видит переезд на ЧПУ.
+Disallow: /*?q=
+Disallow: /*&q=
+Disallow: /*?cart=
+Disallow: /*&cart=
+Disallow: /*?admin=
+Disallow: /*&admin=
+Disallow: /*?msize=
+Disallow: /*&msize=
+Disallow: /*?mfab=
+Disallow: /*&mfab=
+Disallow: /*?series=
+Disallow: /*&series=
+
+# Яндексу: служебные и рекламные метки не создают новых страниц — склеивать в один URL.
+Clean-param: q&cart&admin&msize&mfab&series /
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&gclid&ysclid&_openstat /
 
 Sitemap: https://мебель-фаворит.рф/sitemap.xml

@@ -1857,6 +1857,9 @@ function buildFacets(){
     }
     if(!S.attrs[k].length)delete S.attrs[k];
     page=1;apply();
+    // ЧПУ: если состояние совпало с известным SEO-фильтром — в адресе красивый /кат/фильтр/,
+    // иначе возвращаемся на /кат/ (replace, не push — щелчки галочек не должны засорять историю)
+    try{ if(!window.__ROUTING__ && typeof favWriteUrl==='function') favWriteUrl(null,false); }catch(_){}
   }));
 }
 
@@ -7529,6 +7532,33 @@ function chpuItemPath(it){
   return '/'+cs+'/'+nm+'-'+it.id+'/';
 }
 function chpuCatPath(cat){ var cs=chpuCatSlug(cat); return cs ? ('/'+cs+'/') : '/'; }
+// Применить SEO-фильтр (страница /кат/фильтр/): категория + один атрибут из CHPU_FILTERS.
+function chpuApplyFilter(fkey){
+  var f=window.CHPU_FILTERS && window.CHPU_FILTERS[fkey]; if(!f) return false;
+  try{
+    if(S.cat!==f.c && typeof setCat==='function') setCat(f.c); // сбросит attrs/facetSearch
+    S.attrs={}; S.attrs[f.k]=[f.v];
+    if(typeof buildFacets==='function') buildFacets(); // галочка фильтра подсветится из S.attrs
+    page=1; if(typeof apply==='function') apply();
+  }catch(_){ return false; }
+  return true;
+}
+// (Чипсы-подборки с видимой части категорий убраны по решению заказчика 13.08 —
+//  ссылки на страницы-фильтры живут в нижнем свёрнутом блоке для поисковика.)
+// Если текущее состояние — категория + РОВНО один атрибут с одним значением, совпадающий
+// с известным SEO-фильтром, вернуть его красивый путь /кат/фильтр/, иначе ''.
+function chpuFilterPathForState(){
+  try{
+    if(!S.cat || S.q) return '';
+    var keys=Object.keys(S.attrs||{});
+    if(keys.length!==1) return '';
+    var k=keys[0], vs=S.attrs[k];
+    if(!Array.isArray(vs)||vs.length!==1) return '';
+    var F=window.CHPU_FILTERS||{};
+    for(var p in F){ var f=F[p]; if(f.c===S.cat && f.k===k && String(f.v)===String(vs[0])) return '/'+p+'/'; }
+  }catch(_){ }
+  return '';
+}
 // Клик по карточке-ссылке: обычный левый клик — открыть модалку на месте;
 // Ctrl/Cmd/Shift/Alt (и средняя/правая кнопка — нативно) — открыть ЧПУ-URL в новой вкладке.
 function pcardNav(e, id){
@@ -7554,19 +7584,15 @@ function chpuNavCard(e, id){
 }
 // Фаза-2: статический SEO-блок (контент товара/категории в HTML для поисковиков).
 // Убираем его, как только приложение отрисовало свой интерфейс — чтобы не дублировался.
-// full=true — снести блок целиком (страница ТОВАРА: контент даёт открытая карточка).
-// full=false — страница КАТЕГОРИИ: оставляем крошки/H1/описание (полезно и людям, и Google,
-// который исполняет JS), убираем только список товаров — его дублирует живая сетка.
+// full=true — страница ТОВАРА: убираем и верхний блок, и нижний свёрнутый список
+// (контент даёт открытая карточка).
+// full=false — КАТЕГОРИЯ/ФИЛЬТР: верхний компакт-блок (крошки/H1/описание/чипсы) ОСТАВЛЯЕМ —
+// его видят люди и Google; убираем только нижний список #chpuSeoListBlock — его дублирует
+// живая сетка товаров.
 function chpuDropSeoBlock(full){
   try{
-    var b=document.getElementById('chpuSeoBlock'); if(!b) return;
-    var list=b.querySelector('.chpu-seo-list');
-    if(!full && list){
-      list.remove();
-      var more=b.querySelector('.chpu-seo-more'); if(more) more.remove();
-      return;
-    }
-    b.remove();
+    var lst=document.getElementById('chpuSeoListBlock'); if(lst) lst.remove();
+    if(full){ var b=document.getElementById('chpuSeoBlock'); if(b) b.remove(); }
   }catch(_){ }
 }
 // Путь товара по id (когда под рукой только id, а не объект): ищем в CATALOG.
@@ -7580,17 +7606,22 @@ function chpuParsePath(pathname){
   var last=segs[segs.length-1];
   var m=last.match(/-(\d{5,})$/);
   if(m) return { item:m[1], cat: chpuSlugToCat(segs[0]) };
+  // SEO-фильтр: /{кат}/{фильтр}/ — известные пары лежат в CHPU_FILTERS (chpu-routes.js)
+  if(segs.length>=2 && window.CHPU_FILTERS){
+    var fkey=segs[0]+'/'+segs[1];
+    if(window.CHPU_FILTERS[fkey]) return { cat: chpuSlugToCat(segs[0]), filter: fkey };
+  }
   return { cat: chpuSlugToCat(segs[0]) };
 }
 // Единая точка чтения адреса: ЧПУ-путь + query-наложения + старые ?cat=/?item= (легаси).
 function chpuParseLocation(){
-  var out={ q:'', series:'', cart:'', item:'', cat:'', msize:'', mfab:'', admin:'', legacy:false };
+  var out={ q:'', series:'', cart:'', item:'', cat:'', filter:'', msize:'', mfab:'', admin:'', legacy:false };
   var sp; try{ sp=new URLSearchParams(location.search); }catch(_){ sp=new URLSearchParams(); }
   out.q=(sp.get('q')||'').trim(); out.series=sp.get('series')||''; out.cart=sp.get('cart')||'';
   out.msize=sp.get('msize')||''; out.mfab=sp.get('mfab')||''; out.admin=sp.get('admin')||'';
   var p=chpuParsePath(location.pathname);
   if(p.item){ out.item=p.item; out.cat=p.cat||''; }
-  else if(p.cat){ out.cat=p.cat; }
+  else if(p.cat){ out.cat=p.cat; out.filter=p.filter||''; }
   // старые ссылки ?item=/?cat= (реклама, выдача, ранее расшаренное) — редиректим на ЧПУ
   var legItem=sp.get('item'), legCat=sp.get('cat');
   if(legItem){ out.item=legItem; out.legacy=true; }
@@ -7609,7 +7640,7 @@ function favWriteUrl(overlay, push){
     ['cat','item','q','series','cart','msize','mfab'].forEach(function(k){ qs.delete(k); });
     var curItem=(overlay && overlay.item) ? (window.CATALOG||[]).find(function(x){return String(x.id)===String(overlay.item);}) : null;
     if(curItem){ path=chpuItemPath(curItem); }
-    else if(ctx.cat){ path=chpuCatPath(ctx.cat); }
+    else if(ctx.cat){ path=chpuFilterPathForState() || chpuCatPath(ctx.cat); }
     if(ctx.q) qs.set('q', ctx.q);
     if(ctx.series) qs.set('series', ctx.series);
     if(overlay){
@@ -7643,7 +7674,15 @@ function favApplyUrl(){
       if(!(S.attrs && S.attrs['Серия'] && S.attrs['Серия'][0]===series)) selectMattressSeries(series);
     } else if(cat){
       if(S.q){ /* был поиск — снимем */ if(typeof smartQ==='function') smartQ(''); }
-      if(S.cat!==cat){ var sel=document.getElementById('catSel'); if(sel){ var opt=Array.from(sel.options).find(function(o){return o.value===cat;}); if(opt && typeof setCat==='function') setCat(cat); } }
+      if(L.filter){
+        // адрес SEO-фильтра (/кат/фильтр/) — применяем категорию + атрибут
+        chpuApplyFilter(L.filter);
+      } else if(S.cat!==cat){
+        var sel=document.getElementById('catSel'); if(sel){ var opt=Array.from(sel.options).find(function(o){return o.value===cat;}); if(opt && typeof setCat==='function') setCat(cat); }
+      } else if(S.attrs && Object.keys(S.attrs).length){
+        // вернулись с фильтра на чистую категорию — снимаем атрибуты
+        S.attrs={}; if(typeof buildFacets==='function') buildFacets(); page=1; if(typeof apply==='function') apply();
+      }
     } else {
       // нет контекста — сбрасываем к «всем товарам»
       if(S.q && typeof smartQ==='function') smartQ('');
@@ -8156,7 +8195,11 @@ document.addEventListener('DOMContentLoaded',()=>{
           const opt = Array.from(catSel.options).find(o=>o.value === catParam);
           if(opt){
             // ЧПУ: при инициализации адрес уже правильный (из пути) — не даём setCat переписать его
-            window.__ROUTING__=true; try{ setCat(catParam); } finally { window.__ROUTING__=false; }
+            window.__ROUTING__=true;
+            try{
+              // страница SEO-фильтра (/кат/фильтр/): категория + атрибут; иначе просто категория
+              if(L.filter){ chpuApplyFilter(L.filter); } else { setCat(catParam); }
+            } finally { window.__ROUTING__=false; }
             // Прокручиваем к каталогу
             setTimeout(()=>{
               const a = document.getElementById('catAnchor');

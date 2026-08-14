@@ -2,6 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url><loc>https://мебель-фаворит.рф/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://мебель-фаворит.рф/divany/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://мебель-фаворит.рф/divany/uglovye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/divany/pryamye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/divany/p-obraznye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/divany/modulnye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/divany/serye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/divany/bezhevye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/divany/sinie/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/divany/zelenye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-barselona-raskladnoy-8123795103/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Barselona/8123795103/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-boston-3-raskladnoy-8123590005/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Boston/Boston%203/8123590005/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-boston-2-raskladnoy-8123387227/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Boston/Boston%202/8123387227/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -177,6 +185,8 @@
   <url><loc>https://мебель-фаворит.рф/podvesnye-kresla/kreslo-podvesnoe-rotang-dvuhmestnoe-8154969535/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Podvesnye%20kresla/Gizmarket/Rotang%202%20mestnoe/8154969535/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/podvesnye-kresla/kreslo-podvesnoe-rotang-kaplya-odnomestnoe-8155442819/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Podvesnye%20kresla/Gizmarket/Rotang%20Kaplya%201%20mestnoe/8155442819/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/tv-tumby/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://мебель-фаворит.рф/tv-tumby/belye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/tv-tumby/serye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://мебель-фаворит.рф/tv-tumby/tumba-tv-briz-7707195530/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Veles/Briz/7707195530/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/tv-tumby/tumba-tv-briz-7707258560/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Veles/Briz/7707258560/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/tv-tumby/tumba-tv-byanko-7995205963/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Veles/Byanko/7995205963/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -318,6 +328,9 @@
   <url><loc>https://мебель-фаворит.рф/tv-tumby/tumba-tv-tv2-7259258519/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Era/TV2/7259258519/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/tv-tumby/tumba-tv-tv2-7259731391/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Era/TV2/7259731391/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/krovati/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://мебель-фаворит.рф/krovati/bezhevye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/krovati/belye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/krovati/serye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://мебель-фаворит.рф/krovati/krovat-polutornaya-briz-120x200-7995588099/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Briz/120x200/7995588099/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-briz-140x200-7995332718/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Briz/140x200/7995332718/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-briz-160x200-7995747354/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Briz/160x200/7995747354/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -572,6 +585,8 @@
   <url><loc>https://мебель-фаворит.рф/matrasy/matras-kids-kokos-strutto-8091795828/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Matrasy/Korona/Kids/Kokos-Strutto/8091795828/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/matrasy/matras-kids-strutto-8091615870/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Matrasy/Korona/Kids/Strutto/8091615870/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/spalnye-garnitury/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://мебель-фаворит.рф/spalnye-garnitury/bezhevye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/spalnye-garnitury/belye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-briz-modulnaya-veles-7706988052/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Briz/Vzroslaya/7706988052/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-briz-modulnaya-veles-7707880368/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Briz/Vzroslaya/7707880368/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-briz-modulnaya-veles-7707952462/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Briz/Vzroslaya/7707952462/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -674,6 +689,16 @@
   <url><loc>https://мебель-фаворит.рф/prikrovatnye-tumby/tumba-prikrovatnaya-eko-7675198320/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Era/Eko/7675198320/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/prikrovatnye-tumby/tumba-prikrovatnaya-eko-7674968255/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Era/Eko/7674968255/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/shkafy/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://мебель-фаворит.рф/shkafy/shkafy-kupe/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/shkafy/raspashnye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/shkafy/uglovye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/shkafy/odnostvorchatye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/shkafy/dvuhstvorchatye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/shkafy/tryohstvorchatye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/shkafy/chetyryohstvorchatye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/shkafy/belye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/shkafy/bezhevye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/shkafy/serye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-vena-4572020486/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/1+1/Vena/Stvorchatye/3-kh%20stvorchatyy/4572020486/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/shkafy/penal-alte-7994958144/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Alte/Stvorchatye/Penal/7994958144/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/shkafy/penal-alte-7994948108/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Alte/Stvorchatye/Penal/7994948108/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -1413,6 +1438,9 @@
   <url><loc>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-duet-8027817989/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Duet/Stvorchatye/2-kh%20stvorchatyy/8027817989/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-duet-8027775465/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Duet/Stvorchatye/2-kh%20stvorchatyy/8027775465/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/komody/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://мебель-фаворит.рф/komody/belye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/komody/bezhevye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/komody/serye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://мебель-фаворит.рф/komody/komod-briz-4-yaschika-7995661085/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Briz/4%20yaschika/7995661085/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/komody/komod-briz-3-dveri-7995777537/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Briz/3%20dveri/7995777537/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/komody/komod-byanko-4-yaschika-7995324730/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Byanko/4%20yaschika/7995324730/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -1619,6 +1647,10 @@
   <url><loc>https://мебель-фаворит.рф/tumby-obuvnicy/tumba-obuvnica-vysokaya-nika-7930984318/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby/Era/Nika/7930984318/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/tumby-obuvnicy/tumba-obuvnica-vysokaya-nika-7931093706/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby/Era/Nika/7931093706/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/prihozhie/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://мебель-фаворит.рф/prihozhie/bezhevye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/prihozhie/belye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/prihozhie/serye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/prihozhie/korichnevye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://мебель-фаворит.рф/prihozhie/prihozhaya-alte-7995195235/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Veles/Alte/7995195235/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/prihozhie/modulnaya-prihozhaya-alte-veles-7738970450/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Veles/Alte/7738970450/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/prihozhie/modulnaya-prihozhaya-alte-veles-7739696181/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Veles/Alte/7739696181/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -1827,6 +1859,10 @@
   <url><loc>https://мебель-фаворит.рф/stellazhi/terminal-nord-8155870320/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stellazhi%20i%20etazherki/Mif/Nord/Terminal/8155870320/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/stellazhi/terminal-nord-8155368819/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stellazhi%20i%20etazherki/Mif/Nord/Terminal/8155368819/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/polki/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://мебель-фаворит.рф/polki/bezhevye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/polki/belye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/polki/serye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/polki/korichnevye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://мебель-фаворит.рф/polki/polka-nastennaya-briz-7995596874/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Polki/Veles/Briz/7995596874/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/polki/polka-nastennaya-n1-vita-7994970317/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Polki/Veles/Vita/7994970317/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/polki/polka-nastennaya-n1-vita-7995671932/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Polki/Veles/Vita/7995671932/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -1918,6 +1954,9 @@
   <url><loc>https://мебель-фаворит.рф/polki/antresol-k-terminalu-nord-8154890847/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Polki/Mif/Nord/Antresol%20k%20terminalu/8154890847/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/polki/antresol-k-terminalu-nord-8155781042/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Polki/Mif/Nord/Antresol%20k%20terminalu/8155781042/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/kuhni/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://мебель-фаворит.рф/kuhni/serye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/kuhni/korichnevye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/kuhni/belye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://мебель-фаворит.рф/kuhni/kuhnya-modulnaya-era-7963746732/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhni/Era/Era/7963746732/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/kuhni/kuhnya-era-1-5-m-7963416916/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhni/Era/Era/1.5m/7963416916/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/kuhni/kuhnya-era-1-6-m-7963458947/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhni/Era/Era/1.6m/7963458947/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -2006,6 +2045,7 @@
   <url><loc>https://мебель-фаворит.рф/kuhni/kuhnya-modulnaya-bronks-4411819262/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhni/LEKO/Bronks/4411819262/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/kuhni/kuhnya-modulnaya-na-zakaz-4411815755/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhni/LEKO/Na%20zakaz/4411815755/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/kuhonnye-moduli/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://мебель-фаворит.рф/kuhonnye-moduli/uglovye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://мебель-фаворит.рф/kuhonnye-moduli/brauni-v300-shkaf-verhniy-7931807851/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhonnye%20moduli/Era/Brauni/7931807851/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/kuhonnye-moduli/brauni-v400-shkaf-verhniy-7931166130/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhonnye%20moduli/Era/Brauni/7931166130/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/kuhonnye-moduli/brauni-v500-shkaf-verhniy-7931800690/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhonnye%20moduli/Era/Brauni/7931800690/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -2155,6 +2195,10 @@
   <url><loc>https://мебель-фаворит.рф/stoly/grimernyy-stol-eko-7931444684/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stoly/Era/Eko/7931444684/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/stoly/grimernyy-stol-eko-7931025043/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stoly/Era/Eko/7931025043/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/kompyuternye-stoly/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://мебель-фаворит.рф/kompyuternye-stoly/uglovye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/kompyuternye-stoly/belye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/kompyuternye-stoly/bezhevye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/kompyuternye-stoly/korichnevye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://мебель-фаворит.рф/kompyuternye-stoly/pismennyy-stol-briz-7995432083/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Briz/7995432083/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/kompyuternye-stoly/pismennyy-stol-briz-levyy-7994944920/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Briz/7994944920/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/kompyuternye-stoly/pismennyy-stol-briz-pravyy-7995280220/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Briz/7995280220/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -2315,6 +2359,10 @@
   <url><loc>https://мебель-фаворит.рф/podstavki/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://мебель-фаворит.рф/podstavki/opora-dlya-konsoli-tefiya-8026932287/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Podstavki/Veles/Tefiya/8026932287/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/garnitury/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://мебель-фаворит.рф/garnitury/belye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/garnitury/serye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/garnitury/bezhevye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://мебель-фаворит.рф/garnitury/chernye/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://мебель-фаворит.рф/garnitury/gostinaya-vita-modulnaya-veles-7739491351/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Veles/Vita/7739491351/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/garnitury/gostinaya-vita-modulnaya-veles-7739799302/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Veles/Vita/7739799302/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://мебель-фаворит.рф/garnitury/gostinaya-vita-modulnaya-veles-7739442241/</loc><image:image><image:loc>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Veles/Vita/7739442241/01.webp</image:loc></image:image><changefreq>weekly</changefreq><priority>0.7</priority></url>

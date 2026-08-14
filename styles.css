@@ -923,6 +923,25 @@ a.ssug-i,a.ssug-cat,a.ssug-prod,a.waOpt-link{text-decoration:none}
 .chpu-seo-tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
 .chpu-seo-tbl td{padding:5px 8px;border-bottom:1px solid var(--line)}
 .chpu-seo-tbl td:first-child{color:var(--muted);width:45%}
+/* Вариант «строка» для категорий/фильтров: без коробки, компактно (по замечанию заказчика 13.08) */
+.chpu-seo--bar{background:transparent;border:none;border-radius:0;padding:10px 16px 0;margin:6px auto 0}
+.chpu-seo--bar .chpu-seo-h1{font-size:22px;margin:2px 0 6px}
+.chpu-seo--bar .chpu-seo-p{margin:2px 0 4px;max-width:900px}
+/* Нижний свёрнутый список для поисковика — одна тихая строка перед подвалом */
+.chpu-links{max-width:1200px;margin:26px auto 10px;padding:0 16px;font-size:12.5px;color:var(--muted)}
+.chpu-links summary{cursor:pointer;padding:8px 10px;border:1px dashed var(--line);border-radius:10px;list-style:none;user-select:none}
+.chpu-links summary::-webkit-details-marker{display:none}
+.chpu-links summary::before{content:'▸ ';color:var(--accent)}
+.chpu-links details[open] summary::before{content:'▾ '}
+.chpu-links-filters{margin:10px 0 2px;color:var(--muted)}
+.chpu-links-filters a{color:var(--text);text-decoration:none;border-bottom:1px dotted var(--line)}
+.chpu-links .chpu-seo-list{margin-top:10px;columns:3}
+@media(max-width:900px){.chpu-links .chpu-seo-list{columns:2}}
+@media(max-width:600px){.chpu-links .chpu-seo-list{columns:1}}
+.chpu-seo-chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chpu-seo-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--line);border-radius:16px;font-size:12.5px;color:var(--text);text-decoration:none;background:rgba(255,255,255,.04)}
+.chpu-seo-chip b{color:var(--accent);font-weight:700}
+.chpu-seo-chip:hover{border-color:rgba(255,213,79,.4)}
 .chpu-seo-list{margin:8px 0 0;padding-left:18px;font-size:13px;line-height:1.7;columns:2}
 .chpu-seo-list a{color:var(--text)}
 @media(max-width:700px){.chpu-seo-list{columns:1}}
