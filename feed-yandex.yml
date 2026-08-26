@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-08-26 18:47">
+<yml_catalog date="2026-08-26 19:06">
   <shop>
     <name>Мебель Фаворит</name>
     <company>Мебель Фаворит</company>
@@ -1488,8 +1488,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Sidney/Sidney%202/8123485462/07.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Sidney/Sidney%202/8123485462/08.webp</picture>
       <vendor>Амик</vendor>
-      <name>Диван прямой модульный Сидней-2 раскладной</name>
-      <description>Диван прямой модульный Сидней-2 раскладной. Фабрика Амик. Размер 380х110х95 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Диван прямой модульный Сидней 2 раскладной</name>
+      <description>Диван прямой модульный Сидней 2 раскладной. Фабрика Амик. Размер 380х110х95 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">380 см</param>
       <param name="Глубина">110 см</param>
       <param name="Высота">95 см</param>
@@ -1514,8 +1514,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Sidney/Sidney%201/8123760357/08.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Sidney/Sidney%201/8123760357/09.webp</picture>
       <vendor>Амик</vendor>
-      <name>Диван прямой модульный Сидней-1 раскладной</name>
-      <description>Диван прямой модульный Сидней-1 раскладной. Фабрика Амик. Размер 300х110х95 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Диван прямой модульный Сидней 1 раскладной</name>
+      <description>Диван прямой модульный Сидней 1 раскладной. Фабрика Амик. Размер 300х110х95 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">300 см</param>
       <param name="Глубина">110 см</param>
       <param name="Высота">95 см</param>
@@ -3520,7 +3520,7 @@
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="4187648036" available="true">
-      <url>https://мебель-фаворит.рф/divany/divan-pryamoy-medison-raskladnoy-4187648036/</url>
+      <url>https://мебель-фаворит.рф/divany/divan-pryamoy-medison-md-raskladnoy-4187648036/</url>
       <price>26975</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
@@ -3532,8 +3532,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Medison%20MD/4187648036/06.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Medison%20MD/4187648036/07.webp</picture>
       <vendor>Амик</vendor>
-      <name>Диван прямой Мэдисон раскладной</name>
-      <description>Диван прямой Мэдисон раскладной. Фабрика Амик. Размер 130х105х75 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Диван прямой Мэдисон МД раскладной</name>
+      <description>Диван прямой Мэдисон МД раскладной. Фабрика Амик. Размер 130х105х75 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">130 см</param>
       <param name="Глубина">105 см</param>
       <param name="Высота">75 см</param>
@@ -7404,7 +7404,7 @@
       <param name="Цвет">Золотой</param>
     </offer>
     <offer id="8059476208" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-odnospalnaya-lyuchiya-90x200-8059476208/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-universalnaya-lyuchiya-90x200-8059476208/</url>
       <price>15200</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -7412,8 +7412,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mikon/Lyuchiya/90x200/8059476208/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09452-00037542</vendorCode>
-      <name>Кровать односпальная Лючия 90×200</name>
-      <description>Кровать односпальная Лючия 90×200. Фабрика Микон. Размер 93х75 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать универсальная Лючия 90×200</name>
+      <description>Кровать универсальная Лючия 90×200. Фабрика Микон. Размер 93х75 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">93 см</param>
       <param name="Высота">75 см</param>
       <param name="Цвет">Белый</param>
@@ -7447,7 +7447,7 @@
       <param name="Цвет">Золотой</param>
     </offer>
     <offer id="8059417981" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-odnospalnaya-lyuchiya-90x200-8059417981/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-universalnaya-lyuchiya-90x200-8059417981/</url>
       <price>15200</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -7457,8 +7457,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mikon/Lyuchiya/90x200/8059417981/04.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09452-00035066</vendorCode>
-      <name>Кровать односпальная Лючия 90×200</name>
-      <description>Кровать односпальная Лючия 90×200. Фабрика Микон. Размер 93х75 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать универсальная Лючия 90×200</name>
+      <description>Кровать универсальная Лючия 90×200. Фабрика Микон. Размер 93х75 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">93 см</param>
       <param name="Высота">75 см</param>
       <param name="Цвет">Золотой</param>
@@ -8033,8 +8033,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/160x200/7355280988/09.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/160x200/7355280988/10.webp</picture>
       <vendor>Миф</vendor>
-      <name>Кровать двуспальная Фиеста new 160×200</name>
-      <description>Кровать двуспальная Фиеста new 160×200. Фабрика Миф. Размер 164х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Фиеста NEW 160×200</name>
+      <description>Кровать двуспальная Фиеста NEW 160×200. Фабрика Миф. Размер 164х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">164 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Серый</param>
@@ -8055,8 +8055,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/160x200/7355400574/09.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/160x200/7355400574/10.webp</picture>
       <vendor>Миф</vendor>
-      <name>Кровать двуспальная Фиеста new 160×200</name>
-      <description>Кровать двуспальная Фиеста new 160×200. Фабрика Миф. Размер 164х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Фиеста NEW 160×200</name>
+      <description>Кровать двуспальная Фиеста NEW 160×200. Фабрика Миф. Размер 164х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">164 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Серый</param>
@@ -8070,8 +8070,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/140x200/7355837862/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/140x200/7355837862/03.webp</picture>
       <vendor>Миф</vendor>
-      <name>Кровать двуспальная Фиеста new 140×200</name>
-      <description>Кровать двуспальная Фиеста new 140×200. Фабрика Миф. Размер 144х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Фиеста NEW 140×200</name>
+      <description>Кровать двуспальная Фиеста NEW 140×200. Фабрика Миф. Размер 144х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">144 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Серый</param>
@@ -8084,8 +8084,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/120x200/7931696162/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/120x200/7931696162/02.webp</picture>
       <vendor>Миф</vendor>
-      <name>Кровать полуторная Фиеста new 120×200</name>
-      <description>Кровать полуторная Фиеста new 120×200. Фабрика Миф. Размер 123х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать полуторная Фиеста NEW 120×200</name>
+      <description>Кровать полуторная Фиеста NEW 120×200. Фабрика Миф. Размер 123х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">123 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Серый</param>
@@ -8099,8 +8099,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/140x200/7931534569/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/140x200/7931534569/03.webp</picture>
       <vendor>Миф</vendor>
-      <name>Кровать двуспальная Фиеста new 140×200</name>
-      <description>Кровать двуспальная Фиеста new 140×200. Фабрика Миф. Размер 144х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Фиеста NEW 140×200</name>
+      <description>Кровать двуспальная Фиеста NEW 140×200. Фабрика Миф. Размер 144х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">144 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Серый</param>
@@ -8114,8 +8114,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/160x200/7931270924/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/160x200/7931270924/03.webp</picture>
       <vendor>Миф</vendor>
-      <name>Кровать двуспальная Фиеста new 160×200</name>
-      <description>Кровать двуспальная Фиеста new 160×200. Фабрика Миф. Размер 164х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Фиеста NEW 160×200</name>
+      <description>Кровать двуспальная Фиеста NEW 160×200. Фабрика Миф. Размер 164х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">164 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Серый</param>
@@ -8130,8 +8130,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/160x200/7931575949/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/160x200/7931575949/04.webp</picture>
       <vendor>Миф</vendor>
-      <name>Кровать двуспальная Фиеста new 160×200</name>
-      <description>Кровать двуспальная Фиеста new 160×200. Фабрика Миф. Размер 164х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Фиеста NEW 160×200</name>
+      <description>Кровать двуспальная Фиеста NEW 160×200. Фабрика Миф. Размер 164х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">164 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Бежевый</param>
@@ -8145,8 +8145,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/160x200/7931302652/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/160x200/7931302652/03.webp</picture>
       <vendor>Миф</vendor>
-      <name>Кровать двуспальная Фиеста new 160×200</name>
-      <description>Кровать двуспальная Фиеста new 160×200. Фабрика Миф. Размер 164х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Фиеста NEW 160×200</name>
+      <description>Кровать двуспальная Фиеста NEW 160×200. Фабрика Миф. Размер 164х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">164 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Бежевый</param>
@@ -8160,8 +8160,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/140x200/7931364547/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/140x200/7931364547/03.webp</picture>
       <vendor>Миф</vendor>
-      <name>Кровать двуспальная Фиеста new 140×200</name>
-      <description>Кровать двуспальная Фиеста new 140×200. Фабрика Миф. Размер 144х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Фиеста NEW 140×200</name>
+      <description>Кровать двуспальная Фиеста NEW 140×200. Фабрика Миф. Размер 144х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">144 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Бежевый</param>
@@ -8175,8 +8175,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/160x200/7930948762/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/160x200/7930948762/03.webp</picture>
       <vendor>Миф</vendor>
-      <name>Кровать двуспальная Фиеста new 160×200</name>
-      <description>Кровать двуспальная Фиеста new 160×200. Фабрика Миф. Размер 164х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Фиеста NEW 160×200</name>
+      <description>Кровать двуспальная Фиеста NEW 160×200. Фабрика Миф. Размер 164х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">164 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Бежевый</param>
@@ -8190,8 +8190,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/140x200/7930951354/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/140x200/7930951354/03.webp</picture>
       <vendor>Миф</vendor>
-      <name>Кровать двуспальная Фиеста new 140×200</name>
-      <description>Кровать двуспальная Фиеста new 140×200. Фабрика Миф. Размер 144х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Фиеста NEW 140×200</name>
+      <description>Кровать двуспальная Фиеста NEW 140×200. Фабрика Миф. Размер 144х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">144 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Бежевый</param>
@@ -8204,8 +8204,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/120x200/7931322262/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Mif/Fiesta%20NEW/120x200/7931322262/02.webp</picture>
       <vendor>Миф</vendor>
-      <name>Кровать полуторная Фиеста new 120×200</name>
-      <description>Кровать полуторная Фиеста new 120×200. Фабрика Миф. Размер 123х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать полуторная Фиеста NEW 120×200</name>
+      <description>Кровать полуторная Фиеста NEW 120×200. Фабрика Миф. Размер 123х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">123 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Бежевый</param>
@@ -9501,7 +9501,7 @@
       <param name="Цвет">Белый</param>
     </offer>
     <offer id="8123696438" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-160h200-adel-8123696438/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-adel-160x200-8123696438/</url>
       <price>33598</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9510,14 +9510,14 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Adel/160x200/8123696438/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Adel/160x200/8123696438/04.webp</picture>
       <vendor>Гизмаркет</vendor>
-      <name>Кровать двуспальная 160х200 Адель</name>
-      <description>Кровать двуспальная 160х200 Адель. Фабрика Гизмаркет. Размер 193х110 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Адель 160×200</name>
+      <description>Кровать двуспальная Адель 160×200. Фабрика Гизмаркет. Размер 193х110 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">193 см</param>
       <param name="Высота">110 см</param>
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="8123776341" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-160h200-afina-8123776341/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-afina-160x200-8123776341/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9525,14 +9525,14 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Afina/160x200/8123776341/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Afina/160x200/8123776341/03.webp</picture>
       <vendor>Гизмаркет</vendor>
-      <name>Кровать двуспальная 160х200 Афина</name>
-      <description>Кровать двуспальная 160х200 Афина. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Афина 160×200</name>
+      <description>Кровать двуспальная Афина 160×200. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">173 см</param>
       <param name="Высота">100 см</param>
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="8123004260" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-160h200-meleta-8123004260/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-meleta-160x200-8123004260/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9541,14 +9541,14 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Meleta/Meleta/160x200/8123004260/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Meleta/Meleta/160x200/8123004260/04.webp</picture>
       <vendor>Гизмаркет</vendor>
-      <name>Кровать двуспальная 160х200 Мелета</name>
-      <description>Кровать двуспальная 160х200 Мелета. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Мелета 160×200</name>
+      <description>Кровать двуспальная Мелета 160×200. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">173 см</param>
       <param name="Высота">100 см</param>
       <param name="Цвет">Синий</param>
     </offer>
     <offer id="8123315520" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-160h200-meleta-2-8123315520/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-meleta-2-160x200-8123315520/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9557,14 +9557,14 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Meleta/Meleta%202/160x200/8123315520/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Meleta/Meleta%202/160x200/8123315520/04.webp</picture>
       <vendor>Гизмаркет</vendor>
-      <name>Кровать двуспальная 160х200 Мелета 2</name>
-      <description>Кровать двуспальная 160х200 Мелета 2. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Мелета 2 160×200</name>
+      <description>Кровать двуспальная Мелета 2 160×200. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">173 см</param>
       <param name="Высота">100 см</param>
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8123876872" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-160h200-neta-8123876872/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-neta-160x200-8123876872/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9573,14 +9573,14 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Neta/Neta/160x200/8123876872/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Neta/Neta/160x200/8123876872/04.webp</picture>
       <vendor>Гизмаркет</vendor>
-      <name>Кровать двуспальная 160х200 Нэта</name>
-      <description>Кровать двуспальная 160х200 Нэта. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Нэта 160×200</name>
+      <description>Кровать двуспальная Нэта 160×200. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">173 см</param>
       <param name="Высота">100 см</param>
       <param name="Цвет">Зелёный</param>
     </offer>
     <offer id="8123104211" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-polutoraspalnaya-120h200-neta-2-8123104211/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-polutornaya-neta-2-120x200-8123104211/</url>
       <price>28843</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9589,14 +9589,14 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Neta/Neta%202/120x200/8123104211/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Neta/Neta%202/120x200/8123104211/04.webp</picture>
       <vendor>Гизмаркет</vendor>
-      <name>Кровать Полутораспальная 120х200 Нэта 2</name>
-      <description>Кровать Полутораспальная 120х200 Нэта 2. Фабрика Гизмаркет. Размер 133х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать полуторная Нэта 2 120×200</name>
+      <description>Кровать полуторная Нэта 2 120×200. Фабрика Гизмаркет. Размер 133х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">133 см</param>
       <param name="Высота">100 см</param>
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="8123833560" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-160h200-neta-2-8123833560/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-neta-2-160x200-8123833560/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9605,14 +9605,14 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Neta/Neta%202/160x200/8123833560/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Neta/Neta%202/160x200/8123833560/04.webp</picture>
       <vendor>Гизмаркет</vendor>
-      <name>Кровать двуспальная 160х200 Нэта 2</name>
-      <description>Кровать двуспальная 160х200 Нэта 2. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Нэта 2 160×200</name>
+      <description>Кровать двуспальная Нэта 2 160×200. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">173 см</param>
       <param name="Высота">100 см</param>
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="8122999042" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-160h200-reya-8122999042/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-reya-160x200-8122999042/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9621,14 +9621,14 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Reya/160x200/8122999042/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Reya/160x200/8122999042/04.webp</picture>
       <vendor>Гизмаркет</vendor>
-      <name>Кровать двуспальная 160х200 Рея</name>
-      <description>Кровать двуспальная 160х200 Рея. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Рэя 160×200</name>
+      <description>Кровать двуспальная Рэя 160×200. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">173 см</param>
       <param name="Высота">100 см</param>
       <param name="Цвет">Синий</param>
     </offer>
     <offer id="8123579983" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-160h200-sara-8123579983/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-sara-160x200-8123579983/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9637,14 +9637,14 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Sara/160x200/8123579983/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Sara/160x200/8123579983/04.webp</picture>
       <vendor>Гизмаркет</vendor>
-      <name>Кровать двуспальная 160х200 Сара</name>
-      <description>Кровать двуспальная 160х200 Сара. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать двуспальная Сара 160×200</name>
+      <description>Кровать двуспальная Сара 160×200. Фабрика Гизмаркет. Размер 173х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">173 см</param>
       <param name="Высота">100 см</param>
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8123161536" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-polutoraspalnaya-120h200-sara-8123161536/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-polutornaya-sara-120x200-8123161536/</url>
       <price>24247</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9653,14 +9653,14 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Sara/120x200/8123161536/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Sara/120x200/8123161536/04.webp</picture>
       <vendor>Гизмаркет</vendor>
-      <name>Кровать Полутораспальная 120х200 Сара</name>
-      <description>Кровать Полутораспальная 120х200 Сара. Фабрика Гизмаркет. Размер 133х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать полуторная Сара 120×200</name>
+      <description>Кровать полуторная Сара 120×200. Фабрика Гизмаркет. Размер 133х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">133 см</param>
       <param name="Высота">100 см</param>
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8123512767" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-odnospalnaya-90h200-teddi-8123512767/</url>
+      <url>https://мебель-фаворит.рф/krovati/detskaya-krovat-odnospalnaya-teddi-90x200-8123512767/</url>
       <price>24247</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9671,14 +9671,14 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Teddi/Teddi/90x200/8123512767/05.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Teddi/Teddi/90x200/8123512767/06.webp</picture>
       <vendor>Гизмаркет</vendor>
-      <name>Кровать односпальная 90х200 Тедди</name>
-      <description>Кровать односпальная 90х200 Тедди. Фабрика Гизмаркет. Размер 100х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская кровать односпальная Тедди 90×200</name>
+      <description>Детская кровать односпальная Тедди 90×200. Фабрика Гизмаркет. Размер 100х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">100 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Голубой</param>
     </offer>
     <offer id="8123125658" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-odnospalnaya-90h200-teddi-p-8123125658/</url>
+      <url>https://мебель-фаворит.рф/krovati/detskaya-krovat-odnospalnaya-teddi-p-90x200-8123125658/</url>
       <price>26625</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9686,8 +9686,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Teddi/Teddi%20P/90x200/8123125658/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Gizmarket/Teddi/Teddi%20P/90x200/8123125658/03.webp</picture>
       <vendor>Гизмаркет</vendor>
-      <name>Кровать односпальная 90х200 Тедди П</name>
-      <description>Кровать односпальная 90х200 Тедди П. Фабрика Гизмаркет. Размер 100х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская кровать односпальная Тедди-П 90×200</name>
+      <description>Детская кровать односпальная Тедди-П 90×200. Фабрика Гизмаркет. Размер 100х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">100 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Розовый</param>
@@ -10934,8 +10934,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Briz/Molodezhnaya/7707275344/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Briz/Molodezhnaya/7707275344/05.webp</picture>
       <vendor>Велес</vendor>
-      <name>Молодёжная Спальня Бриз модульная (Велес)</name>
-      <description>Молодёжная Спальня Бриз модульная (Велес). Фабрика Велес. Размер 105х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Молодёжная спальня Бриз модульная (Велес)</name>
+      <description>Молодёжная спальня Бриз модульная (Велес). Фабрика Велес. Размер 105х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">105 см</param>
       <param name="Высота">102 см</param>
       <param name="Материал">ЛДСП</param>
@@ -10952,8 +10952,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Briz/Detskaya/7707189741/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Briz/Detskaya/7707189741/05.webp</picture>
       <vendor>Велес</vendor>
-      <name>Детская Спальня Бриз модульная (Велес)</name>
-      <description>Детская Спальня Бриз модульная (Велес). Фабрика Велес. Размер 83х72 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская спальня Бриз модульная (Велес)</name>
+      <description>Детская спальня Бриз модульная (Велес). Фабрика Велес. Размер 83х72 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">83 см</param>
       <param name="Высота">72 см</param>
       <param name="Материал">ЛДСП</param>
@@ -11009,8 +11009,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Byanko/Molodezhnaya/7995761278/05.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Byanko/Molodezhnaya/7995761278/06.webp</picture>
       <vendor>Велес</vendor>
-      <name>Молодёжная Спальня Бьянко модульная (Велес)</name>
-      <description>Молодёжная Спальня Бьянко модульная (Велес). Фабрика Велес. Размер 93х90 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Молодёжная спальня Бьянко модульная (Велес)</name>
+      <description>Молодёжная спальня Бьянко модульная (Велес). Фабрика Велес. Размер 93х90 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">93 см</param>
       <param name="Высота">90 см</param>
       <param name="Материал">ЛДСП</param>
@@ -11028,8 +11028,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Byanko/Detskaya/7995198706/05.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Byanko/Detskaya/7995198706/06.webp</picture>
       <vendor>Велес</vendor>
-      <name>Детская Спальня Бьянко модульная (Велес)</name>
-      <description>Детская Спальня Бьянко модульная (Велес). Фабрика Велес. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская спальня Бьянко модульная (Велес)</name>
+      <description>Детская спальня Бьянко модульная (Велес). Фабрика Велес. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Материал">ЛДСП</param>
       <param name="Цвет">Белый</param>
     </offer>
@@ -11158,8 +11158,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Vita/Detskaya/7995022265/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Vita/Detskaya/7995022265/05.webp</picture>
       <vendor>Велес</vendor>
-      <name>Детская Спальня Вита модульная (Велес)</name>
-      <description>Детская Спальня Вита модульная (Велес). Фабрика Велес. Размер 83х70 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская спальня Вита модульная (Велес)</name>
+      <description>Детская спальня Вита модульная (Велес). Фабрика Велес. Размер 83х70 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">83 см</param>
       <param name="Высота">70 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
@@ -11176,8 +11176,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Vita/Molodezhnaya/7995881212/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Vita/Molodezhnaya/7995881212/05.webp</picture>
       <vendor>Велес</vendor>
-      <name>Молодёжная Спальня Вита модульная (Велес)</name>
-      <description>Молодёжная Спальня Вита модульная (Велес). Фабрика Велес. Размер 94х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Молодёжная спальня Вита модульная (Велес)</name>
+      <description>Молодёжная спальня Вита модульная (Велес). Фабрика Велес. Размер 94х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">94 см</param>
       <param name="Высота">100 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
@@ -11196,8 +11196,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Vita/Detskaya/7995506717/06.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Vita/Detskaya/7995506717/07.webp</picture>
       <vendor>Велес</vendor>
-      <name>Детская Спальня Вита модульная (Велес)</name>
-      <description>Детская Спальня Вита модульная (Велес). Фабрика Велес. Размер 83х70 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская спальня Вита модульная (Велес)</name>
+      <description>Детская спальня Вита модульная (Велес). Фабрика Велес. Размер 83х70 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">83 см</param>
       <param name="Высота">70 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
@@ -11216,8 +11216,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Vita/Molodezhnaya/7994946491/06.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Vita/Molodezhnaya/7994946491/07.webp</picture>
       <vendor>Велес</vendor>
-      <name>Молодёжная Спальня Вита модульная (Велес)</name>
-      <description>Молодёжная Спальня Вита модульная (Велес). Фабрика Велес. Размер 94х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Молодёжная спальня Вита модульная (Велес)</name>
+      <description>Молодёжная спальня Вита модульная (Велес). Фабрика Велес. Размер 94х100 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">94 см</param>
       <param name="Высота">100 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
@@ -11288,8 +11288,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Eva/Molodezhnaya/7739702257/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Eva/Molodezhnaya/7739702257/05.webp</picture>
       <vendor>Велес</vendor>
-      <name>Молодёжная Спальня Ева модульная (Велес)</name>
-      <description>Молодёжная Спальня Ева модульная (Велес). Фабрика Велес. Размер 105х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Молодёжная спальня Ева модульная (Велес)</name>
+      <description>Молодёжная спальня Ева модульная (Велес). Фабрика Велес. Размер 105х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">105 см</param>
       <param name="Высота">102 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
@@ -11306,8 +11306,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Eva/Detskaya/7739270163/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Eva/Detskaya/7739270163/05.webp</picture>
       <vendor>Велес</vendor>
-      <name>Детская Спальня Ева модульная (Велес)</name>
-      <description>Детская Спальня Ева модульная (Велес). Фабрика Велес. Размер 83х72 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская спальня Ева модульная (Велес)</name>
+      <description>Детская спальня Ева модульная (Велес). Фабрика Велес. Размер 83х72 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">83 см</param>
       <param name="Высота">72 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
@@ -11363,8 +11363,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Loren/Molodezhnaya/7739201855/05.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Loren/Molodezhnaya/7739201855/06.webp</picture>
       <vendor>Велес</vendor>
-      <name>Молодёжная Спальня Лорэн модульная (Велес)</name>
-      <description>Молодёжная Спальня Лорэн модульная (Велес). Фабрика Велес. Размер 106х97 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Молодёжная спальня Лорэн модульная (Велес)</name>
+      <description>Молодёжная спальня Лорэн модульная (Велес). Фабрика Велес. Размер 106х97 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">106 см</param>
       <param name="Высота">97 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
@@ -11382,8 +11382,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Loren/Detskaya/7739089175/05.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Loren/Detskaya/7739089175/06.webp</picture>
       <vendor>Велес</vendor>
-      <name>Детская Спальня Лорэн модульная (Велес)</name>
-      <description>Детская Спальня Лорэн модульная (Велес). Фабрика Велес. Размер 83х72 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская спальня Лорэн модульная (Велес)</name>
+      <description>Детская спальня Лорэн модульная (Велес). Фабрика Велес. Размер 83х72 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">83 см</param>
       <param name="Высота">72 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
@@ -11454,8 +11454,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Milana/Molodezhnaya/7995003697/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Milana/Molodezhnaya/7995003697/05.webp</picture>
       <vendor>Велес</vendor>
-      <name>Молодёжная Спальня Милана модульная (Велес)</name>
-      <description>Молодёжная Спальня Милана модульная (Велес). Фабрика Велес. Размер 93х110 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Молодёжная спальня Милана модульная (Велес)</name>
+      <description>Молодёжная спальня Милана модульная (Велес). Фабрика Велес. Размер 93х110 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">93 см</param>
       <param name="Высота">110 см</param>
       <param name="Материал">ЛДСП</param>
@@ -11526,8 +11526,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Sitsiliya/Detskaya/7739300439/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Sitsiliya/Detskaya/7739300439/05.webp</picture>
       <vendor>Велес</vendor>
-      <name>Детская Спальня Сицилия модульная (Велес)</name>
-      <description>Детская Спальня Сицилия модульная (Велес). Фабрика Велес. Размер 83х72 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская спальня Сицилия модульная (Велес)</name>
+      <description>Детская спальня Сицилия модульная (Велес). Фабрика Велес. Размер 83х72 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">83 см</param>
       <param name="Высота">72 см</param>
       <param name="Материал">ЛДСП</param>
@@ -11544,8 +11544,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Sitsiliya/Molodezhnaya/7739875977/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Sitsiliya/Molodezhnaya/7739875977/05.webp</picture>
       <vendor>Велес</vendor>
-      <name>Молодёжная Спальня Сицилия модульная (Велес)</name>
-      <description>Молодёжная Спальня Сицилия модульная (Велес). Фабрика Велес. Размер 105х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Молодёжная спальня Сицилия модульная (Велес)</name>
+      <description>Молодёжная спальня Сицилия модульная (Велес). Фабрика Велес. Размер 105х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">105 см</param>
       <param name="Высота">102 см</param>
       <param name="Материал">ЛДСП</param>
@@ -11619,8 +11619,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Tefiya/Detskaya/7579916392/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Tefiya/Detskaya/7579916392/05.webp</picture>
       <vendor>Велес</vendor>
-      <name>Детская Спальня Тефия модульная (Велес)</name>
-      <description>Детская Спальня Тефия модульная (Велес). Фабрика Велес. Размер 83х70 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская спальня Тефия модульная (Велес)</name>
+      <description>Детская спальня Тефия модульная (Велес). Фабрика Велес. Размер 83х70 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">83 см</param>
       <param name="Высота">70 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
@@ -11637,8 +11637,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Tefiya/Molodezhnaya/7579064420/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Tefiya/Molodezhnaya/7579064420/05.webp</picture>
       <vendor>Велес</vendor>
-      <name>Молодёжная Спальня Тефия модульная (Велес)</name>
-      <description>Молодёжная Спальня Тефия модульная (Велес). Фабрика Велес. Размер 105х76 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Молодёжная спальня Тефия модульная (Велес)</name>
+      <description>Молодёжная спальня Тефия модульная (Велес). Фабрика Велес. Размер 105х76 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">105 см</param>
       <param name="Высота">76 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
@@ -11736,8 +11736,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Mikon/Lyuchiya/Detskaya/8059327421/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Mikon/Lyuchiya/Detskaya/8059327421/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Детская Спальня Лючия модульная (Микон)</name>
-      <description>Детская Спальня Лючия модульная (Микон). Фабрика Микон. Размер 93х75 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская спальня Лючия модульная (Микон)</name>
+      <description>Детская спальня Лючия модульная (Микон). Фабрика Микон. Размер 93х75 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">93 см</param>
       <param name="Высота">75 см</param>
       <param name="Цвет">Белый</param>
@@ -11750,8 +11750,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Mikon/Lyuchiya/Detskaya/8059870120/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Mikon/Lyuchiya/Detskaya/8059870120/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Детская Спальня Лючия модульная (Микон)</name>
-      <description>Детская Спальня Лючия модульная (Микон). Фабрика Микон. Размер 127х75 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская спальня Лючия модульная (Микон)</name>
+      <description>Детская спальня Лючия модульная (Микон). Фабрика Микон. Размер 127х75 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">127 см</param>
       <param name="Высота">75 см</param>
       <param name="Цвет">Золотой</param>
@@ -11764,8 +11764,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Mikon/Lyuchiya/Detskaya/8059017869/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Mikon/Lyuchiya/Detskaya/8059017869/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Детская Спальня Лючия модульная (Микон)</name>
-      <description>Детская Спальня Лючия модульная (Микон). Фабрика Микон. Размер 97х75 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская спальня Лючия модульная (Микон)</name>
+      <description>Детская спальня Лючия модульная (Микон). Фабрика Микон. Размер 97х75 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">97 см</param>
       <param name="Высота">75 см</param>
       <param name="Цвет">Золотой</param>
@@ -11778,8 +11778,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Mikon/Lyuchiya/Detskaya/8059394422/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Mikon/Lyuchiya/Detskaya/8059394422/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Детская Спальня Лючия модульная (Микон)</name>
-      <description>Детская Спальня Лючия модульная (Микон). Фабрика Микон. Размер 96х170 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская спальня Лючия модульная (Микон)</name>
+      <description>Детская спальня Лючия модульная (Микон). Фабрика Микон. Размер 96х170 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">96 см</param>
       <param name="Высота">170 см</param>
       <param name="Цвет">Золотой</param>
@@ -11820,8 +11820,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Mikon/Menks/Detskaya/8059520122/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Mikon/Menks/Detskaya/8059520122/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Детская Спальня Мэнкс модульная (Микон)</name>
-      <description>Детская Спальня Мэнкс модульная (Микон). Фабрика Микон. Размер 93х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Детская спальня Мэнкс модульная (Микон)</name>
+      <description>Детская спальня Мэнкс модульная (Микон). Фабрика Микон. Размер 93х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">93 см</param>
       <param name="Высота">80 см</param>
       <param name="Цвет">Белый</param>
@@ -11957,7 +11957,7 @@
       <param name="Цвет">Золотой\Зелёный</param>
     </offer>
     <offer id="4379991913" available="true">
-      <url>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-versal-modulnaya-rostok-4379991913/</url>
+      <url>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-versal-5-modulnaya-rostok-4379991913/</url>
       <price>57431</price>
       <currencyId>RUB</currencyId>
       <categoryId>19</categoryId>
@@ -11972,8 +11972,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Rostok/Versal/Vzroslaya/4379991913/09.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Rostok/Versal/Vzroslaya/4379991913/10.webp</picture>
       <vendor>Росток</vendor>
-      <name>Спальня Версаль модульная (Росток)</name>
-      <description>Спальня Версаль модульная (Росток). Фабрика Росток. Размер 168х86 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Спальня Версаль-5 модульная (Росток)</name>
+      <description>Спальня Версаль-5 модульная (Росток). Фабрика Росток. Размер 168х86 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">168 см</param>
       <param name="Высота">86 см</param>
       <param name="Цвет">Бежевый</param>
@@ -12022,7 +12022,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="4379544436" available="true">
-      <url>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-sabrina-modulnaya-rostok-4379544436/</url>
+      <url>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-sabrina-2-modulnaya-rostok-4379544436/</url>
       <price>65770</price>
       <currencyId>RUB</currencyId>
       <categoryId>19</categoryId>
@@ -12037,8 +12037,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Rostok/Sabrina/Vzroslaya/4379544436/09.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Rostok/Sabrina/Vzroslaya/4379544436/10.webp</picture>
       <vendor>Росток</vendor>
-      <name>Спальня Сабрина модульная (Росток)</name>
-      <description>Спальня Сабрина модульная (Росток). Фабрика Росток. Размер 167х90 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Спальня Сабрина-2 модульная (Росток)</name>
+      <description>Спальня Сабрина-2 модульная (Росток). Фабрика Росток. Размер 167х90 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">167 см</param>
       <param name="Высота">90 см</param>
       <param name="Цвет">Бежевый</param>
@@ -12870,7 +12870,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995301233" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/antresol-alte-2-h-stvorchataya-7995301233/</url>
+      <url>https://мебель-фаворит.рф/shkafy/antresol-2-h-stvorchataya-alte-7995301233/</url>
       <price>3823</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -12878,8 +12878,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Alte/Antresol/2-kh%20stvorchataya/7995301233/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10514-00039969</vendorCode>
-      <name>Антресоль Альте 2-х створчатая</name>
-      <description>Антресоль Альте 2-х створчатая. Фабрика Велес. Размер 80х55х40 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Антресоль 2-х створчатая Альте</name>
+      <description>Антресоль 2-х створчатая Альте. Фабрика Велес. Размер 80х55х40 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
       <param name="Глубина">55 см</param>
       <param name="Высота">40 см</param>
@@ -12888,7 +12888,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995597727" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/antresol-alte-3-h-stvorchataya-7995597727/</url>
+      <url>https://мебель-фаворит.рф/shkafy/antresol-3-h-stvorchataya-alte-7995597727/</url>
       <price>5548</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -12896,8 +12896,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Alte/Antresol/3-kh%20stvorchataya/7995597727/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10514-00039968</vendorCode>
-      <name>Антресоль Альте 3-х створчатая</name>
-      <description>Антресоль Альте 3-х створчатая. Фабрика Велес. Размер 120х55х40 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Антресоль 3-х створчатая Альте</name>
+      <description>Антресоль 3-х створчатая Альте. Фабрика Велес. Размер 120х55х40 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
       <param name="Глубина">55 см</param>
       <param name="Высота">40 см</param>
@@ -13077,7 +13077,7 @@
       <param name="Цвет">Белый</param>
     </offer>
     <offer id="7995838726" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/antresol-alte-2-h-stvorchataya-7995838726/</url>
+      <url>https://мебель-фаворит.рф/shkafy/antresol-2-h-stvorchataya-alte-7995838726/</url>
       <price>3645</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -13085,8 +13085,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Alte/Antresol/2-kh%20stvorchataya/7995838726/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10514-00039971</vendorCode>
-      <name>Антресоль Альте 2-х створчатая</name>
-      <description>Антресоль Альте 2-х створчатая. Фабрика Велес. Размер 80х55х40 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Антресоль 2-х створчатая Альте</name>
+      <description>Антресоль 2-х створчатая Альте. Фабрика Велес. Размер 80х55х40 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
       <param name="Глубина">55 см</param>
       <param name="Высота">40 см</param>
@@ -13095,7 +13095,7 @@
       <param name="Цвет">Белый</param>
     </offer>
     <offer id="7995263582" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/antresol-alte-3-h-stvorchataya-7995263582/</url>
+      <url>https://мебель-фаворит.рф/shkafy/antresol-3-h-stvorchataya-alte-7995263582/</url>
       <price>4968</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -13103,8 +13103,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Alte/Antresol/3-kh%20stvorchataya/7995263582/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10514-00039973</vendorCode>
-      <name>Антресоль Альте 3-х створчатая</name>
-      <description>Антресоль Альте 3-х створчатая. Фабрика Велес. Размер 120х55х40 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Антресоль 3-х створчатая Альте</name>
+      <description>Антресоль 3-х створчатая Альте. Фабрика Велес. Размер 120х55х40 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
       <param name="Глубина">55 см</param>
       <param name="Высота">40 см</param>
@@ -13157,8 +13157,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Briz/Stvorchatye/2-kh%20stvorchatyy%20s%20Yaschikami/7995493029/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10971-00043690</vendorCode>
-      <name>Шкаф 2-х створчатый Бриз с Ящиками</name>
-      <description>Шкаф 2-х створчатый Бриз с Ящиками. Фабрика Велес. Размер 80х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый Бриз с ящиками</name>
+      <description>Шкаф 2-х створчатый Бриз с ящиками. Фабрика Велес. Размер 80х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -13193,8 +13193,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Briz/Stvorchatye/3-kh%20stvorchatyy%20s%20Zerkalom/7995662162/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10971-00043693</vendorCode>
-      <name>Шкаф 3-х створчатый Бриз с Зеркалом</name>
-      <description>Шкаф 3-х створчатый Бриз с Зеркалом. Фабрика Велес. Размер 140х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый Бриз с зеркалом</name>
+      <description>Шкаф 3-х створчатый Бриз с зеркалом. Фабрика Велес. Размер 140х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">140 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -13210,8 +13210,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Briz/Stvorchatye/3-kh%20stvorchatyy%20s%20Yaschikami/7995664882/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Briz/Stvorchatye/3-kh%20stvorchatyy%20s%20Yaschikami/7995664882/02.webp</picture>
       <vendor>Велес</vendor>
-      <name>Шкаф 3-х створчатый Бриз с Ящиками</name>
-      <description>Шкаф 3-х створчатый Бриз с Ящиками. Фабрика Велес. Размер 105х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый Бриз с ящиками</name>
+      <description>Шкаф 3-х створчатый Бриз с ящиками. Фабрика Велес. Размер 105х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">105 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -13255,15 +13255,15 @@
       <param name="Цвет">Бирюзовый</param>
     </offer>
     <offer id="7995062291" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/antresol-briz-3-h-stvorchataya-7995062291/</url>
+      <url>https://мебель-фаворит.рф/shkafy/antresol-3-h-stvorchataya-briz-7995062291/</url>
       <price>4919</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Briz/Antresol/3-kh%20stvorchataya/7995062291/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Briz/Antresol/3-kh%20stvorchataya/7995062291/02.webp</picture>
       <vendor>Велес</vendor>
-      <name>Антресоль Бриз 3-х створчатая</name>
-      <description>Антресоль Бриз 3-х створчатая. Фабрика Велес. Размер 120х52х42 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Антресоль 3-х створчатая Бриз</name>
+      <description>Антресоль 3-х створчатая Бриз. Фабрика Велес. Размер 120х52х42 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">42 см</param>
@@ -13308,7 +13308,7 @@
       <param name="Цвет">Белый</param>
     </offer>
     <offer id="7995499432" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-byanko-s-2-yaschikami-7995499432/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-byanko-7995499432/</url>
       <price>8903</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -13316,8 +13316,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Byanko/Stvorchatye/2-kh%20stvorchatyy%20s%202%20Yaschikami/7995499432/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>09513-00033044</vendorCode>
-      <name>Шкаф 2-х створчатый Бьянко с 2 Ящиками</name>
-      <description>Шкаф 2-х створчатый Бьянко с 2 Ящиками. Фабрика Велес. Размер 60х40х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый Бьянко</name>
+      <description>Шкаф 2-х створчатый Бьянко. Фабрика Велес. Размер 60х40х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
       <param name="Глубина">40 см</param>
       <param name="Высота">210 см</param>
@@ -13434,7 +13434,7 @@
       <param name="Цвет">Белый</param>
     </offer>
     <offer id="7995555906" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-vita-7995555906/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-vita-s-zerkalom-7995555906/</url>
       <price>27597</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -13442,8 +13442,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Vita/Stvorchatye/3-kh%20stvorchatyy/7995555906/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>09709-00041589</vendorCode>
-      <name>Шкаф 3-х створчатый Вита</name>
-      <description>Шкаф 3-х створчатый Вита. Фабрика Велес. Размер 120х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый Вита с зеркалом</name>
+      <description>Шкаф 3-х створчатый Вита с зеркалом. Фабрика Велес. Размер 120х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">220 см</param>
@@ -13478,8 +13478,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Vita/Stvorchatye/4-kh%20stvorchatyy%20s%20Zerkalom/7994985396/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>09709-00041591</vendorCode>
-      <name>Шкаф 4-х створчатый Вита с Зеркалом</name>
-      <description>Шкаф 4-х створчатый Вита с Зеркалом. Фабрика Велес. Размер 140х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 4-х створчатый Вита с зеркалом</name>
+      <description>Шкаф 4-х створчатый Вита с зеркалом. Фабрика Велес. Размер 140х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">140 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">220 см</param>
@@ -13514,8 +13514,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Vita/Stvorchatye/Penal%20nadstroyka/7995498596/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>09709-00042218</vendorCode>
-      <name>Пенал надстройка Вита</name>
-      <description>Пенал надстройка Вита. Фабрика Велес. Размер 35х42х162 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал-надстройка Вита</name>
+      <description>Пенал-надстройка Вита. Фабрика Велес. Размер 35х42х162 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">35 см</param>
       <param name="Глубина">42 см</param>
       <param name="Высота">162 см</param>
@@ -13578,7 +13578,7 @@
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="7995791123" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-vita-7995791123/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-vita-s-zerkalom-7995791123/</url>
       <price>27597</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -13586,8 +13586,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Vita/Stvorchatye/3-kh%20stvorchatyy/7995791123/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>09709-00040504</vendorCode>
-      <name>Шкаф 3-х створчатый Вита</name>
-      <description>Шкаф 3-х створчатый Вита. Фабрика Велес. Размер 120х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый Вита с зеркалом</name>
+      <description>Шкаф 3-х створчатый Вита с зеркалом. Фабрика Велес. Размер 120х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">220 см</param>
@@ -13622,8 +13622,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Vita/Stvorchatye/4-kh%20stvorchatyy%20s%20Zerkalom/7994929905/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>09709-00040505</vendorCode>
-      <name>Шкаф 4-х створчатый Вита с Зеркалом</name>
-      <description>Шкаф 4-х створчатый Вита с Зеркалом. Фабрика Велес. Размер 140х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 4-х створчатый Вита с зеркалом</name>
+      <description>Шкаф 4-х створчатый Вита с зеркалом. Фабрика Велес. Размер 140х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">140 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">220 см</param>
@@ -13658,8 +13658,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Vita/Stvorchatye/Penal%20nadstroyka/7995891692/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>09709-00044097</vendorCode>
-      <name>Пенал надстройка Вита</name>
-      <description>Пенал надстройка Вита. Фабрика Велес. Размер 35х42х162 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал-надстройка Вита</name>
+      <description>Пенал-надстройка Вита. Фабрика Велес. Размер 35х42х162 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">35 см</param>
       <param name="Глубина">42 см</param>
       <param name="Высота">162 см</param>
@@ -13725,7 +13725,7 @@
       <param name="Цвет">Зелёный</param>
     </offer>
     <offer id="7995689670" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-eva-7995689670/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-eva-s-zerkalom-7995689670/</url>
       <price>29097</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -13733,8 +13733,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Eva/Stvorchatye/3-kh%20stvorchatyy/7995689670/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10924-00043087</vendorCode>
-      <name>Шкаф 3-х створчатый Ева</name>
-      <description>Шкаф 3-х створчатый Ева. Фабрика Велес. Размер 120х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый Ева с зеркалом</name>
+      <description>Шкаф 3-х створчатый Ева с зеркалом. Фабрика Велес. Размер 120х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -13769,8 +13769,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Eva/Stvorchatye/Penal%20nadstroyka/7995571271/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10924-00043699</vendorCode>
-      <name>Пенал надстройка Ева</name>
-      <description>Пенал надстройка Ева. Фабрика Велес. Размер 40х42х163 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал-надстройка Ева</name>
+      <description>Пенал-надстройка Ева. Фабрика Велес. Размер 40х42х163 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">40 см</param>
       <param name="Глубина">42 см</param>
       <param name="Высота">163 см</param>
@@ -13831,7 +13831,7 @@
       <param name="Цвет">Коричневый</param>
     </offer>
     <offer id="7994969446" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-eva-s-yaschikami-7994969446/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-eva-s-2-yaschikami-7994969446/</url>
       <price>18065</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -13839,8 +13839,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Eva/Stvorchatye/2-kh%20stvorchatyy%20s%20Yaschikami/7994969446/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10924-00043712</vendorCode>
-      <name>Шкаф 2-х створчатый Ева с Ящиками</name>
-      <description>Шкаф 2-х створчатый Ева с Ящиками. Фабрика Велес. Размер 80х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый Ева с 2 ящиками</name>
+      <description>Шкаф 2-х створчатый Ева с 2 ящиками. Фабрика Велес. Размер 80х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -13849,7 +13849,7 @@
       <param name="Цвет">Коричневый</param>
     </offer>
     <offer id="7995186582" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-eva-s-yaschikami-7995186582/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-eva-s-2-yaschikami-7995186582/</url>
       <price>26081</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -13857,8 +13857,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Eva/Stvorchatye/3-kh%20stvorchatyy%20s%20Yaschikami/7995186582/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10924-00043714</vendorCode>
-      <name>Шкаф 3-х створчатый Ева с Ящиками</name>
-      <description>Шкаф 3-х створчатый Ева с Ящиками. Фабрика Велес. Размер 120х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый Ева с 2 ящиками</name>
+      <description>Шкаф 3-х створчатый Ева с 2 ящиками. Фабрика Велес. Размер 120х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -13911,8 +13911,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Loren/Stvorchatye/Penal%20s%202%20Yaschikami%20levyy/7995156956/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10744-00042720</vendorCode>
-      <name>Пенал Лорэн с 2 Ящиками левый</name>
-      <description>Пенал Лорэн с 2 Ящиками левый. Фабрика Велес. Размер 45х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал Лорэн с 2 ящиками левый</name>
+      <description>Пенал Лорэн с 2 ящиками левый. Фабрика Велес. Размер 45х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">45 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -13929,8 +13929,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Loren/Stvorchatye/Penal%20s%202%20Yaschikami%20pravyy/7995073930/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10744-00042721</vendorCode>
-      <name>Пенал Лорэн с 2 Ящиками правый</name>
-      <description>Пенал Лорэн с 2 Ящиками правый. Фабрика Велес. Размер 45х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал Лорэн с 2 ящиками правый</name>
+      <description>Пенал Лорэн с 2 ящиками правый. Фабрика Велес. Размер 45х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">45 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -13975,7 +13975,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995363443" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-loren-s-yaschikami-7995363443/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-loren-s-2-yaschikami-7995363443/</url>
       <price>22081</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -13983,8 +13983,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Loren/Stvorchatye/2-kh%20stvorchatyy%20s%20Yaschikami/7995363443/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10744-00041635</vendorCode>
-      <name>Шкаф 2-х створчатый Лорэн с Ящиками</name>
-      <description>Шкаф 2-х створчатый Лорэн с Ящиками. Фабрика Велес. Размер 80х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый Лорэн с 2 ящиками</name>
+      <description>Шкаф 2-х створчатый Лорэн с 2 ящиками. Фабрика Велес. Размер 80х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -13993,7 +13993,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995736621" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-loren-s-yaschikami-7995736621/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-loren-s-2-yaschikami-7995736621/</url>
       <price>32710</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14001,8 +14001,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Loren/Stvorchatye/3-kh%20stvorchatyy%20s%20Yaschikami/7995736621/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10744-00041693</vendorCode>
-      <name>Шкаф 3-х створчатый Лорэн с Ящиками</name>
-      <description>Шкаф 3-х створчатый Лорэн с Ящиками. Фабрика Велес. Размер 120х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый Лорэн с 2 ящиками</name>
+      <description>Шкаф 3-х створчатый Лорэн с 2 ящиками. Фабрика Велес. Размер 120х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -14011,7 +14011,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995691055" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-loren-7995691055/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-loren-s-zerkalom-7995691055/</url>
       <price>39323</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14019,8 +14019,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Loren/Stvorchatye/4-kh%20stvorchatyy/7995691055/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10744-00041694</vendorCode>
-      <name>Шкаф 4-х створчатый Лорэн</name>
-      <description>Шкаф 4-х створчатый Лорэн. Фабрика Велес. Размер 160х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 4-х створчатый Лорэн с зеркалом</name>
+      <description>Шкаф 4-х створчатый Лорэн с зеркалом. Фабрика Велес. Размер 160х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">160 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -14072,8 +14072,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Loren/Stvorchatye/Penal%20nadstroyka/7995367711/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10744-00041686</vendorCode>
-      <name>Пенал надстройка Лорэн</name>
-      <description>Пенал надстройка Лорэн. Фабрика Велес. Размер 40х42х163 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал-надстройка Лорэн</name>
+      <description>Пенал-надстройка Лорэн. Фабрика Велес. Размер 40х42х163 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">40 см</param>
       <param name="Глубина">42 см</param>
       <param name="Высота">163 см</param>
@@ -14082,7 +14082,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995386231" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/penal-milana-7995386231/</url>
+      <url>https://мебель-фаворит.рф/shkafy/penal-milana-s-polkami-i-shtangoy-7995386231/</url>
       <price>8387</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14090,8 +14090,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milana/Stvorchatye/Penal/7995386231/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>07807-00028034</vendorCode>
-      <name>Пенал Милана</name>
-      <description>Пенал Милана. Фабрика Велес. Размер 49х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал Милана с полками и штангой</name>
+      <description>Пенал Милана с полками и штангой. Фабрика Велес. Размер 49х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">49 см</param>
       <param name="Глубина">60 см</param>
       <param name="Высота">220 см</param>
@@ -14100,15 +14100,15 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995229362" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/penal-milana-7995229362/</url>
+      <url>https://мебель-фаворит.рф/shkafy/penal-milana-s-polkami-i-vydvizhnoy-veshalkoy-7995229362/</url>
       <price>7694</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milana/Stvorchatye/Penal/7995229362/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milana/Stvorchatye/Penal/7995229362/02.webp</picture>
       <vendor>Велес</vendor>
-      <name>Пенал Милана</name>
-      <description>Пенал Милана. Фабрика Велес. Размер 50х45х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал Милана с полками и выдвижной вешалкой</name>
+      <description>Пенал Милана с полками и выдвижной вешалкой. Фабрика Велес. Размер 50х45х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">50 см</param>
       <param name="Глубина">45 см</param>
       <param name="Высота">220 см</param>
@@ -14143,8 +14143,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milana/Stvorchatye/2-kh%20stvorchatyy%20s%202%20Yaschikami/7995786151/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>07807-00028036</vendorCode>
-      <name>Шкаф 2-х створчатый Милана с 2 Ящиками</name>
-      <description>Шкаф 2-х створчатый Милана с 2 Ящиками. Фабрика Велес. Размер 94х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый Милана с 2 ящиками</name>
+      <description>Шкаф 2-х створчатый Милана с 2 ящиками. Фабрика Велес. Размер 94х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">94 см</param>
       <param name="Глубина">60 см</param>
       <param name="Высота">220 см</param>
@@ -14153,7 +14153,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995635093" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-milana-7995635093/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-milana-s-zerkalom-i-2-yaschikami-7995635093/</url>
       <price>22710</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14161,8 +14161,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milana/Stvorchatye/3-kh%20stvorchatyy/7995635093/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>07807-00031894</vendorCode>
-      <name>Шкаф 3-х створчатый Милана</name>
-      <description>Шкаф 3-х створчатый Милана. Фабрика Велес. Размер 120х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый Милана с зеркалом и 2 ящиками</name>
+      <description>Шкаф 3-х створчатый Милана с зеркалом и 2 ящиками. Фабрика Велес. Размер 120х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
       <param name="Глубина">60 см</param>
       <param name="Высота">220 см</param>
@@ -14171,7 +14171,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995273300" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-milana-7995273300/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-milana-s-zerkalom-i-2-yaschikami-7995273300/</url>
       <price>22306</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14179,8 +14179,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milana/Stvorchatye/3-kh%20stvorchatyy/7995273300/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>07807-00027669</vendorCode>
-      <name>Шкаф 3-х створчатый Милана</name>
-      <description>Шкаф 3-х створчатый Милана. Фабрика Велес. Размер 140х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый Милана с зеркалом и 2 ящиками</name>
+      <description>Шкаф 3-х створчатый Милана с зеркалом и 2 ящиками. Фабрика Велес. Размер 140х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">140 см</param>
       <param name="Глубина">60 см</param>
       <param name="Высота">220 см</param>
@@ -14189,7 +14189,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995821699" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-milana-7995821699/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-milana-s-zerkalom-i-2-yaschikami-7995821699/</url>
       <price>29532</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14197,8 +14197,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milana/Stvorchatye/4-kh%20stvorchatyy/7995821699/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>07807-00027670</vendorCode>
-      <name>Шкаф 4-х створчатый Милана</name>
-      <description>Шкаф 4-х створчатый Милана. Фабрика Велес. Размер 185х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 4-х створчатый Милана с зеркалом и 2 ящиками</name>
+      <description>Шкаф 4-х створчатый Милана с зеркалом и 2 ящиками. Фабрика Велес. Размер 185х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">185 см</param>
       <param name="Глубина">60 см</param>
       <param name="Высота">220 см</param>
@@ -14233,8 +14233,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milana/Stvorchatye/Shkaf-Stellazh%20levyy/7994961810/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>07807-00028079</vendorCode>
-      <name>Шкаф-Стеллаж Милана левый</name>
-      <description>Шкаф-Стеллаж Милана левый. Фабрика Велес. Размер 30х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф-стеллаж Милана левый</name>
+      <description>Шкаф-стеллаж Милана левый. Фабрика Велес. Размер 30х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">30 см</param>
       <param name="Глубина">60 см</param>
       <param name="Высота">220 см</param>
@@ -14251,8 +14251,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milana/Stvorchatye/Shkaf-Stellazh%20pravyy/7995851857/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>07807-00028080</vendorCode>
-      <name>Шкаф-Стеллаж Милана правый</name>
-      <description>Шкаф-Стеллаж Милана правый. Фабрика Велес. Размер 30х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф-стеллаж Милана правый</name>
+      <description>Шкаф-стеллаж Милана правый. Фабрика Велес. Размер 30х60х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">30 см</param>
       <param name="Глубина">60 см</param>
       <param name="Высота">220 см</param>
@@ -14261,7 +14261,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995100626" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/penal-siciliya-7995100626/</url>
+      <url>https://мебель-фаворит.рф/shkafy/penal-siciliya-s-polkami-i-shtangoy-7995100626/</url>
       <price>10032</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14269,8 +14269,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Sitsiliya/Stvorchatye/Penal/7995100626/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10972-00043741</vendorCode>
-      <name>Пенал Сицилия</name>
-      <description>Пенал Сицилия. Фабрика Велес. Размер 40х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал Сицилия с полками и штангой</name>
+      <description>Пенал Сицилия с полками и штангой. Фабрика Велес. Размер 40х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">40 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -14297,7 +14297,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995327884" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-siciliya-s-yaschikami-7995327884/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-siciliya-s-2-yaschikami-7995327884/</url>
       <price>17065</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14305,8 +14305,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Sitsiliya/Stvorchatye/2-kh%20stvorchatyy%20s%20Yaschikami/7995327884/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10972-00043743</vendorCode>
-      <name>Шкаф 2-х створчатый Сицилия с Ящиками</name>
-      <description>Шкаф 2-х створчатый Сицилия с Ящиками. Фабрика Велес. Размер 80х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый Сицилия с 2 ящиками</name>
+      <description>Шкаф 2-х створчатый Сицилия с 2 ящиками. Фабрика Велес. Размер 80х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -14315,7 +14315,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995728843" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-siciliya-7995728843/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-siciliya-s-2-yaschikami-7995728843/</url>
       <price>25097</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14323,8 +14323,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Sitsiliya/Stvorchatye/3-kh%20stvorchatyy/7995728843/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10972-00043744</vendorCode>
-      <name>Шкаф 3-х створчатый Сицилия</name>
-      <description>Шкаф 3-х створчатый Сицилия. Фабрика Велес. Размер 120х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый Сицилия с 2 ящиками</name>
+      <description>Шкаф 3-х створчатый Сицилия с 2 ящиками. Фабрика Велес. Размер 120х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -14333,7 +14333,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995853835" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-siciliya-s-zerkalom-7995853835/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-siciliya-s-zerkalom-i-2-yaschikami-7995853835/</url>
       <price>27694</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14341,8 +14341,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Sitsiliya/Stvorchatye/3-kh%20stvorchatyy%20s%20Zerkalom/7995853835/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10972-00044033</vendorCode>
-      <name>Шкаф 3-х створчатый Сицилия с Зеркалом</name>
-      <description>Шкаф 3-х створчатый Сицилия с Зеркалом. Фабрика Велес. Размер 140х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый Сицилия с зеркалом и 2 ящиками</name>
+      <description>Шкаф 3-х створчатый Сицилия с зеркалом и 2 ящиками. Фабрика Велес. Размер 140х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">140 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -14351,7 +14351,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995794845" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-siciliya-s-yaschikami-7995794845/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-siciliya-s-4-yaschikami-7995794845/</url>
       <price>23984</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14359,8 +14359,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Sitsiliya/Stvorchatye/3-kh%20stvorchatyy%20s%20Yaschikami/7995794845/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10972-00044658</vendorCode>
-      <name>Шкаф 3-х створчатый Сицилия с Ящиками</name>
-      <description>Шкаф 3-х створчатый Сицилия с Ящиками. Фабрика Велес. Размер 105х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый Сицилия с 4 ящиками</name>
+      <description>Шкаф 3-х створчатый Сицилия с 4 ящиками. Фабрика Велес. Размер 105х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">105 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -14369,7 +14369,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995099415" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-siciliya-7995099415/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-siciliya-s-2-yaschikami-7995099415/</url>
       <price>30097</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14377,8 +14377,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Sitsiliya/Stvorchatye/4-kh%20stvorchatyy/7995099415/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10972-00043745</vendorCode>
-      <name>Шкаф 4-х створчатый Сицилия</name>
-      <description>Шкаф 4-х створчатый Сицилия. Фабрика Велес. Размер 160х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 4-х створчатый Сицилия с 2 ящиками</name>
+      <description>Шкаф 4-х створчатый Сицилия с 2 ящиками. Фабрика Велес. Размер 160х52х230 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">160 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">230 см</param>
@@ -14423,7 +14423,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7579714340" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/penal-tefiya-7579714340/</url>
+      <url>https://мебель-фаворит.рф/shkafy/penal-tefiya-s-polkami-i-shtangoy-7579714340/</url>
       <price>10855</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14439,8 +14439,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Tefiya/Stvorchatye/Penal/7579714340/10.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10365-00039011</vendorCode>
-      <name>Пенал Тефия</name>
-      <description>Пенал Тефия. Фабрика Велес. Размер 40х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал Тефия с полками и штангой</name>
+      <description>Пенал Тефия с полками и штангой. Фабрика Велес. Размер 40х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">40 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">220 см</param>
@@ -14494,7 +14494,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7995724318" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-tefiya-7995724318/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-tefiya-s-zerkalom-i-2-yaschikami-7995724318/</url>
       <price>30097</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14502,8 +14502,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Tefiya/Stvorchatye/3-kh%20stvorchatyy/7995724318/02.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10365-00041883</vendorCode>
-      <name>Шкаф 3-х створчатый Тефия</name>
-      <description>Шкаф 3-х створчатый Тефия. Фабрика Велес. Размер 120х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый Тефия с зеркалом и 2 ящиками</name>
+      <description>Шкаф 3-х створчатый Тефия с зеркалом и 2 ящиками. Фабрика Велес. Размер 120х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">220 см</param>
@@ -14512,7 +14512,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7579833333" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-tefiya-7579833333/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-tefiya-s-2-yaschikami-7579833333/</url>
       <price>32968</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14528,8 +14528,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Tefiya/Stvorchatye/4-kh%20stvorchatyy/7579833333/10.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10365-00039390</vendorCode>
-      <name>Шкаф 4-х створчатый Тефия</name>
-      <description>Шкаф 4-х створчатый Тефия. Фабрика Велес. Размер 140х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 4-х створчатый Тефия с 2 ящиками</name>
+      <description>Шкаф 4-х створчатый Тефия с 2 ящиками. Фабрика Велес. Размер 140х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">140 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">220 см</param>
@@ -14538,7 +14538,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7579813802" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-tefiya-7579813802/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-tefiya-s-2-yaschikami-7579813802/</url>
       <price>34371</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14554,8 +14554,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Tefiya/Stvorchatye/4-kh%20stvorchatyy/7579813802/10.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10365-00038797</vendorCode>
-      <name>Шкаф 4-х створчатый Тефия</name>
-      <description>Шкаф 4-х створчатый Тефия. Фабрика Велес. Размер 150х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 4-х створчатый Тефия с 2 ящиками</name>
+      <description>Шкаф 4-х створчатый Тефия с 2 ящиками. Фабрика Велес. Размер 150х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">150 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">220 см</param>
@@ -14564,7 +14564,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7579273891" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-tefiya-7579273891/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-tefiya-s-2-yaschikami-7579273891/</url>
       <price>36000</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14580,8 +14580,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Tefiya/Stvorchatye/4-kh%20stvorchatyy/7579273891/10.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10365-00038798</vendorCode>
-      <name>Шкаф 4-х створчатый Тефия</name>
-      <description>Шкаф 4-х створчатый Тефия. Фабрика Велес. Размер 160х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 4-х створчатый Тефия с 2 ящиками</name>
+      <description>Шкаф 4-х створчатый Тефия с 2 ящиками. Фабрика Велес. Размер 160х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">160 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">220 см</param>
@@ -14590,7 +14590,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="7579363220" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-tefiya-s-zerkalom-7579363220/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-tefiya-s-zerkalom-i-2-yaschikami-7579363220/</url>
       <price>25081</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14606,8 +14606,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Tefiya/Stvorchatye/4-kh%20stvorchatyy%20s%20Zerkalom/7579363220/10.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10365-00039391</vendorCode>
-      <name>Шкаф 4-х створчатый Тефия с Зеркалом</name>
-      <description>Шкаф 4-х створчатый Тефия с Зеркалом. Фабрика Велес. Размер 120х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 4-х створчатый Тефия с зеркалом и 2 ящиками</name>
+      <description>Шкаф 4-х створчатый Тефия с зеркалом и 2 ящиками. Фабрика Велес. Размер 120х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
       <param name="Глубина">52 см</param>
       <param name="Высота">220 см</param>
@@ -14721,8 +14721,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Tefiya/Stvorchatye/Penal%20nadstroyka/7579696942/03.webp</picture>
       <vendor>Велес</vendor>
       <vendorCode>10365-00039049</vendorCode>
-      <name>Пенал надстройка Тефия</name>
-      <description>Пенал надстройка Тефия. Фабрика Велес. Размер 35х42х162 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал-надстройка Тефия</name>
+      <description>Пенал-надстройка Тефия. Фабрика Велес. Размер 35х42х162 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">35 см</param>
       <param name="Глубина">42 см</param>
       <param name="Высота">162 см</param>
@@ -14846,8 +14846,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Vesta/Stvorchatye/Penal%20s%20Vitrinoy/8027048777/01.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09805-00038183</vendorCode>
-      <name>Пенал Веста с Витриной</name>
-      <description>Пенал Веста с Витриной. Фабрика Микон. Размер 45х40х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал Веста с витриной</name>
+      <description>Пенал Веста с витриной. Фабрика Микон. Размер 45х40х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">45 см</param>
       <param name="Глубина">40 см</param>
       <param name="Высота">210 см</param>
@@ -14897,8 +14897,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Vesta/Stvorchatye/Penal%20s%20Vitrinoy/8027684439/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Vesta/Stvorchatye/Penal%20s%20Vitrinoy/8027684439/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Пенал Веста с Витриной</name>
-      <description>Пенал Веста с Витриной. Фабрика Микон. Размер 45х40х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал Веста с витриной</name>
+      <description>Пенал Веста с витриной. Фабрика Микон. Размер 45х40х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">45 см</param>
       <param name="Глубина">40 см</param>
       <param name="Высота">210 см</param>
@@ -14924,7 +14924,7 @@
       <param name="Цвет">Коричневый</param>
     </offer>
     <offer id="8027037919" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-platyanoy-vitra-8027037919/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-vitra-8027037919/</url>
       <price>8050</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14932,8 +14932,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Vitra/Stvorchatye/2-kh%20stvorchatyy%20Platyanoy/8027037919/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09515-00036187</vendorCode>
-      <name>Шкаф 2-х створчатый Платяной Витра</name>
-      <description>Шкаф 2-х створчатый Платяной Витра. Фабрика Микон. Размер 60х34х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый Витра</name>
+      <description>Шкаф 2-х створчатый Витра. Фабрика Микон. Размер 60х34х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
       <param name="Глубина">34 см</param>
       <param name="Высота">200 см</param>
@@ -14942,7 +14942,7 @@
       <param name="Цвет">Золотистое дерево</param>
     </offer>
     <offer id="8027451495" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-platyanoy-vitra-8027451495/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-vitra-8027451495/</url>
       <price>8050</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14951,8 +14951,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Vitra/Stvorchatye/2-kh%20stvorchatyy%20Platyanoy/8027451495/03.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09515-00032925</vendorCode>
-      <name>Шкаф 2-х створчатый Платяной Витра</name>
-      <description>Шкаф 2-х створчатый Платяной Витра. Фабрика Микон. Размер 60х34х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый Витра</name>
+      <description>Шкаф 2-х створчатый Витра. Фабрика Микон. Размер 60х34х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
       <param name="Глубина">34 см</param>
       <param name="Высота">200 см</param>
@@ -14961,7 +14961,7 @@
       <param name="Цвет">Светло-коричневое дерево</param>
     </offer>
     <offer id="8027394289" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-platyanoy-vitra-8027394289/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-vitra-8027394289/</url>
       <price>8050</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -14970,8 +14970,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Vitra/Stvorchatye/2-kh%20stvorchatyy%20Platyanoy/8027394289/03.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09515-00032924</vendorCode>
-      <name>Шкаф 2-х створчатый Платяной Витра</name>
-      <description>Шкаф 2-х створчатый Платяной Витра. Фабрика Микон. Размер 60х34х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый Витра</name>
+      <description>Шкаф 2-х створчатый Витра. Фабрика Микон. Размер 60х34х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
       <param name="Глубина">34 см</param>
       <param name="Высота">200 см</param>
@@ -15008,8 +15008,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Kevin/Stvorchatye/Penal%20s%20Zerkalom/8059744048/03.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09516-00039962</vendorCode>
-      <name>Пенал Кевин с Зеркалом</name>
-      <description>Пенал Кевин с Зеркалом. Фабрика Микон. Размер 40х37х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал Кевин с зеркалом</name>
+      <description>Пенал Кевин с зеркалом. Фабрика Микон. Размер 40х37х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">40 см</param>
       <param name="Глубина">37 см</param>
       <param name="Высота">215 см</param>
@@ -15086,8 +15086,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Kevin/Stvorchatye/Penal%20s%20Zerkalom/8059538104/03.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09516-00036188</vendorCode>
-      <name>Пенал Кевин с Зеркалом</name>
-      <description>Пенал Кевин с Зеркалом. Фабрика Микон. Размер 40х37х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал Кевин с зеркалом</name>
+      <description>Пенал Кевин с зеркалом. Фабрика Микон. Размер 40х37х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">40 см</param>
       <param name="Глубина">37 см</param>
       <param name="Высота">215 см</param>
@@ -15667,8 +15667,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Lill/Stvorchatye/Penal%20s%20Zerkalom%20i%20Yaschikami/8059015761/03.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>10340-00044228</vendorCode>
-      <name>Пенал Лилль с Зеркалом и Ящиками</name>
-      <description>Пенал Лилль с Зеркалом и Ящиками. Фабрика Микон. Размер 50х54х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал Лилль с зеркалом и ящиками</name>
+      <description>Пенал Лилль с зеркалом и ящиками. Фабрика Микон. Размер 50х54х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">50 см</param>
       <param name="Глубина">54 см</param>
       <param name="Высота">240 см</param>
@@ -15705,8 +15705,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Lill/Stvorchatye/2-kh%20stvorchatyy%20s%20Zerkalom%20i%20Yaschikami/8059854814/03.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>10340-00038525</vendorCode>
-      <name>Шкаф 2-х створчатый Лилль с Зеркалом и Ящиками</name>
-      <description>Шкаф 2-х створчатый Лилль с Зеркалом и Ящиками. Фабрика Микон. Размер 100х54х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый Лилль с зеркалом и ящиками</name>
+      <description>Шкаф 2-х створчатый Лилль с зеркалом и ящиками. Фабрика Микон. Размер 100х54х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">100 см</param>
       <param name="Глубина">54 см</param>
       <param name="Высота">240 см</param>
@@ -16035,8 +16035,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Reya/Stvorchatye/Penal%20s%20Vitrinoy/8027383139/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>10338-00038502</vendorCode>
-      <name>Пенал Рея с Витриной</name>
-      <description>Пенал Рея с Витриной. Фабрика Микон. Размер 45х38х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал Рея с витриной</name>
+      <description>Пенал Рея с витриной. Фабрика Микон. Размер 45х38х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">45 см</param>
       <param name="Глубина">38 см</param>
       <param name="Высота">210 см</param>
@@ -16093,8 +16093,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Reya/Stvorchatye/Penal%20s%20Vitrinoy/8027466540/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>10338-00038503</vendorCode>
-      <name>Пенал Рея с Витриной</name>
-      <description>Пенал Рея с Витриной. Фабрика Микон. Размер 45х38х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал Рея с витриной</name>
+      <description>Пенал Рея с витриной. Фабрика Микон. Размер 45х38х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">45 см</param>
       <param name="Глубина">38 см</param>
       <param name="Высота">210 см</param>
@@ -16130,8 +16130,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sidney%201/Stvorchatye/Sidney-1%20Platyanoy/8027056235/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09161-00030920</vendorCode>
-      <name>Шкаф Сидней-1 Платяной</name>
-      <description>Шкаф Сидней-1 Платяной. Фабрика Микон. Размер 60х43х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф Сидней-1 платяной</name>
+      <description>Шкаф Сидней-1 платяной. Фабрика Микон. Размер 60х43х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
       <param name="Глубина">43 см</param>
       <param name="Высота">200 см</param>
@@ -16147,8 +16147,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sidney%201/Stvorchatye/Sidney-1%20Platyanoy/8027853969/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sidney%201/Stvorchatye/Sidney-1%20Platyanoy/8027853969/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Шкаф Сидней-1 Платяной</name>
-      <description>Шкаф Сидней-1 Платяной. Фабрика Микон. Размер 60х43х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф Сидней-1 платяной</name>
+      <description>Шкаф Сидней-1 платяной. Фабрика Микон. Размер 60х43х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
       <param name="Глубина">43 см</param>
       <param name="Высота">200 см</param>
@@ -16165,8 +16165,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sidney%201/Stvorchatye/Sidney-1%20Platyanoy/8027280152/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09161-00034059</vendorCode>
-      <name>Шкаф Сидней-1 Платяной</name>
-      <description>Шкаф Сидней-1 Платяной. Фабрика Микон. Размер 60х43х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф Сидней-1 платяной</name>
+      <description>Шкаф Сидней-1 платяной. Фабрика Микон. Размер 60х43х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
       <param name="Глубина">43 см</param>
       <param name="Высота">200 см</param>
@@ -16232,7 +16232,7 @@
       <param name="Цвет">Светло-коричневое дерево</param>
     </offer>
     <offer id="8027276584" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/penal-sofiya-8027276584/</url>
+      <url>https://мебель-фаворит.рф/shkafy/penal-platyanoy-sofiya-8027276584/</url>
       <price>10517</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -16240,8 +16240,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal/8027276584/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09164-00030929</vendorCode>
-      <name>Пенал София</name>
-      <description>Пенал София. Фабрика Микон. Размер 54х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал платяной София</name>
+      <description>Пенал платяной София. Фабрика Микон. Размер 54х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">54 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">221 см</param>
@@ -16258,8 +16258,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20s%20Vitrinoy/8027404669/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09164-00043876</vendorCode>
-      <name>Пенал София с Витриной</name>
-      <description>Пенал София с Витриной. Фабрика Микон. Размер 54х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал София с витриной</name>
+      <description>Пенал София с витриной. Фабрика Микон. Размер 54х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">54 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">221 см</param>
@@ -16275,8 +16275,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20s%20Zerkalom%20i%20Yaschikami/8059259986/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20s%20Zerkalom%20i%20Yaschikami/8059259986/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Пенал София с Зеркалом и Ящиками</name>
-      <description>Пенал София с Зеркалом и Ящиками. Фабрика Микон. Размер 45х55х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал София с зеркалом и ящиками</name>
+      <description>Пенал София с зеркалом и ящиками. Фабрика Микон. Размер 45х55х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">45 см</param>
       <param name="Глубина">55 см</param>
       <param name="Высота">221 см</param>
@@ -16292,8 +16292,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20s%20Polkami/8027845289/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20s%20Polkami/8027845289/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Пенал София с Полками</name>
-      <description>Пенал София с Полками. Фабрика Микон. Размер 36х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал София с полками</name>
+      <description>Пенал София с полками. Фабрика Микон. Размер 36х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">36 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">221 см</param>
@@ -16310,8 +16310,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20s%20Yaschikami/8027184784/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09164-00030930</vendorCode>
-      <name>Пенал София с Ящиками</name>
-      <description>Пенал София с Ящиками. Фабрика Микон. Размер 54х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал София с ящиками</name>
+      <description>Пенал София с ящиками. Фабрика Микон. Размер 54х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">54 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">221 см</param>
@@ -16320,7 +16320,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8027325575" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-sofiya-8027325575/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-sofiya-kombinirovannyy-8027325575/</url>
       <price>18933</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -16328,8 +16328,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/2-kh%20stvorchatyy/8027325575/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09164-00036846</vendorCode>
-      <name>Шкаф 2-х створчатый София</name>
-      <description>Шкаф 2-х створчатый София. Фабрика Микон. Размер 90х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый София комбинированный</name>
+      <description>Шкаф 2-х створчатый София комбинированный. Фабрика Микон. Размер 90х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">90 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">221 см</param>
@@ -16346,8 +16346,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/2-kh%20stvorchatyy%20s%20Vitrinoy/8027291338/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09164-00034062</vendorCode>
-      <name>Шкаф 2-х створчатый София с Витриной</name>
-      <description>Шкаф 2-х створчатый София с Витриной. Фабрика Микон. Размер 90х35х185 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый София с витриной</name>
+      <description>Шкаф 2-х створчатый София с витриной. Фабрика Микон. Размер 90х35х185 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">90 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">185 см</param>
@@ -16380,8 +16380,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/3-kh%20stvorchatyy%20s%20Zerkalom/8059045618/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/3-kh%20stvorchatyy%20s%20Zerkalom/8059045618/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Шкаф 3-х створчатый София с Зеркалом</name>
-      <description>Шкаф 3-х створчатый София с Зеркалом. Фабрика Микон. Размер 135х55х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый София с зеркалом</name>
+      <description>Шкаф 3-х створчатый София с зеркалом. Фабрика Микон. Размер 135х55х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">135 см</param>
       <param name="Глубина">55 см</param>
       <param name="Высота">221 см</param>
@@ -16426,7 +16426,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8027310111" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/penal-nadstroyka-sofiya-8027310111/</url>
+      <url>https://мебель-фаворит.рф/shkafy/penal-vitrina-sofiya-8027310111/</url>
       <price>11067</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -16434,8 +16434,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20nadstroyka/8027310111/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09164-00030931</vendorCode>
-      <name>Пенал надстройка София</name>
-      <description>Пенал надстройка София. Фабрика Микон. Размер 36х35х180 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал-витрина София</name>
+      <description>Пенал-витрина София. Фабрика Микон. Размер 36х35х180 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">36 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">180 см</param>
@@ -16462,15 +16462,15 @@
       <param name="Цвет">Коричневый</param>
     </offer>
     <offer id="8027840111" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/penal-sofiya-8027840111/</url>
+      <url>https://мебель-фаворит.рф/shkafy/penal-platyanoy-sofiya-8027840111/</url>
       <price>10517</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal/8027840111/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal/8027840111/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Пенал София</name>
-      <description>Пенал София. Фабрика Микон. Размер 54х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал платяной София</name>
+      <description>Пенал платяной София. Фабрика Микон. Размер 54х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">54 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">221 см</param>
@@ -16487,8 +16487,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20s%20Vitrinoy/8027022526/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09164-00042480</vendorCode>
-      <name>Пенал София с Витриной</name>
-      <description>Пенал София с Витриной. Фабрика Микон. Размер 54х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал София с витриной</name>
+      <description>Пенал София с витриной. Фабрика Микон. Размер 54х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">54 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">221 см</param>
@@ -16504,8 +16504,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20s%20Zerkalom%20i%20Yaschikami/8059142801/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20s%20Zerkalom%20i%20Yaschikami/8059142801/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Пенал София с Зеркалом и Ящиками</name>
-      <description>Пенал София с Зеркалом и Ящиками. Фабрика Микон. Размер 45х55х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал София с зеркалом и ящиками</name>
+      <description>Пенал София с зеркалом и ящиками. Фабрика Микон. Размер 45х55х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">45 см</param>
       <param name="Глубина">55 см</param>
       <param name="Высота">221 см</param>
@@ -16522,8 +16522,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20s%20Polkami/8027154257/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09164-00042481</vendorCode>
-      <name>Пенал София с Полками</name>
-      <description>Пенал София с Полками. Фабрика Микон. Размер 36х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал София с полками</name>
+      <description>Пенал София с полками. Фабрика Микон. Размер 36х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">36 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">221 см</param>
@@ -16539,8 +16539,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20s%20Yaschikami/8027090800/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20s%20Yaschikami/8027090800/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Пенал София с Ящиками</name>
-      <description>Пенал София с Ящиками. Фабрика Микон. Размер 54х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал София с ящиками</name>
+      <description>Пенал София с ящиками. Фабрика Микон. Размер 54х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">54 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">221 см</param>
@@ -16549,7 +16549,7 @@
       <param name="Цвет">Коричневый</param>
     </offer>
     <offer id="8027485981" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-sofiya-8027485981/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-sofiya-kombinirovannyy-8027485981/</url>
       <price>16767</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -16557,8 +16557,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/2-kh%20stvorchatyy/8027485981/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09164-00042485</vendorCode>
-      <name>Шкаф 2-х створчатый София</name>
-      <description>Шкаф 2-х створчатый София. Фабрика Микон. Размер 90х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый София комбинированный</name>
+      <description>Шкаф 2-х створчатый София комбинированный. Фабрика Микон. Размер 90х35х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">90 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">221 см</param>
@@ -16591,8 +16591,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/2-kh%20stvorchatyy%20s%20Vitrinoy/8027851087/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/2-kh%20stvorchatyy%20s%20Vitrinoy/8027851087/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Шкаф 2-х створчатый София с Витриной</name>
-      <description>Шкаф 2-х створчатый София с Витриной. Фабрика Микон. Размер 90х35х185 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 2-х створчатый София с витриной</name>
+      <description>Шкаф 2-х створчатый София с витриной. Фабрика Микон. Размер 90х35х185 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">90 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">185 см</param>
@@ -16626,8 +16626,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/3-kh%20stvorchatyy%20s%20Zerkalom/8059223102/02.webp</picture>
       <vendor>Микон</vendor>
       <vendorCode>09453-00036514</vendorCode>
-      <name>Шкаф 3-х створчатый София с Зеркалом</name>
-      <description>Шкаф 3-х створчатый София с Зеркалом. Фабрика Микон. Размер 135х55х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф 3-х створчатый София с зеркалом</name>
+      <description>Шкаф 3-х створчатый София с зеркалом. Фабрика Микон. Размер 135х55х221 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">135 см</param>
       <param name="Глубина">55 см</param>
       <param name="Высота">221 см</param>
@@ -16670,15 +16670,15 @@
       <param name="Цвет">Коричневый</param>
     </offer>
     <offer id="8027769663" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/penal-nadstroyka-sofiya-8027769663/</url>
+      <url>https://мебель-фаворит.рф/shkafy/penal-vitrina-sofiya-8027769663/</url>
       <price>11067</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20nadstroyka/8027769663/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mikon/Sofiya/Stvorchatye/Penal%20nadstroyka/8027769663/02.webp</picture>
       <vendor>Микон</vendor>
-      <name>Пенал надстройка София</name>
-      <description>Пенал надстройка София. Фабрика Микон. Размер 36х35х180 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Пенал-витрина София</name>
+      <description>Пенал-витрина София. Фабрика Микон. Размер 36х35х180 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">36 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">180 см</param>
@@ -16997,15 +16997,15 @@
       <param name="Цвет">Светло-коричневое дерево</param>
     </offer>
     <offer id="7292020915" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-martina-platyanoy-7292020915/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-platyanoy-martina-7292020915/</url>
       <price>6767</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mif/Martina/Stvorchatye/Platyanoy/7292020915/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mif/Martina/Stvorchatye/Platyanoy/7292020915/02.webp</picture>
       <vendor>Миф</vendor>
-      <name>Шкаф Мартина платяной</name>
-      <description>Шкаф Мартина платяной. Фабрика Миф. Размер 50х35х201 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф платяной Мартина</name>
+      <description>Шкаф платяной Мартина. Фабрика Миф. Размер 50х35х201 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">50 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">201 см</param>
@@ -17189,7 +17189,7 @@
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="7291819811" available="true">
-      <url>https://мебель-фаворит.рф/shkafy/shkaf-martina-platyanoy-7291819811/</url>
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-platyanoy-martina-7291819811/</url>
       <price>6767</price>
       <currencyId>RUB</currencyId>
       <categoryId>25</categoryId>
@@ -17204,8 +17204,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mif/Martina/Stvorchatye/Platyanoy/7291819811/09.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mif/Martina/Stvorchatye/Platyanoy/7291819811/10.webp</picture>
       <vendor>Миф</vendor>
-      <name>Шкаф Мартина платяной</name>
-      <description>Шкаф Мартина платяной. Фабрика Миф. Размер 50х35х201 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф платяной Мартина</name>
+      <description>Шкаф платяной Мартина. Фабрика Миф. Размер 50х35х201 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">50 см</param>
       <param name="Глубина">35 см</param>
       <param name="Высота">201 см</param>
@@ -25607,8 +25607,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Praga/Stvorchatye/Vitrina%20universalnaya/7931483350/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Praga/Stvorchatye/Vitrina%20universalnaya/7931483350/04.webp</picture>
       <vendor>Эра</vendor>
-      <name>Шкаф Витрина универсальная Прага</name>
-      <description>Шкаф Витрина универсальная Прага. Фабрика Эра. Размер 66х37х103 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф-витрина универсальная Прага</name>
+      <description>Шкаф-витрина универсальная Прага. Фабрика Эра. Размер 66х37х103 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">66 см</param>
       <param name="Глубина">37 см</param>
       <param name="Высота">103 см</param>
@@ -25660,8 +25660,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Praga/Stvorchatye/Vitrina%20universalnaya/7930928302/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Praga/Stvorchatye/Vitrina%20universalnaya/7930928302/04.webp</picture>
       <vendor>Эра</vendor>
-      <name>Шкаф Витрина универсальная Прага</name>
-      <description>Шкаф Витрина универсальная Прага. Фабрика Эра. Размер 66х37х103 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф-витрина универсальная Прага</name>
+      <description>Шкаф-витрина универсальная Прага. Фабрика Эра. Размер 66х37х103 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">66 см</param>
       <param name="Глубина">37 см</param>
       <param name="Высота">103 см</param>
@@ -25713,8 +25713,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Praga/Stvorchatye/Vitrina%20universalnaya/7931342375/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Praga/Stvorchatye/Vitrina%20universalnaya/7931342375/04.webp</picture>
       <vendor>Эра</vendor>
-      <name>Шкаф Витрина универсальная Прага</name>
-      <description>Шкаф Витрина универсальная Прага. Фабрика Эра. Размер 66х37х103 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф-витрина универсальная Прага</name>
+      <description>Шкаф-витрина универсальная Прага. Фабрика Эра. Размер 66х37х103 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">66 см</param>
       <param name="Глубина">37 см</param>
       <param name="Высота">103 см</param>
@@ -25766,8 +25766,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Praga/Stvorchatye/Vitrina%20universalnaya/7931676156/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Praga/Stvorchatye/Vitrina%20universalnaya/7931676156/04.webp</picture>
       <vendor>Эра</vendor>
-      <name>Шкаф Витрина универсальная Прага</name>
-      <description>Шкаф Витрина универсальная Прага. Фабрика Эра. Размер 66х37х103 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф-витрина универсальная Прага</name>
+      <description>Шкаф-витрина универсальная Прага. Фабрика Эра. Размер 66х37х103 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">66 см</param>
       <param name="Глубина">37 см</param>
       <param name="Высота">103 см</param>
@@ -25817,8 +25817,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Praga/Stvorchatye/Vitrina%20universalnaya/7931012168/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Praga/Stvorchatye/Vitrina%20universalnaya/7931012168/02.webp</picture>
       <vendor>Эра</vendor>
-      <name>Шкаф Витрина универсальная Прага</name>
-      <description>Шкаф Витрина универсальная Прага. Фабрика Эра. Размер 66х37х103 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф-витрина универсальная Прага</name>
+      <description>Шкаф-витрина универсальная Прага. Фабрика Эра. Размер 66х37х103 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">66 см</param>
       <param name="Глубина">37 см</param>
       <param name="Высота">103 см</param>
@@ -25870,8 +25870,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Praga/Stvorchatye/Vitrina%20universalnaya/7931805750/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Era/Praga/Stvorchatye/Vitrina%20universalnaya/7931805750/04.webp</picture>
       <vendor>Эра</vendor>
-      <name>Шкаф Витрина универсальная Прага</name>
-      <description>Шкаф Витрина универсальная Прага. Фабрика Эра. Размер 66х37х103 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Шкаф-витрина универсальная Прага</name>
+      <description>Шкаф-витрина универсальная Прага. Фабрика Эра. Размер 66х37х103 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">66 см</param>
       <param name="Глубина">37 см</param>
       <param name="Высота">103 см</param>
