@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-08-26 19:06">
+<yml_catalog date="2026-08-29 16:54">
   <shop>
     <name>Мебель Фаворит</name>
     <company>Мебель Фаворит</company>
@@ -47257,6 +47257,8 @@
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Rostok/Sabrina-2/bez%20PM/140x200/Yasen%20ankor%20svetlyy/8219621574/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Rostok/Sabrina-2/bez%20PM/140x200/Yasen%20ankor%20svetlyy/8219621574/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Rostok/Sabrina-2/bez%20PM/140x200/Yasen%20ankor%20svetlyy/8219621574/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07631-00031571</vendorCode>
       <name>Кровать двуспальная Сабрина-2 140х200</name>
@@ -47287,6 +47289,8 @@
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Rostok/Sabrina-2/bez%20PM/160x200/Yasen%20ankor%20svetlyy/8219067383/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Rostok/Sabrina-2/bez%20PM/160x200/Yasen%20ankor%20svetlyy/8219067383/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Rostok/Sabrina-2/bez%20PM/160x200/Yasen%20ankor%20svetlyy/8219067383/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07631-00033720</vendorCode>
       <name>Кровать двуспальная Сабрина-2 160х200</name>
@@ -48568,6 +48572,7 @@
       <categoryId>16</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Venetsiya-1/Venge%20-%20beloe%20derevo/8219718810/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Venetsiya-1/Venge%20-%20beloe%20derevo/8219718810/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Venetsiya-1/Venge%20-%20beloe%20derevo/8219718810/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>08260-00031421</vendorCode>
       <name>Тумба прикроватная Венеция-1</name>
@@ -48586,6 +48591,7 @@
       <categoryId>16</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Venetsiya-1/Dub%20sonoma%20-%20beloe%20derevo/8219129200/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Venetsiya-1/Dub%20sonoma%20-%20beloe%20derevo/8219129200/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Venetsiya-1/Dub%20sonoma%20-%20beloe%20derevo/8219129200/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>08260-00031576</vendorCode>
       <name>Тумба прикроватная Венеция-1</name>
@@ -48606,6 +48612,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Versal-5/Dub%20barrik/8219435652/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Versal-5/Dub%20barrik/8219435652/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Versal-5/Dub%20barrik/8219435652/04.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Versal-5/Dub%20barrik/8219435652/05.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07458-00004586</vendorCode>
       <name>Тумба прикроватная Версаль-5</name>
@@ -48623,6 +48630,7 @@
       <currencyId>RUB</currencyId>
       <categoryId>16</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Liana-1/Dub%20kraft%20zolotoy%20-%20soft%20grafit/8219539412/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Liana-1/Dub%20kraft%20zolotoy%20-%20soft%20grafit/8219539412/02.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>09294-00031567</vendorCode>
       <name>Тумба прикроватная Лиана-1</name>
@@ -48640,6 +48648,7 @@
       <currencyId>RUB</currencyId>
       <categoryId>16</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Milana/Yasen%20ankor%20-%20dub%20elza/8219248362/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Milana/Yasen%20ankor%20-%20dub%20elza/8219248362/02.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>09267-00031429</vendorCode>
       <name>Тумба прикроватная Милана</name>
@@ -48657,6 +48666,7 @@
       <currencyId>RUB</currencyId>
       <categoryId>16</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Sabrina-2/Yasen%20ankor%20svetlyy/8219753028/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Rostok/Sabrina-2/Yasen%20ankor%20svetlyy/8219753028/02.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07631-00031573</vendorCode>
       <name>Тумба прикроватная Сабрина-2</name>
@@ -51259,6 +51269,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Penaly/Penal%20s%20yaschikami/8219766794/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Penaly/Penal%20s%20yaschikami/8219766794/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Penaly/Penal%20s%20yaschikami/8219766794/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>06443-00000457</vendorCode>
       <name>Пенал Диана-4 с ящиками</name>
@@ -51277,6 +51288,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Penaly/Penal%20s%20yaschikami/8219119912/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Penaly/Penal%20s%20yaschikami/8219119912/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Penaly/Penal%20s%20yaschikami/8219119912/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>06443-00032010</vendorCode>
       <name>Пенал Диана-4 с ящиками</name>
@@ -51296,6 +51308,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/2-kh%20stvorchatyy/8219415532/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/2-kh%20stvorchatyy/8219415532/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/2-kh%20stvorchatyy/8219415532/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/2-kh%20stvorchatyy/8219415532/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>03352-00016166</vendorCode>
       <name>Шкаф 2-х створчатый Диана-4</name>
@@ -51315,6 +51328,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/2-kh%20stvorchatyy/8219271640/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/2-kh%20stvorchatyy/8219271640/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/2-kh%20stvorchatyy/8219271640/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/2-kh%20stvorchatyy/8219271640/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>03349-00016163</vendorCode>
       <name>Шкаф 2-х створчатый Диана-4</name>
@@ -51334,6 +51348,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/2-kh%20stvorchatyy/8219086167/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/2-kh%20stvorchatyy/8219086167/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/2-kh%20stvorchatyy/8219086167/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/2-kh%20stvorchatyy/8219086167/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>03349-00024411</vendorCode>
       <name>Шкаф 2-х створчатый Диана-4</name>
@@ -51353,6 +51368,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/3-kh%20stvorchatyy/8219097541/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/3-kh%20stvorchatyy/8219097541/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/3-kh%20stvorchatyy/8219097541/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/3-kh%20stvorchatyy/8219097541/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>03353-00016167</vendorCode>
       <name>Шкаф 3-х створчатый Диана-4</name>
@@ -51372,6 +51388,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/3-kh%20stvorchatyy/8219838668/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/3-kh%20stvorchatyy/8219838668/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/3-kh%20stvorchatyy/8219838668/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/3-kh%20stvorchatyy/8219838668/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>03353-00024416</vendorCode>
       <name>Шкаф 3-х створчатый Диана-4</name>
@@ -51391,6 +51408,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/Uglovoy/8219476624/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/Uglovoy/8219476624/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/Uglovoy/8219476624/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/Uglovoy/8219476624/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>03440-00015466</vendorCode>
       <name>Шкаф угловой Диана-4</name>
@@ -51409,6 +51427,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/Uglovoy/8219413558/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/Uglovoy/8219413558/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/Uglovoy/8219413558/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>03350-00016164</vendorCode>
       <name>Шкаф угловой Диана-4</name>
@@ -51427,6 +51446,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/Uglovoy/8219123271/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/Uglovoy/8219123271/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Diana-4/Stvorchatye/Uglovoy/8219123271/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>03350-00032669</vendorCode>
       <name>Шкаф угловой Диана-4</name>
@@ -51446,6 +51466,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219130798/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219130798/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219130798/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219130798/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>06465-00000529</vendorCode>
       <name>Шкаф 2-х створчатый Венеция-1</name>
@@ -51465,6 +51486,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219016011/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219016011/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219016011/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219016011/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>06465-00030742</vendorCode>
       <name>Шкаф 2-х створчатый Венеция-1</name>
@@ -51483,6 +51505,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219156427/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219156427/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219156427/03.webp</picture>
       <vendor>Росток</vendor>
       <name>Шкаф 2-х створчатый Венеция-1 с ящиками</name>
       <description>Шкаф 2-х створчатый Венеция-1 с ящиками. Фабрика Росток. Размер 90х44х218 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
@@ -51500,6 +51523,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219533647/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219533647/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/2-kh%20stvorchatyy/8219533647/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>06742-00033714</vendorCode>
       <name>Шкаф 2-х створчатый Венеция-1 с ящиками</name>
@@ -51519,6 +51543,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/3-kh%20stvorchatyy/8219548628/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/3-kh%20stvorchatyy/8219548628/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/3-kh%20stvorchatyy/8219548628/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/3-kh%20stvorchatyy/8219548628/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>08260-00026893</vendorCode>
       <name>Шкаф 3-х створчатый Венеция-1</name>
@@ -51537,6 +51562,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/3-kh%20stvorchatyy/8219436030/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/3-kh%20stvorchatyy/8219436030/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/3-kh%20stvorchatyy/8219436030/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>06465-00031306</vendorCode>
       <name>Шкаф 3-х створчатый Венеция-1</name>
@@ -51556,6 +51582,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/Uglovoy/8219718514/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/Uglovoy/8219718514/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/Uglovoy/8219718514/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/Uglovoy/8219718514/04.webp</picture>
       <vendor>Росток</vendor>
       <name>Шкаф угловой Венеция-1</name>
       <description>Шкаф угловой Венеция-1. Фабрика Росток. Размер 75х75х218 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
@@ -51573,6 +51600,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/Uglovoy/8218922874/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/Uglovoy/8218922874/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Venetsiya-1/Stvorchatye/Uglovoy/8218922874/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>08260-00031304</vendorCode>
       <name>Шкаф угловой Венеция-1</name>
@@ -51591,6 +51619,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Penaly/Penal/8219851406/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Penaly/Penal/8219851406/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Penaly/Penal/8219851406/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07631-00032796</vendorCode>
       <name>Пенал Сабрина-2</name>
@@ -51609,6 +51638,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Stvorchatye/2-kh%20stvorchatyy/8219068396/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Stvorchatye/2-kh%20stvorchatyy/8219068396/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Stvorchatye/2-kh%20stvorchatyy/8219068396/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07631-00033713</vendorCode>
       <name>Шкаф 2-х створчатый Сабрина-2</name>
@@ -51628,6 +51658,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Stvorchatye/3-kh%20stvorchatyy/8219307045/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Stvorchatye/3-kh%20stvorchatyy/8219307045/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Stvorchatye/3-kh%20stvorchatyy/8219307045/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Stvorchatye/3-kh%20stvorchatyy/8219307045/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07631-00031574</vendorCode>
       <name>Шкаф 3-х створчатый Сабрина-2</name>
@@ -51646,6 +51677,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Stvorchatye/4-kh%20stvorchatyy/8219164109/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Stvorchatye/4-kh%20stvorchatyy/8219164109/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Stvorchatye/4-kh%20stvorchatyy/8219164109/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07631-00033712</vendorCode>
       <name>Шкаф 4-х створчатый Сабрина-2</name>
@@ -51664,6 +51696,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Stvorchatye/Uglovoy/8218907407/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Stvorchatye/Uglovoy/8218907407/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Sabrina-2/Stvorchatye/Uglovoy/8218907407/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07631-00034587</vendorCode>
       <name>Шкаф угловой Сабрина-2</name>
@@ -51683,6 +51716,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Milana/Penaly/Penal/8219077267/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Milana/Penaly/Penal/8219077267/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Milana/Penaly/Penal/8219077267/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Milana/Penaly/Penal/8219077267/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>09267-00038094</vendorCode>
       <name>Пенал Милана</name>
@@ -51704,6 +51738,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Milana/Stvorchatye/2-kh%20stvorchatyy/8219194601/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Milana/Stvorchatye/2-kh%20stvorchatyy/8219194601/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Milana/Stvorchatye/2-kh%20stvorchatyy/8219194601/05.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Milana/Stvorchatye/2-kh%20stvorchatyy/8219194601/06.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>09267-00033533</vendorCode>
       <name>Шкаф 2-х створчатый Милана</name>
@@ -51722,6 +51757,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Milana/Stvorchatye/Uglovoy/8219865672/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Milana/Stvorchatye/Uglovoy/8219865672/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Milana/Stvorchatye/Uglovoy/8219865672/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>09267-00041520</vendorCode>
       <name>Шкаф угловой Милана</name>
@@ -51740,6 +51776,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Versal-5/Stvorchatye/3-kh%20stvorchatyy/8219758307/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Versal-5/Stvorchatye/3-kh%20stvorchatyy/8219758307/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Versal-5/Stvorchatye/3-kh%20stvorchatyy/8219758307/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07458-00026719</vendorCode>
       <name>Шкаф 3-х створчатый Версаль-5</name>
@@ -51762,6 +51799,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Versal-5/Stvorchatye/4-kh%20stvorchatyy/8219107259/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Versal-5/Stvorchatye/4-kh%20stvorchatyy/8219107259/05.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Versal-5/Stvorchatye/4-kh%20stvorchatyy/8219107259/06.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Versal-5/Stvorchatye/4-kh%20stvorchatyy/8219107259/07.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07458-00004587</vendorCode>
       <name>Шкаф 4-х створчатый Версаль-5</name>
@@ -51780,6 +51818,7 @@
       <categoryId>25</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Liana-1/Stvorchatye/4-kh%20stvorchatyy/8219112579/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Liana-1/Stvorchatye/4-kh%20stvorchatyy/8219112579/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Rostok/Liana-1/Stvorchatye/4-kh%20stvorchatyy/8219112579/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>09294-00032464</vendorCode>
       <name>Шкаф 4-х створчатый Лиана-1</name>
@@ -52781,6 +52820,7 @@
       <categoryId>5</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Rostok/Versal-2/Dub%20barrik%20-%20yasen%20ankor%20-%20belyy/8219823295/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Rostok/Versal-2/Dub%20barrik%20-%20yasen%20ankor%20-%20belyy/8219823295/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Rostok/Versal-2/Dub%20barrik%20-%20yasen%20ankor%20-%20belyy/8219823295/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>08284-00033169</vendorCode>
       <name>Комод Версаль-2</name>
@@ -52802,6 +52842,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Rostok/Versal-5/Dub%20barrik/8219013770/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Rostok/Versal-5/Dub%20barrik/8219013770/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Rostok/Versal-5/Dub%20barrik/8219013770/05.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Rostok/Versal-5/Dub%20barrik/8219013770/06.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07458-00004584</vendorCode>
       <name>Комод Версаль-5</name>
@@ -52820,6 +52861,7 @@
       <categoryId>5</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Rostok/Sabrina-2/Yasen%20ankor%20svetlyy/8219691773/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Rostok/Sabrina-2/Yasen%20ankor%20svetlyy/8219691773/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Rostok/Sabrina-2/Yasen%20ankor%20svetlyy/8219691773/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07631-00033711</vendorCode>
       <name>Комод Сабрина-2</name>
@@ -53013,6 +53055,7 @@
       <categoryId>23</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby/Rostok/Diana-4/Venge%20-%20dub%20molochnyy/8219638573/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby/Rostok/Diana-4/Venge%20-%20dub%20molochnyy/8219638573/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby/Rostok/Diana-4/Venge%20-%20dub%20molochnyy/8219638573/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>03511-00008577</vendorCode>
       <name>Тумба обувница Диана-4</name>
@@ -53031,6 +53074,8 @@
       <categoryId>23</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby/Rostok/Diana-4/Yasen%20ankor%20-%20dub%20elza/8219341873/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby/Rostok/Diana-4/Yasen%20ankor%20-%20dub%20elza/8219341873/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby/Rostok/Diana-4/Yasen%20ankor%20-%20dub%20elza/8219341873/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby/Rostok/Diana-4/Yasen%20ankor%20-%20dub%20elza/8219341873/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>03511-00031425</vendorCode>
       <name>Тумба обувница Диана-4</name>
@@ -53715,6 +53760,8 @@
       <categoryId>17</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Rostok/Diana-4/Prikhozhaya/8219134616/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Rostok/Diana-4/Prikhozhaya/8219134616/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Rostok/Diana-4/Prikhozhaya/8219134616/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Rostok/Diana-4/Prikhozhaya/8219134616/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>03770-00022907</vendorCode>
       <name>Прихожая Диана-4</name>
@@ -53732,6 +53779,8 @@
       <categoryId>17</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Rostok/Diana-4/Prikhozhaya/8219708204/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Rostok/Diana-4/Prikhozhaya/8219708204/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Rostok/Diana-4/Prikhozhaya/8219708204/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Rostok/Diana-4/Prikhozhaya/8219708204/04.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>03770-00024964</vendorCode>
       <name>Прихожая Диана-4</name>
@@ -53748,6 +53797,7 @@
       <currencyId>RUB</currencyId>
       <categoryId>1</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garderobnye%20sistemy%20i%20veshalki/Rostok/Diana-4/Venge%20-%20dub%20molochnyy/8219523497/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garderobnye%20sistemy%20i%20veshalki/Rostok/Diana-4/Venge%20-%20dub%20molochnyy/8219523497/02.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>06232-00018177</vendorCode>
       <name>Вешалка Диана-4</name>
@@ -53922,6 +53972,7 @@
       <currencyId>RUB</currencyId>
       <categoryId>20</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stellazhi%20i%20etazherki/Rostok/Diana-4/Venge%20-%20dub%20molochnyy/8219698880/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stellazhi%20i%20etazherki/Rostok/Diana-4/Venge%20-%20dub%20molochnyy/8219698880/02.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>03487-00016810</vendorCode>
       <name>Стеллаж угловой Диана-4</name>
@@ -53940,6 +53991,7 @@
       <categoryId>20</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stellazhi%20i%20etazherki/Rostok/Sabrina-2/Yasen%20ankor%20svetlyy/8219808728/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stellazhi%20i%20etazherki/Rostok/Sabrina-2/Yasen%20ankor%20svetlyy/8219808728/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stellazhi%20i%20etazherki/Rostok/Sabrina-2/Yasen%20ankor%20svetlyy/8219808728/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>07631-00034977</vendorCode>
       <name>Стеллаж угловой Сабрина-2</name>
@@ -54355,6 +54407,7 @@
       <currencyId>RUB</currencyId>
       <categoryId>21</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stoly/Rostok/Milana/Yasen%20ankor%20-%20dub%20elza/8219561683/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stoly/Rostok/Milana/Yasen%20ankor%20-%20dub%20elza/8219561683/02.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>09267-00031432</vendorCode>
       <name>Гримерный стол Милана</name>
