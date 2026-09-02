@@ -191,7 +191,7 @@
      Это решает блокировку Cloudflare без VPN и устраняет внешний кэш
      прокси, из-за которого новые фото долго не подменялись. -->
 <!-- Preload каталога: он всё равно нужен сразу, но начнёт качаться параллельно с HTML -->
-<link rel="preload" href="catalog.js?v=45500abd" as="fetch">
+<link rel="preload" href="catalog.js?v=6340e5a6" as="fetch">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/golos.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css?v=d147d02e">
@@ -383,7 +383,7 @@
 <!-- Sticky-панель "Поиск + Фильтры" — видна только на мобиле и только когда
      пользователь долистал до этого места. При скролле вниз компактно прячется,
      при скролле вверх — снова появляется. -->
-<section class="chpu-seo" id="chpuSeoBlock"><nav class="chpu-seo-crumbs"><a href="/">Главная</a> › <a href="/krovati/">Кровати</a> › <span>Кровать двуспальная Милана 160×200</span></nav><h1 class="chpu-seo-h1">Кровать двуспальная Милана 160×200</h1><div class="chpu-seo-row"><img class="chpu-seo-img" src="https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milana/160x200/7995044535/thumb.webp" alt="Кровать двуспальная Милана 160×200" loading="eager"><div class="chpu-seo-col"><div class="chpu-seo-price">12 871 ₽</div><p class="chpu-seo-p">Фабрика — Велес. Цвет — Бежевый\Белый. Габариты: Ш 164 · В 110 см. Доставка по Стерлитамаку, Салавату, Ишимбаю и районам до 60 км, возможна сборка.</p><table class="chpu-seo-tbl"><tbody><tr><td>Вид товара</td><td>Кровати, диваны и кресла</td></tr><tr><td>Подвид товара</td><td>Кровати</td></tr><tr><td>Тип кровати</td><td>Двуспальная</td></tr><tr><td>Название модели</td><td>Милана</td></tr><tr><td>Основной цвет</td><td>Бежевый\Белый</td></tr><tr><td>Цвет от производителя</td><td>Гаскон пайн/Белый лофт</td></tr><tr><td>Каркас</td><td>ЛДСП</td></tr><tr><td>Наличие подъемного механизма</td><td>Нет</td></tr><tr><td>Матрас в комплекте</td><td>Нет</td></tr><tr><td>Ширина спального места</td><td>160</td></tr><tr><td>Длина спального места</td><td>200</td></tr><tr><td>Длина</td><td>204.9</td></tr></tbody></table><p class="chpu-seo-p"><a href="/krovati/">Смотреть все товары раздела «Кровати»</a></p></div></div></section>
+<section class="chpu-seo" id="chpuSeoBlock"><nav class="chpu-seo-crumbs"><a href="/">Главная</a> › <a href="/krovati/">Кровати</a> › <span>Кровать двуспальная Милана 160×200</span></nav><h1 class="chpu-seo-h1">Кровать двуспальная Милана 160×200</h1><div class="chpu-seo-row"><img class="chpu-seo-img" src="https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milana/160x200/7995044535/thumb.webp" alt="Кровать двуспальная Милана 160×200" loading="eager"><div class="chpu-seo-col"><div class="chpu-seo-price">12 871 ₽</div><p class="chpu-seo-p">Фабрика — Велес. Цвет — Бежевый\Белый. Габариты: Ш 164 · В 110 см. Доставка по Стерлитамаку, Салавату, Ишимбаю и районам до 60 км, возможна сборка.</p><table class="chpu-seo-tbl"><tbody><tr><td>Вид товара</td><td>Кровати, диваны и кресла</td></tr><tr><td>Подвид товара</td><td>Кровати</td></tr><tr><td>Тип кровати</td><td>Двуспальная</td></tr><tr><td>Название модели</td><td>Милана</td></tr><tr><td>Основной цвет</td><td>Бежевый\Белый</td></tr><tr><td>Цвет от производителя</td><td>Гаскон пайн/Белый лофт</td></tr><tr><td>Каркас</td><td>ЛДСП</td></tr><tr><td>Наличие подъемного механизма</td><td>Нет</td></tr><tr><td>Матрас в комплекте</td><td>Нет</td></tr><tr><td>Ширина спального места</td><td>160</td></tr><tr><td>Длина спального места</td><td>200</td></tr><tr><td>Длина</td><td>204</td></tr></tbody></table><p class="chpu-seo-p"><a href="/krovati/">Смотреть все товары раздела «Кровати»</a></p></div></div></section>
 <div id="catAnchor"></div>
 <div class="page-layout">
 
@@ -953,7 +953,7 @@ if(document.readyState === 'loading'){
 /* V41_115 (TBT): каталог парсится в Web Worker — главный поток не блокируется 2.2МБ.
    Готово -> window.CATALOG + событие catalog-ready. Фолбэк: обычный <script defer>. */
 (function(){
-  var URL_='catalog.js?v=45500abd';
+  var URL_='catalog.js?v=6340e5a6';
   var settled=false;
   function ready(arr,meta){
     if(settled) return; settled=true;

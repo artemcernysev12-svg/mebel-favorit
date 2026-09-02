@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-08-30 16:19">
+<yml_catalog date="2026-09-02 10:34">
   <shop>
     <name>Мебель Фаворит</name>
     <company>Мебель Фаворит</company>
@@ -45103,7 +45103,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N1/8155865478/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №1 модульная (Миф)</name>
-      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8155837849" available="true">
@@ -45116,7 +45118,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N1/8155837849/03.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №1 модульная (Миф)</name>
-      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8155232246" available="true">
@@ -45127,7 +45131,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N1/8155232246/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №1 модульная (Миф)</name>
-      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8155657614" available="true">
@@ -45138,7 +45144,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N1/8155657614/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №1 модульная (Миф)</name>
-      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Белый</param>
     </offer>
     <offer id="8154891573" available="true">
@@ -45149,7 +45157,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N1/8154891573/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №1 модульная (Миф)</name>
-      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Зелёный</param>
     </offer>
     <offer id="8155010094" available="true">
@@ -45160,7 +45170,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N1/8155010094/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №1 модульная (Миф)</name>
-      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Золотой</param>
     </offer>
     <offer id="8155612914" available="true">
@@ -45171,7 +45183,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N1/8155612914/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №1 модульная (Миф)</name>
-      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №1 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="8155153579" available="true">
@@ -45182,7 +45196,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N2/8155153579/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №2 модульная (Миф)</name>
-      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8155428174" available="true">
@@ -45194,7 +45210,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N2/8155428174/02.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №2 модульная (Миф)</name>
-      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8154943399" available="true">
@@ -45205,7 +45223,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N2/8154943399/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №2 модульная (Миф)</name>
-      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Белый</param>
     </offer>
     <offer id="8155402719" available="true">
@@ -45216,7 +45236,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N2/8155402719/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №2 модульная (Миф)</name>
-      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Зелёный</param>
     </offer>
     <offer id="8155375646" available="true">
@@ -45229,7 +45251,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N2/8155375646/03.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №2 модульная (Миф)</name>
-      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Зелёный</param>
     </offer>
     <offer id="8155836769" available="true">
@@ -45240,7 +45264,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N2/8155836769/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №2 модульная (Миф)</name>
-      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Золотой</param>
     </offer>
     <offer id="8155201597" available="true">
@@ -45251,7 +45277,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N2/8155201597/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №2 модульная (Миф)</name>
-      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №2 модульная (Миф). Фабрика Миф. Размер 150х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">35 см</param>
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="8155574721" available="true">
@@ -45267,7 +45295,10 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N3/8155574721/06.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №3 модульная (Миф)</name>
-      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. Размер 360х51х224 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">360 см</param>
+      <param name="Глубина">51 см</param>
+      <param name="Высота">224 см</param>
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8155642011" available="true">
@@ -45281,7 +45312,10 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N3/8155642011/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №3 модульная (Миф)</name>
-      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. Размер 360х51х224 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">360 см</param>
+      <param name="Глубина">51 см</param>
+      <param name="Высота">224 см</param>
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8155223808" available="true">
@@ -45292,7 +45326,10 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N3/8155223808/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №3 модульная (Миф)</name>
-      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. Размер 360х51х224 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">360 см</param>
+      <param name="Глубина">51 см</param>
+      <param name="Высота">224 см</param>
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8155584196" available="true">
@@ -45306,7 +45343,10 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N3/8155584196/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №3 модульная (Миф)</name>
-      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. Размер 360х51х224 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">360 см</param>
+      <param name="Глубина">51 см</param>
+      <param name="Высота">224 см</param>
       <param name="Цвет">Белый</param>
     </offer>
     <offer id="8155465379" available="true">
@@ -45321,7 +45361,10 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N3/8155465379/05.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №3 модульная (Миф)</name>
-      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. Размер 360х51х224 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">360 см</param>
+      <param name="Глубина">51 см</param>
+      <param name="Высота">224 см</param>
       <param name="Цвет">Зелёный</param>
     </offer>
     <offer id="8155786391" available="true">
@@ -45335,7 +45378,10 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N3/8155786391/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №3 модульная (Миф)</name>
-      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. Размер 360х51х224 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">360 см</param>
+      <param name="Глубина">51 см</param>
+      <param name="Высота">224 см</param>
       <param name="Цвет">Зелёный</param>
     </offer>
     <offer id="8155787256" available="true">
@@ -45349,7 +45395,10 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N3/8155787256/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №3 модульная (Миф)</name>
-      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. Размер 360х51х224 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">360 см</param>
+      <param name="Глубина">51 см</param>
+      <param name="Высота">224 см</param>
       <param name="Цвет">Золотой</param>
     </offer>
     <offer id="8155565185" available="true">
@@ -45363,7 +45412,10 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Gostinaya%20N3/8155565185/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Гостиная Норд №3 модульная (Миф)</name>
-      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Гостиная Норд №3 модульная (Миф). Фабрика Миф. Размер 360х51х224 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">360 см</param>
+      <param name="Глубина">51 см</param>
+      <param name="Высота">224 см</param>
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="8155298181" available="true">
@@ -45378,7 +45430,10 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Mif/Nord/Zona%20tv/8155298181/05.webp</picture>
       <vendor>Миф</vendor>
       <name>Зона ТВ Норд (Миф)</name>
-      <description>Зона ТВ Норд (Миф). Фабрика Миф. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Зона ТВ Норд (Миф). Фабрика Миф. Размер 200х35х148 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">200 см</param>
+      <param name="Глубина">35 см</param>
+      <param name="Высота">148 см</param>
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8187802029" available="true">
