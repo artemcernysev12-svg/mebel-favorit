@@ -1523,52 +1523,7 @@ function renderModalAttrs(it){
     ? `<div class="mA wide mA-dims mA-sleep">${sleepPairs.map(([l,v])=>`<div class="mA-dim"><div class="mA-l">${esc(l)}</div><div class="mA-v">${esc(String(v))}</div></div>`).join('')}</div>`
     : sleepPairs.map(attTile).join('');
   box.innerHTML = dimsRowHtml + sleepRowHtml + restPairs.map(attTile).join('');
-  applyMobileAttrCollapse(box);
 }
-
-// V41_142: на мобиле показываем первые 6 плашек характеристик, остальное — по кнопке.
-function applyMobileAttrCollapse(box){
-  try{
-    if(!box) return;
-    box.classList.remove('m-collapsed');
-    var old = box.querySelector('.mAttMore'); if(old) old.remove();
-    if(!(window.matchMedia && window.matchMedia('(max-width:860px)').matches)) return;
-    var kids = box.querySelectorAll('.mA');
-    if(kids.length <= 7) return; // ради одной строки не сворачиваем
-    box.classList.add('m-collapsed');
-    var btn = document.createElement('button');
-    btn.type = 'button'; btn.className = 'mAttMore';
-    btn.textContent = 'Все характеристики (ещё ' + (kids.length - 6) + ') ▾';
-    btn.onclick = function(){ box.classList.remove('m-collapsed'); btn.remove(); };
-    box.appendChild(btn);
-  }catch(_){}
-}
-
-// V41_142: на мобиле блоки выбора (мульти/опции) переезжают из-под галереи внутрь
-// инфо-колонки — CSS order ставит их МЕЖДУ кнопками покупки и характеристиками.
-function syncMobileCardLayout(){
-  try{
-    var gal = document.querySelector('#mOv .mGal'), inf = document.querySelector('#mOv .mInf');
-    if(!gal || !inf) return;
-    var mob = window.matchMedia && window.matchMedia('(max-width:860px)').matches;
-    // Переносим ТОЛЬКО #mMulti: кнопки «Выбрать опции» живут ВНУТРИ него
-    // (mount*OptionToolsHost вкладывает их в #mMultiSizes) и едут вместе с ним.
-    var multi = document.getElementById('mMulti');
-    if(!multi) return;
-    if(mob){
-      if(multi.parentNode !== inf) inf.insertBefore(multi, document.getElementById('mAtt'));
-    } else {
-      if(multi.parentNode !== gal) gal.appendChild(multi);
-    }
-  }catch(_){}
-}
-window.addEventListener('resize', function(){
-  clearTimeout(window.__mCardLayoutT);
-  window.__mCardLayoutT = setTimeout(function(){
-    syncMobileCardLayout();
-    applyMobileAttrCollapse(document.getElementById('mAtt'));
-  }, 150);
-});
 
 const FACET_SKIP_KEYS = new Set(['вид товара','контактное лицо','поместится ли товар в одну коробку?','глубина кухни','глубина нижних шкафов','ширина','высота','глубина','название мультиобъявления','шаблон ссылок github']);
 const FACET_EXCLUDE_BY_CATEGORY = {
@@ -3819,7 +3774,6 @@ function renderMattressAttrs(it, v, rec){
     ? '<div class="mA wide mA-dims">'+dims.map(function(p){ return '<div class="mA-dim"><div class="mA-l">'+esc(p[0])+'</div><div class="mA-v">'+esc(String(p[1]))+'</div></div>'; }).join('')+'</div>'
     : dims.map(tile).join('');
   att.innerHTML=dimsRow+rest.map(tile).join('');
-  applyMobileAttrCollapse(att);
 }
 function renderMattressOptions(it, opts){
   const box=document.getElementById('mMattressOptions');
@@ -4086,7 +4040,6 @@ function openM(id, opts){
   } else { stockEl.style.display='none'; }
   document.getElementById('mPri').textContent=getItemInitialPriceText(it);
   renderModalAttrs(it);
-  syncMobileCardLayout();
   renderBedOptions(it);
   renderWardrobeAttic(it);
   renderWardrobeCoupeKit(it);
@@ -9072,14 +9025,3 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   }
 });
-
-// V41_142: липкая мобильная панель зеркалит цену карточки (любые пересчёты опций).
-(function(){
-  try{
-    var pri = document.getElementById('mPri'), st = document.getElementById('mStickyPrice');
-    if(!pri || !st) return;
-    var sync = function(){ st.textContent = pri.textContent; };
-    new MutationObserver(sync).observe(pri, {childList:true, characterData:true, subtree:true});
-    sync();
-  }catch(_){}
-})();
