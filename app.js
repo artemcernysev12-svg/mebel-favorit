@@ -1285,13 +1285,13 @@ function formatMainDimsText(it){
 
 
 const USEFUL_ATTRS_BY_CATEGORY = {
-  'Диваны':['Название модели','Форма','Угол','Модульный','Раскладной механизм','Тип раскладного механизма','Материал обивки','Спальное место','Ширина спального места','Длина спального места','Особенности'],
+  'Диваны':['Форма','Угол','Модульный','Раскладной механизм','Тип раскладного механизма','Материал обивки','Спальное место','Ширина спального места','Длина спального места','Особенности'],
   'Кресла':['Тип мебели','Раскладной механизм','Материал обивки','Спальное место','Особенности'],
   'Подвесные кресла':['Материал каркаса','Материал сиденья','Количество мест','Установка'],
-  'Кровати':['Название модели','Тип кровати','Каркас','Наличие подъемного механизма','Матрас в комплекте','Ширина спального места','Длина спального места','Что есть у кровати'],
-  'Матрасы':['Серия','Размер спального места','Жёсткость','Тип','Для кого','Особенности состава','Доп. особенности'],
+  'Кровати':['Тип кровати','Каркас','Наличие подъемного механизма','Матрас в комплекте','Ширина спального места','Длина спального места','Что есть у кровати'],
+  'Матрасы':['Тип матраса','Вид матраса','Пружинный блок','Жёсткость','Одна сторона','Другая сторона','Обивка'],
   'Спальные гарнитуры':['Состав комплекта','Ширина спального места','Длина спального места','Длина'],
-  'Шкафы и буфеты':['Название модели','Наполнение','Зеркало','Исполнение','Тип шкафов','Тип дверей','Количество створок','Форма','Материал'],
+  'Шкафы и буфеты':['Тип шкафов','Тип дверей','Количество створок','Наполнение','Полки и штанги','Зеркало','Форма','Материал','Назначение','Особенности'],
   'Комоды и тумбы':['Тип комодов','Материал','Что есть у товара'],
   'Тумбы':['Подтип тумбы','Материал','Что есть у товара'],
   'Тумбы под телевизор':['Тип расположения','Материал','Кол-во ящиков','Ниша','Основной цвет','Распашные дверцы'],
@@ -1302,7 +1302,7 @@ const USEFUL_ATTRS_BY_CATEGORY = {
   'Полки':['Тип полки','Тип размещения','Материал','Что есть у товара'],
   'Гарнитуры и комплекты':['Состав комплекта','Подсветка'],
   'Кухни':['Тип кухни','Форма кухни','Материал фасада','Поверхность фасада','Столешница в комплекте','Материал столешницы','Цвет столешницы','Остров в комплекте','Комплектация'],
-  'Кухонные модули':['Название модели','Тип шкафов','Тип дверей','Форма','Количество створок','Материал'],
+  'Кухонные модули':['Тип шкафов','Тип дверей','Форма','Количество створок','Материал'],
   'Столы':['Тип стола','Форма','Раскладной механизм','Материал столешницы','Материал основания','Длина в разложенном виде','Что есть у товара'],
   'Компьютерные столы':['Тип стола','Форма','Регулировка высоты','Материал столешницы','Материал основания','Что есть у стола'],
   'Стулья':['Тип стула','Материал сиденья','Материал основания','Количество стульев','Складной','Что есть у стула'],
@@ -1314,7 +1314,10 @@ const DETAIL_ATTR_SKIP = new Set([
   'вид товара','подвид товара','тип товара','категория','цена','фабрика','шаблон ссылок github',
   'уникальный идентификатор объявления','номер объявления на авито','ссылки на фото','название мультиобъявления',
   'ширина','высота','глубина','длина','ширина, см','длина, см','высота, см',
-  'поместится ли товар в одну коробку?','ширина коробки'
+  'поместится ли товар в одну коробку?','ширина коробки',
+  // Аудит 02.09: дубли и мусор — Бренд=Производитель (257), Арт поставщика=Артикул,
+  // «Название модели» дублирует заголовок карточки, «Целевая аудитория» — авитный шум.
+  'бренд','арт поставщика','артикул поставщика','целевая аудитория','название модели'
 ]);
 function getCategoryUsefulAttrKeys(cat){
   return USEFUL_ATTRS_BY_CATEGORY[cat] || [];
@@ -1326,7 +1329,18 @@ function getUsefulAttrPairs(it, limit){
   const usedValues = new Set();
   // Эти поля показываем всегда отдельно, даже если значение совпадает с уже добавленным
   // (например, «Цвет» и «Цвет от производителя» оба = «Белый»).
-  const EXEMPT_FROM_VALUE_DEDUP = new Set(['цвет от производителя','цвет производителя']);
+  const EXEMPT_FROM_VALUE_DEDUP = new Set([
+    'цвет от производителя','цвет производителя',
+    // Числовые/короткие характеристики: «Кол-во ящиков: 2» и «Распашные дверцы: 2»
+    // должны показываться обе, даже если значения совпали.
+    'тип расположения','материал','кол-во ящиков','ниша','распашные дверцы','длина под тв (см)',
+    // Габариты: у Бриза Высота=Глубина=35 — дедуп по значению съедал Глубину из плашки.
+    'ширина','высота','глубина','длина',
+    // Спальное место: у Барселоны длина сп. места 240 = глубине дивана 240 — не съедать.
+    'ширина спального места','длина спального места',
+    // Значимые «Нет» (KEEP_NO): два «Нет» подряд не должны съедать друг друга.
+    'раскладной механизм','наличие подъемного механизма','зеркало','матрас в комплекте','основание','дно для белья'
+  ]);
   function valueKey(v){
     return String(v===undefined||v===null?'':v).replace(/\s+/g,' ').trim().toLowerCase();
   }
@@ -1342,30 +1356,173 @@ function getUsefulAttrPairs(it, limit){
     usedValues.add(vv);
     out.push([cleanLabel, cleanValue]);
   }
+  // V41_139: у ТВ-тумб характеристики в фиксированном порядке (заказчик: «в разброс,
+  // неудобно глазам»): габариты ОДНОЙ строкой → длина под ТВ → тип расположения →
+  // материал → ящики/ниша/дверцы (пустые «0»/«Нет» не показываем) → производитель →
+  // цвета → артикул. Служебные дубли («Подтип тумбы», «Название модели») скрыты.
+  if(String((it && (it.sheet || it.c)) || '').trim() === 'Тумбы под телевизор'){
+    // Ширина/Высота/Глубина отдельными подписями, но карточка склеит их в ОДНУ строку
+    // (плашка .mA-dims на всю ширину, три колонки) — заказчик: «ШхВхГ неприятно глазам».
+    if(it && it.w) add('Ширина', formatMainDimValue(it, it.w));
+    if(it && it.h) add('Высота', formatMainDimValue(it, it.h));
+    if(it && it.d) add('Глубина', formatMainDimValue(it, it.d));
+    add('Длина под ТВ (см)', attrs['Длина под ТВ (см)']);
+    add('Тип расположения', attrs['Тип расположения']);
+    add('Материал', attrs['Материал']);
+    // «Пусто» пишут по-разному: 0, «0 шт.», Нет, «-» — все варианты скрываем.
+    const emptyish = (s)=>{ const n = String(s==null?'':s).trim().toLowerCase().replace(/ё/g,'е'); return !n || /^0(\s|шт|$)/.test(n) || n==='нет' || n==='-' || n==='—'; };
+    if(!emptyish(attrs['Кол-во ящиков'])) add('Кол-во ящиков', String(attrs['Кол-во ящиков']).trim());
+    if(!emptyish(attrs['Ниша'])) add('Ниша', String(attrs['Ниша']).trim());
+    if(!emptyish(attrs['Распашные дверцы'])) add('Распашные дверцы', String(attrs['Распашные дверцы']).trim());
+    if(it && it.f) add('Производитель', it.f);
+    if(it && it.col) add('Цвет', it.col);
+    add('Цвет от производителя', attrs['Цвет от производителя']);
+    if(it && it.art) add('Артикул', it.art);
+    const TV_HIDE = new Set(['подтип тумбы','название модели','кол-во ящиков','ниша','распашные дверцы']);
+    Object.entries(attrs).forEach(([key,val])=>{
+      if(val===undefined || val===null || String(val).trim()==='') return;
+      const lk = String(key).toLowerCase().trim();
+      if(DETAIL_ATTR_SKIP.has(lk) || TV_HIDE.has(lk)) return;
+      if(lk==='основной цвет' && valueKey(val)===valueKey(it && it.col)) return;
+      add(key, val);
+    });
+    return out.slice(0, limit || 14);
+  }
+
   if(it && it.w) add('Ширина', formatMainDimValue(it, it.w));
   if(it && it.h) add('Высота', formatMainDimValue(it, it.h));
-  if(it && it.d) add('Глубина', formatMainDimValue(it, it.d));
-  if(it && it.f) add('Производитель', it.f);
-  if(it && it.col) add('Цвет', it.col);
-  if(it && it.art) add('Артикул', it.art);
+  // У кроватей третий габарит — это длина, «Глубина» сбивала с толку (заказчик 02.09).
+  const depthLabel = (String((it && (it.sheet || it.c)) || '').trim() === 'Кровати') ? 'Длина' : 'Глубина';
+  if(it && it.d) add(depthLabel, formatMainDimValue(it, it.d));
+  else {
+    // Поле глубины пусто, но габарит есть атрибутом (кровати: «Длина: 204») — DETAIL_ATTR_SKIP
+    // его глушит, поэтому поднимаем в плашку вручную.
+    const dRaw = attrs['Длина'] || attrs['Глубина'] || attrs['Длина, см'];
+    const dClean = String(dRaw == null ? '' : dRaw).trim();
+    // Если в значении уже есть буквы («204 см») — не дописываем единицы второй раз.
+    if(dClean) add((attrs['Длина'] || attrs['Длина, см']) ? 'Длина' : depthLabel,
+      /[а-яёa-z]/i.test(dClean) ? dClean : formatMainDimValue(it, dClean));
+  }
+  // Спальное место — плашкой с раздельными подписями, как габариты (заказчик 02.09);
+  // сводный атрибут «Спальное место: Есть» и текстовые дубли тогда не показываем.
+  const SLEEP_SRC_KEYS = new Set(['спальное место','размер спального места','размер матраса']);
+  let sleepShown = false;
+  {
+    let sw = attrs['Ширина спального места'], sl = attrs['Длина спального места'];
+    if(!sw || !sl){
+      const ex = attrs['Размер спального места'] || attrs['Размер матраса'];
+      const m = ex ? String(ex).replace(/[xх*]/gi,'×').match(/(\d{2,3})\s*×\s*(\d{2,3})/) : null;
+      if(m){ sw = sw || m[1]; sl = sl || m[2]; }
+    }
+    const smFmt = (v)=>{ v = String(v).trim(); return /[а-яёa-z]/i.test(v) ? v : (v + ' см'); };
+    if(sw && sl && String(sw).trim() && String(sl).trim()){
+      add('Ширина спального места', smFmt(sw));
+      add('Длина спального места', smFmt(sl));
+      sleepShown = true;
+    }
+  }
+  // Порядок «как у ТВ-тумб» для ВСЕХ категорий (заказчик 02.09): габариты/спальное место →
+  // ключевые характеристики категории (кураторский список USEFUL_ATTRS_BY_CATEGORY) →
+  // остальное → производитель, цвета и артикул строго В КОНЦЕ (хвост лимитом не обрезается).
+  // Кровати: выбранные ДОП. ОПЦИИ отражаем в характеристиках (заказчик 02.09:
+  // «меняешь доп функцию — в характеристиках значение не меняется»).
+  let bedSt = null, bedRec = null;
+  try{
+    if(String((it && (it.sheet || it.c)) || '').trim()==='Кровати' && typeof getBedOptions==='function'){
+      bedRec = getBedOptions(it);
+      if(bedRec) bedSt = getBedChoiceState(it);
+    }
+  }catch(_){ bedSt = bedRec = null; }
+  // (пары «Основание»/«Дно для белья» добавляются ПОСЛЕ кураторского списка —
+  // иначе при выборе опций они вклинивались перед «Тип кровати» и порядок прыгал.)
+  // Пустышки «Нет/0/—» не показываем (заказчик: «ящики которых нет — не показывать»),
+  // КРОМЕ действительно значимых «Нет» из белого списка.
+  // «Нет» здесь — значимый ответ покупателю (Codex r5): зеркало и матрас в комплекте
+  // прямо влияют на решение о покупке, их «Нет» показываем.
+  const KEEP_NO = new Set(['раскладной механизм','наличие подъемного механизма','зеркало','матрас в комплекте']);
+  const isEmptyVal = (lk, val)=>{
+    const v = valueKey(val).replace(/ё/g,'е');
+    if((v==='нет'||v==='0'||v==='-'||v==='—') && !KEEP_NO.has(lk)) return true;
+    if(lk==='возрастная группа' && v==='взрослая') return true; // дефолт, инфы ноль
+    return false;
+  };
+  const mapAttrVal = (lk, val)=>{
+    if(lk==='наличие подъемного механизма' && bedSt && bedSt.pm) return 'Есть (опция)';
+    return val;
+  };
 
   const preferred = getCategoryUsefulAttrKeys((it && (it.sheet || it.c)) || '');
   preferred.forEach(key=>{
-    const val = attrs[key];
+    let val = attrs[key];
     if(val===undefined || val===null || String(val).trim()==='') return;
-    if(String(key).toLowerCase()==='основной цвет' && valueKey(val)===valueKey(it && it.col)) return;
+    const lk = String(key).toLowerCase().trim();
+    if(sleepShown && SLEEP_SRC_KEYS.has(lk)) return;
+    if(lk==='основной цвет' && valueKey(val)===valueKey(it && it.col)) return;
+    val = mapAttrVal(lk, val);
+    if(isEmptyVal(lk, val)) return;
     add(key, val);
   });
+
+  // Выбранные опции кровати — сразу после кураторских характеристик, стабильным блоком.
+  if(bedSt && bedRec){
+    const bch = bedRec.choices && bedRec.choices[bedSt.baseKey];
+    if(bch && bedSt.baseKey!=='base' && bch.label) add('Основание', bch.label + ' (опция)');
+    if(bedSt.box) add('Дно для белья', 'Есть (опция)');
+  }
 
   Object.entries(attrs).forEach(([key,val])=>{
     if(val===undefined || val===null || String(val).trim()==='') return;
     const lk = String(key).toLowerCase().trim();
     if(DETAIL_ATTR_SKIP.has(lk)) return;
+    if(sleepShown && SLEEP_SRC_KEYS.has(lk)) return;
+    if(lk==='цвет от производителя' || lk==='артикул') return; // уйдут в хвост
     if(preferred.includes(key)) return;
     if(lk==='основной цвет' && valueKey(val)===valueKey(it && it.col)) return;
+    // «Подкатегория дивана: Диваны» и подобные дубли категории — мусор.
+    if(valueKey(val)===valueKey(it && (it.sheet || it.c))) return;
+    val = mapAttrVal(lk, val);
+    if(isEmptyVal(lk, val)) return;
     add(key, val);
   });
-  return out.slice(0, limit || 14);
+
+  const tail = [];
+  const addTail = (l, v)=>{
+    const cl = String(l||'').trim(), cv = String(v==null?'':v).replace(/\s+/g,' ').trim();
+    if(!cl || !cv || usedLabels.has(cl.toLowerCase())) return;
+    usedLabels.add(cl.toLowerCase()); tail.push([cl, cv]);
+  };
+  if(it && it.f) addTail('Производитель', it.f);
+  if(it && it.col) addTail('Цвет', it.col);
+  addTail('Цвет от производителя', attrs['Цвет от производителя']);
+  addTail('Артикул', (it && it.art) || attrs['Артикул']);
+  const lim = limit || 14;
+  return out.slice(0, Math.max(0, lim - tail.length)).concat(tail);
+}
+
+// Рендер блока характеристик карточки. Вынесен из openM, чтобы перерисовывать
+// при смене доп. опций кровати (выбор основания/ПМ/дна отражается в характеристиках).
+function renderModalAttrs(it){
+  const box = document.getElementById('mAtt');
+  if(!box || !it) return;
+  // 20 вместо 14: плашки габаритов/сп.места занимают 5 позиций, при 14 у диванов
+  // отрезались «Материал обивки» и «Особенности» (заказчик 02.09: показывать ключевое).
+  const attrs = getUsefulAttrPairs(it, 20);
+  // Габариты (Ширина/Высота/Глубина/Длина) склеиваем в одну широкую плашку-строку —
+  // так все размеры видны разом и не прыгают по разным рядам сетки.
+  const DIMS_ROW_LABELS = ['Ширина','Высота','Глубина','Длина'];
+  const SLEEP_ROW_LABELS = ['Ширина спального места','Длина спального места'];
+  const dimPairs = attrs.filter(([l])=>DIMS_ROW_LABELS.includes(l));
+  const sleepPairs = attrs.filter(([l])=>SLEEP_ROW_LABELS.includes(l));
+  const restPairs = attrs.filter(([l])=>!DIMS_ROW_LABELS.includes(l) && !SLEEP_ROW_LABELS.includes(l));
+  const attTile = ([l,v])=>`<div class="mA"><div class="mA-l">${esc(l)}</div><div class="mA-v">${esc(String(v))}</div></div>`;
+  const dimsRowHtml = dimPairs.length >= 2
+    ? `<div class="mA wide mA-dims">${dimPairs.map(([l,v])=>`<div class="mA-dim"><div class="mA-l">${esc(l)}</div><div class="mA-v">${esc(String(v))}</div></div>`).join('')}</div>`
+    : dimPairs.map(attTile).join('');
+  // Спальное место — своей широкой плашкой сразу под габаритами, подписи раздельные.
+  const sleepRowHtml = sleepPairs.length >= 2
+    ? `<div class="mA wide mA-dims mA-sleep">${sleepPairs.map(([l,v])=>`<div class="mA-dim"><div class="mA-l">${esc(l)}</div><div class="mA-v">${esc(String(v))}</div></div>`).join('')}</div>`
+    : sleepPairs.map(attTile).join('');
+  box.innerHTML = dimsRowHtml + sleepRowHtml + restPairs.map(attTile).join('');
 }
 
 const FACET_SKIP_KEYS = new Set(['вид товара','контактное лицо','поместится ли товар в одну коробку?','глубина кухни','глубина нижних шкафов','ширина','высота','глубина','название мультиобъявления','шаблон ссылок github']);
@@ -2391,10 +2548,14 @@ function getSeatOptionAvailability(it, opt, withSeat){
     available: both,
     qty: minQty,
     className: both ? 'instock' : 'preorder',
-    label: both 
-      ? ('✓ Комплект с сиденьем в наличии' + (minQty ? (' — ' + minQty + ' шт.') : ''))
-      : (!tumbaOk && !seatOk ? 'Комплект под заказ' 
-         : (!tumbaOk ? 'Тумба под заказ' : 'Сиденье под заказ'))
+    label: (function(){
+      // Опция называется по-разному (Куб/Ножки/Накладка) — «Сиденье» писали для всех, нелогично.
+      var noun = (opt && opt.optBadge) || 'Сиденье';
+      return both
+        ? ('✓ Комплект в наличии' + (minQty ? (' — ' + minQty + ' шт.') : ''))
+        : (!tumbaOk && !seatOk ? 'Комплект под заказ'
+           : (!tumbaOk ? 'Тумба под заказ' : noun + ' под заказ'));
+    })()
   };
 }
 function seatOptionAvailabilityHtml(state){
@@ -3005,6 +3166,7 @@ function setBedBaseChoice(id, baseKey){
   }
   saveBedChoiceState(id, st);
   updateBedOptionSelection(it);
+  try{ renderModalAttrs(it); }catch(_){}
 }
 function setBedAddon(id, addon, checked){
   const it = findItemById(id);
@@ -3020,6 +3182,7 @@ function setBedAddon(id, addon, checked){
   }
   saveBedChoiceState(id, st);
   updateBedOptionSelection(it);
+  try{ renderModalAttrs(it); }catch(_){}
 }
 function bedVariantKeyFromState(rec, st){
   const baseKey = (st && st.baseKey) || 'base';
@@ -3570,12 +3733,13 @@ function copyMattressVk(id){
   }catch(_){ ta.select(); }
 }
 function mattressAttrPairs(it, v, rec){
+  // Порядок «как у ТВ» (заказчик 02.09): габариты плашкой → тип/блок/жёсткость/
+  // конструкция/нагрузка/чехол/особенности → производитель и артикул В КОНЦЕ.
   const pairs=[];
   if(v){
     pairs.push(['Ширина × Длина', ((v.w!=null?v.w:'?'))+' × '+((v.l!=null?v.l:'?'))+' см']);
     if(v.h) pairs.push(['Высота', v.h+' см']);
   }
-  pairs.push(['Производитель', (it&&it.f)||'Корона']);
   const block=(rec&&rec.block)||'';
   if(block){
     pairs.push(['Тип матраса', block==='Беспружинный'?'Беспружинный':'Пружинный']);
@@ -3592,15 +3756,24 @@ function mattressAttrPairs(it, v, rec){
   if(v && v.fabric){ cover=v.fabric; if(v.ftype) cover+=' «'+v.ftype+'»'; }
   if(cover) pairs.push(['Чехол (ткань)', cover]);
   if(rec && rec.features && rec.features.length) pairs.push(['Особенности состава', rec.features.join(', ')]);
+  if(rec && rec.comp) pairs.push(['Состав', rec.comp]);
+  pairs.push(['Производитель', (it&&it.f)||'Корона']);
+  if(it && it.art) pairs.push(['Артикул', it.art]);
   return pairs;
 }
 function renderMattressAttrs(it, v, rec){
   const att=document.getElementById('mAtt');
   if(!att) return;
   const pairs=mattressAttrPairs(it, v, rec);
-  let h=pairs.map(function(p){ return '<div class="mA"><div class="mA-l">'+esc(p[0])+'</div><div class="mA-v">'+esc(String(p[1]))+'</div></div>'; }).join('');
-  if(rec && rec.comp){ h+='<div class="mA"><div class="mA-l">Состав</div><div class="mA-v">'+esc(rec.comp)+'</div></div>'; }
-  att.innerHTML=h;
+  // Габариты матраса — одной широкой плашкой, как во всех категориях.
+  const DIM_LABELS=['Ширина × Длина','Высота'];
+  const dims=pairs.filter(function(p){ return DIM_LABELS.indexOf(p[0])>=0; });
+  const rest=pairs.filter(function(p){ return DIM_LABELS.indexOf(p[0])<0; });
+  const tile=function(p){ return '<div class="mA"><div class="mA-l">'+esc(p[0])+'</div><div class="mA-v">'+esc(String(p[1]))+'</div></div>'; };
+  const dimsRow = dims.length>=2
+    ? '<div class="mA wide mA-dims">'+dims.map(function(p){ return '<div class="mA-dim"><div class="mA-l">'+esc(p[0])+'</div><div class="mA-v">'+esc(String(p[1]))+'</div></div>'; }).join('')+'</div>'
+    : dims.map(tile).join('');
+  att.innerHTML=dimsRow+rest.map(tile).join('');
 }
 function renderMattressOptions(it, opts){
   const box=document.getElementById('mMattressOptions');
@@ -3866,8 +4039,7 @@ function openM(id, opts){
     stockEl.style.display = 'inline-flex';
   } else { stockEl.style.display='none'; }
   document.getElementById('mPri').textContent=getItemInitialPriceText(it);
-  const attrs = getUsefulAttrPairs(it, 14);
-  document.getElementById('mAtt').innerHTML=attrs.map(([l,v])=>`<div class="mA"><div class="mA-l">${esc(l)}</div><div class="mA-v">${esc(String(v))}</div></div>`).join('');
+  renderModalAttrs(it);
   renderBedOptions(it);
   renderWardrobeAttic(it);
   renderWardrobeCoupeKit(it);
@@ -3987,7 +4159,8 @@ function openM(id, opts){
   document.getElementById('mOv').classList.add('open');
   document.body.style.overflow='hidden';
   // Адрес: ?item=ID — карточкой можно поделиться, «Назад» вернёт в каталог
-  if(!window.__ROUTING__){ favWriteUrl({item:it.id}, true); }
+  if(!window.__ROUTING__){ favWriteUrl({item:it.id}, !window.__TAB_REPLACE__); }
+  window.__TAB_REPLACE__ = false;
   if(typeof updateSeoProduct === 'function') updateSeoProduct(it);
   const restoreTop = Number(opts && opts.restoreScrollTop);
   const sc = getModalScrollEl();
@@ -4635,6 +4808,32 @@ function findMultiVariants(it){
   return variants;
 }
 
+// V41_139: ТВ-тумбы — в мультиобъявлении сперва выбирается ВИД товара (напольная/подвесная/
+// универсальная ТВ-тумба, навесная тумба, консоль, полка), а размеры и цвета показываются
+// только внутри выбранного вида. Иначе у серий Ева/Тефия/Оливия/Флэш/Норд в одной
+// переключалке размеров смешивались напольные и подвесные модели.
+function isTvStandSheet(it){
+  return String((it && (it.sheet || it.c)) || '').trim() === 'Тумбы под телевизор';
+}
+const TV_KIND_ORDER = ['Напольная','Подвесная','Универсальная','Навесная тумбочка','Консоль','Полка'];
+function tvKindOf(v){
+  if(!v) return '';
+  const t = String(v.t || '').toLowerCase().replace(/ё/g,'е');
+  const tip = String((v.a && v.a['Тип расположения']) || '').trim().toLowerCase();
+  if(t.includes('полка')) return 'Полка';
+  if(t.includes('консол')) return 'Консоль';
+  if(t.includes('навесная') && !t.includes('тв')) return 'Навесная тумбочка';
+  if(tip.startsWith('подвесн')) return 'Подвесная';
+  if(tip.startsWith('универс')) return 'Универсальная';
+  if(tip.startsWith('навесн')) return 'Навесная тумбочка';
+  if(tip) return 'Напольная';
+  // Атрибут «Тип расположения» пуст (новый товар) — страховка по названию.
+  if(t.includes('подвесн')) return 'Подвесная';
+  if(t.includes('универсал')) return 'Универсальная';
+  if(t.includes('навесн')) return 'Навесная тумбочка';
+  return 'Напольная';
+}
+
 function renderMulti(it){
   const box   = document.getElementById('mMulti');
   const secW  = document.getElementById('mMultiSizes');
@@ -4763,6 +4962,14 @@ function renderMulti(it){
     return parts.length >= 2 ? parts.join('×') : '';
   }
   function variantSizeKey(v){
+    // ТВ-тумбы: размер = ширина + глубина. Навесные Оливия №1/№2 одинаковы по ширине,
+    // но различаются глубиной (44/34) — это разные размеры; а разная ВЫСОТА при той же
+    // ширине/глубине (Оливия 200: обычная 66 и «2 двери 2 ящика» 59) — это исполнение.
+    if(isTvStandSheet(it)){
+      // Глубина не заполнена — не превращаем её в «0» (склеило бы разные модели), метим отдельно.
+      const dv = Number(v && v.d);
+      return `tv:${Number(v && v.w)||0}x${(isFinite(dv) && dv>0) ? dv : 'na'}`;
+    }
     if(isKitchen){
       const nominal = titleNominalSize(v);
       if(nominal) return `k:${nominal}`;
@@ -4780,6 +4987,10 @@ function renderMulti(it){
     return 'single';
   }
   function variantSizeLabel(v){
+    if(isTvStandSheet(it)){
+      const w = Number(v && v.w) || 0;
+      return w ? String(w) : 'Размер';
+    }
     if(isKitchen){
       return titleNominalSize(v) || (v && v.w ? String(v.w) : 'Размер');
     }
@@ -4798,8 +5009,59 @@ function renderMulti(it){
     return m ? Number(m[1]) : Number.POSITIVE_INFINITY;
   }
 
+  // ТВ-тумбы: сначала делим группу по виду товара; размеры/цвета строим внутри вида.
+  const kindBox  = document.getElementById('mMultiKind');
+  const kindTabs = document.getElementById('mMultiKindTabs');
+  let pool = all;
+  let hasKindTabs = false;
+  if(kindBox && kindTabs){
+    kindTabs.innerHTML = '';
+    kindBox.style.display = 'none';
+  }
+  if(isTvStandSheet(it) && kindBox && kindTabs){
+    const kindBuckets = new Map();
+    all.forEach(v=>{
+      const k = tvKindOf(v);
+      if(!kindBuckets.has(k)) kindBuckets.set(k, []);
+      kindBuckets.get(k).push(v);
+    });
+    const curKind = tvKindOf(it);
+    pool = kindBuckets.get(curKind) || [it];
+    if(kindBuckets.size > 1){
+      hasKindTabs = true;
+      const kindsSorted = Array.from(kindBuckets.keys()).sort((a,b)=>{
+        const ia = TV_KIND_ORDER.indexOf(a), ib = TV_KIND_ORDER.indexOf(b);
+        return (ia<0?99:ia) - (ib<0?99:ib);
+      });
+      kindTabs.innerHTML = kindsSorted.map(k=>
+        `<button type="button" class="mMulti-tab${k===curKind?' active':''}" data-kind="${esc(k)}">${esc(k)}</button>`
+      ).join('');
+      kindTabs.querySelectorAll('[data-kind]').forEach(btn=>{
+        btn.onclick = () => {
+          const k = btn.getAttribute('data-kind') || '';
+          if(k === curKind) return;
+          const items = kindBuckets.get(k) || [];
+          if(!items.length) return;
+          // Подбираем ближайший вариант нового вида: сначала тот же цвет, затем ближайшая ширина.
+          const myCol = colorKey(it);
+          const sameCol = items.filter(v=>colorKey(v) === myCol);
+          const cands = sameCol.length ? sameCol : items;
+          const myW = Number(it.w) || 0;
+          let target = cands[0], best = Infinity;
+          cands.forEach(v=>{
+            const d = Math.abs((Number(v.w)||0) - myW);
+            if(d < best){ best = d; target = v; }
+          });
+          // Переключение вкладки — не новая страница: не плодим записи в истории браузера.
+          if(target){ window.__TAB_REPLACE__ = true; navOpen(target.id); }
+        };
+      });
+      kindBox.style.display = '';
+    }
+  }
+
   const sizeBuckets = new Map();
-  all.forEach(v=>{
+  pool.forEach(v=>{
     const key = variantSizeKey(v);
     if(!sizeBuckets.has(key)) sizeBuckets.set(key, { key, label: variantSizeLabel(v), items: [] });
     sizeBuckets.get(key).items.push(v);
@@ -4809,11 +5071,27 @@ function renderMulti(it){
     if(av !== bv) return av - bv;
     return String(a.label || '').localeCompare(String(b.label || ''), 'ru');
   });
+  if(isTvStandSheet(it)){
+    // Сортировка ширина→глубина; если одна ширина встречается в нескольких размерах
+    // (навесные Оливия №1/№2) — дописываем глубину в подпись.
+    const dimsOfKey = k => String(k).replace(/^tv:/,'').split('x').map(Number);
+    sizes.sort((a,b)=>{
+      const da = dimsOfKey(a.key), db = dimsOfKey(b.key);
+      return (da[0]-db[0]) || (da[1]-db[1]);
+    });
+    const wSeen = new Map();
+    sizes.forEach(b=>{ const w = dimsOfKey(b.key)[0]; wSeen.set(w, (wSeen.get(w)||0)+1); });
+    sizes.forEach(b=>{
+      const [w,d] = dimsOfKey(b.key);
+      if(wSeen.get(w) > 1 && d > 0) b.label = `${w}, глубина ${d}`;
+    });
+  }
 
   let curSizeKey = variantSizeKey(it);
   let curExec = isKitchen ? kitchenExecMeta(it, [it]).value : '';
   let curColor = colorKey(it) || '';
   let curMirror = '';
+  let curTvExec = '';
   let curFilling = '';
   let curDrawers = '';
 
@@ -5031,6 +5309,43 @@ function renderMulti(it){
       return;
     }
 
+    // ТВ-тумбы: если внутри вида и размера названия различаются (Оливия: обычная /
+    // (Металл) / 2 двери 2 ящика — у обычной ножки пластик, у «Металл» металлические),
+    // делаем вкладки «Исполнение». Метка = хвост названия после общего начала.
+    const tvExecBuckets = new Map();
+    let tvExecs = [];
+    let tvExecOf = null;
+    if(isTvStandSheet(it) && options.length > 1){
+      const titles = Array.from(new Set(options.map(v=>String(v.t||'').trim())));
+      if(titles.length > 1){
+        let prefix = titles[0];
+        for(const t of titles){
+          let i = 0;
+          while(i < prefix.length && i < t.length && prefix[i] === t[i]) i++;
+          prefix = prefix.slice(0, i);
+        }
+        // Обрезаем до границы слова, если общий кусок закончился посреди слова.
+        const boundaryOk = titles.every(t => t.length === prefix.length || /[\s(]/.test(t[prefix.length]));
+        if(!boundaryOk) prefix = prefix.slice(0, prefix.lastIndexOf(' ') + 1);
+        const rawTail = v => String(v.t||'').trim().slice(prefix.length).trim().replace(/^\(/,'').replace(/\)$/,'').trim();
+        const hasMetal = titles.some(t => /металл/i.test(t.slice(prefix.length)));
+        tvExecOf = v => {
+          const tail = rawTail(v);
+          if(!tail) return hasMetal ? 'Ножки пластик' : 'Обычная';
+          if(/^металл$/i.test(tail)) return 'Ножки металл';
+          return tail;
+        };
+        options.forEach(v=>{
+          const label = tvExecOf(v);
+          const key = normTokenLocal(label);
+          if(!tvExecBuckets.has(key)) tvExecBuckets.set(key, { key, label, items: [] });
+          tvExecBuckets.get(key).items.push(v);
+        });
+        tvExecs = Array.from(tvExecBuckets.values());
+      }
+    }
+    const hasTvExecTabs = tvExecs.length > 1;
+
     const mirrorBuckets = new Map();
     options.forEach(v=>{
       const label = mirrorLabel(v, options);
@@ -5072,9 +5387,33 @@ function renderMulti(it){
     });
     const colors = Array.from(colorBuckets.values()).sort((a,b)=>String(a.label||'').localeCompare(String(b.label||''),'ru'));
     const hasRepeatedColorVariants = colors.some(c => c.items && c.items.length > 1);
-    const hasColorTabs = !hasMirrorTabs && !hasFillingTabs && !hasDrawerTabs && options.length > 2 && colors.length > 1 && hasRepeatedColorVariants;
+    // ТВ-тумбы: вкладки по цвету не делаем — заказчик просил показывать все цвета
+    // сразу сеткой карточек (внутри вида/размера/исполнения их немного).
+    const hasColorTabs = !hasTvExecTabs && !isTvStandSheet(it) && !hasMirrorTabs && !hasFillingTabs && !hasDrawerTabs && options.length > 2 && colors.length > 1 && hasRepeatedColorVariants;
 
-    if(hasMirrorTabs){
+    if(hasTvExecTabs){
+      const currentExec = tvExecOf ? tvExecOf(it) : '';
+      if(!curTvExec || !tvExecBuckets.has(normTokenLocal(curTvExec))) curTvExec = currentExec || tvExecs[0].label;
+      const activeNorm = normTokenLocal(curTvExec || tvExecs[0].label);
+      colorTabs.innerHTML = tvExecs.map(e=>{
+        const active = e.key === activeNorm;
+        return `<button type="button" class="mMulti-tab${active?' active':''}" data-tvexec="${esc(e.label)}">${esc(e.label)}</button>`;
+      }).join('');
+      colorTabs.querySelectorAll('[data-tvexec]').forEach(btn=>{
+        btn.onclick = () => {
+          const nextExec = btn.getAttribute('data-tvexec') || '';
+          curTvExec = nextExec;
+          const nextBucket = tvExecBuckets.get(normTokenLocal(nextExec));
+          const currentStillFits = nextBucket && nextBucket.items.some(v=>String(v.id)===String(it.id));
+          if(nextBucket && !currentStillFits){
+            const target = chooseTarget(nextBucket.items, colorKey(it)) || nextBucket.items[0];
+            if(target && String(target.id) !== String(it.id)){ window.__TAB_REPLACE__ = true; navOpen(target.id); return; }
+          }
+          renderColors();
+        };
+      });
+      colorTabs.style.display = '';
+    } else if(hasMirrorTabs){
       const currentMirror = mirrorLabel(it, options);
       if(!curMirror || !mirrorBuckets.has(normTokenLocal(curMirror))) curMirror = currentMirror || mirrors[0].label;
       const activeNorm = normTokenLocal(curMirror || mirrors[0].label);
@@ -5165,7 +5504,10 @@ function renderMulti(it){
     }
 
     let filteredOptions = options;
-    if(hasMirrorTabs){
+    if(hasTvExecTabs){
+      const activeBucket = tvExecBuckets.get(normTokenLocal(curTvExec || tvExecs[0].label)) || tvExecs[0];
+      filteredOptions = activeBucket.items.slice().sort((a,b)=>String(colorLabel(a)||'').localeCompare(String(colorLabel(b)||''),'ru'));
+    } else if(hasMirrorTabs){
       const activeBucket = mirrorBuckets.get(normTokenLocal(curMirror || mirrors[0].label)) || mirrors[0];
       filteredOptions = activeBucket.items.slice().sort((a,b)=>String(colorLabel(a)||'').localeCompare(String(colorLabel(b)||''),'ru'));
     } else if(hasFillingTabs){
@@ -5182,7 +5524,8 @@ function renderMulti(it){
     const uniqueConfigCount = new Set(filteredOptions.map(v=>normTokenLocal(optionExtra(v) || String(v && v.id || '')))).size;
     const hasAltConfigs = uniqueConfigCount > 1;
     const sizeText = bucket && bucket.label ? ` для размера ${bucket.label}` : '';
-    if(hasMirrorTabs) hC.textContent = `Выберите исполнение${sizeText}`;
+    if(hasTvExecTabs) hC.textContent = `Выберите исполнение и цвет${sizeText}`;
+    else if(hasMirrorTabs) hC.textContent = `Выберите исполнение${sizeText}`;
     else if(hasFillingTabs) hC.textContent = `Выберите наполнение${sizeText}`;
     else if(hasDrawerTabs) hC.textContent = `Выберите количество ящиков${sizeText}`;
     else if(hasColorTabs && hasAltConfigs) hC.textContent = `Выберите цвет и вариант${sizeText}`;
@@ -5252,7 +5595,7 @@ function renderMulti(it){
   const hasSizes = sizes.length >= 2;
   const hasExec = extraSel.style.display !== 'none';
   const hasColors = secC.style.display !== 'none';
-  box.style.display = (hasSizes || hasExec || hasColors) ? '' : 'none';
+  box.style.display = (hasKindTabs || hasSizes || hasExec || hasColors) ? '' : 'none';
 }
 function getDefaultKitchenCountertopItem(){
   return (window.CATALOG || []).find(x => normBuilderToken([x && x.t, x && x.c, x && x.sheet].filter(Boolean).join(' ')).includes('столеш')) || null;
@@ -7391,6 +7734,14 @@ function favNegRefine(it, q){
   return true;
 }
 function favItemMatchesQ(it, q){
+  // Поиск по ID объявления (заказчик 02.09): чисто цифровой запрос от 5 знаков —
+  // ищем по началу ID (набрал часть номера — уже находит) и по цифрам артикула.
+  var qDigits = String(q||'').replace(/\s+/g,'');
+  if(/^\d{5,}$/.test(qDigits)){
+    if(String(it.id).indexOf(qDigits) === 0) return true;
+    if(it.art && String(it.art).replace(/\D/g,'').indexOf(qDigits) !== -1) return true;
+    return false;
+  }
   var qt=favQTok(q); if(!qt.length) return true;
   // Строгий режим: если хоть у кого-то слово в названии/категории — ищем только так.
   // Предохранитель: если сильных совпадений нет нигде (запрос «160», артикул) — широкий поиск.
