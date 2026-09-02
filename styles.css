@@ -1492,3 +1492,42 @@ a.favRevCard-src:hover{background:rgba(45,125,255,.15)}
 .facet-range-help{margin-top:8px;color:var(--muted);font-size:11px;line-height:1.4}
 @media(max-width:991px){.optl{min-height:44px;touch-action:manipulation}.facet-color-opt{min-height:48px}.facet-color-dot{width:34px;height:34px;flex-basis:34px}.facet-color-check{inset:8px}.facet-color-check::after{left:5px;top:2px;width:6px;height:10px}.facet-range-field .fi{min-height:44px}}
 @media(prefers-reduced-motion:reduce){.facet-color-opt,.facet-color-dot,.facet-color-check{transition:none}}
+
+/* ============================================================
+   V41_142: МОБИЛЬНАЯ КАРТОЧКА (заказчик 02.09) — кнопки покупки
+   сразу под фото/ценой, липкая панель «цена + В корзину» внизу,
+   характеристики свёрнуты до главных. Десктоп не затронут.
+   ============================================================ */
+.mSticky{display:none}
+.mAttMore{display:none}
+@media(max-width:860px){
+  /* фото компактнее — первый экран не только картинка */
+  .mMain{height:auto;min-height:180px;max-height:44vh}
+  .mMain img{max-height:42vh}
+  /* порядок блоков: категория→название→цена→КНОПКИ→опции/итог→выбор (мульти)→характеристики */
+  .mInf{display:flex;flex-direction:column;padding-bottom:86px}
+  .mInf>*{order:10}
+  .mInf .mClose{order:0}
+  .mInf .mCat{order:1}
+  .mInf .mTitle{order:2}
+  .mInf #mStock{order:3}
+  .mInf .mPrice{order:3}
+  .mInf .mCta{order:4;margin-top:2px}
+  .mInf #mBedOptions,.mInf #mMattressOptions,.mInf #mWardrobeAttic,
+  .mInf #mTumbaSeatOption,.mInf #mCoupeKit{order:5}
+  .mInf #mMulti{order:6}
+  .mInf .mAttrs{order:8}
+  .mInf .mAvi{order:11}
+  /* липкая панель */
+  .mOv.open .mSticky{display:flex}
+  .mSticky{position:fixed;left:0;right:0;bottom:0;z-index:1200;align-items:center;gap:10px;
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(13,18,32,.96);border-top:1px solid var(--line);backdrop-filter:blur(8px)}
+  .mSticky-p{font-family:var(--fh);font-weight:700;font-size:17px;white-space:nowrap}
+  .mSticky .cCart{flex:1;margin:0;padding:12px}
+  /* свёртка характеристик: 2 плашки + 4 ячейки, дальше — по кнопке */
+  #mAtt.m-collapsed .mA:nth-child(n+7){display:none}
+  .mAttMore{display:block;width:100%;grid-column:1/-1;background:none;border:1px dashed var(--line);
+    color:var(--muted);border-radius:10px;padding:9px;font:600 12px var(--fb);
+    cursor:pointer;margin-top:6px}
+}
