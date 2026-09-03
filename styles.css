@@ -1661,3 +1661,10 @@ a.favRevCard-src:hover{background:rgba(45,125,255,.15)}
   .builderStickyHead .builderFilterGrid{grid-row:4}
   .builderStickyHead .builderActions{grid-row:5}
 }
+
+/* Миф-конфигуратор: чекбоксы опций — жёсткая структура «название+цена / бейдж наличия»,
+   чтобы тексты не переносились кто куда (замечание заказчика 03.09). */
+.bedOpt-check-body{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
+.bedOpt-check-line{display:inline-flex;align-items:center;gap:6px;flex-wrap:nowrap;white-space:nowrap}
+.bedOpt-check-line b{white-space:nowrap}
+.bedOpt-check-body .bedOpt-avail{margin-top:0}

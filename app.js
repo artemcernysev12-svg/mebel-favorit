@@ -1338,6 +1338,9 @@ function getUsefulAttrPairs(it, limit){
     'ширина','высота','глубина','длина',
     // Спальное место: у Барселоны длина сп. места 240 = глубине дивана 240 — не съедать.
     'ширина спального места','длина спального места',
+    // Опции кровати Миф: «Подсветка: Есть (опция)» не должна съедаться дедупом,
+    // когда «Есть (опция)» уже стоит у «Наличие подъемного механизма».
+    'подсветка','основание',
     // Значимые «Нет» (KEEP_NO): два «Нет» подряд не должны съедать друг друга.
     'раскладной механизм','наличие подъемного механизма','зеркало','матрас в комплекте','основание','дно для белья'
   ]);
@@ -1464,7 +1467,11 @@ function getUsefulAttrPairs(it, limit){
   });
 
   // Выбранные опции кровати — сразу после кураторских характеристик, стабильным блоком.
-  if(bedSt && bedRec){
+  if(bedSt && bedRec && isComboBedRec(bedRec)){
+    // Миф (combo): основание показываем всегда (дерево = база, металл = опция), подсветку — при выборе.
+    add('Основание', bedSt.baseKey === 'metal' ? 'Металл-ортопед (опция)' : 'Дерево-ортопед');
+    if(bedSt.led) add('Подсветка', 'Есть (опция)');
+  } else if(bedSt && bedRec){
     const bch = bedRec.choices && bedRec.choices[bedSt.baseKey];
     if(bch && bedSt.baseKey!=='base' && bch.label) add('Основание', bch.label + ' (опция)');
     if(bedSt.box) add('Дно для белья', 'Есть (опция)');
@@ -3140,6 +3147,12 @@ function getBedOptionShortParts(it){
   const rec = getBedOptions(it);
   if(!rec) return [];
   const st = getBedChoiceState(it);
+  if(isComboBedRec(rec)){
+    const parts = [st.baseKey === 'metal' ? 'Металл-ортопед' : 'Дерево-ортопед'];
+    if(st.pm) parts.push('ПМ');
+    if(st.led) parts.push('Подсветка');
+    return parts;
+  }
   const base = (rec.choices && rec.choices[st.baseKey]) || (rec.choices && rec.choices.base) || null;
   const baseLabel = String((base && (base.label || base.rawLabel)) || '').toLowerCase().replace(/ё/g,'е');
   let shortBase = 'Без осн.';
@@ -3161,8 +3174,43 @@ function getBedOptionShortBadge(it){
   return `<div class="kitCard-bedsummary${txt ? '' : ' empty'}">${esc(txt || 'Опции не выбраны')}</div>`;
 }
 function bedStateKey(id){ return String(id || ''); }
+/* ===== Кровати Миф (mode:'combo'): 6 готовых комбинаций, цена НЕ суммируется =====
+   Правила заказчика: основание дерево ИЛИ металл; при дереве ПМ недоступен (кода
+   «дерево+ПМ» в прайсе нет); включили ПМ → основание само становится металл;
+   цена всегда берётся ГОТОВОЙ из комбинации (wood/woodLed/metal/metalLed/metalPm/metalPmLed). */
+function isComboBedRec(rec){ return !!(rec && rec.mode === 'combo'); }
+function comboBedVariantKey(st){
+  const metal = (st && st.baseKey) === 'metal';
+  const pm = metal && !!(st && st.pm); // дерево+ПМ невозможно по правилам
+  const led = !!(st && st.led);
+  return (metal ? 'metal' : 'wood') + (pm ? 'Pm' : '') + (led ? 'Led' : '');
+}
+function comboBedPrice(rec, st){
+  const v = rec && rec.choices ? rec.choices[comboBedVariantKey(st)] : null;
+  return Number((v && v.price) || 0);
+}
+// Честная дельта чекбокса при несуммируемых ценах: (комбинация С опцией) − (комбинация БЕЗ неё)
+// при остальных флагах как сейчас; для ПМ «с опцией» означает и автопереход на металл.
+function comboBedAddonDelta(rec, st, addon){
+  const on = {baseKey: st.baseKey, pm: st.pm, led: st.led};
+  const off = {baseKey: st.baseKey, pm: st.pm, led: st.led};
+  if(addon === 'pm'){ on.pm = true; on.baseKey = 'metal'; off.pm = false; }
+  else if(addon === 'led'){ on.led = true; off.led = false; }
+  const pOn = comboBedPrice(rec, on), pOff = comboBedPrice(rec, off);
+  if(!pOn || !pOff) return null;
+  return pOn - pOff; // может быть и отрицательной — не прячем (Codex п.4)
+}
+function comboBedDeltaText(delta){
+  if(delta === null || delta === undefined) return '';
+  if(delta === 0) return '+0 ₽';
+  return (delta > 0 ? '+' : '−') + rub(Math.abs(delta));
+}
 function getBedAllowedBaseKeys(rec){
   const keys = [];
+  if(isComboBedRec(rec)){
+    ['wood','metal'].forEach(k=>{ if(rec.choices && rec.choices[k]) keys.push(k); });
+    return keys;
+  }
   // V40_108: кроме Велес-ключей поддерживаем варианты Микон: ЛДСП, ДСП 2с, ортопед на опорах, ортопед+ПМ+ящик.
   ['base','plank','plankLdsp','plankDsp2','ortho','orthoSplit','orthoWeld','orthoPmBox'].forEach(k=>{ if(rec && rec.choices && rec.choices[k]) keys.push(k); });
   return keys;
@@ -3192,6 +3240,13 @@ function getBedChoiceState(it){
   const id = bedStateKey(it && it.id);
   const allowed = getBedAllowedBaseKeys(rec);
   const saved = BED_OPTION_CHOICE[id] || {};
+  if(isComboBedRec(rec)){
+    const baseKey = allowed.includes(saved.baseKey) ? saved.baseKey : 'wood';
+    // Дерево+ПМ невозможно: у дерева ПМ принудительно снят.
+    const pm = baseKey === 'metal' && !!saved.pm;
+    const led = !!saved.led;
+    return {baseKey, pm, led, box:false};
+  }
   let baseKey = allowed.includes(saved.baseKey) ? saved.baseKey : (allowed[0] || 'base');
   let pm = !!saved.pm;
   let box = !!saved.box;
@@ -3205,19 +3260,47 @@ function getBedChoiceState(it){
   return {baseKey, pm, box};
 }
 function saveBedChoiceState(id, st){
-  BED_OPTION_CHOICE[bedStateKey(id)] = {baseKey:st.baseKey || 'base', pm:!!st.pm, box:!!st.box};
+  BED_OPTION_CHOICE[bedStateKey(id)] = {baseKey:st.baseKey || 'base', pm:!!st.pm, box:!!st.box, led:!!st.led};
 }
-function setBedBaseChoice(id, baseKey){
-  const it = findItemById(id);
-  const rec = getBedOptions(it);
-  if(!rec) return;
+// Общие переходы состояния (карточка и мини-попап в конструкторе зовут одно и то же).
+function bedApplyBaseChoice(rec, st, baseKey){
   const allowed = getBedAllowedBaseKeys(rec);
-  const st = getBedChoiceState(it);
+  if(isComboBedRec(rec)){
+    st.baseKey = allowed.includes(baseKey) ? baseKey : 'wood';
+    if(st.baseKey !== 'metal') st.pm = false; // выбрал дерево — ПМ снимается (правило прайса)
+    return st;
+  }
   st.baseKey = allowed.includes(baseKey) ? baseKey : (allowed[0] || 'base');
   if(!canBedBaseHaveAddons(rec, st.baseKey)){
     st.pm = false;
     st.box = false;
   }
+  return st;
+}
+function bedApplyAddon(rec, st, addon, checked){
+  if(isComboBedRec(rec)){
+    if(addon === 'pm'){
+      st.pm = !!checked;
+      if(st.pm) st.baseKey = 'metal'; // включил ПМ → основание автоматически металл
+    }else if(addon === 'led'){
+      st.led = !!checked;
+    }
+    return st; // 'box' у Миф не существует
+  }
+  if(!canBedBaseHaveAddons(rec, st.baseKey)) return st;
+  if(addon === 'pm'){
+    st.pm = !!checked;
+    if(!st.pm) st.box = false;
+  }else if(addon === 'box'){
+    st.box = !!checked && !!st.pm;
+  }
+  return st;
+}
+function setBedBaseChoice(id, baseKey){
+  const it = findItemById(id);
+  const rec = getBedOptions(it);
+  if(!rec) return;
+  const st = bedApplyBaseChoice(rec, getBedChoiceState(it), baseKey);
   saveBedChoiceState(id, st);
   updateBedOptionSelection(it);
   try{ renderModalAttrs(it); }catch(_){}
@@ -3226,19 +3309,14 @@ function setBedAddon(id, addon, checked){
   const it = findItemById(id);
   const rec = getBedOptions(it);
   if(!rec || !rec.allowAddons) return;
-  const st = getBedChoiceState(it);
-  if(!canBedBaseHaveAddons(rec, st.baseKey)) return;
-  if(addon === 'pm'){
-    st.pm = !!checked;
-    if(!st.pm) st.box = false;
-  }else if(addon === 'box'){
-    st.box = !!checked && !!st.pm;
-  }
+  if(!isComboBedRec(rec) && !canBedBaseHaveAddons(rec, getBedChoiceState(it).baseKey)) return;
+  const st = bedApplyAddon(rec, getBedChoiceState(it), addon, checked);
   saveBedChoiceState(id, st);
   updateBedOptionSelection(it);
   try{ renderModalAttrs(it); }catch(_){}
 }
 function bedVariantKeyFromState(rec, st){
+  if(isComboBedRec(rec)) return comboBedVariantKey(st);
   const baseKey = (st && st.baseKey) || 'base';
   if(!rec || !rec.choices) return baseKey;
   if(rec.allowAddons && st && st.pm && st.box){
@@ -3288,12 +3366,17 @@ function getBedSelectedVariant(it){
   const rec = getBedOptions(it);
   if(!rec) return null;
   const st = getBedChoiceState(it);
+  if(isComboBedRec(rec)){
+    // Миф: ТОЛЬКО готовая комбинация из прайса, никакого суммирования компонентов.
+    return (rec.choices && (rec.choices[comboBedVariantKey(st)] || rec.choices.wood)) || null;
+  }
   // Если выбраны обе доп. опции, используем готовую связку из прайса, если она есть.
   const fullKey = bedVariantKeyFromState(rec, st);
   if(st.pm && st.box && rec.choices && rec.choices[fullKey]) return rec.choices[fullKey];
   return buildCustomBedVariant(rec, st) || rec.choices.base || null;
 }
 function isFixedPlankBed(rec, it){
+  if(isComboBedRec(rec)) return false;
   const size = Number((rec && rec.size) || (it && (it.sw || it.w)) || 0);
   const choices = rec && rec.choices ? Object.keys(rec.choices) : [];
   // У Велес кровати 800 идут уже с настилом/ящиками, поэтому не показываем их как "без основания".
@@ -3409,15 +3492,25 @@ function renderBedOptionChoice(rec, key, id, it){
 function mountBedOptionToolsHost(){
   const tools = document.getElementById('mBedOptionTools');
   if(!tools) return;
+  const secW = document.getElementById('mMultiSizes');
   const inlineHost = document.querySelector('#mMultiSizes .mMulti-controls');
-  if(inlineHost){
+  // Как у Велес: кнопка живёт в строке выбора сп.места.
+  if(inlineHost && secW && secW.style.display !== 'none'){
     inlineHost.appendChild(tools);
     tools.classList.add('bedOptTools-inline');
-  }else{
-    const fallbackHost = document.querySelector('.mGal');
-    if(fallbackHost && tools.parentNode !== fallbackHost) fallbackHost.appendChild(tools);
-    tools.classList.remove('bedOptTools-inline');
+    return;
   }
+  // Один размер (Миф): строку «Сп.Место» НЕ показываем (решение заказчика 03.09) —
+  // кнопка стоит на ТОМ ЖЕ месте макета, прямо над вариантами цветов.
+  const colors = document.getElementById('mMultiColors');
+  if(colors && colors.parentNode){
+    colors.parentNode.insertBefore(tools, colors);
+    tools.classList.add('bedOptTools-inline');
+    return;
+  }
+  const fallbackHost = document.querySelector('.mGal');
+  if(fallbackHost && tools.parentNode !== fallbackHost) fallbackHost.appendChild(tools);
+  tools.classList.remove('bedOptTools-inline');
 }
 function toggleBedOptionWindow(e, id){
   if(e) e.preventDefault();
@@ -3442,6 +3535,24 @@ function renderBedOptionTools(it){
   const id = String(it.id || '');
   const baseKeys = getBedAllowedBaseKeys(rec);
   const baseHtml = baseKeys.map(k=>renderBedOptionChoice(rec, k, id, it)).join('');
+  const combo = isComboBedRec(rec);
+  const addonsHtml = combo ? `
+      <div class="bedOpt-addons" id="bedOptAddons" style="display:none">
+        <div class="bedOpt-sub">Дополнительные опции</div>
+        <div class="bedOpt-checks">
+          <label class="bedOpt-check" data-bed-addon-wrap="pm"><input type="checkbox" data-bed-addon="pm" onchange="setBedAddon('${esc(id)}','pm',this.checked)"> <span class="bedOpt-check-body"><span class="bedOpt-check-line">Подъёмный механизм <b id="bedAddonPmPrice"></b></span><span id="bedAddonPmAvail"></span></span></label>
+          <label class="bedOpt-check" data-bed-addon-wrap="led"><input type="checkbox" data-bed-addon="led" onchange="setBedAddon('${esc(id)}','led',this.checked)"> <span class="bedOpt-check-body"><span class="bedOpt-check-line">Подсветка <b id="bedAddonLedPrice"></b></span><span id="bedAddonLedAvail"></span></span></label>
+        </div>
+        <div class="bedOpt-warn">Подъёмный механизм доступен только с металлическим основанием. Подсветку можно добавить к любому варианту.</div>
+      </div>` : `
+      <div class="bedOpt-addons" id="bedOptAddons" style="display:none">
+        <div class="bedOpt-sub">Дополнительные опции</div>
+        <div class="bedOpt-checks">
+          <label class="bedOpt-check" data-bed-addon-wrap="pm"><input type="checkbox" data-bed-addon="pm" onchange="setBedAddon('${esc(id)}','pm',this.checked)"> <span>Подъёмный механизм <b id="bedAddonPmPrice"></b><span id="bedAddonPmAvail"></span></span></label>
+          <label class="bedOpt-check" data-bed-addon-wrap="box"><input type="checkbox" data-bed-addon="box" onchange="setBedAddon('${esc(id)}','box',this.checked)"> <span>Короб / дно для белья <b id="bedAddonBoxPrice"></b><span id="bedAddonBoxAvail"></span></span></label>
+        </div>
+        <div class="bedOpt-warn">Короб/дно можно добавить только при выбранном подъёмном механизме. Подъёмник можно выбрать и без дна.</div>
+      </div>`;
   tools.style.display = 'block';
   tools.innerHTML = `
     <div class="bedOptTools-in">
@@ -3459,14 +3570,7 @@ function renderBedOptionTools(it){
       </div>
       <div class="bedOpt-sub">Основание</div>
       <div class="bedOpt-grid">${baseHtml}</div>
-      <div class="bedOpt-addons" id="bedOptAddons" style="display:none">
-        <div class="bedOpt-sub">Дополнительные опции</div>
-        <div class="bedOpt-checks">
-          <label class="bedOpt-check" data-bed-addon-wrap="pm"><input type="checkbox" data-bed-addon="pm" onchange="setBedAddon('${esc(id)}','pm',this.checked)"> <span>Подъёмный механизм <b id="bedAddonPmPrice"></b><span id="bedAddonPmAvail"></span></span></label>
-          <label class="bedOpt-check" data-bed-addon-wrap="box"><input type="checkbox" data-bed-addon="box" onchange="setBedAddon('${esc(id)}','box',this.checked)"> <span>Короб / дно для белья <b id="bedAddonBoxPrice"></b><span id="bedAddonBoxAvail"></span></span></label>
-        </div>
-        <div class="bedOpt-warn">Короб/дно можно добавить только при выбранном подъёмном механизме. Подъёмник можно выбрать и без дна.</div>
-      </div>
+      ${addonsHtml}
       <div class="bedOpt-pop-actions"><div class="bedOpt-pop-total" id="bedOptPopupTotal">Итог: —</div><button type="button" class="bedOpt-done" onclick="closeBedOptionWindow()">Готово</button></div>
     </div>`;
   mountBedOptionToolsHost();
@@ -3476,7 +3580,8 @@ function updateBedOptionSelection(it){
   const box = document.getElementById('mBedOptions');
   if(!box || !rec || !rec.showOptions) return;
   const st = getBedChoiceState(it);
-  const selected = getBedSelectedVariant(it) || rec.choices.base;
+  const combo = isComboBedRec(rec);
+  const selected = getBedSelectedVariant(it) || (combo ? rec.choices.wood : rec.choices.base);
   document.querySelectorAll('#mBedOptionTools .bedOpt-choice').forEach(el=>el.classList.toggle('on', el.dataset.choice === st.baseKey));
   document.querySelectorAll('#mBedOptionTools input[name="bedBaseOpt"]').forEach(inp=>{ inp.checked = inp.value === st.baseKey; });
   document.querySelectorAll('#mBedOptionTools [data-bed-base-avail]').forEach(el=>{
@@ -3485,8 +3590,66 @@ function updateBedOptionSelection(it){
     el.innerHTML = v ? bedOptionAvailabilityHtml(getBedVariantAvailabilityShort(it, v)) : '';
   });
   document.querySelectorAll('#mBedOptionTools input[data-bed-addon]').forEach(inp=>{
-    inp.checked = inp.dataset.bedAddon === 'pm' ? !!st.pm : !!st.box;
+    const a = inp.dataset.bedAddon;
+    inp.checked = a === 'pm' ? !!st.pm : (a === 'led' ? !!st.led : !!st.box);
   });
+  if(combo){
+    // Миф: как у Велес — доп. опции видны всегда, недоступный ПМ (при дереве) серый
+    // и заблокирован с подсказкой; дельты честные, из готовых цен комбинаций.
+    const addonsC = document.querySelector('#mBedOptionTools #bedOptAddons');
+    if(addonsC) addonsC.style.display = 'flex';
+    const woodNow = st.baseKey !== 'metal';
+    const pmInp = document.querySelector('#mBedOptionTools input[data-bed-addon="pm"]');
+    const pmWrap = document.querySelector('#mBedOptionTools [data-bed-addon-wrap="pm"]');
+    if(pmInp){ pmInp.disabled = woodNow; if(woodNow) pmInp.checked = false; }
+    if(pmWrap){ pmWrap.classList.toggle('off', woodNow); pmWrap.title = woodNow ? 'Доступно только с металлическим основанием' : ''; }
+    const pmEl = document.getElementById('bedAddonPmPrice');
+    const ledEl = document.getElementById('bedAddonLedPrice');
+    if(pmEl) pmEl.textContent = comboBedDeltaText(comboBedAddonDelta(rec, st, 'pm'));
+    if(ledEl) ledEl.textContent = comboBedDeltaText(comboBedAddonDelta(rec, st, 'led'));
+    // Бейджи наличия у чекбоксов — по комбинации с этой опцией (как у Велес по компоненту).
+    const availFor = (addon)=>{
+      const s2 = {baseKey: st.baseKey, pm: st.pm, led: st.led};
+      if(addon === 'pm'){ s2.pm = true; s2.baseKey = 'metal'; } else { s2.led = true; }
+      const v2 = rec.choices[comboBedVariantKey(s2)];
+      return v2 ? bedOptionAvailabilityHtml(getBedVariantAvailabilityShort(it, v2)) : '';
+    };
+    const pmAvailEl = document.getElementById('bedAddonPmAvail');
+    const ledAvailEl = document.getElementById('bedAddonLedAvail');
+    if(pmAvailEl) pmAvailEl.innerHTML = availFor('pm');
+    if(ledAvailEl) ledAvailEl.innerHTML = availFor('led');
+    const mini = document.getElementById('bedOptCurrentMini');
+    if(mini && selected){ mini.innerHTML = `Выбрано: <b>${esc(selected.label || '')}</b><br>${rub(selected.price)}`; }
+    const popupTotal = document.getElementById('bedOptPopupTotal');
+    if(popupTotal && selected){ popupTotal.innerHTML = `Итог: <b>${rub(selected.price)}</b>`; }
+    const priceEl = document.getElementById('mPri');
+    if(priceEl) priceEl.textContent = selected ? rub(selected.price) : getBedInitialPriceText(it);
+    const state = getBedOptionAvailability(it, rec, selected);
+    updateBedStockBadge(state);
+    const detail = box.querySelector('#bedOptDetail');
+    if(detail && selected){
+      // «Доплата по опциям» как у Велес: телескопические дельты — база → основание → ПМ → подсветка
+      // (сумма строк всегда сходится с итогом, хотя цены берутся готовыми из прайса).
+      const p0 = Number(rec.choices.wood && rec.choices.wood.price || 0);
+      const pB = comboBedPrice(rec, {baseKey: st.baseKey, pm:false, led:false});
+      const pP = comboBedPrice(rec, {baseKey: st.baseKey, pm: st.pm, led:false});
+      const baseV = rec.choices[st.baseKey === 'metal' ? 'metal' : 'wood'];
+      const priceLines = [];
+      if(baseV) priceLines.push(`<div>${esc(baseV.label)} — <b>+${rub(Math.max(0, pB - p0))}</b></div>`);
+      if(st.pm) priceLines.push(`<div>Подъёмный механизм — <b>+${rub(Math.max(0, pP - pB))}</b></div>`);
+      if(st.led) priceLines.push(`<div>Подсветка — <b>+${rub(Math.max(0, selected.price - pP))}</b></div>`);
+      detail.innerHTML = `
+        <div><b>Итог:</b> ${esc(it.t || rec.title || 'Кровать')}</div>
+        <div class="bedOpt-list">
+          <div>Комплектация: ${esc(selected.label || '')}</div>
+          ${priceLines.length ? `<div style="margin-top:6px;color:var(--muted)">Доплата по опциям:</div><div style="margin-top:4px;display:grid;gap:3px">${priceLines.join('')}</div>` : ''}
+        </div>
+        <div class="bedOpt-total">
+          <span class="bedOpt-stock ${state.available ? 'ok' : 'none'}">${esc(state.loaded ? state.label : 'Остатки не загружены')}</span>
+        </div>`;
+    }
+    return;
+  }
   const addons = document.querySelector('#mBedOptionTools #bedOptAddons');
   const canAdd = canBedBaseHaveAddons(rec, st.baseKey);
   if(addons) addons.style.display = canAdd ? 'flex' : 'none';
@@ -3956,7 +4119,8 @@ function updateMiniBedOptionPopup(){
   const rec = getBedOptions(it);
   if(!host || !it || !rec) return;
   const st = getBedChoiceState(it);
-  const selected = getBedSelectedVariant(it) || rec.choices.base;
+  const combo = isComboBedRec(rec);
+  const selected = getBedSelectedVariant(it) || (combo ? rec.choices.wood : rec.choices.base);
   host.querySelectorAll('.bedOpt-choice').forEach(el=>el.classList.toggle('on', el.dataset.choice === st.baseKey));
   host.querySelectorAll('input[name="bedMiniBaseOpt"]').forEach(inp=>{ inp.checked = inp.value === st.baseKey; });
   host.querySelectorAll('[data-bed-mini-base-avail]').forEach(el=>{
@@ -3964,7 +4128,36 @@ function updateMiniBedOptionPopup(){
     const v = rec && rec.choices ? rec.choices[key] : null;
     el.innerHTML = v ? bedOptionAvailabilityHtml(getBedVariantAvailabilityShort(it, v)) : '';
   });
-  host.querySelectorAll('input[data-bed-mini-addon]').forEach(inp=>{ inp.checked = inp.dataset.bedMiniAddon === 'pm' ? !!st.pm : !!st.box; });
+  host.querySelectorAll('input[data-bed-mini-addon]').forEach(inp=>{
+    const a = inp.dataset.bedMiniAddon;
+    inp.checked = a === 'pm' ? !!st.pm : (a === 'led' ? !!st.led : !!st.box);
+  });
+  if(combo){
+    const addonsC = host.querySelector('#bedMiniOptAddons');
+    if(addonsC) addonsC.style.display = 'flex';
+    const woodNow = st.baseKey !== 'metal';
+    const pmInp = host.querySelector('input[data-bed-mini-addon="pm"]');
+    const pmWrap = host.querySelector('[data-bed-mini-addon-wrap="pm"]');
+    if(pmInp){ pmInp.disabled = woodNow; if(woodNow) pmInp.checked = false; }
+    if(pmWrap){ pmWrap.classList.toggle('off', woodNow); pmWrap.title = woodNow ? 'Доступно только с металлическим основанием' : ''; }
+    const pmEl = host.querySelector('#bedMiniAddonPmPrice');
+    const ledEl = host.querySelector('#bedMiniAddonLedPrice');
+    if(pmEl) pmEl.textContent = comboBedDeltaText(comboBedAddonDelta(rec, st, 'pm'));
+    if(ledEl) ledEl.textContent = comboBedDeltaText(comboBedAddonDelta(rec, st, 'led'));
+    const availFor = (addon)=>{
+      const s2 = {baseKey: st.baseKey, pm: st.pm, led: st.led};
+      if(addon === 'pm'){ s2.pm = true; s2.baseKey = 'metal'; } else { s2.led = true; }
+      const v2 = rec.choices[comboBedVariantKey(s2)];
+      return v2 ? bedOptionAvailabilityHtml(getBedVariantAvailabilityShort(it, v2)) : '';
+    };
+    const pmAvailEl = host.querySelector('#bedMiniAddonPmAvail');
+    const ledAvailEl = host.querySelector('#bedMiniAddonLedAvail');
+    if(pmAvailEl) pmAvailEl.innerHTML = availFor('pm');
+    if(ledAvailEl) ledAvailEl.innerHTML = availFor('led');
+    const totalC = host.querySelector('#bedMiniPopupTotal');
+    if(totalC && selected) totalC.innerHTML = `Итог: <b>${rub(selected.price)}</b>`;
+    return;
+  }
   const canAdd = canBedBaseHaveAddons(rec, st.baseKey);
   const addons = host.querySelector('#bedMiniOptAddons');
   if(addons) addons.style.display = canAdd ? 'flex' : 'none';
@@ -3993,6 +4186,24 @@ function openMiniBedOptionPopup(ev, id){
   const baseKeys = getBedAllowedBaseKeys(rec);
   const baseHtml = baseKeys.map(k=>renderMiniBedOptionChoice(rec, k, id, it)).join('');
   window.__BED_MINI_ITEM_ID__ = String(id || '');
+  const comboMini = isComboBedRec(rec);
+  const miniAddonsHtml = comboMini ? `
+      <div class="bedOpt-addons" id="bedMiniOptAddons" style="display:none">
+        <div class="bedOpt-sub">Дополнительные опции</div>
+        <div class="bedOpt-checks">
+          <label class="bedOpt-check" data-bed-mini-addon-wrap="pm"><input type="checkbox" data-bed-mini-addon="pm" onchange="miniBedSetAddon('${esc(id)}','pm',this.checked)"> <span class="bedOpt-check-body"><span class="bedOpt-check-line">Подъёмный механизм <b id="bedMiniAddonPmPrice"></b></span><span id="bedMiniAddonPmAvail"></span></span></label>
+          <label class="bedOpt-check" data-bed-mini-addon-wrap="led"><input type="checkbox" data-bed-mini-addon="led" onchange="miniBedSetAddon('${esc(id)}','led',this.checked)"> <span class="bedOpt-check-body"><span class="bedOpt-check-line">Подсветка <b id="bedMiniAddonLedPrice"></b></span><span id="bedMiniAddonLedAvail"></span></span></label>
+        </div>
+        <div class="bedOpt-warn">Подъёмный механизм доступен только с металлическим основанием. Подсветку можно добавить к любому варианту.</div>
+      </div>` : `
+      <div class="bedOpt-addons" id="bedMiniOptAddons" style="display:none">
+        <div class="bedOpt-sub">Дополнительные опции</div>
+        <div class="bedOpt-checks">
+          <label class="bedOpt-check" data-bed-mini-addon-wrap="pm"><input type="checkbox" data-bed-mini-addon="pm" onchange="miniBedSetAddon('${esc(id)}','pm',this.checked)"> <span>Подъёмный механизм <b id="bedMiniAddonPmPrice"></b><span id="bedMiniAddonPmAvail"></span></span></label>
+          <label class="bedOpt-check" data-bed-mini-addon-wrap="box"><input type="checkbox" data-bed-mini-addon="box" onchange="miniBedSetAddon('${esc(id)}','box',this.checked)"> <span>Короб / дно для белья <b id="bedMiniAddonBoxPrice"></b><span id="bedMiniAddonBoxAvail"></span></span></label>
+        </div>
+        <div class="bedOpt-warn">Короб/дно можно добавить только при выбранном подъёмном механизме. Подъёмник можно выбрать и без дна.</div>
+      </div>`;
   host.innerHTML = `
     <div class="bedOpt-pop-backdrop" onclick="closeMiniBedOptionPopup()"></div>
     <div class="bedOpt-pop">
@@ -4005,14 +4216,7 @@ function openMiniBedOptionPopup(ev, id){
       </div>
       <div class="bedOpt-sub">Основание</div>
       <div class="bedOpt-grid">${baseHtml}</div>
-      <div class="bedOpt-addons" id="bedMiniOptAddons" style="display:none">
-        <div class="bedOpt-sub">Дополнительные опции</div>
-        <div class="bedOpt-checks">
-          <label class="bedOpt-check" data-bed-mini-addon-wrap="pm"><input type="checkbox" data-bed-mini-addon="pm" onchange="miniBedSetAddon('${esc(id)}','pm',this.checked)"> <span>Подъёмный механизм <b id="bedMiniAddonPmPrice"></b><span id="bedMiniAddonPmAvail"></span></span></label>
-          <label class="bedOpt-check" data-bed-mini-addon-wrap="box"><input type="checkbox" data-bed-mini-addon="box" onchange="miniBedSetAddon('${esc(id)}','box',this.checked)"> <span>Короб / дно для белья <b id="bedMiniAddonBoxPrice"></b><span id="bedMiniAddonBoxAvail"></span></span></label>
-        </div>
-        <div class="bedOpt-warn">Короб/дно можно добавить только при выбранном подъёмном механизме. Подъёмник можно выбрать и без дна.</div>
-      </div>
+      ${miniAddonsHtml}
       <div class="bedOpt-pop-actions"><div class="bedOpt-pop-total" id="bedMiniPopupTotal">Итог: —</div><button type="button" class="bedOpt-done" onclick="closeMiniBedOptionPopup()">Готово</button></div>
     </div>`;
   host.classList.add('show');
@@ -4022,13 +4226,7 @@ function miniBedSetBaseChoice(id, baseKey){
   const it = findItemById(id);
   const rec = getBedOptions(it);
   if(!rec) return;
-  const allowed = getBedAllowedBaseKeys(rec);
-  const st = getBedChoiceState(it);
-  st.baseKey = allowed.includes(baseKey) ? baseKey : (allowed[0] || 'base');
-  if(!canBedBaseHaveAddons(rec, st.baseKey)){
-    st.pm = false;
-    st.box = false;
-  }
+  const st = bedApplyBaseChoice(rec, getBedChoiceState(it), baseKey);
   saveBedChoiceState(id, st);
   updateMiniBedOptionPopup();
   refreshBedMiniOptionViews();
@@ -4037,14 +4235,8 @@ function miniBedSetAddon(id, addon, checked){
   const it = findItemById(id);
   const rec = getBedOptions(it);
   if(!rec || !rec.allowAddons) return;
-  const st = getBedChoiceState(it);
-  if(!canBedBaseHaveAddons(rec, st.baseKey)) return;
-  if(addon === 'pm'){
-    st.pm = !!checked;
-    if(!st.pm) st.box = false;
-  }else if(addon === 'box'){
-    st.box = !!checked && !!st.pm;
-  }
+  if(!isComboBedRec(rec) && !canBedBaseHaveAddons(rec, getBedChoiceState(it).baseKey)) return;
+  const st = bedApplyAddon(rec, getBedChoiceState(it), addon, checked);
   saveBedChoiceState(id, st);
   updateMiniBedOptionPopup();
   refreshBedMiniOptionViews();
@@ -5372,6 +5564,33 @@ function renderMulti(it){
     const tvExecBuckets = new Map();
     let tvExecs = [];
     let tvExecOf = null;
+    const isBedHere = String((it && (it.sheet || it.c)) || '') === 'Кровати';
+    const isSofaHere = String((it && (it.sheet || it.c)) || '') === 'Диваны';
+    // Общая фабрика модельных меток: хвост названия после общего префикса, без размеров;
+    // короткий суффикс («2») клеится к имени модели («Синди 2»), длинный — сам с заглавной.
+    const modelTailExecOf = (titles)=>{
+      let prefix = titles[0];
+      for(const t of titles){
+        let i = 0;
+        while(i < prefix.length && i < t.length && prefix[i] === t[i]) i++;
+        prefix = prefix.slice(0, i);
+      }
+      const boundaryOk = titles.every(t => t.length === prefix.length || /[\s(]/.test(t[prefix.length]));
+      if(!boundaryOk) prefix = prefix.slice(0, prefix.lastIndexOf(' ') + 1);
+      const modelBase = prefix.trim().split(' ').pop() || '';
+      const fn = v => {
+        let tail = String(v.t||'').trim().slice(prefix.length).trim();
+        tail = tail.replace(/\d+\s*[xх×]\s*\d+/gi,'').trim();
+        // Шум в метке не нужен: скобки с фабрикой «(Миф)» и слово «модульная»
+        // есть у всех вариантов группы — покупателя различает только остаток.
+        tail = tail.replace(/\([^)]*\)/g,'').replace(/модульн[а-яё]*/gi,'').replace(/\s+/g,' ').trim();
+        if(!tail) return modelBase || 'Обычная';
+        if(tail.length <= 3) return (modelBase + ' ' + tail).trim();
+        return tail.charAt(0).toUpperCase() + tail.slice(1);
+      };
+      fn.baseLabel = modelBase || 'Обычная'; // базовая модель (без хвоста) — для порядка вкладок
+      return fn;
+    };
     if(isTvStandSheet(it) && options.length > 1){
       const titles = Array.from(new Set(options.map(v=>String(v.t||'').trim())));
       if(titles.length > 1){
@@ -5392,16 +5611,49 @@ function renderMulti(it){
           if(/^металл$/i.test(tail)) return 'Ножки металл';
           return tail;
         };
-        options.forEach(v=>{
-          const label = tvExecOf(v);
-          const key = normTokenLocal(label);
-          if(!tvExecBuckets.has(key)) tvExecBuckets.set(key, { key, label, items: [] });
-          tvExecBuckets.get(key).items.push(v);
-        });
-        tvExecs = Array.from(tvExecBuckets.values());
+      }
+    } else if(isBedHere && options.length > 1){
+      // Кровати: слепленные модели одной серии и размера разводим вкладками «как у ТВ-тумб»
+      // (заказчик 03.09, названия согласованы с Codex). Приоритет — атрибутные отличия:
+      // подъёмник / ящики / мягкое изголовье; если атрибуты одинаковы, но модели разные
+      // (Синди vs Синди 2) — метки по названию модели.
+      const low = s => String(s||'').toLowerCase().replace(/ё/g,'е');
+      const battr = (v,k) => String((v && v.a && v.a[k]) || '').trim();
+      const bedAttrExec = v => {
+        const t = low(v && v.t);
+        if(low(battr(v,'Наличие подъемного механизма')) === 'есть' || t.includes('подъемн')) return 'С подъёмником';
+        if(low(battr(v,'Что есть у кровати')).includes('ящик') || t.includes('ящик')) return 'С ящиками';
+        if(low(battr(v,'Каркас')).includes('обивк') || t.includes('мягк')) return 'Мягкое изголовье';
+        return '';
+      };
+      const attrLabels = options.map(bedAttrExec);
+      if(new Set(attrLabels.map(a=>a || 'Обычная')).size > 1){
+        tvExecOf = v => bedAttrExec(v) || 'Обычная';
+      } else {
+        const titles = Array.from(new Set(options.map(v=>String(v.t||'').trim())));
+        if(titles.length > 1) tvExecOf = modelTailExecOf(titles);
       }
     }
-    const hasTvExecTabs = tvExecs.length > 1;
+    if(tvExecOf){
+      options.forEach(v=>{
+        const label = tvExecOf(v);
+        const key = normTokenLocal(label);
+        if(!tvExecBuckets.has(key)) tvExecBuckets.set(key, { key, label, items: [] });
+        tvExecBuckets.get(key).items.push(v);
+      });
+      tvExecs = Array.from(tvExecBuckets.values());
+      if(isBedHere){
+        // Порядок вкладок (Codex): Обычная → С подъёмником → С ящиками → Мягкое изголовье → модели.
+        const BED_EXEC_ORDER = ['обычная','с подъемником','с ящиками','мягкое изголовье'];
+        tvExecs.sort((a,b)=>{
+          const ia = BED_EXEC_ORDER.indexOf(normTokenLocal(a.label));
+          const ib = BED_EXEC_ORDER.indexOf(normTokenLocal(b.label));
+          if((ia<0?99:ia) !== (ib<0?99:ib)) return (ia<0?99:ia) - (ib<0?99:ib);
+          return String(a.label).localeCompare(String(b.label),'ru');
+        });
+      }
+    }
+    let hasTvExecTabs = tvExecs.length > 1;
 
     const mirrorBuckets = new Map();
     options.forEach(v=>{
@@ -5412,7 +5664,7 @@ function renderMulti(it){
       mirrorBuckets.get(key).items.push(v);
     });
     const mirrors = Array.from(mirrorBuckets.values()).sort((a,b)=>mirrorOrder(a.label)-mirrorOrder(b.label));
-    const hasMirrorTabs = mirrors.length > 1 && options.every(v => !!mirrorLabel(v, options));
+    const hasMirrorTabs = !isBedHere && mirrors.length > 1 && options.every(v => !!mirrorLabel(v, options)); // кровати: шкафные вкладки не для них
 
     const fillingBuckets = new Map();
     options.forEach(v=>{
@@ -5423,7 +5675,7 @@ function renderMulti(it){
       fillingBuckets.get(key).items.push(v);
     });
     const fillings = Array.from(fillingBuckets.values()).sort((a,b)=>fillingOrder(a.label)-fillingOrder(b.label));
-    const hasFillingTabs = !hasMirrorTabs && fillings.length > 1 && options.every(v => !!fillingLabel(v));
+    const hasFillingTabs = !isBedHere && !hasMirrorTabs && fillings.length > 1 && options.every(v => !!fillingLabel(v));
 
     const drawerBuckets = new Map();
     options.forEach(v=>{
@@ -5434,7 +5686,7 @@ function renderMulti(it){
       drawerBuckets.get(key).items.push(v);
     });
     const drawers = Array.from(drawerBuckets.values()).sort((a,b)=>drawersOrder(a.label)-drawersOrder(b.label));
-    const hasDrawerTabs = !hasMirrorTabs && !hasFillingTabs && drawers.length > 1 && options.every(v => !!drawersLabel(v));
+    const hasDrawerTabs = !isBedHere && !hasMirrorTabs && !hasFillingTabs && drawers.length > 1 && options.every(v => !!drawersLabel(v));
 
     const colorBuckets = new Map();
     options.forEach(v=>{
@@ -5444,9 +5696,49 @@ function renderMulti(it){
     });
     const colors = Array.from(colorBuckets.values()).sort((a,b)=>String(a.label||'').localeCompare(String(b.label||''),'ru'));
     const hasRepeatedColorVariants = colors.some(c => c.items && c.items.length > 1);
+
+    // ВСЕ категории, кроме диванов (заказчик 03.09): слепленные модели разводим вкладками
+    // «как у ТВ-тумб и Кроватей». Вкладки нужны только когда внутри ОДНОГО цвета лежат
+    // разные модели (иначе сетка цветов с подписями различает их сама — прихожие Норд №1,
+    // где цвет зашит в названии, вкладок не получают). ТВ/кровати/кухни/зеркальные и прочие
+    // спец-вкладки имеют приоритет; вкладок больше 6 не делаем — перегруз.
+    if(!hasTvExecTabs && !hasMirrorTabs && !hasFillingTabs && !hasDrawerTabs
+       && !isTvStandSheet(it) && !isBedHere && !isKitchen && !isSofaHere
+       && options.length > 1 && hasRepeatedColorVariants){
+      const genTitles = Array.from(new Set(options.map(v=>String(v.t||'').trim())));
+      if(genTitles.length > 1){
+        const genExecOf = modelTailExecOf(genTitles);
+        const genBuckets = new Map();
+        options.forEach(v=>{
+          const label = genExecOf(v);
+          const key = normTokenLocal(label);
+          if(!genBuckets.has(key)) genBuckets.set(key, { key, label, items: [] });
+          genBuckets.get(key).items.push(v);
+        });
+        // Если каждая «вкладка» вышла бы с одной карточкой — это не модели, а варианты,
+        // зашитые в название (прихожая Норд №1 белый/графит/кашемир): сетка справится сама.
+        const anyBucketMulti = Array.from(genBuckets.values()).some(b=>b.items.length > 1);
+        if(genBuckets.size >= 2 && genBuckets.size <= 6 && anyBucketMulti){
+          tvExecOf = genExecOf;
+          tvExecBuckets.clear();
+          genBuckets.forEach((v,k)=>tvExecBuckets.set(k,v));
+          const baseLbl = normTokenLocal(genExecOf.baseLabel || '');
+          tvExecs = Array.from(tvExecBuckets.values()).sort((a,b)=>{
+            const ab = normTokenLocal(a.label) === baseLbl ? 0 : 1;
+            const bb = normTokenLocal(b.label) === baseLbl ? 0 : 1;
+            if(ab !== bb) return ab - bb; // базовая модель (без хвоста) — первой
+            return String(a.label).localeCompare(String(b.label),'ru');
+          });
+          hasTvExecTabs = true;
+        }
+      }
+    }
+
     // ТВ-тумбы: вкладки по цвету не делаем — заказчик просил показывать все цвета
     // сразу сеткой карточек (внутри вида/размера/исполнения их немного).
-    const hasColorTabs = !hasTvExecTabs && !isTvStandSheet(it) && !hasMirrorTabs && !hasFillingTabs && !hasDrawerTabs && options.length > 2 && colors.length > 1 && hasRepeatedColorVariants;
+    // 03.09: цветовые вкладки остаются ТОЛЬКО у диванов (их не трогаем) — у всех
+    // остальных категорий цвета показываются сеткой, как у ТВ-тумб и Кроватей.
+    const hasColorTabs = isSofaHere && !hasTvExecTabs && !hasMirrorTabs && !hasFillingTabs && !hasDrawerTabs && options.length > 2 && colors.length > 1 && hasRepeatedColorVariants;
 
     if(hasTvExecTabs){
       const currentExec = tvExecOf ? tvExecOf(it) : '';
@@ -5653,6 +5945,9 @@ function renderMulti(it){
   const hasExec = extraSel.style.display !== 'none';
   const hasColors = secC.style.display !== 'none';
   box.style.display = (hasKindTabs || hasSizes || hasExec || hasColors) ? '' : 'none';
+  // Кнопка «Выбрать опции» кровати монтируется ПО ФАКТИЧЕСКОЙ видимости секции размера,
+  // а renderBedOptionTools мог отработать раньше renderMulti — перемонтируем (идемпотентно).
+  try{ if(typeof mountBedOptionToolsHost === 'function') mountBedOptionToolsHost(); }catch(_){}
 }
 function getDefaultKitchenCountertopItem(){
   return (window.CATALOG || []).find(x => normBuilderToken([x && x.t, x && x.c, x && x.sheet].filter(Boolean).join(' ')).includes('столеш')) || null;
