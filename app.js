@@ -1523,7 +1523,61 @@ function renderModalAttrs(it){
     ? `<div class="mA wide mA-dims mA-sleep">${sleepPairs.map(([l,v])=>`<div class="mA-dim"><div class="mA-l">${esc(l)}</div><div class="mA-v">${esc(String(v))}</div></div>`).join('')}</div>`
     : sleepPairs.map(attTile).join('');
   box.innerHTML = dimsRowHtml + sleepRowHtml + restPairs.map(attTile).join('');
+  applyMobileAttrCollapse(box);
 }
+
+// V41_142-r3: на мобиле плашки габаритов/сп.места видны всегда, из обычных ПЛИТОК
+// показываем 6 (три ряда), остальные — по кнопке «Все характеристики · N».
+function applyMobileAttrCollapse(box){
+  try{
+    if(!box) return;
+    var old = box.querySelector('.mAttMore'); if(old) old.remove();
+    var rows = Array.prototype.slice.call(box.querySelectorAll('.mA:not(.wide)'));
+    rows.forEach(function(r){ r.style.display = ''; });
+    if(!(window.matchMedia && window.matchMedia('(max-width:860px)').matches)) return;
+    var hidden = rows.slice(6);
+    if(hidden.length < 2) return; // ради одной плитки не сворачиваем
+    hidden.forEach(function(r){ r.style.display = 'none'; });
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'mAttMore';
+    btn.textContent = 'Все характеристики · ' + rows.length + ' ▾';
+    btn.onclick = function(){ hidden.forEach(function(r){ r.style.display = ''; }); btn.remove(); };
+    box.appendChild(btn);
+  }catch(_){}
+}
+// Вариант мобильной вёрстки зафиксирован заказчиком: B (размер → цвета).
+// Демо-переключатель ?mv= убран; сохранённый в браузере выбор стираем.
+(function(){
+  try{ localStorage.removeItem('mf_mv'); }catch(_){}
+  document.body.dataset.mv = 'b';
+})();
+
+// V41_142: на мобиле блоки выбора (мульти/опции) переезжают из-под галереи внутрь
+// инфо-колонки — CSS order ставит их МЕЖДУ кнопками покупки и характеристиками.
+function syncMobileCardLayout(){
+  try{
+    var gal = document.querySelector('#mOv .mGal'), inf = document.querySelector('#mOv .mInf');
+    if(!gal || !inf) return;
+    var mob = window.matchMedia && window.matchMedia('(max-width:860px)').matches;
+    // Переносим ТОЛЬКО #mMulti: кнопки «Выбрать опции» живут ВНУТРИ него
+    // (mount*OptionToolsHost вкладывает их в #mMultiSizes) и едут вместе с ним.
+    var multi = document.getElementById('mMulti');
+    if(!multi) return;
+    if(mob){
+      if(multi.parentNode !== inf) inf.insertBefore(multi, document.getElementById('mAtt'));
+    } else {
+      if(multi.parentNode !== gal) gal.appendChild(multi);
+    }
+  }catch(_){}
+}
+window.addEventListener('resize', function(){
+  clearTimeout(window.__mCardLayoutT);
+  window.__mCardLayoutT = setTimeout(function(){
+    syncMobileCardLayout();
+    applyMobileAttrCollapse(document.getElementById('mAtt'));
+    if(typeof setupMobileKitFold === 'function') setupMobileKitFold();
+  }, 150);
+});
 
 const FACET_SKIP_KEYS = new Set(['вид товара','контактное лицо','поместится ли товар в одну коробку?','глубина кухни','глубина нижних шкафов','ширина','высота','глубина','название мультиобъявления','шаблон ссылок github']);
 const FACET_EXCLUDE_BY_CATEGORY = {
@@ -3774,6 +3828,7 @@ function renderMattressAttrs(it, v, rec){
     ? '<div class="mA wide mA-dims">'+dims.map(function(p){ return '<div class="mA-dim"><div class="mA-l">'+esc(p[0])+'</div><div class="mA-v">'+esc(String(p[1]))+'</div></div>'; }).join('')+'</div>'
     : dims.map(tile).join('');
   att.innerHTML=dimsRow+rest.map(tile).join('');
+  applyMobileAttrCollapse(att);
 }
 function renderMattressOptions(it, opts){
   const box=document.getElementById('mMattressOptions');
@@ -4040,6 +4095,8 @@ function openM(id, opts){
   } else { stockEl.style.display='none'; }
   document.getElementById('mPri').textContent=getItemInitialPriceText(it);
   renderModalAttrs(it);
+  syncMobileCardLayout();
+  setupMobileKitFold();
   renderBedOptions(it);
   renderWardrobeAttic(it);
   renderWardrobeCoupeKit(it);
@@ -5798,6 +5855,7 @@ function hideCalcPanel(){
     panel.style.display = 'none';
     panel.classList.remove('expanded');
   }
+  document.body.classList.remove('m-calcon');
 }
 // Раскрытие/сворачивание панели калькулятора на мобильном.
 // На десктопе панель всегда раскрыта (CSS .mCalcCollapsed скрыт через @media).
@@ -6027,7 +6085,7 @@ function renderCalcPanel(){
   const listEl = document.getElementById('mCalcList');
   if(!panel || !priceEl || !metaEl || !listEl) return;
   const items = Object.values(BUILDER_CART);
-  if(!items.length){ panel.style.display = 'none'; return; }
+  if(!items.length){ panel.style.display = 'none'; document.body.classList.remove('m-calcon'); return; }
 
   const s = calcSummary();
   priceEl.textContent = `${s.sum.toLocaleString('ru-RU')} ₽`;
@@ -6095,6 +6153,7 @@ function renderCalcPanel(){
   });
 
   panel.style.display = '';
+  document.body.classList.add('m-calcon');
 }
 
 function findItemById_Soft(id){ return id ? findItemById(id) : null; }
@@ -9025,3 +9084,73 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   }
 });
+
+// V41_142-r2: липкая панель зеркалит цену карточки и появляется ТОЛЬКО когда
+// основная кнопка «Добавить в корзину» ушла с экрана (одна CTA на экране — UX Codex).
+(function(){
+  try{
+    var pri = document.getElementById('mPri'), st = document.getElementById('mStickyPrice');
+    if(pri && st){
+      var sync = function(){ st.textContent = pri.textContent; };
+      new MutationObserver(sync).observe(pri, {childList:true, characterData:true, subtree:true});
+      sync();
+    }
+    var mainBtn = document.getElementById('mAddCart'), bar = document.getElementById('mSticky');
+    if(mainBtn && bar && 'IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        bar.classList.toggle('on', !entries[0].isIntersecting);
+        try{ document.body.classList.toggle('m-stickyon', bar.classList.contains('on')); }catch(_){}
+      }, {threshold: 0}).observe(mainBtn);
+    } else if(bar){ bar.classList.add('on'); }
+  }catch(_){}
+})();
+
+// V41_142-r4: кухонные блоки на мобиле свёрнуты в шапки (тап — развернуть),
+// плюс кнопка «наверх» при глубокой прокрутке карточки.
+function setupMobileKitFold(){
+  try{
+    var mob = window.matchMedia && window.matchMedia('(max-width:860px)').matches;
+    // подчистка старого поведения (сворачивали целые блоки — заказчик отменил)
+    ['mKitComp','mKitPool'].forEach(function(id){
+      var box = document.getElementById(id);
+      if(box){ box.classList.remove('m-folded'); var h=box.querySelector('.kitHead'); if(h) h.onclick=null; }
+    });
+    var pool = document.getElementById('mKitPool');
+    var grid = pool && pool.querySelector('.builderFilterGrid');
+    if(!grid) return;
+    // Кнопка «Взять состав» — в шапку, на свою строку сетки (иначе наслаивается)
+    var head = pool.querySelector('.builderStickyHead');
+    var acts = pool.querySelector('.builderActions');
+    if(head && acts){
+      if(mob){ if(acts.parentNode !== head) head.appendChild(acts); }
+      else { var topEl = pool.querySelector('.builderTop'); if(topEl && acts.parentNode !== topEl) topEl.appendChild(acts); }
+    }
+    var btn = pool.querySelector('.builderFiltersToggle');
+    if(mob){
+      if(!btn){
+        btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'builderFiltersToggle';
+        grid.parentNode.insertBefore(btn, grid);
+        grid.classList.add('m-hide'); // по умолчанию свёрнуто
+      }
+      var upd = function(){ btn.textContent = grid.classList.contains('m-hide') ? 'Фильтры ▸' : 'Фильтры ▾'; };
+      btn.onclick = function(){ grid.classList.toggle('m-hide'); upd(); };
+      upd();
+    } else {
+      if(btn) btn.remove();
+      grid.classList.remove('m-hide');
+    }
+  }catch(_){}
+}
+(function(){
+  try{
+    var box = document.querySelector('.mBox'), btn = document.getElementById('mToTop');
+    if(!box || !btn) return;
+    box.addEventListener('scroll', function(){
+      btn.classList.toggle('on', box.scrollTop > 600);
+      var bar=document.getElementById('mSticky');
+      document.body.classList.toggle('m-stickyon', !!(bar && bar.classList.contains('on') && document.getElementById('mOv').classList.contains('open')));
+    }, {passive:true});
+    btn.onclick = function(){ try{ box.scrollTo({top:0, behavior:'smooth'}); }catch(_){} setTimeout(function(){ if(box.scrollTop>50) box.scrollTop=0; },350); };
+  }catch(_){}
+})();

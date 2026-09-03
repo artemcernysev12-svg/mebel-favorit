@@ -196,14 +196,14 @@
 <link rel="preload" href="catalog.js?v=f7e40341" as="fetch">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/golos.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=78a047a6">
+<link rel="stylesheet" href="styles.css?v=93756be0">
 
 
 
 
 
 
-  <link rel="preload" href="app.js?v=9bffe1df" as="script">
+  <link rel="preload" href="app.js?v=50c9fa6a" as="script">
 </head>
 <body>
 
@@ -840,7 +840,9 @@ if(document.readyState === 'loading'){
         <div class="mAvi" id="mAvi"></div>
       </div>
     </div>
-<div id="bedMiniPopupHost"></div>
+<!-- V41_142: мобильная липкая панель — цена + корзина всегда под пальцем -->
+    <button type="button" class="mToTop" id="mToTop" aria-label="Наверх">↑</button><div class="mSticky" id="mSticky"><span class="mSticky-p" id="mStickyPrice"></span><button type="button" class="cCart mSticky-btn" onclick="favCartAddFromModal();return false;"><span class="cCart-txt">В корзину</span></button></div>
+    <div id="bedMiniPopupHost"></div>
 <div id="wardrobePopupHost"></div>
 
     <!-- Блоки конструктора на всю ширину модалки, под галереей и описанием -->
@@ -991,7 +993,7 @@ if(document.readyState === 'loading'){
 <script src="catalog-data/wardrobe-coupe.js?v=8293ba42" defer></script>
 <script src="catalog-data/seat-options.js?v=8076a9a2" defer></script>
 <script src="/chpu-routes.js?v=f3dd39d3"></script>
-<script src="app.js?v=9bffe1df"></script>
+<script src="app.js?v=50c9fa6a"></script>
 
 <!-- Универсальная цель Метрики "avito_click" + "lead_any".
      Скрипт находит на странице ВСЕ ссылки на Авито (avito.ru, avito.com)

@@ -194,14 +194,14 @@
 <link rel="preload" href="catalog.js?v=f7e40341" as="fetch">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/golos.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=78a047a6">
+<link rel="stylesheet" href="styles.css?v=93756be0">
 
 
 
 
 
 
-  <link rel="preload" href="app.js?v=9bffe1df" as="script">
+  <link rel="preload" href="app.js?v=50c9fa6a" as="script">
 <meta property="product:price:amount" content="25267"/><meta property="product:price:currency" content="RUB"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://мебель-фаворит.рф/"}, {"@type": "ListItem", "position": 2, "name": "Шкафы и буфеты", "item": "https://мебель-фаворит.рф/shkafy/"}, {"@type": "ListItem", "position": 3, "name": "Шкаф 3-х створчатый Роджина", "item": "https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-rodzhina-7291731694/"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "Шкаф 3-х створчатый Роджина", "sku": "09529-00036573", "category": "Шкафы и буфеты", "url": "https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-rodzhina-7291731694/", "description": "Шкаф 3-х створчатый Роджина · производитель Миф · Ш 150 · Г 52 · В 240 см · цена от 25 267 ₽ · Мебель Фаворит: доставка по Стерлитамаку и районам до 60 км, консультация в…", "image": ["https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Mif/Rodzhina/Stvorchatye/3-kh%20stvorchatyy/7291731694/01.webp"], "offers": {"@type": "Offer", "priceCurrency": "RUB", "url": "https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-rodzhina-7291731694/", "availability": "https://schema.org/PreOrder", "itemCondition": "https://schema.org/NewCondition", "price": 25267}, "brand": {"@type": "Brand", "name": "Миф"}}</script>
 </head>
 <body>
@@ -840,7 +840,9 @@ if(document.readyState === 'loading'){
         <div class="mAvi" id="mAvi"></div>
       </div>
     </div>
-<div id="bedMiniPopupHost"></div>
+<!-- V41_142: мобильная липкая панель — цена + корзина всегда под пальцем -->
+    <button type="button" class="mToTop" id="mToTop" aria-label="Наверх">↑</button><div class="mSticky" id="mSticky"><span class="mSticky-p" id="mStickyPrice"></span><button type="button" class="cCart mSticky-btn" onclick="favCartAddFromModal();return false;"><span class="cCart-txt">В корзину</span></button></div>
+    <div id="bedMiniPopupHost"></div>
 <div id="wardrobePopupHost"></div>
 
     <!-- Блоки конструктора на всю ширину модалки, под галереей и описанием -->
@@ -991,7 +993,7 @@ if(document.readyState === 'loading'){
 <script src="catalog-data/wardrobe-coupe.js?v=8293ba42" defer></script>
 <script src="catalog-data/seat-options.js?v=8076a9a2" defer></script>
 <script src="/chpu-routes.js?v=f3dd39d3"></script>
-<script src="app.js?v=9bffe1df"></script>
+<script src="app.js?v=50c9fa6a"></script>
 
 <!-- Универсальная цель Метрики "avito_click" + "lead_any".
      Скрипт находит на странице ВСЕ ссылки на Авито (avito.ru, avito.com)
