@@ -32,7 +32,7 @@ async function ensureKitchenData(){
     // Составы шкафных комплектов Миф мерджатся ПОСЛЕ kitchen-comp.js —
     // тот присваивает __KITCHEN_COMP__ целиком и затёр бы мердж при обратном порядке.
     loadScriptOnce('catalog-data/kitchen-comp.js?v=01844a0b')
-      .then(()=>loadScriptOnce('catalog-data/wardrobe-kits-mif.js?v=mifk5')),
+      .then(()=>loadScriptOnce('catalog-data/wardrobe-kits-mif.js?v=mifk6')),
     loadScriptOnce('catalog-data/kitchen-pools.js?v=4ef74692'),
     loadScriptOnce('catalog-data/agava-modules.js?v=9b91d0ce')
   ]);
@@ -5394,6 +5394,111 @@ function wardrobeKindOf(v){
 function wardrobeTitleHasAttic(v){
   return /с\s+антресолью/i.test(String((v && v.t) || ''));
 }
+
+// Стеллажи (раунд 11, заказчик 07.09: «должно быть понимание торцевой он или нет,
+// угловой или нет»). Отдельный классификатор — шкафный не годится: там «стеллаж»
+// проверяется раньше формы (разбор Codex). Порядок: торцевой → угловой → атрибут
+// «Тип конструкции» → прямой (терминалы/пеналы-стеллажи считаем прямыми).
+function isShelvingMultiSheet(it){
+  return String((it && (it.sheet || it.c)) || '').trim() === 'Стеллажи и этажерки';
+}
+const SHELVING_KIND_ORDER = ['Прямые','Угловые','Торцевые'];
+function shelvingKindOf(v){
+  const t = String((v && v.t) || '').toLowerCase().replace(/ё/g,'е').trim();
+  if(t.includes('торцев')) return 'Торцевые';
+  if(t.includes('углов')) return 'Угловые';
+  const form = String(((v && v.a) || {})['Тип конструкции'] || '').toLowerCase();
+  if(form.startsWith('углов')) return 'Угловые';
+  if(form.startsWith('торцев')) return 'Торцевые';
+  return 'Прямые';
+}
+
+// Полки (раунд 11): в одном списке размеров лежат полка, навесной шкаф и антресоль
+// (Норд, Оливия, Флэш, Ева) — по цифрам не понять, что есть что. Атрибуты «Тип
+// размещения»/«Тип полки» ненадёжны (у «Полка настенная ПНМ-5» размещение «Напольное»),
+// поэтому классифицируем по названию — Codex.
+function isShelfMultiSheet(it){
+  return String((it && (it.sheet || it.c)) || '').trim() === 'Полки';
+}
+const SHELF_KIND_ORDER = ['Полки','Навесные шкафы','Антресоли'];
+function shelfKindOf(v){
+  const t = String((v && v.t) || '').toLowerCase().replace(/ё/g,'е').trim();
+  if(/^антресол/.test(t)) return 'Антресоли';
+  if(t.includes('шкаф')) return 'Навесные шкафы'; // в т.ч. «Шкаф-Полка настенная Ева»
+  return 'Полки';
+}
+
+// Кухонные модули (раунд 11): 24–29 модулей серии лежали одним списком из 22 размеров
+// («30×62×29», «40×205×60», «85×83×85»…). Делим по расположению, размер — по ширине
+// из фабричной маркировки (В500Г заведён с фиктивной шириной 51 — как у самих кухонь).
+function isKitchenModuleSheet(it){
+  return String((it && (it.sheet || it.c)) || '').trim() === 'Кухонные модули';
+}
+const KITCHEN_MODULE_KIND_ORDER = ['Навесные','Напольные','Пеналы'];
+function kitchenModuleKindOf(v){
+  const t = String((v && v.t) || '').toLowerCase().replace(/ё/g,'е');
+  const h = Number(v && v.h) || 0;
+  if(t.includes('пенал') || h >= 150) return 'Пеналы';
+  if(t.includes('верхн') || (h > 0 && h <= 70)) return 'Навесные';
+  return 'Напольные';
+}
+// Ширина из маркировки («В500Г» → 50 см); если расходится с карточкой больше чем
+// на 1 см (вт285 → 26), доверяем карточке.
+function kitchenModuleWidth(v){
+  const w = Number(v && v.w) || 0;
+  const m = String((v && v.t) || '').match(/[A-Za-zА-Яа-я]+(\d{3,4})/);
+  if(m){
+    // Маркировка в мм → см БЕЗ округления: «нт285» = 28,5 см (округление до 29
+    // расходилось бы с карточкой, где 28 — находка Codex).
+    const mw = Number(m[1]) / 10;
+    if(mw >= 20 && mw <= 120 && Math.abs(mw - w) <= 1) return mw;
+  }
+  return w;
+}
+function kitchenModuleWidthLabel(v){
+  const mw = kitchenModuleWidth(v);
+  if(!mw) return 'Размер';
+  return String(Math.round(mw * 10) / 10).replace('.', ',') + ' см';
+}
+// Подпись карточки модуля: фабричная маркировка и назначение (цвет у серии один,
+// подписи по цвету бесполезны) + признаки из характеристик.
+function kitchenModuleLabel(v, items){
+  const full = String((v && v.t) || '').trim();
+  const model = String(((v && v.a) || {})['Название модели'] || '').trim();
+  let s = model ? full.replace(new RegExp('^' + model.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\s*', 'i'), '') : full;
+  // «\b» не работает с кириллицей — чистим явными пробелами. Слова «верхний/нижний»
+  // не нужны: расположение уже выбрано рядом «Вид товара».
+  s = s.replace(/\s*шкаф\s+/i, ' ').replace(/\s+(верхний|нижний)(?=\s|$)/i, '').replace(/\s+/g,' ').trim();
+  const a = (v && v.a) || {};
+  const feat = x => ({
+    glass: String(((x && x.a) || {})['Материал'] || '').toLowerCase().includes('стекло'),
+    twin: String(((x && x.a) || {})['Количество створок'] || '').toLowerCase().startsWith('двух'),
+    corner: String(((x && x.a) || {})['Форма'] || '').toLowerCase().startsWith('углов')
+  });
+  const arr = (Array.isArray(items) && items.length) ? items : [v];
+  const varies = k => new Set(arr.map(x=>feat(x)[k])).size > 1;
+  const f = feat(v);
+  const extra = [];
+  // Расшифровка фабричных маркировок Эры (со слов заказчика 07.09):
+  // «Г» — горизонтальный шкафчик (В600 — обычный), «газ» — шкаф под вытяжку.
+  const mark = s.split(/\s/)[0] || '';
+  if(/^газ/i.test(mark)) extra.push('под вытяжку');
+  else if(/\d+Г$/i.test(mark)) extra.push('горизонтальный');
+  if(f.glass && !/стекл/i.test(s)) extra.push('со стеклом');
+  if(f.twin && varies('twin') && !/двух/i.test(s) && !extra.length) extra.push('двухстворчатый');
+  if(f.corner && varies('corner') && !/углов/i.test(s)) extra.push('угловой');
+  return (s + (extra.length ? (' · ' + extra.join(', ')) : '')).trim() || full;
+}
+
+// Кухни (раунд 11): готовые комплекты и витрины модульных серий лежат в одной группе
+// и мешаются в списке размеров. Признак — «Тип кухни» ИЛИ слово «модульная» в названии
+// (у 4411892793 «Кухня модульная» в мастере ошибочно стоит «Готовая» — Codex).
+const KITCHEN_KIND_ORDER = ['Готовые','Модульные'];
+function kitchenKindOf(v){
+  const t = String((v && v.t) || '').toLowerCase().replace(/ё/g,'е');
+  const type = String(((v && v.a) || {})['Тип кухни'] || '').toLowerCase();
+  return (type.startsWith('модульн') || t.includes('модульн')) ? 'Модульные' : 'Готовые';
+}
 // Эффективная антресольность карточки: готовая версия «с антресолью» ИЛИ антресоль
 // выбрана в конфигураторе «Доп. опции» (два механизма, ряд должен показывать правду — Codex).
 function wardrobeEffectiveHasAttic(it){
@@ -5463,9 +5568,16 @@ function renderMulti(it){
   }
   function sizeFullLabel(bucket, refItem){
     const primary = String((bucket && bucket.label) || 'Размер');
+    // Кухонные модули: внутри вида высота и глубина одинаковые — хватит ширины
+    // («60 см»), полные габариты видно в характеристиках.
+    if(isKitchenModuleSheet(it)) return primary;
     if(isKitchen){
-      const parts = [primary, refItem && refItem.h, refItem && refItem.d].filter(x=>x!=null && x!=='').map(x=>String(x).trim()).filter(Boolean);
-      return parts.length ? parts.join('×') : primary;
+      // Подпись уже в метрах («1,6 м») — НЕ склеиваем с высотой/глубиной в сантиметрах
+      // (вышло бы «1,6 м×200×60» со смешанными единицами — находка Codex).
+      // Коротко: «1,6 м · В 200 · Г 60» (заказчик 07.09: «высота/глубина» съедали строку).
+      const h = refItem && refItem.h, d = refItem && refItem.d;
+      const tail = [h ? ('В ' + h) : '', d ? ('Г ' + d) : ''].filter(Boolean).join(' · ');
+      return tail ? (primary + ' · ' + tail) : primary;
     }
     const sleep = sleepingPlaceLabel(refItem);
     if(sleep) return sleep;
@@ -5476,6 +5588,9 @@ function renderMulti(it){
     if(km && full) return km[0] + ' · ' + full;
     return full || primary;
   }
+  // В закрытом виде — короткая подпись («1,5 м», «№5»), при раскрытии — полные
+  // габариты. Так было изначально, и заказчик 07.09 попросил вернуть именно это
+  // (мои варианты «единая подпись» и «строка под селектом» ему не подошли).
   function syncMultiSizeSelectDisplay(select, expanded){
     if(!select || select.dataset.kind !== 'size') return;
     Array.from(select.options || []).forEach(opt=>{
@@ -5497,32 +5612,94 @@ function renderMulti(it){
       if(e.key === 'Escape') setTimeout(()=>syncMultiSizeSelectDisplay(select, false), 0);
     });
   }
+  // Номинальный размер кухни В САНТИМЕТРАХ (ключ бакета). Берём из названия
+  // («Кухня Брауни 1.6 м» → 160), иначе из «см» в названии, иначе ширина.
+  // Зачем: версии одной кухни разведены в мастере ФИКТИВНОЙ шириной (160/161,
+  // 180/181, 200/201, 300/301) — по названию они склеиваются в один пункт списка,
+  // а различает их исполнение (шкаф под вытяжку, стекло, пенал). Ключ держим в см,
+  // чтобы он был сопоставим с fallback-шириной и корректно сортировался (Codex).
   function titleNominalSize(v){
     const title = String((v && v.t) || '');
+    const mm = title.match(/(\d+(?:[.,]\d+)?)\s*м(?![а-яём])/i);
+    if(mm){
+      const meters = Number(String(mm[1]).replace(',', '.'));
+      if(Number.isFinite(meters) && meters > 0 && meters < 10) return String(Math.round(meters * 100));
+    }
     const m = title.match(/(\d{3,4})\s*см/i);
     if(m) return String(Number(m[1]));
     const w = Number(v && v.w);
     if(Number.isFinite(w) && w > 0) return String(Math.round(w));
     return '';
   }
-  function kitchenGlassState(v){
-    const explicit = attr(v, 'Стекло / исполнение') || attr(v, 'Наличие стекла') || attr(v, 'Исполнение');
-    if(explicit) return explicit;
-    const source = [attr(v, 'Материал фасада'), attr(v, 'Цвет от производителя'), v && v.t].filter(Boolean).join(' ').toLowerCase();
-    return source.includes('стекл') ? 'Со стеклом' : 'Без стекла';
+  // Подпись размера кухни — в метрах: «1,6 м» (заказчик: понятно покупателю).
+  function kitchenSizeLabel(v){
+    const cm = Number(titleNominalSize(v));
+    if(!Number.isFinite(cm) || cm <= 0) return (v && v.w) ? String(v.w) : 'Размер';
+    const meters = cm / 100;
+    const txt = (Math.round(meters * 10) / 10).toFixed(1).replace('.', ',');
+    return txt + ' м';
   }
-  function kitchenExecMeta(v, bucketItems){
-    const items = Array.isArray(bucketItems) && bucketItems.length ? bucketItems : [v].filter(Boolean);
-    const uniq = arr => Array.from(new Set(arr.map(x=>String(x||'').trim()).filter(Boolean)));
-    const formValues = uniq(items.map(x=>attr(x, 'Форма кухни')));
-    const glassValues = uniq(items.map(x=>kitchenGlassState(x)));
-    if(formValues.length > 1){
-      return {label:'Форма кухни', value: attr(v, 'Форма кухни') || '—'};
+  // Стекло: 'yes' | 'no' | '' (не указано). Порядок проверок важен — «без стекла»
+  // тоже содержит «стекл» (старая логика на этом ошибалась). У Микона признак зашит
+  // в «Цвет от производителя» («Белый снег» / «Белый снег без стелка» — опечатка
+  // мастера, ловим по «без сте»).
+  function kitchenGlassState(v){
+    const explicit = (attr(v, 'Стекло / исполнение') || attr(v, 'Наличие стекла') || attr(v, 'Исполнение')).toLowerCase();
+    if(explicit) return /без/.test(explicit) ? 'no' : 'yes';
+    const source = [attr(v, 'Материал фасада'), attr(v, 'Цвет от производителя'), v && v.t].filter(Boolean).join(' ').toLowerCase();
+    if(/без\s+сте/.test(source)) return 'no';
+    if(/стекл/.test(source)) return 'yes';
+    return '';
+  }
+  // Стекло с учётом соседей по размеру: если у кого-то в наборе явно «без стекла»,
+  // то «не указано» у остальных означает «со стеклом» (Аликанте: пара 66000/63990).
+  function kitchenGlassIn(v, items){
+    const st = kitchenGlassState(v);
+    if(st) return st === 'yes';
+    const arr = Array.isArray(items) ? items : [];
+    return arr.some(x => kitchenGlassState(x) === 'no');
+  }
+  // Признаки исполнения кухни. Стабильный ключ = все признаки сразу (Codex: «первый
+  // различающий» склеил бы разные комплектации под одной вкладкой), подпись — только
+  // из тех признаков, которые ВНУТРИ размера действительно различаются.
+  function kitchenExecFlags(v, items){
+    const comp = attr(v, 'Комплектация').toLowerCase().replace(/ё/g,'е');
+    return {
+      hood: /под\s*вытяжк/.test(comp),
+      penal: /пенал/.test(comp),
+      oven: /под\s*духовк/.test(comp),
+      glass: kitchenGlassIn(v, items),
+      form: attr(v, 'Форма кухни') || ''
+    };
+  }
+  function kitchenExecKey(v, items){
+    const f = kitchenExecFlags(v, items);
+    return [f.hood?'h':'', f.penal?'p':'', f.oven?'o':'', f.glass?'g':'', normTokenLocal(f.form)].join('|');
+  }
+  // Подпись вкладки: КОРОТКО (заказчик 07.09 — длинные подписи съедали строку).
+  // Пишем только то, что ЕСТЬ у этого варианта и чего нет у соседа; если добавлять
+  // нечего — пишем одно отрицание по главному различию.
+  function kitchenExecLabel(v, bucketItems){
+    const items = (Array.isArray(bucketItems) && bucketItems.length) ? bucketItems : [v];
+    const f = kitchenExecFlags(v, items);
+    const varies = k => new Set(items.map(x=>String(kitchenExecFlags(x, items)[k]))).size > 1;
+    // Первый признак — полной фразой, следующие — кратко: «Со стеклом + пенал».
+    const plus = [];
+    if(varies('form') && f.form) plus.push([f.form, f.form.toLowerCase()]);
+    if(varies('hood') && f.hood) plus.push(['Со шкафом под вытяжку', 'шкаф под вытяжку']);
+    if(varies('glass') && f.glass) plus.push(['Со стеклом', 'стекло']);
+    if(varies('penal') && f.penal) plus.push(['С пеналом', 'пенал']);
+    if(varies('oven') && f.oven) plus.push(['Со шкафом под духовку', 'шкаф под духовку']);
+    if(plus.length){
+      return plus.map((p, i)=>i === 0 ? p[0] : p[1]).join(' + ');
     }
-    if(glassValues.length > 1){
-      return {label:'Наличие стекла', value:kitchenGlassState(v)};
-    }
-    return {label:'', value:'', kind:'none'};
+    // Положительных отличий нет — называем главное, чего у варианта нет.
+    if(varies('hood')) return 'Без шкафа под вытяжку';
+    if(varies('glass')) return 'Без стекла';
+    if(varies('penal')) return 'Без пенала';
+    if(varies('oven')) return 'Без шкафа под духовку';
+    if(varies('form') && f.form) return f.form;
+    return 'Обычная';
   }
   function isWardrobeVariant(v){
     const blob = [
@@ -5558,6 +5735,11 @@ function renderMulti(it){
       const nominal = titleNominalSize(v);
       if(nominal) return `k:${nominal}`;
     }
+    // Кухонные модули: ширина по маркировке (склеивает фиктивные 50/51, 60/61, 80/81).
+    if(isKitchenModuleSheet(it)){
+      const mw = kitchenModuleWidth(v);
+      if(mw) return `km:${mw}`;
+    }
     const sleep = sleepingPlaceLabel(v);
     if(sleep) return `sp:${normTokenLocal(sleep)}`;
     const fullWardrobe = isWardrobeVariant(v) ? fullDimensionLabel(v) : '';
@@ -5575,8 +5757,9 @@ function renderMulti(it){
       const w = Number(v && v.w) || 0;
       return w ? String(w) : 'Размер';
     }
+    if(isKitchenModuleSheet(it)) return kitchenModuleWidthLabel(v);
     if(isKitchen){
-      return titleNominalSize(v) || (v && v.w ? String(v.w) : 'Размер');
+      return kitchenSizeLabel(v);
     }
     const sleep = sleepingPlaceLabel(v);
     if(sleep) return sleep;
@@ -5657,6 +5840,57 @@ function renderMulti(it){
   const atticTabs = document.getElementById('mMultiAtticTabs');
   let hasAtticTabs = false;
   if(atticBox && atticTabs){ atticTabs.innerHTML = ''; atticBox.style.display = 'none'; }
+  // Стеллажи и полки (раунд 11): простой ряд «Вид товара» по классификатору названия.
+  // Шкафную механику (антресоли, серии, комплекты) сюда НЕ тянем — Codex.
+  const simpleKindSpec = isShelvingMultiSheet(it) ? {of:shelvingKindOf, order:SHELVING_KIND_ORDER}
+                       : isShelfMultiSheet(it) ? {of:shelfKindOf, order:SHELF_KIND_ORDER}
+                       : isKitchen ? {of:kitchenKindOf, order:KITCHEN_KIND_ORDER}
+                       : isKitchenModuleSheet(it) ? {of:kitchenModuleKindOf, order:KITCHEN_MODULE_KIND_ORDER}
+                       : null;
+  if(simpleKindSpec && kindBox && kindTabs){
+    const kindBuckets = new Map();
+    all.forEach(v=>{
+      const k = simpleKindSpec.of(v);
+      if(!kindBuckets.has(k)) kindBuckets.set(k, []);
+      kindBuckets.get(k).push(v);
+    });
+    const curKind = simpleKindSpec.of(it);
+    pool = kindBuckets.get(curKind) || [it];   // фильтруем ДО размеров и цветов
+    if(kindBuckets.size > 1){
+      hasKindTabs = true;
+      const kindsSorted = Array.from(kindBuckets.keys()).sort((a,b)=>{
+        const ia = simpleKindSpec.order.indexOf(a), ib = simpleKindSpec.order.indexOf(b);
+        return (ia<0?99:ia) - (ib<0?99:ib);
+      });
+      kindTabs.innerHTML = kindsSorted.map(k=>
+        `<button type="button" class="mMulti-tab${k===curKind?' active':''}" data-kind="${esc(k)}">${esc(k)}</button>`
+      ).join('');
+      kindTabs.querySelectorAll('[data-kind]').forEach(btn=>{
+        btn.onclick = () => {
+          const k = btn.getAttribute('data-kind') || '';
+          if(k === curKind) return;
+          const items = kindBuckets.get(k) || [];
+          if(!items.length) return;
+          // Точная расцветка производителя → общий цвет → ближайшая ширина (Codex:
+          // одного colorKey мало, декор терялся).
+          const prodCol = v => normTokenLocal(attr(v, 'Цвет от производителя'));
+          const myProd = prodCol(it), myCol = colorKey(it);
+          let cands = items.filter(v=>myProd && prodCol(v) === myProd);
+          if(!cands.length) cands = items.filter(v=>colorKey(v) === myCol);
+          if(!cands.length) cands = items;
+          const myW = Number(it.w) || 0;
+          let target = cands[0], best = Infinity;
+          cands.forEach(v=>{
+            const d = Math.abs((Number(v.w) || 0) - myW);
+            if(d < best){ best = d; target = v; }
+          });
+          if(target){ window.__TAB_REPLACE__ = true; navOpen(target.id); }
+        };
+      });
+      kindBox.style.display = '';
+    }
+  }
+
   if(isWardrobeMultiSheet(it) && kindBox && kindTabs){
     const prodColOfW = v => normTokenLocal(attr(v, 'Цвет от производителя')) || normTokenLocal(colorKey(v));
     const nearestByWidth = (cands)=>{
@@ -5802,7 +6036,6 @@ function renderMulti(it){
   }
 
   let curSizeKey = variantSizeKey(it);
-  let curExec = isKitchen ? kitchenExecMeta(it, [it]).value : '';
   let curColor = colorKey(it) || '';
   let curMirror = '';
   let curTvExec = '';
@@ -5812,16 +6045,6 @@ function renderMulti(it){
   function getCurrentBucket(){
     return sizeBuckets.get(curSizeKey) || sizes[0] || { key:'', label:'Размер', items:[it] };
   }
-  function getExecOptions(bucket){
-    if(!isKitchen || !bucket) return [];
-    const seen = new Set();
-    return bucket.items.map(v=>kitchenExecMeta(v, bucket.items).value).filter(val=>{
-      const key = String(val || '').trim();
-      if(!key || seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
-  }
   function chooseTarget(items, preferredColor){
     if(!items || !items.length) return null;
     const current = items.find(v => String(v.id) === String(it.id));
@@ -5830,27 +6053,13 @@ function renderMulti(it){
     return sameColor || items[0];
   }
   function currentFilteredItems(){
-    const bucket = getCurrentBucket();
-    let items = bucket.items.slice();
-    if(isKitchen && curExec){
-      const execFiltered = items.filter(v => kitchenExecMeta(v, bucket.items).value === curExec);
-      if(execFiltered.length) items = execFiltered;
-    }
-    return items;
+    // Кухни: исполнение выбирается ВКЛАДКАМИ (как в остальных категориях —
+    // заказчик 07.09), здесь фильтра больше нет; старый exec-селект отключён.
+    return getCurrentBucket().items.slice();
   }
   function renderExecSelect(){
-    const bucket = getCurrentBucket();
-    const execOptions = getExecOptions(bucket);
-    const execMeta = bucket && bucket.items && bucket.items.length ? kitchenExecMeta(bucket.items[0], bucket.items) : {label:'Исполнение'};
-    if(!isKitchen || execOptions.length < 2){
-      extraSel.style.display = 'none';
-      extraSel.innerHTML = '<option value="">Исполнение</option>';
-      return;
-    }
-    if(!execOptions.includes(curExec)) curExec = execOptions[0];
-    extraSel.setAttribute('aria-label', execMeta.label || 'Исполнение');
-    extraSel.innerHTML = execOptions.map(val=>`<option value="${esc(val)}" ${String(val)===String(curExec)?'selected':''}>${esc(val)}</option>`).join('');
-    extraSel.style.display = '';
+    extraSel.style.display = 'none';
+    extraSel.innerHTML = '<option value="">Исполнение</option>';
   }
   function renderColors(){
     const bucket = getCurrentBucket();
@@ -5866,6 +6075,9 @@ function renderMulti(it){
       return colorKey(v) || 'Без цвета';
     }
     function producerColorLabel(v){
+      // Кухонные модули: цвет у всей серии один, различает их маркировка и назначение —
+      // её и показываем на карточке (заказчик 07.09: «сделать удобно покупателю»).
+      if(isKitchenModuleSheet(it)) return kitchenModuleLabel(v, options);
       return attr(v, 'Цвет от производителя')
         || attr(v, 'Цвет производителя')
         || attr(v, 'Цвет')
@@ -5978,6 +6190,16 @@ function renderMulti(it){
     // ящичные вкладки у Челси/Бьянко/Фиесты, где их не было (проверено симуляцией).
     function drawersCount(v){
       const explicit = attr(v, 'Количество ящиков');
+      // В мастере это поле бывает голым числом (стеллажи Велеса, тумбы) — вкладки
+      // выходили «0» и «1». Делаем человеческую подпись (заказчик 07.09: коротко
+      // и понятно). Значения со словом («4 ящика») оставляем как есть.
+      if(/^\d+$/.test(explicit)){
+        const n = Number(explicit);
+        if(n === 0) return 'Без ящиков';
+        const word = (n % 10 === 1 && n % 100 !== 11) ? 'ящик'
+                   : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) ? 'ящика' : 'ящиков';
+        return n + ' ' + word;
+      }
       if(explicit) return explicit;
       const txt = [v && v.t, attr(v, 'Что есть у товара'), attr(v, 'Особенности')].filter(Boolean).join(' ').toLowerCase().replace(/ё/g,'е');
       if(/к800\s*3\s*\/\s*2/.test(txt) || /5\s*ящ/.test(txt)) return '5 ящиков';
@@ -6014,7 +6236,9 @@ function renderMulti(it){
       return base + ' и ' + d + ' ' + word;
     }
     function drawersOrder(label){
-      const n = String(label || '').match(/\d+/);
+      const s = String(label || '').toLowerCase();
+      if(s.startsWith('без')) return -1; // «Без ящиков» — первой вкладкой
+      const n = s.match(/\d+/);
       return n ? Number(n[0]) : 99;
     }
     function chooseDrawersTarget(items, currentItem){
@@ -6130,7 +6354,15 @@ function renderMulti(it){
         const titles = Array.from(new Set(options.map(v=>String(v.t||'').trim())));
         if(titles.length > 1) tvExecOf = modelTailExecOf(titles);
       }
-    } else if(!isKitchen && !isSofaHere && options.length > 1){
+    } else if(isKitchen && options.length > 1){
+      // Кухни (раунд 11): вкладки исполнения вместо селекта. Внутри одного метража
+      // лежат версии, разведённые в мастере фиктивной шириной (160/161): различаются
+      // шкафом под вытяжку, стеклом, пеналом, формой. Ключ стабильный (все признаки),
+      // подпись — только из различающихся (Codex).
+      if(new Set(options.map(v=>kitchenExecKey(v, options))).size > 1){
+        tvExecOf = v => kitchenExecLabel(v, options);
+      }
+    } else if(!isSofaHere && options.length > 1){
       // «(Металл)» в названии — вкладки «Ножки пластик | Ножки металл», как у ТВ-тумб
       // Оливия (заказчик 07.09: комоды Оливия; общая ветка не годится — она режет скобки).
       const metalOf = v => /\(\s*металл\s*\)/i.test(String((v && v.t) || ''));
@@ -6422,13 +6654,23 @@ function renderMulti(it){
     if(!nextKey || !sizeBuckets.has(nextKey)) return;
     curSizeKey = nextKey;
     renderExecSelect();
-    const target = chooseTarget(currentFilteredItems(), colorKey(it));
-    if(target && String(target.id) !== String(it.id)) navOpen(target.id);
-    else renderColors();
-  };
-  extraSel.onchange = () => {
-    curExec = String(extraSel.value || '');
-    const target = chooseTarget(currentFilteredItems(), colorKey(it));
+    let items = currentFilteredItems();
+    // Кухни: при смене метража СОХРАНЯЕМ выбранное исполнение (Codex: иначе с «1,8 м
+    // со шкафом под вытяжку» попадали на «1,6 м без вытяжки»). Каскад: точно то же
+    // исполнение → хотя бы тот же шкаф под вытяжку (самый заметный признак) → как есть.
+    if(isKitchen){
+      const prevItems = (sizeBuckets.get(variantSizeKey(it)) || {items:[it]}).items;
+      const myExec = kitchenExecKey(it, prevItems);
+      const sameExec = items.filter(v => kitchenExecKey(v, items) === myExec);
+      if(sameExec.length){
+        items = sameExec;
+      }else{
+        const myHood = kitchenExecFlags(it, prevItems).hood;
+        const sameHood = items.filter(v => kitchenExecFlags(v, items).hood === myHood);
+        if(sameHood.length) items = sameHood;
+      }
+    }
+    const target = chooseTarget(items, colorKey(it));
     if(target && String(target.id) !== String(it.id)) navOpen(target.id);
     else renderColors();
   };
@@ -6457,14 +6699,14 @@ function renderMulti(it){
       wSel.innerHTML = `<option value="${esc(sizes[0].key)}" data-short="${esc(primary)}" data-full="${esc(full)}" selected>${esc(primary)}</option>`;
       bindMultiSizeSelect(wSel);
       syncMultiSizeSelectDisplay(wSel, false);
-    } else {
+      } else {
       wSel.innerHTML = '<option value="">Сп.Место</option>';
     }
     // Секцию оставляем видимой и при одном размере, если у товара есть конфигуратор
     // антресоли — кнопка «Выбрать опции» живёт здесь и должна быть на видном месте
     // (пенал со стеклом Норд: кнопка уезжала в галерею — заказчик 07.09).
     const keepForWardrobeOpts = (typeof hasWardrobeAtticOption === 'function') && hasWardrobeAtticOption(it);
-    secW.style.display = ((isKitchen && getExecOptions(getCurrentBucket()).length >= 2) || keepForWardrobeOpts) ? '' : 'none';
+    secW.style.display = keepForWardrobeOpts ? '' : 'none';
   }
 
   if(hW){
