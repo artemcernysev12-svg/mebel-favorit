@@ -20,12 +20,19 @@ function loadScriptOnce(src){
 const KITCHEN_BUILDER_CATS = new Set(['Кухни','Гарнитуры и комплекты','Спальные гарнитуры','Прихожие и обувницы']);
 function itemNeedsKitchenData(it){
   if(!it) return false;
-  return KITCHEN_BUILDER_CATS.has(String(it.c || it.sheet || ''));
+  if(KITCHEN_BUILDER_CATS.has(String(it.c || it.sheet || ''))) return true;
+  // Модульные комплекты шкафов Миф (Норд №1–№7): заказчик 06.09 — состав рисуем
+  // карточками модулей, «как в спальнях и гостиных» (данные в wardrobe-kits-mif.js).
+  const rec = (typeof getWardrobeCoupe === 'function') ? getWardrobeCoupe(it) : null;
+  return !!(rec && rec.display === 'kit');
 }
 async function ensureKitchenData(){
-  if(typeof window.__KITCHEN_COMP__ !== 'undefined' && typeof window.__KITCHEN_POOL__ !== 'undefined' && typeof window.__AGAVA_MODULES__ !== 'undefined') return;
+  if(typeof window.__KITCHEN_COMP__ !== 'undefined' && typeof window.__KITCHEN_POOL__ !== 'undefined' && typeof window.__AGAVA_MODULES__ !== 'undefined' && window.__MIF_KITS_MERGED__) return;
   await Promise.all([
-    loadScriptOnce('catalog-data/kitchen-comp.js?v=01844a0b'),
+    // Составы шкафных комплектов Миф мерджатся ПОСЛЕ kitchen-comp.js —
+    // тот присваивает __KITCHEN_COMP__ целиком и затёр бы мердж при обратном порядке.
+    loadScriptOnce('catalog-data/kitchen-comp.js?v=01844a0b')
+      .then(()=>loadScriptOnce('catalog-data/wardrobe-kits-mif.js?v=mifk5')),
     loadScriptOnce('catalog-data/kitchen-pools.js?v=4ef74692'),
     loadScriptOnce('catalog-data/agava-modules.js?v=9b91d0ce')
   ]);
@@ -2247,14 +2254,87 @@ function getWardrobeAttic(it){
   return (rec && rec.attic && rec.attic.atticId) ? rec : null;
 }
 function hasWardrobeAtticOption(it){ return !!getWardrobeAttic(it); }
+// Универсальный список вариантов опций шкафа: классическая пара «без/с антресолью»
+// ИЛИ rec.options (пеналы со стеклом Норд: антресоль / подсветка / обе; цены готовые).
+function getWardrobeAtticVariants(rec){
+  const base = {key:'base', label:'Только шкаф', price:Number((rec.base && rec.base.price) || 0), parts:[], led:false, heightLabel:(rec.base && rec.base.heightLabel) || ''};
+  if(Array.isArray(rec.options) && rec.options.length){
+    return [base].concat(rec.options.map(o=>({
+      key:String(o.key), label:String(o.label || ''), price:Number(o.price || 0),
+      parts:Array.isArray(o.parts) ? o.parts : [], led:!!o.led, heightLabel:String(o.heightLabel || '')
+    })));
+  }
+  const a = rec.attic || {};
+  const parts = (Array.isArray(a.parts) && a.parts.length) ? a.parts
+    : [{atticId:a.atticId, atticTitle:a.atticTitle, atticArt:a.atticArt, atticPrice:a.atticPrice, qty:a.atticQty || 1, atticWidth:a.atticWidth, atticHeight:a.atticHeight}];
+  return [base, {key:'attic', label:(parts.length > 1 ? 'Шкаф + антресоли' : 'Шкаф + антресоль'), price:Number(a.price || 0), parts, led:false, heightLabel:String(a.heightLabel || '')}];
+}
+function getWardrobeAtticVariantByKey(rec, key){
+  const vs = getWardrobeAtticVariants(rec);
+  return vs.find(v=>v.key === key) || vs[0];
+}
+// Радио-варианты (антресоль): всё, кроме led-комбинаций. Подсветка — отдельная галочка
+// (решение заказчика 06.09: «подсветка — только чекбокс, к антресоли не привязывать»).
+function getWardrobeAtticRadioVariants(rec){
+  return getWardrobeAtticVariants(rec).filter(v=>!v.led);
+}
+function wardrobeRecHasLed(rec){
+  return !!(rec && Array.isArray(rec.options) && rec.options.some(o=>o && o.led));
+}
+function wardrobeRecNoun(rec){
+  return String((rec && rec.noun) || 'Шкаф').trim() || 'Шкаф';
+}
+let WARDROBE_LED_CHOICE = {};
+function isWardrobeLedOn(it){
+  const rec = getWardrobeAttic(it);
+  return !!(rec && wardrobeRecHasLed(rec) && WARDROBE_LED_CHOICE[String(it.id)]);
+}
+function setWardrobeLedChoice(id, on){
+  WARDROBE_LED_CHOICE[String(id || '')] = !!on;
+  // Модальные элементы (#mPri и пр.) обновляем только если открыта карточка ЭТОГО товара —
+  // галочку могут щёлкнуть и из состава комплекта (мини-попап у модуля-пенала).
+  const cur = window.__CUR_ITEM__;
+  if(cur && String(cur.id) === String(id)) updateWardrobeAtticSelection(cur);
+  try{ updateMiniWardrobeLedPopup(); }catch(_){}
+  try{ refreshBedMiniOptionViews(); }catch(_){}
+}
+// led-комбинация, парная радио-варианту: base→'led' (parts пустые), attic→'atticLed' (parts есть).
+function findWardrobeLedVariant(rec, radioKey){
+  const vs = getWardrobeAtticVariants(rec);
+  const radioV = vs.find(v=>v.key === radioKey) || vs[0];
+  const wantParts = !!(radioV.parts && radioV.parts.length);
+  return vs.find(v=>v.led && !!(v.parts && v.parts.length) === wantParts) || null;
+}
+// Честная дельта галочки: цена(тек. радио + подсветка) − цена(тек. радио); null = пары нет.
+function getWardrobeLedDelta(it, rec){
+  rec = rec || getWardrobeAttic(it);
+  if(!rec) return null;
+  const radioKey = getWardrobeAtticChoice(it);
+  const ledV = findWardrobeLedVariant(rec, radioKey);
+  if(!ledV) return null;
+  const radioV = getWardrobeAtticVariantByKey(rec, radioKey);
+  return Math.max(0, Number(ledV.price || 0) - Number((radioV && radioV.price) || 0));
+}
+// Эффективный вариант = радио (base/attic) × подсветка → готовая комбинация из данных.
+function getWardrobeAtticEffectiveKey(it){
+  const rec = getWardrobeAttic(it);
+  if(!rec) return 'base';
+  const radio = getWardrobeAtticChoice(it);
+  if(!isWardrobeLedOn(it)) return radio;
+  const ledV = findWardrobeLedVariant(rec, radio);
+  return ledV ? ledV.key : radio;
+}
 function getWardrobeAtticChoice(it){
   const rec = getWardrobeAttic(it);
   if(!rec) return 'base';
-  return WARDROBE_ATTIC_CHOICE[String(it.id)] || 'base';
+  const saved = WARDROBE_ATTIC_CHOICE[String(it.id)] || 'base';
+  return getWardrobeAtticRadioVariants(rec).some(v=>v.key === saved) ? saved : 'base';
 }
 function setWardrobeAtticChoice(id, choice){
-  WARDROBE_ATTIC_CHOICE[String(id || '')] = (choice === 'attic') ? 'attic' : 'base';
   const it = findItemById(id);
+  const rec = it ? getWardrobeAttic(it) : null;
+  const ok = rec ? getWardrobeAtticRadioVariants(rec).some(v=>v.key === String(choice)) : (choice === 'attic');
+  WARDROBE_ATTIC_CHOICE[String(id || '')] = ok ? String(choice) : 'base';
   if(it) updateWardrobeAtticSelection(it);
 }
 function getWardrobeStockQtyFromArt(art, fallbackItem){
@@ -2289,20 +2369,28 @@ function getWardrobeBaseAvailability(it, rec){
   };
 }
 function getWardrobeAtticAvailability(it, rec, choice){
-  const atticItem = rec && rec.attic ? findItemById(rec.attic.atticId) : null;
-  if(choice !== 'attic') return getWardrobeBaseAvailability(it, rec);
+  if(choice === 'base' || !choice) return getWardrobeBaseAvailability(it, rec);
   if(!rec || !rec.attic){
     return {loaded:true, available:false, qty:0, className:'preorder', label:'Под заказ', badgeLabel:'', fromWardrobeAttic:true};
   }
   if(!STOCK.loaded){
     return {loaded:false, available:false, qty:null, className:'nodata', label:'Остатки не загружены', badgeLabel:'', fromWardrobeAttic:true};
   }
-  const needAttic = Math.max(1, Number(rec.attic.atticQty) || 1);
+  const variant = getWardrobeAtticVariantByKey(rec, choice);
   const cab = getWardrobeStockQtyFromArt(rec.cabinetArt, it);
-  const attic = getWardrobeStockQtyFromArt(rec.attic.atticArt, atticItem);
   const cabQty = cab.missing ? 0 : Math.max(0, Number(cab.qty) || 0);
-  const atticQty = attic.missing ? 0 : Math.max(0, Number(attic.qty) || 0);
-  const kits = Math.min(cabQty, Math.floor(atticQty / needAttic));
+  // Комплектов столько, на сколько хватает шкафа и КАЖДОЙ антресоли варианта.
+  // Подсветка не складская (в составе кода прайса) — на наличие не влияет.
+  let kits = cabQty, atticQty = Infinity, needAttic = (variant.parts && variant.parts.length) ? 1 : 0;
+  (variant.parts || []).forEach(p=>{
+    const need = Math.max(1, Number(p.qty) || 1);
+    needAttic = Math.max(needAttic, need);
+    const q = getWardrobeStockQtyFromArt(p.atticArt, findItemById(p.atticId));
+    const have = q.missing ? 0 : Math.max(0, Number(q.qty) || 0);
+    kits = Math.min(kits, Math.floor(have / need));
+    atticQty = Math.min(atticQty, have);
+  });
+  if(!isFinite(atticQty)) atticQty = 0;
   const available = kits > 0;
   return {
     loaded:true,
@@ -2330,12 +2418,12 @@ function wardrobeAtticPopupTotalStockHtml(state){
 function updateWardrobeAtticPopupStock(it, rec){
   const host = document.getElementById('wardrobePopupHost');
   if(!host || !host.innerHTML || !rec) return;
-  const baseState = getWardrobeAtticAvailability(it, rec, 'base');
-  const atticState = getWardrobeAtticAvailability(it, rec, 'attic');
-  const baseEl = host.querySelector('[data-wa-stock="base"]');
-  const atticEl = host.querySelector('[data-wa-stock="attic"]');
-  if(baseEl) baseEl.outerHTML = wardrobeAtticStockHtml(baseState).replace('waOpt-choice-stock', 'waOpt-choice-stock').replace('<span ', '<span data-wa-stock="base" ');
-  if(atticEl) atticEl.outerHTML = wardrobeAtticStockHtml(atticState).replace('waOpt-choice-stock', 'waOpt-choice-stock').replace('<span ', '<span data-wa-stock="attic" ');
+  getWardrobeAtticVariants(rec).forEach(v=>{
+    const el = host.querySelector(`[data-wa-stock="${v.key}"]`);
+    if(!el) return;
+    const st = getWardrobeAtticAvailability(it, rec, v.key);
+    el.outerHTML = wardrobeAtticStockHtml(st).replace('<span ', `<span data-wa-stock="${v.key}" `);
+  });
 }
 function updateWardrobeAtticStockBadge(state){
   const stockEl = document.getElementById('mStock');
@@ -2348,15 +2436,33 @@ function updateWardrobeAtticStockBadge(state){
     stockEl.style.display = 'none';
   }
 }
+function wardrobeAtticIsPair(rec){
+  return !!(rec && rec.attic && Array.isArray(rec.attic.parts) && rec.attic.parts.length > 1);
+}
+// Ширина антресоли: сперва из живой карточки (там точные см), иначе эвристика мм/см.
+// Эвристика формата (порог 450) врёт на 400 мм → «400 см» (пенал Норд, раунд 10).
+function wardrobeAtticPartWidthCm(p){
+  const pi = p && p.atticId ? findItemById(p.atticId) : null;
+  const w = pi ? Number(pi.w) : 0;
+  if(w > 0) return formatCmNumber(w) + ' см';
+  return formatMaybeMmWidthCm(p && p.atticWidth);
+}
+function wardrobeAtticPartsLabel(rec){
+  // «80 + 120 см» — для пары антресолей Миф (6-ти створчатые Норд).
+  const parts = (rec && rec.attic && rec.attic.parts) || [];
+  return parts.map(p=>wardrobeAtticPartWidthCm(p)).filter(Boolean).join(' + ');
+}
 function getWardrobeAtticMessageInfo(it){
   const rec = getWardrobeAttic(it);
-  if(!rec || getWardrobeAtticChoice(it) !== 'attic') return null;
-  const attic = rec.attic || {};
+  // Эффективный вариант: радио (антресоль) × галочка подсветки — в сообщение идёт готовая комбинация.
+  const choice = rec ? getWardrobeAtticEffectiveKey(it) : 'base';
+  if(!rec || choice === 'base') return null;
+  const v = getWardrobeAtticVariantByKey(rec, choice);
   return {
-    price: Number(attic.price || rec.base.price || it.p || 0),
+    price: Number(v.price || (rec.base && rec.base.price) || it.p || 0),
     lines: [
-      '• Комплектация: шкаф + антресоль',
-      attic.heightLabel || ''
+      '• Комплектация: ' + wardrobeVariantDisplayName(v, rec).toLowerCase(),
+      v.heightLabel || ''
     ].filter(Boolean)
   };
 }
@@ -2364,55 +2470,70 @@ function closeWardrobeOptionWindow(){
   const host = document.getElementById('wardrobePopupHost');
   if(host) host.innerHTML = '';
 }
+function wardrobeVariantDisplayName(v, rec){
+  // Существительное из данных связки (rec.noun): «Шкаф»/«Пенал»/«Прихожая» — тексты
+  // не привязаны к слову «шкаф» (заказчик 06.09: конфигуратор и у прихожих Норд).
+  const noun = wardrobeRecNoun(rec);
+  if(v.key === 'base') return 'Только ' + noun.toLowerCase();
+  if(v.led && v.parts.length) return noun + ' + антресоль + подсветка';
+  if(v.led) return noun + ' + подсветка';
+  return v.parts.length > 1 ? noun + ' + антресоли' : noun + ' + антресоль';
+}
+function wardrobeVariantMeta(v){
+  if(!v.parts.length) return v.led ? 'подсветка входит в цену' : '';
+  const widths = v.parts.map(p=>wardrobeAtticPartWidthCm(p)).filter(Boolean).join(' + ');
+  const base = v.parts.length > 1 ? widths : (Math.max(1, Number(v.parts[0].qty) || 1) + ' шт. × ' + widths);
+  return v.led ? (base + ' · подсветка') : base;
+}
 function openWardrobeOptionWindow(it){
   const rec = getWardrobeAttic(it);
   const host = document.getElementById('wardrobePopupHost');
   if(!rec || !host) return;
   const basePrice = Number((rec.base && rec.base.price) || it.p || 0);
-  const atticTotal = Number((rec.attic && rec.attic.price) || 0);
-  const atticExtra = Number((rec.attic && (rec.attic.totalAtticPrice || rec.attic.atticPrice)) || Math.max(0, atticTotal - basePrice));
-  const qty = Math.max(1, Number(rec.attic && rec.attic.atticQty) || 1);
-  const atticWidth = rec.attic && rec.attic.atticWidth ? formatMaybeMmWidthCm(rec.attic.atticWidth) : '';
-  const atticItem = rec && rec.attic ? findItemById(rec.attic.atticId) : null;
   const baseImg = (it && it.img) ? it.img : '';
-  const atticImg = (atticItem && atticItem.img) ? atticItem.img : baseImg;
-  const baseState = getWardrobeAtticAvailability(it, rec, 'base');
-  const atticState = getWardrobeAtticAvailability(it, rec, 'attic');
+  // Радио — только варианты антресоли; подсветка — отдельная галочка ниже (заказчик 06.09).
+  const variants = getWardrobeAtticRadioVariants(rec);
+  const choicesHtml = variants.map(v=>{
+    const st = getWardrobeAtticAvailability(it, rec, v.key);
+    const firstPart = v.parts && v.parts[0];
+    const pi = firstPart ? findItemById(firstPart.atticId) : null;
+    const img = v.key === 'base' ? baseImg : ((pi && pi.img) || baseImg);
+    const extra = Math.max(0, Number(v.price || 0) - basePrice);
+    const meta = wardrobeVariantMeta(v);
+    return `
+        <label class="waOpt-choice" data-choice="${esc(v.key)}">
+          <input type="radio" name="waOptPopup" value="${esc(v.key)}" onchange="setWardrobeAtticChoice('${esc(it.id)}','${esc(v.key)}')">
+          <span>
+            <div class="waOpt-choice-visual">${img ? `<img src="${esc(img)}" alt="${esc(wardrobeVariantDisplayName(v, rec))}" loading="lazy">` : ''}</div>
+            <div class="waOpt-choice-copy">
+              <div class="waOpt-choice-name">${esc(wardrobeVariantDisplayName(v, rec))}</div>
+              <div class="waOpt-choice-price">${extra > 0 ? '+' + rub(extra) : '+0 ₽'}</div>
+              ${meta ? `<div class="waOpt-choice-meta">${esc(meta)}</div>` : ''}
+              ${wardrobeAtticStockHtml(st).replace('<span ', `<span data-wa-stock="${esc(v.key)}" `)}
+            </div>
+          </span>
+        </label>`;
+  }).join('');
+  const ledHtml = wardrobeRecHasLed(rec) ? `
+      <div class="bedOpt-addons" style="display:flex">
+        <div class="bedOpt-sub">Дополнительные опции</div>
+        <div class="bedOpt-checks">
+          <label class="bedOpt-check"><input type="checkbox" id="wardrobeOptLedInput" onchange="setWardrobeLedChoice('${esc(it.id)}',this.checked)"> <span class="bedOpt-check-body"><span class="bedOpt-check-line">Подсветка <b id="wardrobeOptLedPrice"></b></span></span></label>
+        </div>
+        <div class="bedOpt-warn">Подсветку можно добавить к любому варианту — размеры она не меняет.</div>
+      </div>` : '';
   host.innerHTML = `
     <div class="wardrobeOpt-pop-backdrop" onclick="closeWardrobeOptionWindow()"></div>
     <div class="wardrobeOpt-pop">
       <div class="wardrobeOpt-pop-h">
         <div>
-          <div class="wardrobeOpt-pop-title">Опции шкафа</div>
-          <div class="wardrobeOpt-pop-hint">Выберите: только шкаф или шкаф с антресолью. Итоговая цена справа пересчитается сразу.</div>
+          <div class="wardrobeOpt-pop-title">Доп. опции</div>
+          <div class="wardrobeOpt-pop-hint">Выберите комплектацию — итоговая цена пересчитается сразу.</div>
         </div>
         <button type="button" class="wardrobeOpt-close" onclick="closeWardrobeOptionWindow()" aria-label="Закрыть">×</button>
       </div>
-      <div class="waOpt-choices" style="margin-top:12px">
-        <label class="waOpt-choice" data-choice="base">
-          <input type="radio" name="waOptPopup" value="base" onchange="setWardrobeAtticChoice('${esc(it.id)}','base')">
-          <span>
-            <div class="waOpt-choice-visual">${baseImg ? `<img src="${esc(baseImg)}" alt="Только шкаф" loading="lazy">` : ''}</div>
-            <div class="waOpt-choice-copy">
-              <div class="waOpt-choice-name">Только шкаф</div>
-              <div class="waOpt-choice-price">+0 ₽</div>
-              ${wardrobeAtticStockHtml(baseState).replace('<span ', '<span data-wa-stock="base" ')}
-            </div>
-          </span>
-        </label>
-        <label class="waOpt-choice" data-choice="attic">
-          <input type="radio" name="waOptPopup" value="attic" onchange="setWardrobeAtticChoice('${esc(it.id)}','attic')">
-          <span>
-            <div class="waOpt-choice-visual">${atticImg ? `<img src="${esc(atticImg)}" alt="Шкаф + антресоль" loading="lazy">` : ''}</div>
-            <div class="waOpt-choice-copy">
-              <div class="waOpt-choice-name">Шкаф + антресоль</div>
-              <div class="waOpt-choice-price">+${rub(atticExtra)}</div>
-              <div class="waOpt-choice-meta">${qty} шт. × ${esc(atticWidth)}</div>
-              ${wardrobeAtticStockHtml(atticState).replace('<span ', '<span data-wa-stock="attic" ')}
-            </div>
-          </span>
-        </label>
-      </div>
+      <div class="waOpt-choices" style="margin-top:12px">${choicesHtml}</div>
+      ${ledHtml}
       <div class="wardrobeOpt-pop-note" id="wardrobeOptPopupNote" style="display:none"></div>
       <div class="wardrobeOpt-pop-actions"><div class="wardrobeOpt-pop-total" id="wardrobeOptPopupTotal">Итог: —</div><button type="button" class="wardrobeOpt-done" onclick="closeWardrobeOptionWindow()">Готово</button></div>
     </div>`;
@@ -2421,7 +2542,11 @@ function openWardrobeOptionWindow(it){
 function mountWardrobeOptionToolsHost(){
   const tools = document.getElementById('mWardrobeOptionTools');
   if(!tools) return;
-  const inlineHost = document.querySelector('#mMultiSizes .mMulti-controls');
+  // Секция размера может быть скрыта (один размер внутри вида, напр. Терминалы Норд) —
+  // тогда кнопку «Выбрать опции» монтируем в галерею, иначе она пропадает (Codex р.11).
+  const sizesSec = document.getElementById('mMultiSizes');
+  const sizesVisible = !!(sizesSec && sizesSec.style.display !== 'none');
+  const inlineHost = sizesVisible ? sizesSec.querySelector('.mMulti-controls') : null;
   if(inlineHost){
     inlineHost.appendChild(tools);
     tools.classList.add('wardrobeOptTools-inline');
@@ -2435,37 +2560,40 @@ function updateWardrobeAtticSelection(it){
   const rec = getWardrobeAttic(it);
   const box = document.getElementById('mWardrobeAttic');
   if(!box || !rec) return;
-  const choice = getWardrobeAtticChoice(it);
-  const selected = choice === 'attic' ? rec.attic : rec.base;
-  const price = Number((selected && selected.price) || it.p || 0);
+  const choice = getWardrobeAtticChoice(it);           // радио: base / antресольный вариант
+  const effKey = getWardrobeAtticEffectiveKey(it);      // радио × подсветка → готовая комбинация
+  const variant = getWardrobeAtticVariantByKey(rec, effKey);
+  const price = Number((variant && variant.price) || it.p || 0);
   const priceEl = document.getElementById('mPri');
   if(priceEl) priceEl.textContent = rub(price);
-  const state = getWardrobeAtticAvailability(it, rec, choice);
+  const state = getWardrobeAtticAvailability(it, rec, effKey);
   updateWardrobeAtticStockBadge(state);
   const detail = box.querySelector('#waOptDetail');
   if(detail){
-    if(choice === 'attic'){
-      const a = rec.attic || {};
-      const qty = Math.max(1, Number(a.atticQty) || 1);
+    if(effKey !== 'base'){
+      const compName = wardrobeVariantDisplayName(variant, rec).toLowerCase();
+      const atticRows = (variant.parts || []).map(p=>`<div>${esc(p.atticTitle || 'Антресоль')} — ${Math.max(1, Number(p.qty) || 1)} шт.</div>`).join('')
+        + (variant.led ? '<div>Подсветка — входит в комплектацию</div>' : '');
+      const atticLinks = (variant.parts || []).filter(p=>p.atticId).map((p, i, arr)=>`<a class="waOpt-link" href="${esc(chpuItemPathById(p.atticId))}" onclick="return chpuNavCard(event,'${esc(p.atticId)}')">${arr.length > 1 ? 'Антресоль ' + esc(wardrobeAtticPartWidthCm(p)) : 'Посмотреть антресоль'}</a>`).join(' ');
       detail.innerHTML = `
         <div><b>Итог:</b> ${esc(rec.title || it.t || 'Шкаф')}</div>
         <div class="waOpt-list">
-          <div>Комплектация: шкаф + антресоль</div>
+          <div>Комплектация: ${esc(compName)}</div>
           <div style="margin-top:6px;color:var(--muted)">В комплекте:</div>
           <div>${esc(rec.title || it.t || 'Шкаф')} — 1 шт.</div>
-          <div>${esc(a.atticTitle || 'Антресоль')} — ${qty} шт.</div>
-          ${a.heightLabel ? `<div style="margin-top:6px;color:var(--muted)">${esc(a.heightLabel)}</div>` : ''}
+          ${atticRows}
+          ${variant.heightLabel ? `<div style="margin-top:6px;color:var(--muted)">${esc(variant.heightLabel)}</div>` : ''}
           <div style="margin-top:6px"><b>Наличие комплекта:</b> ${esc(state.loaded ? state.label : 'Остатки не загружены')}</div>
         </div>
         <div class="waOpt-foot">
-          ${a.atticId ? `<a class="waOpt-link" href="${esc(chpuItemPathById(a.atticId))}" onclick="return chpuNavCard(event,'${esc(a.atticId)}')">Посмотреть антресоль</a>` : ''}
+          ${atticLinks}
           <span class="waOpt-stock ${state.available ? 'ok' : 'none'}">${esc(state.loaded ? state.label : 'Остатки не загружены')}</span>
         </div>`;
     }else{
       detail.innerHTML = `
         <div><b>Итог:</b> ${esc(rec.title || it.t || 'Шкаф')}</div>
         <div class="waOpt-list">
-          <div>Комплектация: только шкаф</div>
+          <div>Комплектация: только ${esc(wardrobeRecNoun(rec).toLowerCase())}</div>
           ${rec.base && rec.base.heightLabel ? `<div style="margin-top:6px;color:var(--muted)">${esc(rec.base.heightLabel)}</div>` : ''}
         </div>
         <div class="waOpt-foot"><span class="waOpt-stock ${state.available ? 'ok' : 'none'}">${esc(state.loaded ? state.label : 'Остатки не загружены')}</span></div>`;
@@ -2473,7 +2601,7 @@ function updateWardrobeAtticSelection(it){
   }
   const tools = document.getElementById('mWardrobeOptionTools');
   if(tools){
-    const label = choice === 'attic' ? 'Выбрано: шкаф + антресоль' : 'Выбрано: только шкаф';
+    const label = 'Выбрано: ' + wardrobeVariantDisplayName(variant, rec).toLowerCase();
     tools.innerHTML = `<div class="wardrobeOptTools-in"><button type="button" class="wardrobeOpt-open" onclick="event.stopPropagation(); openWardrobeOptionWindow(findItemById('${esc(it.id)}')); return false;">⚙️ Выбрать опции</button><div class="wardrobeOptCurrent">${esc(label)}</div></div>`;
     tools.style.display = 'flex';
     mountWardrobeOptionToolsHost();
@@ -2482,9 +2610,16 @@ function updateWardrobeAtticSelection(it){
   if(host && host.innerHTML){
     host.querySelectorAll('.waOpt-choice').forEach(el=>el.classList.toggle('on', el.dataset.choice === choice));
     host.querySelectorAll('input[name="waOptPopup"]').forEach(inp=>{ inp.checked = inp.value === choice; });
+    const ledInp = host.querySelector('#wardrobeOptLedInput');
+    if(ledInp) ledInp.checked = isWardrobeLedOn(it);
+    const ledPriceEl = host.querySelector('#wardrobeOptLedPrice');
+    if(ledPriceEl){
+      const d = getWardrobeLedDelta(it, rec);
+      ledPriceEl.textContent = (d !== null && d > 0) ? ('+' + rub(d)) : '';
+    }
     const note = host.querySelector('#wardrobeOptPopupNote');
     if(note){
-      const txt = (choice === 'attic' && rec.attic && rec.attic.heightLabel) ? rec.attic.heightLabel : '';
+      const txt = (effKey !== 'base') ? ((variant && variant.heightLabel) || '') : '';
       note.textContent = txt;
       note.style.display = txt ? 'block' : 'none';
     }
@@ -2492,6 +2627,8 @@ function updateWardrobeAtticSelection(it){
     const total = host.querySelector('#wardrobeOptPopupTotal');
     if(total) total.innerHTML = `Итог: <b>${rub(price)}</b>${wardrobeAtticPopupTotalStockHtml(state)}`;
   }
+  // Ряд «Комплектация» над размером отражает и выбор конфигуратора (раунд 11, Codex).
+  try{ syncWardrobeAtticTabsRow(it); }catch(_){ }
 }
 function renderWardrobeAttic(it){
   const box = document.getElementById('mWardrobeAttic');
@@ -2888,6 +3025,10 @@ function hasWardrobeCoupe(it){ return !!getWardrobeCoupe(it); }
 function getWardrobeCoupePrice(it){
   const rec = getWardrobeCoupe(it);
   if(!rec) return Number(it && it.p || 0);
+  // Миф-комплекты: цена ВСЕГДА живая из карточки (catalog.js) — связка даёт только
+  // наличие по модулям; никаких снапшотов, чтобы переоценка каталога не расходилась
+  // с фидом/SEO (Codex п.4).
+  if(rec.kind === 'mif-kit') return Number(it && it.p || 0) || Number(rec.calcPrice || 0);
   return Number(rec.sitePrice || rec.manualPrice || rec.calcPrice || it.p || 0);
 }
 function getWardrobeCoupeComponentStock(comp, it){
@@ -2902,16 +3043,37 @@ function getWardrobeCoupeComponentStock(comp, it){
   // Если артикула комплектующей нет, наличие считаем неизвестным, чтобы не показывать ложное "в наличии".
   return {qty:0, missing:true};
 }
+function coupeComponentArt(c){
+  // Арт компонента: из связки, а если пуст — с карточки модуля (Миф-комплекты, Codex п.3).
+  let art = String((c && c.art) || '').trim();
+  if(!art && c && c.id){
+    const modItem = findItemById(c.id);
+    if(modItem && modItem.art) art = String(modItem.art).trim();
+  }
+  return art;
+}
 function getWardrobeCoupeAvailability(it, rec){
   if(!rec) return getDisplayAvailability(it);
   if(!STOCK.loaded) return {loaded:false, available:false, qty:null, className:'nodata', label:'Остатки не загружены', badgeLabel:'', fromCoupe:true};
   const comps = (rec.components || []).filter(c=>String(c.stock || '').toLowerCase() !== 'нет');
-  let minQty = Infinity, missing = false;
+  // Одинаковые арты в разных строках агрегируем: потребность складывается,
+  // иначе два модуля с одним артом при одном остатке дали бы ложный комплект (Codex п.5).
+  const byArt = new Map();
+  let missing = false;
   comps.forEach(c=>{
-    const q = getWardrobeCoupeComponentStock(c, it);
+    const art = coupeComponentArt(c);
     const need = Math.max(1, Number(c.qty || 1));
+    if(!art){ missing = true; return; }
+    const key = (typeof normArt === 'function') ? normArt(art) : art;
+    const e = byArt.get(key) || {art, need:0, comp:c};
+    e.need += need;
+    byArt.set(key, e);
+  });
+  let minQty = Infinity;
+  byArt.forEach(e=>{
+    const q = getWardrobeCoupeComponentStock({art:e.art}, it);
     if(q.missing) missing = true;
-    minQty = Math.min(minQty, Math.floor(q.qty / need));
+    minQty = Math.min(minQty, Math.floor(q.qty / e.need));
   });
   if(!comps.length || minQty === Infinity) minQty = 0;
   const available = !missing && minQty > 0;
@@ -2995,22 +3157,43 @@ function renderWardrobeCoupeKit(it){
   if(!box) return;
   const rec = getWardrobeCoupe(it);
   if(!rec){ box.style.display='none'; box.innerHTML=''; return; }
+  if(rec.display === 'kit'){
+    // Модульные комплекты Норд: наличие и цена — по купе-механике («все модули»),
+    // а СОСТАВ рисует renderKitComposition карточками (как в гостиных) — блок не дублируем.
+    const kitPrice = getWardrobeCoupePrice(it);
+    const kitPriceEl = document.getElementById('mPri');
+    if(kitPriceEl) kitPriceEl.textContent = rub(kitPrice);
+    updateWardrobeCoupeStockBadge(getWardrobeCoupeAvailability(it, rec));
+    box.style.display='none'; box.innerHTML='';
+    return;
+  }
   const price = getWardrobeCoupePrice(it);
   const priceEl = document.getElementById('mPri');
   if(priceEl) priceEl.textContent = rub(price);
   const state = getWardrobeCoupeAvailability(it, rec);
   updateWardrobeCoupeStockBadge(state);
-  const componentRows = getCoupeComponentRows(rec);
+  const isMifKit = rec.kind === 'mif-kit';
+  const componentRows = isMifKit
+    // Миф-комплекты: состав как есть (тип из связки, включая виртуальные позиции без остатка),
+    // без купейной группировки «Корпус/Фасад».
+    ? (rec.components || []).map(c=>{
+        // Цена модуля ЖИВАЯ из catalog.js (как и итог) — снапшот из связки только запасной.
+        const modIt = c.id ? findItemById(c.id) : null;
+        const unit = modIt ? Number(modIt.p || 0) : Number(c.price || 0);
+        const q = Math.max(1, Number(c.qty || 1));
+        return {group: String(c.group || c.type || 'Модуль'), name: String(c.name || ''), price: (unit * q) || Number(c.sum || 0)};
+      })
+    : getCoupeComponentRows(rec);
   const componentHtml = componentRows.map(row=>`<div class="coupeKit-row"><div class="coupeKit-row-k">${esc(row.group)}</div><div class="coupeKit-row-v">${esc(row.name)}</div><div class="coupeKit-row-p">${rub(row.price)}</div></div>`).join('');
-  const rule = rec.rule || ((rec.title||'').toLowerCase().includes('элегант') ? 'Элегант: 1 корпус + 1 фасад' : 'Гранд: 1 корпус + 2 фасада');
+  const rule = rec.rule || (isMifKit ? 'Комплект в наличии, когда есть все модули' : ((rec.title||'').toLowerCase().includes('элегант') ? 'Элегант: 1 корпус + 1 фасад' : 'Гранд: 1 корпус + 2 фасада'));
   const calc = Number(rec.calcPrice || 0);
   const manual = rec.manualPrice ? Number(rec.manualPrice) : 0;
-  const priceNote = manual ? 'Цена комплекта задана вручную.' : 'Цена рассчитана по комплектующим.';
+  const priceNote = isMifKit ? 'Цена указана за готовый комплект.' : (manual ? 'Цена комплекта задана вручную.' : 'Цена рассчитана по комплектующим.');
   box.style.display = 'flex';
   box.innerHTML = `
     <div class="coupeKit-h">
       <div>
-        <div class="coupeKit-title">Итог комплектации шкафа-купе</div>
+        <div class="coupeKit-title">${isMifKit ? 'Итог комплектации' : 'Итог комплектации шкафа-купе'}</div>
         <div class="coupeKit-tag">${esc(rule)}</div>
       </div>
       <div class="coupeKit-hint">Цена указана за готовый комплект.</div>
@@ -3019,13 +3202,18 @@ function renderWardrobeCoupeKit(it){
       <div><b>Итог:</b> ${esc(rec.title || it.t || 'Шкаф-купе')}</div>
       ${componentHtml ? `<div class="coupeKit-list">${componentHtml}</div>` : ''}
       <div class="coupeKit-total"><span class="coupeKit-stock ${state.available ? 'ok' : 'none'}">${esc(state.loaded ? state.label : 'Остатки не загружены')}</span><b>${rub(price)}</b></div>
-      <div class="coupeKit-note">${esc(priceNote)}${calc && price !== calc ? ' Расчёт по деталям: ' + rub(calc) + '.' : ''}</div>
+      <div class="coupeKit-note">${esc(priceNote)}${!isMifKit && calc && price !== calc ? ' Расчёт по деталям: ' + rub(calc) + '.' : ''}</div>
     </div>`;
 }
 function getWardrobeCoupeMessageInfo(it){
   const rec = getWardrobeCoupe(it);
   if(!rec) return null;
   const price = getWardrobeCoupePrice(it);
+  if(rec.kind === 'mif-kit'){
+    const lines = ['• Цена за готовый комплект'];
+    (rec.components || []).forEach(c=>lines.push('• ' + String(c.group || c.type || 'Модуль') + ': ' + String(c.name || '')));
+    return {price, lines};
+  }
   const rows = getCoupeComponentRows(rec);
   const lines = ['• Цена за комплект: корпус + фасады'];
   rows.forEach(row=>lines.push('• ' + row.group + ': ' + row.name));
@@ -3142,6 +3330,22 @@ function getBedCardDisplayPrice(it, fallback){
 function getBedCardDisplayPriceText(it, fallback){
   const p = getBedCardDisplayPrice(it, fallback);
   return p ? (p.toLocaleString('ru-RU') + ' ₽') : '—';
+}
+// Цена модуля в составе/калькуляторе/сообщении: учитывает и вариант кровати,
+// и выбранную комбинацию шкафа/пенала (антресоль × подсветка) — готовые цены прайса.
+function getModuleCardDisplayPrice(it, fallback){
+  let p = getBedCardDisplayPrice(it, fallback);
+  try{
+    if(it && typeof hasWardrobeAtticOption === 'function' && hasWardrobeAtticOption(it)){
+      const effKey = getWardrobeAtticEffectiveKey(it);
+      if(effKey !== 'base'){
+        const v = getWardrobeAtticVariantByKey(getWardrobeAttic(it), effKey);
+        const pv = Number((v && v.price) || 0);
+        if(pv > 0) p = pv;
+      }
+    }
+  }catch(_){ }
+  return p;
 }
 function getBedOptionShortParts(it){
   const rec = getBedOptions(it);
@@ -4242,6 +4446,66 @@ function miniBedSetAddon(id, addon, checked){
   refreshBedMiniOptionViews();
 }
 
+// ===== Подсветка шкафа/пенала в СОСТАВЕ комплекта (заказчик 06.09) =====
+// Мини-попап с одной галочкой «Подсветка» — переиспользует bedMiniPopupHost и стили bedOpt.
+// Выбор синхронен с карточкой самого пенала (общее состояние WARDROBE_LED_CHOICE).
+function shouldShowWardrobeLedOption(it){
+  const rec = (typeof getWardrobeAttic === 'function') ? getWardrobeAttic(it) : null;
+  return !!(rec && wardrobeRecHasLed(rec));
+}
+function closeMiniWardrobeLedPopup(){
+  const host = document.getElementById('bedMiniPopupHost');
+  if(host){ host.classList.remove('show'); host.innerHTML=''; }
+  window.__WA_MINI_ITEM_ID__ = '';
+}
+function updateMiniWardrobeLedPopup(){
+  const id = String(window.__WA_MINI_ITEM_ID__ || '');
+  if(!id) return;
+  const it = findItemById(id);
+  const host = document.getElementById('bedMiniPopupHost');
+  const rec = it ? getWardrobeAttic(it) : null;
+  if(!host || !host.innerHTML || !it || !rec) return;
+  const inp = host.querySelector('input[data-wa-mini-led]');
+  if(inp) inp.checked = isWardrobeLedOn(it);
+  const priceEl = host.querySelector('#waMiniLedPrice');
+  if(priceEl){
+    const d = getWardrobeLedDelta(it, rec);
+    priceEl.textContent = (d !== null && d > 0) ? ('+' + rub(d)) : '';
+  }
+  const total = host.querySelector('#waMiniPopupTotal');
+  if(total) total.innerHTML = `Итог: <b>${rub(getModuleCardDisplayPrice(it))}</b>`;
+}
+function openMiniWardrobeLedPopup(ev, id){
+  if(ev){ ev.preventDefault(); ev.stopPropagation(); }
+  const it = findItemById(id);
+  const rec = it ? getWardrobeAttic(it) : null;
+  const host = document.getElementById('bedMiniPopupHost');
+  if(!it || !rec || !wardrobeRecHasLed(rec) || !host) return;
+  window.__WA_MINI_ITEM_ID__ = String(id || '');
+  window.__BED_MINI_ITEM_ID__ = '';
+  host.innerHTML = `
+    <div class="bedOpt-pop-backdrop" onclick="closeMiniWardrobeLedPopup()"></div>
+    <div class="bedOpt-pop">
+      <div class="bedOpt-pop-h">
+        <div>
+          <div class="bedOpt-pop-title">Доп. опции</div>
+          <div class="bedOpt-pop-hint">${esc(it.t || wardrobeRecNoun(rec))}</div>
+        </div>
+        <button type="button" class="bedOpt-close" onclick="closeMiniWardrobeLedPopup()" aria-label="Закрыть">×</button>
+      </div>
+      <div class="bedOpt-addons" style="display:flex">
+        <div class="bedOpt-sub">Дополнительные опции</div>
+        <div class="bedOpt-checks">
+          <label class="bedOpt-check"><input type="checkbox" data-wa-mini-led onchange="setWardrobeLedChoice('${esc(it.id)}',this.checked)"> <span class="bedOpt-check-body"><span class="bedOpt-check-line">Подсветка <b id="waMiniLedPrice"></b></span></span></label>
+        </div>
+        <div class="bedOpt-warn">Подсветка входит в готовый код прайса — размеры не меняет.</div>
+      </div>
+      <div class="bedOpt-pop-actions"><div class="bedOpt-pop-total" id="waMiniPopupTotal">Итог: —</div><button type="button" class="bedOpt-done" onclick="closeMiniWardrobeLedPopup()">Готово</button></div>
+    </div>`;
+  host.classList.add('show');
+  updateMiniWardrobeLedPopup();
+}
+
 function openM(id, opts){
   const it=findItemById(id);if(!it)return;
   chpuDropSeoBlock(true); // карточка открывается — статический SEO-блок больше не нужен
@@ -4790,7 +5054,7 @@ function getKitGroupRow(ownerId, groupKey, itemId){
 function getKitRowDomPayload(row){
   const modItem = getKitRowItem(row);
   const title = (modItem && modItem.t) || (row && (row.module_title || row.module_code)) || '—';
-  const price = modItem ? getBedCardDisplayPrice(modItem, row && row.matched_price) : Number((row && row.matched_price) || 0);
+  const price = modItem ? getModuleCardDisplayPrice(modItem, row && row.matched_price) : Number((row && row.matched_price) || 0);
   const photo = (modItem && modItem.img) || (row && row.matched_photo) || '';
   const qty = Number(row && row.qty) || 1;
   const meta = [
@@ -5044,13 +5308,21 @@ function getDiscrim(it){
   return base;
 }
 
+// Комплекты шкафов Норд №1–№7 заведены отдельными мультиобъявлениями (миф-нордк1…к7) —
+// заказчик 07.09: одна карточка с выбором номера. Склеиваем ТОЛЬКО для мульти-группы
+// (конструктор/серии работают по исходному mu, их не трогаем).
+function normMuForMulti(mu){
+  const m = String(mu || '').toLowerCase();
+  if(/^миф-нордк\d+$/.test(m)) return 'миф-норд-комплекты';
+  return m;
+}
 function findMultiVariants(it){
   if(!it || !it.mu) return [];
-  const mu = String(it.mu).toLowerCase();
+  const mu = normMuForMulti(it.mu);
   const disc = getDiscrim(it);
   const variants = CATALOG.filter(x =>
     x.id !== it.id &&
-    String(x.mu || '').toLowerCase() === mu &&
+    normMuForMulti(x.mu) === mu &&
     getDiscrim(x) === disc
   );
   variants.sort(variantStableCompare);
@@ -5081,6 +5353,65 @@ function tvKindOf(v){
   if(t.includes('универсал')) return 'Универсальная';
   if(t.includes('навесн')) return 'Навесная тумбочка';
   return 'Напольная';
+}
+
+// V41 раунд 11 (заказчик 07.09): шкафы — сперва ВИД по форме («Прямые/Угловые», не «Шкафы»),
+// затем отдельный ряд «Комплектация: Без антресоли / С антресолью», затем размеры и цвета.
+// Классификация по названию; версии «с антресолью» остаются в виде своего шкафа —
+// антресольность выбирается вторым рядом (Codex: у них другая высота, внутри размера
+// вкладки не встретились бы). Товары-«Антресоли» — самостоятельный вид.
+function isWardrobeMultiSheet(it){
+  return String((it && (it.sheet || it.c)) || '').trim() === 'Шкафы и буфеты';
+}
+const WARDROBE_KIND_ORDER = ['Прямые','Угловые','Торцевые','Навесные','Витрины','Стеллажи','Надстройки','Буфеты','Антресоли'];
+function wardrobeKindOf(v){
+  const tl = String((v && v.t) || '').toLowerCase().replace(/ё/g,'е').trim();
+  if(/^антресол/.test(tl)) return 'Антресоли';
+  const base = tl.replace(/с\s+антресолью/g,''); // «Шкаф угловой Норд с антресолью» — Угловые
+  if(base.includes('буфет')) return 'Буфеты';
+  if(base.includes('надстройк')) return 'Надстройки';
+  if(base.includes('стеллаж')) return 'Стеллажи';
+  if(/навесн|настенн|подвесн/.test(base)) return 'Навесные';
+  if(base.includes('шкаф-витрина')) return 'Витрины';
+  if(base.includes('торцев')) return 'Торцевые';
+  // Комплекты: атрибут «Форма» в мастере заполнен не везде и местами неверно
+  // (№1 серый = «Прямой», №5 золотой = пусто) — страхуемся геометрией:
+  // у углового комплекта глубина = вторая стена (170–210 см), у прямого 51 см.
+  if(/^комплект/.test(base)){
+    const d = Number(v && v.d) || 0;
+    if(d >= 100) return 'Угловые';
+    if(d > 0) return 'Прямые';
+  }
+  // Форма — как у фабрики (атрибут мастера): угловые комплекты Норд №1–№4 не имеют
+  // слова «угловой» в названии. Пеналы и терминалы отдельно НЕ выделяем —
+  // прямые к «Прямым», угловой пенал к «Угловым» (заказчик 07.09).
+  const form = String(((v && v.a) || {})['Форма'] || '').toLowerCase();
+  if(form.startsWith('углов')) return 'Угловые';
+  if(form.startsWith('торцев')) return 'Торцевые';
+  if(base.includes('углов')) return 'Угловые';
+  return 'Прямые';
+}
+function wardrobeTitleHasAttic(v){
+  return /с\s+антресолью/i.test(String((v && v.t) || ''));
+}
+// Эффективная антресольность карточки: готовая версия «с антресолью» ИЛИ антресоль
+// выбрана в конфигураторе «Доп. опции» (два механизма, ряд должен показывать правду — Codex).
+function wardrobeEffectiveHasAttic(it){
+  if(wardrobeTitleHasAttic(it)) return true;
+  try{
+    if(typeof hasWardrobeAtticOption === 'function' && hasWardrobeAtticOption(it)){
+      const rec = getWardrobeAttic(it);
+      const v = getWardrobeAtticVariantByKey(rec, getWardrobeAtticEffectiveKey(it));
+      return !!(v && v.parts && v.parts.length);
+    }
+  }catch(_){ }
+  return false;
+}
+function syncWardrobeAtticTabsRow(it){
+  const tabs = document.getElementById('mMultiAtticTabs');
+  if(!tabs || !tabs.innerHTML || !it) return;
+  const effA = wardrobeEffectiveHasAttic(it);
+  tabs.querySelectorAll('[data-attic]').forEach(b=>b.classList.toggle('active', (b.getAttribute('data-attic') === '1') === effA));
 }
 
 function renderMulti(it){
@@ -5139,6 +5470,10 @@ function renderMulti(it){
     const sleep = sleepingPlaceLabel(refItem);
     if(sleep) return sleep;
     const full = dimsFor(refItem);
+    // Комплекты Норд: номер должен жить и в раскрытой подписи — «№5 · 200×223×51»
+    // (иначе при выборе номера подписи превращались в голые габариты, Codex).
+    const km = primary.match(/^№\d+/);
+    if(km && full) return km[0] + ' · ' + full;
     return full || primary;
   }
   function syncMultiSizeSelectDisplay(select, expanded){
@@ -5246,7 +5581,13 @@ function renderMulti(it){
     const sleep = sleepingPlaceLabel(v);
     if(sleep) return sleep;
     const fullWardrobe = isWardrobeVariant(v) ? fullDimensionLabel(v) : '';
-    if(fullWardrobe) return fullWardrobe;
+    if(fullWardrobe){
+      // Комплекты шкафов Норд: покупатель выбирает НОМЕРОМ — короткая подпись «№5»
+      // (габариты в раскрытом списке «№5 · 200×223×51» и в характеристиках; длинная
+      // подпись обрезалась в селекте — заказчик 07.09).
+      const km = /^комплект/i.test(String((v && v.t) || '')) ? String(v.t).match(/№\s*(\d+)/) : null;
+      return km ? ('№' + km[1]) : fullWardrobe;
+    }
     const explicitSize = attr(v, 'Размер');
     if(explicitSize) return explicitSize;
     const w = Number(v && v.w);
@@ -5309,6 +5650,126 @@ function renderMulti(it){
     }
   }
 
+  // Шкафы (раунд 11): вид по форме («Прямые/Угловые/…», без слова «Шкафы» — заказчик 07.09),
+  // затем ряд «Комплектация: Без антресоли / С антресолью» ВЫШЕ размера (версии с антресолью
+  // выше по габаритам — внутри размера они бы не встретились, разбор Codex).
+  const atticBox = document.getElementById('mMultiAttic');
+  const atticTabs = document.getElementById('mMultiAtticTabs');
+  let hasAtticTabs = false;
+  if(atticBox && atticTabs){ atticTabs.innerHTML = ''; atticBox.style.display = 'none'; }
+  if(isWardrobeMultiSheet(it) && kindBox && kindTabs){
+    const prodColOfW = v => normTokenLocal(attr(v, 'Цвет от производителя')) || normTokenLocal(colorKey(v));
+    const nearestByWidth = (cands)=>{
+      const myW = Number(it.w) || 0;
+      let target = cands[0], best = Infinity;
+      cands.forEach(v=>{
+        const d = Math.abs((Number(v.w) || 0) - myW);
+        if(d < best){ best = d; target = v; }
+      });
+      return target;
+    };
+    const pickWardrobeTarget = (items, keepAttic)=>{
+      if(!items || !items.length) return null;
+      let cands = items;
+      if(keepAttic){
+        // Состояние антресоли сохраняем, если в новом виде оно доступно (Codex п.5).
+        const wantAttic = wardrobeTitleHasAttic(it);
+        const atticMatched = cands.filter(v=>wardrobeTitleHasAttic(v) === wantAttic);
+        if(atticMatched.length) cands = atticMatched;
+      }
+      // Сначала ТОЧНАЯ расцветка производителя (у Норда несколько «белых»:
+      // белый глянец ≠ дуб крафт белый — общий col их путает, Codex), затем общий цвет.
+      const prodColOf = v => normTokenLocal(attr(v, 'Цвет от производителя'));
+      const myProd = prodColOf(it);
+      const sameProd = myProd ? cands.filter(v=>prodColOf(v) === myProd) : [];
+      if(sameProd.length){
+        cands = sameProd;
+      }else{
+        const myCol = colorKey(it);
+        const sameCol = cands.filter(v=>colorKey(v) === myCol);
+        if(sameCol.length) cands = sameCol;
+      }
+      return nearestByWidth(cands);
+    };
+    const kindBuckets = new Map();
+    all.forEach(v=>{
+      const k = wardrobeKindOf(v);
+      if(!kindBuckets.has(k)) kindBuckets.set(k, []);
+      kindBuckets.get(k).push(v);
+    });
+    const curKind = wardrobeKindOf(it);
+    pool = kindBuckets.get(curKind) || [it];
+    // «Антресоли» НЕ показываем вкладкой (заказчик 07.09): антресоль покупается через
+    // конфигуратор шкафа («Выбрать опции»), отдельные карточки-антресоли остаются
+    // доступными из состава/каталога, но в переключателе видов не участвуют.
+    // На карточке самой антресоли ряд видов не показываем вовсе.
+    const kindTabKeys = Array.from(kindBuckets.keys()).filter(k=>k !== 'Антресоли');
+    if(curKind !== 'Антресоли' && kindTabKeys.length > 1){
+      hasKindTabs = true;
+      const kindsSorted = kindTabKeys.sort((a,b)=>{
+        const ia = WARDROBE_KIND_ORDER.indexOf(a), ib = WARDROBE_KIND_ORDER.indexOf(b);
+        return (ia<0?99:ia) - (ib<0?99:ib);
+      });
+      kindTabs.innerHTML = kindsSorted.map(k=>
+        `<button type="button" class="mMulti-tab${k===curKind?' active':''}" data-kind="${esc(k)}"${k==='Терминалы'?' title="Узкие шкафы со стеклом"':''}>${esc(k)}</button>`
+      ).join('');
+      kindTabs.querySelectorAll('[data-kind]').forEach(btn=>{
+        btn.onclick = () => {
+          const k = btn.getAttribute('data-kind') || '';
+          if(k === curKind) return;
+          const target = pickWardrobeTarget(kindBuckets.get(k) || [], true);
+          if(target){ window.__TAB_REPLACE__ = true; navOpen(target.id); }
+        };
+      });
+      kindBox.style.display = '';
+    }
+    // Ряд «Комплектация» — только когда у ТЕКУЩЕГО товара есть настоящая ПАРА
+    // (то же название без/с «с антресолью»). Иначе кнопка уводила бы на другой товар:
+    // у Роджины «без» = купе 2-дверный, «с» = купе 3-дверный (разные шкафы, антресоль
+    // отдельно не покупается); у пенала углового Норд антресольной версии нет вовсе —
+    // клик переключал на угловой ШКАФ (заказчик 07.09).
+    if(atticBox && atticTabs && curKind !== 'Антресоли'){
+      // Пара = то же название БЕЗ «с антресолью» + та же расцветка + та же глубина.
+      // Расцветка в ключе: иначе «графит-изумруд» без антресольной версии уводил в кашемир.
+      // Глубина в ключе: у Ириса две одноимённые базы (90×210×41 и 90×223×51) —
+      // антресольная строится от новой, старая пары не имеет (Codex P1).
+      const baseTitleOf = v => normTokenLocal(String((v && v.t) || '').replace(/\s*с\s+антресолью/ig,''));
+      const pairKeyOf = v => baseTitleOf(v) + '|' + prodColOfW(v) + '|' + String(Number(v && v.d) || '');
+      const myPairKey = pairKeyOf(it);
+      const pairWith = pool.filter(v=>pairKeyOf(v) === myPairKey && wardrobeTitleHasAttic(v));
+      const pairWithout = pool.filter(v=>pairKeyOf(v) === myPairKey && !wardrobeTitleHasAttic(v));
+      if(pairWith.length && pairWithout.length){
+        hasAtticTabs = true;
+        const curA = wardrobeTitleHasAttic(it);
+        // Пул размеров показываем в выбранной комплектации (высоты у версий разные).
+        pool = pool.filter(v=>wardrobeTitleHasAttic(v) === curA);
+        atticTabs.innerHTML =
+          `<button type="button" class="mMulti-tab${curA ? '' : ' active'}" data-attic="0">Без антресоли</button>` +
+          `<button type="button" class="mMulti-tab${curA ? ' active' : ''}" data-attic="1">С антресолью</button>`;
+        atticTabs.querySelectorAll('[data-attic]').forEach(btn=>{
+          btn.onclick = () => {
+            const wantA = btn.getAttribute('data-attic') === '1';
+            const effA = wardrobeEffectiveHasAttic(it); // карточка ИЛИ выбор в «Доп. опциях»
+            if(wantA === effA) return;
+            if(!wantA && !curA && effA){
+              // Антресоль выбрана конфигуратором на карточке «без антресоли» —
+              // «Без антресоли» снимает опцию, переход не нужен.
+              setWardrobeAtticChoice(it.id, 'base');
+              syncWardrobeAtticTabsRow(it);
+              return;
+            }
+            // Переход строго на ПАРНУЮ версию этого же шкафа (та же расцветка) —
+            // «туда-обратно» возвращает исходный товар (заказчик 07.09).
+            const target = pickWardrobeTarget(wantA ? pairWith : pairWithout, false);
+            if(target){ window.__TAB_REPLACE__ = true; navOpen(target.id); }
+          };
+        });
+        atticBox.style.display = '';
+        syncWardrobeAtticTabsRow(it);
+      }
+    }
+  }
+
   const sizeBuckets = new Map();
   pool.forEach(v=>{
     const key = variantSizeKey(v);
@@ -5320,6 +5781,10 @@ function renderMulti(it){
     if(av !== bv) return av - bv;
     return String(a.label || '').localeCompare(String(b.label || ''), 'ru');
   });
+  // Комплекты Норд: подписи «№1…№7» — сортируем по номеру, не по ширине.
+  if(isWardrobeMultiSheet(it) && sizes.length > 1 && sizes.every(b=>/^№\d+/.test(String(b.label || '')))){
+    sizes.sort((a,b)=>Number(String(a.label).match(/^№(\d+)/)[1]) - Number(String(b.label).match(/^№(\d+)/)[1]));
+  }
   if(isTvStandSheet(it)){
     // Сортировка ширина→глубина; если одна ширина встречается в нескольких размерах
     // (навесные Оливия №1/№2) — дописываем глубину в подпись.
@@ -5508,13 +5973,45 @@ function renderMulti(it){
     function chooseFillingTarget(items, currentItem){
       return chooseTarget(items || [], colorKey(currentItem)) || ((items || [])[0] || null);
     }
-    function drawersLabel(v){
+    // Метка количества ящиков — как раньше (атрибут «Количество ящиков», иначе эвристика
+    // по названию К800): расширять её на атрибут «Ящики» нельзя — это включило бы
+    // ящичные вкладки у Челси/Бьянко/Фиесты, где их не было (проверено симуляцией).
+    function drawersCount(v){
       const explicit = attr(v, 'Количество ящиков');
       if(explicit) return explicit;
       const txt = [v && v.t, attr(v, 'Что есть у товара'), attr(v, 'Особенности')].filter(Boolean).join(' ').toLowerCase().replace(/ё/g,'е');
       if(/к800\s*3\s*\/\s*2/.test(txt) || /5\s*ящ/.test(txt)) return '5 ящиков';
       if(/комод\s+к800/.test(txt) || /4\s*ящ/.test(txt)) return '4 ящика';
       return '';
+    }
+    function drawersDoors(v){
+      const n = Number(attr(v, 'Двери'));
+      return Number.isFinite(n) ? n : 0;
+    }
+    // У комодов Эра К800 и К800-1Д одинаковые габариты и по 4 ящика, но у «-1Д» есть
+    // дверь — без этого они слипались в одну вкладку (заказчик 07.09, размеры сравняли
+    // по данным фабрики). Дверь дописываем ТОЛЬКО тому количеству ящиков, внутри
+    // которого встречаются и товары с дверью, и без (Codex: флаг должен быть по ключу).
+    const drawersDoorMixedKeys = (()=>{
+      const m = new Map(), out = new Set();
+      options.forEach(v=>{
+        const k = normTokenLocal(drawersCount(v));
+        if(!k) return;
+        if(!m.has(k)) m.set(k, new Set());
+        m.get(k).add(drawersDoors(v) > 0);
+      });
+      m.forEach((set, k)=>{ if(set.size > 1) out.add(k); });
+      return out;
+    })();
+    function drawersLabel(v){
+      const base = drawersCount(v);
+      if(!base) return '';
+      if(!drawersDoorMixedKeys.has(normTokenLocal(base))) return base;
+      const d = drawersDoors(v);
+      if(!d) return base;
+      if(d === 1) return base + ' и дверь';
+      const word = (d >= 2 && d <= 4) ? 'двери' : 'дверей';
+      return base + ' и ' + d + ' ' + word;
     }
     function drawersOrder(label){
       const n = String(label || '').match(/\d+/);
@@ -5633,6 +6130,13 @@ function renderMulti(it){
         const titles = Array.from(new Set(options.map(v=>String(v.t||'').trim())));
         if(titles.length > 1) tvExecOf = modelTailExecOf(titles);
       }
+    } else if(!isKitchen && !isSofaHere && options.length > 1){
+      // «(Металл)» в названии — вкладки «Ножки пластик | Ножки металл», как у ТВ-тумб
+      // Оливия (заказчик 07.09: комоды Оливия; общая ветка не годится — она режет скобки).
+      const metalOf = v => /\(\s*металл\s*\)/i.test(String((v && v.t) || ''));
+      if(options.some(metalOf) && options.some(v=>!metalOf(v))){
+        tvExecOf = v => metalOf(v) ? 'Ножки металл' : 'Ножки пластик';
+      }
     }
     if(tvExecOf){
       options.forEach(v=>{
@@ -5651,6 +6155,9 @@ function renderMulti(it){
           if((ia<0?99:ia) !== (ib<0?99:ib)) return (ia<0?99:ia) - (ib<0?99:ib);
           return String(a.label).localeCompare(String(b.label),'ru');
         });
+      } else if(tvExecs.some(b=>b.label === 'Ножки пластик')){
+        // Пластик (базовый, дешевле) — первой вкладкой, металл — второй.
+        tvExecs.sort((a,b)=>(a.label === 'Ножки пластик' ? 0 : 1) - (b.label === 'Ножки пластик' ? 0 : 1));
       }
     }
     let hasTvExecTabs = tvExecs.length > 1;
@@ -5707,7 +6214,29 @@ function renderMulti(it){
        && options.length > 1 && hasRepeatedColorVariants){
       const genTitles = Array.from(new Set(options.map(v=>String(v.t||'').trim())));
       if(genTitles.length > 1){
-        const genExecOf = modelTailExecOf(genTitles);
+        let genExecOf = modelTailExecOf(genTitles);
+        // Шкафы (раунд 11): пустой хвост давал метку-модель («Норд») рядом с «С ящиками» —
+        // покупателю понятнее «Обычный». Плюс из меток убираем имя модели: «Платяной
+        // София» → «Платяной», «с витриной» → «С витриной» — коротко для телефона
+        // (заказчик 07.09). Кровати не трогаем — у них модель в метке РАЗЛИЧАЕТ товары.
+        if(isWardrobeMultiSheet(it)){
+          const inner = genExecOf;
+          const baseNorm = normTokenLocal(inner.baseLabel || '');
+          const modelWord = String(attr(it, 'Название модели') || inner.baseLabel || '').trim();
+          const modelRe = modelWord ? new RegExp('\\s*' + modelWord.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\s*', 'ig') : null;
+          genExecOf = v => {
+            let l = inner(v);
+            if(normTokenLocal(l) === baseNorm) return 'Обычный';
+            if(modelRe){
+              const stripped = l.replace(modelRe, ' ').replace(/\s+/g,' ').trim();
+              if(stripped && normTokenLocal(stripped) !== normTokenLocal(l)){
+                l = stripped.charAt(0).toUpperCase() + stripped.slice(1);
+              }
+            }
+            return l || 'Обычный';
+          };
+          genExecOf.baseLabel = 'Обычный';
+        }
         const genBuckets = new Map();
         options.forEach(v=>{
           const label = genExecOf(v);
@@ -5716,7 +6245,8 @@ function renderMulti(it){
           genBuckets.get(key).items.push(v);
         });
         // Если каждая «вкладка» вышла бы с одной карточкой — это не модели, а варианты,
-        // зашитые в название (прихожая Норд №1 белый/графит/кашемир): сетка справится сама.
+        // зашитые в название: сетка карточек с подписями справится сама (заказчик 07.09
+        // вернул после пробы: у Тефии/Лорэна вкладки выходили длинными — «как было»).
         const anyBucketMulti = Array.from(genBuckets.values()).some(b=>b.items.length > 1);
         if(genBuckets.size >= 2 && genBuckets.size <= 6 && anyBucketMulti){
           tvExecOf = genExecOf;
@@ -5930,7 +6460,11 @@ function renderMulti(it){
     } else {
       wSel.innerHTML = '<option value="">Сп.Место</option>';
     }
-    secW.style.display = isKitchen && getExecOptions(getCurrentBucket()).length >= 2 ? '' : 'none';
+    // Секцию оставляем видимой и при одном размере, если у товара есть конфигуратор
+    // антресоли — кнопка «Выбрать опции» живёт здесь и должна быть на видном месте
+    // (пенал со стеклом Норд: кнопка уезжала в галерею — заказчик 07.09).
+    const keepForWardrobeOpts = (typeof hasWardrobeAtticOption === 'function') && hasWardrobeAtticOption(it);
+    secW.style.display = ((isKitchen && getExecOptions(getCurrentBucket()).length >= 2) || keepForWardrobeOpts) ? '' : 'none';
   }
 
   if(hW){
@@ -5944,10 +6478,11 @@ function renderMulti(it){
   const hasSizes = sizes.length >= 2;
   const hasExec = extraSel.style.display !== 'none';
   const hasColors = secC.style.display !== 'none';
-  box.style.display = (hasKindTabs || hasSizes || hasExec || hasColors) ? '' : 'none';
+  box.style.display = (hasKindTabs || hasAtticTabs || hasSizes || hasExec || hasColors) ? '' : 'none';
   // Кнопка «Выбрать опции» кровати монтируется ПО ФАКТИЧЕСКОЙ видимости секции размера,
   // а renderBedOptionTools мог отработать раньше renderMulti — перемонтируем (идемпотентно).
   try{ if(typeof mountBedOptionToolsHost === 'function') mountBedOptionToolsHost(); }catch(_){}
+  try{ if(typeof mountWardrobeOptionToolsHost === 'function') mountWardrobeOptionToolsHost(); }catch(_){}
 }
 function getDefaultKitchenCountertopItem(){
   return (window.CATALOG || []).find(x => normBuilderToken([x && x.t, x && x.c, x && x.sheet].filter(Boolean).join(' ')).includes('столеш')) || null;
@@ -6027,7 +6562,7 @@ function renderKitComposition(it){
     const q = Number(row.qty)||1;
     totalModules += q;
     const m = findItemById(row.module_avito_id || row.module_item_id);
-    const price = m ? getBedCardDisplayPrice(m, (row.matched_price || row.price)) : Number(row.matched_price || row.price || 0);
+    const price = m ? getModuleCardDisplayPrice(m, (row.matched_price || row.price)) : Number(row.matched_price || row.price || 0);
     if(price){ kitSum += Number(price)*q; kitSumKnown += q; }
     // Доп. опция «Мягкое сиденье» к тумбе (Микон): прибавляем цену сиденья если выбрано
     if(m && shouldShowSeatOption(m)){
@@ -6052,7 +6587,7 @@ function renderKitComposition(it){
     const row = group.active;
     const modItem = findItemById(row.module_avito_id || row.module_item_id);
     const title = (modItem && modItem.t) || row.module_title || row.module_code || '—';
-    const price = modItem ? getBedCardDisplayPrice(modItem, row.matched_price) : Number(row.matched_price || 0);
+    const price = modItem ? getModuleCardDisplayPrice(modItem, row.matched_price) : Number(row.matched_price || 0);
     const photo = (modItem && modItem.img) || row.matched_photo || '';
     const qty = Number(row.qty) || 1;
     const clickable = !!(modItem && modItem.id);
@@ -6083,6 +6618,12 @@ function renderKitComposition(it){
     const seatOptButton = (!variantTabs && modItem && shouldShowSeatOption(modItem))
       ? `<button type="button" class="kitCard-bedopt" onclick="event.stopPropagation(); openMiniSeatOptionPopup(event,'${esc(modItem.id)}'); return false;">Опции</button>`
       : '';
+    // Подсветка пенала (Норд со стеклом) выбирается и в составе комплекта (заказчик 06.09)
+    const waLedButton = (modItem && typeof shouldShowWardrobeLedOption === 'function' && shouldShowWardrobeLedOption(modItem))
+      ? `<button type="button" class="kitCard-bedopt" onclick="event.stopPropagation(); openMiniWardrobeLedPopup(event,'${esc(modItem.id)}'); return false;">Опции</button>`
+      : '';
+    const waLedSummary = (waLedButton && isWardrobeLedOn(modItem))
+      ? '<span class="kitCard-seatbadge on">+ Подсветка</span>' : '';
     // Цена карточки: если выбрано «с сиденьем» — добавляем стоимость сиденья к цене тумбы
     const seatExtra = (modItem && shouldShowSeatOption(modItem)) ? getSeatOptionExtraPrice(modItem.id) : 0;
     const priceWithSeat = (Number(price) || 0) + seatExtra;
@@ -6095,13 +6636,14 @@ function renderKitComposition(it){
         <span class="kitCard-qty">×${qty}</span>
         ${bedOptSummary}
         ${seatOptSummary}
+        ${waLedSummary}
       </div>
       <div class="kitCard-body">
         <div class="kitCard-title">${esc(title)}</div>
         ${renderModuleCardDetailsHtml(compDetails)}
         ${meta?`<div class="kitCard-meta">${esc(meta)}</div>`:''}
         ${variantTabs}
-        ${(bedOptButton || seatOptButton)?`<div class="kitCard-tools">${bedOptButton}${seatOptButton}</div>`:''}
+        ${(bedOptButton || seatOptButton || waLedButton)?`<div class="kitCard-tools">${bedOptButton}${seatOptButton}${waLedButton}</div>`:''}
       </div>
       <div class="kitCard-foot">
         ${stockBadge}
@@ -6350,7 +6892,7 @@ function calcSummary(){
   items.forEach(({qty, m})=>{
     totalCount += qty;
     const linkedItem = m && m.id ? findItemById(m.id) : null;
-    const currentPrice = linkedItem ? getBedCardDisplayPrice(linkedItem, m.price) : Number(m.price || 0);
+    const currentPrice = linkedItem ? getModuleCardDisplayPrice(linkedItem, m.price) : Number(m.price || 0);
     const seatX = (linkedItem && typeof getSeatOptionExtraPrice === 'function') ? getSeatOptionExtraPrice(linkedItem.id) : 0;
     if(currentPrice || seatX) totalSum += (Number(currentPrice) + seatX) * qty;
     const g = moduleWidthGroup(m);
@@ -6409,7 +6951,7 @@ function renderCalcPanel(){
 
   listEl.innerHTML = items.map(({qty, m})=>{
     const linkedItem = m && m.id ? findItemById(m.id) : null;
-    const unitBase = linkedItem ? getBedCardDisplayPrice(linkedItem, m.price) : Number(m.price || 0);
+    const unitBase = linkedItem ? getModuleCardDisplayPrice(linkedItem, m.price) : Number(m.price || 0);
     const unitSeatX = (linkedItem && typeof getSeatOptionExtraPrice === 'function') ? getSeatOptionExtraPrice(linkedItem.id) : 0;
     const unitPrice = Number(unitBase) + unitSeatX;
     const priceTotal = unitPrice ? (unitPrice * qty).toLocaleString('ru-RU')+' ₽' : '—';
@@ -6506,8 +7048,19 @@ function getPoolRowSearchBlob(row){
     linked && linked.a && linked.a['Цвет от производителя']
   ].filter(Boolean).join(' '));
 }
+// Эффективная серия владельца конструктора: обычно из mu, но шкафные комплекты Миф
+// (mu «миф-нордк1» — подгруппа комплектов) ищут модули по имени модели («норд»).
+function getBuilderSeriesForOwner(it){
+  // Override серии — ТОЛЬКО для шкафных комплектов (mu «миф-нордк1» → «норд»).
+  // Гостиные/спальни/прихожие Миф с display:'kit' держат родную mu-серию
+  // (иначе Оливия АГТ «оливияагт» превратилась бы в «оливия» — Codex P1).
+  const rec = (typeof getWardrobeCoupe === 'function') ? getWardrobeCoupe(it) : null;
+  const sh = String((it && (it.sheet || it.c)) || '').trim();
+  if(rec && rec.display === 'kit' && sh === 'Шкафы и буфеты') return getBuilderModelName(it) || getExpectedBuilderSeries(it);
+  return getExpectedBuilderSeries(it);
+}
 function filterBuilderPoolForItem(it, pool){
-  const expected = getExpectedBuilderSeries(it);
+  const expected = getBuilderSeriesForOwner(it);
   if(!expected || !Array.isArray(pool) || !pool.length) return Array.isArray(pool) ? pool.slice() : [];
   const expectedFactory = normBuilderToken(it && it.f);
   return pool.filter(row=>{
@@ -6539,6 +7092,9 @@ function getBuilderTypeOrderForItem(it){
   if(sh === 'Гарнитуры и комплекты') return ['Шкафы','Антресоли','Комоды','Полки','Тумбы ТВ','Стеллажи и этажерки','Надстройки'];
   if(sh === 'Спальные гарнитуры') return ['Шкафы','Антресоли','Комоды','Тумбы','Кровати','Полки','Компьютерные столы','Гримерные столы','Стеллажи и этажерки','Зеркала','Надстройки'];
   if(sh === 'Прихожие и обувницы' || sh === 'Прихожие') return ['Шкафы','Антресоли','Комоды','Тумбы и обувницы','Прихожие и вешалки','Стеллажи и этажерки','Зеркала'];
+  // Шкафные комплекты Миф — шкафная тематика.
+  const rec = (typeof getWardrobeCoupe === 'function') ? getWardrobeCoupe(it) : null;
+  if(rec && rec.display === 'kit') return ['Шкафы','Антресоли','Стеллажи и этажерки'];
   return [];
 }
 
@@ -6546,11 +7102,18 @@ function getBuilderAllowedTypesForItem(it){
   const sh = String((it && (it.sheet || it.c || '')) || '').trim();
   const order = getBuilderTypeOrderForItem(it);
   if(sh === 'Гарнитуры и комплекты' || sh === 'Спальные гарнитуры' || sh === 'Прихожие и обувницы' || sh === 'Прихожие') return order;
+  // Шкафные комплекты Миф: разрешена шкафная тематика (order уже её и содержит).
+  const rec = (typeof getWardrobeCoupe === 'function') ? getWardrobeCoupe(it) : null;
+  if(rec && rec.display === 'kit') return order;
   return [];
 }
 function isModularSystemOwner(it){
   const sh = String((it && (it.sheet || it.c || '')) || '').trim();
-  return sh === 'Гарнитуры и комплекты' || sh === 'Спальные гарнитуры' || sh === 'Прихожие и обувницы' || sh === 'Прихожие';
+  if(sh === 'Гарнитуры и комплекты' || sh === 'Спальные гарнитуры' || sh === 'Прихожие и обувницы' || sh === 'Прихожие') return true;
+  // Шкафные комплекты Миф (Норд №1–№7): «Собрать из модулей» серии тоже нужен
+  // (заказчик 06.09), пул дальше фильтруется шкафной тематикой в renderKitPool.
+  const rec = (typeof getWardrobeCoupe === 'function') ? getWardrobeCoupe(it) : null;
+  return !!(rec && rec.display === 'kit');
 }
 function normalizeSystemBuilderType(rawType, linked, mod, ownerSheet){
   const blob = normBuilderToken([
@@ -6641,6 +7204,13 @@ function normalizeSystemBuilderType(rawType, linked, mod, ownerSheet){
 }
 function isBuilderModuleAllowed(ownerItem, moduleItem){
   if(!isModularSystemOwner(ownerItem)) return true;
+  // Шкафные комплекты Миф: псевдо-модуль СОСТАВА этого комплекта всегда разрешён —
+  // у него тип из связки («Шкаф» ед.ч.), который списки не знают, а без него
+  // «Взять состав комплекта» теряет точные расцветки (тип нормализуется дальше).
+  if(moduleItem && moduleItem._raw && String(moduleItem._raw.comp_owner_id || '') === String((ownerItem && ownerItem.id) || '')){
+    const rec = (typeof getWardrobeCoupe === 'function') ? getWardrobeCoupe(ownerItem) : null;
+    if(rec && rec.display === 'kit') return true;
+  }
   const allowed = getBuilderAllowedTypesForItem(ownerItem);
   return !!(moduleItem && moduleItem.type && allowed.includes(moduleItem.type));
 }
@@ -6822,6 +7392,17 @@ function getModuleMessageDetails(m, linkedItem){
     }
   }
 
+  // V41_144: выбранная комбинация шкафа/пенала (антресоль × подсветка) — чтобы в составе,
+  // калькуляторе и ВК-сообщении было видно, ЗА ЧТО изменилась цена модуля.
+  if(linkedItem && typeof hasWardrobeAtticOption==='function' && hasWardrobeAtticOption(linkedItem)){
+    const effKey = getWardrobeAtticEffectiveKey(linkedItem);
+    if(effKey !== 'base'){
+      const v = getWardrobeAtticVariantByKey(getWardrobeAttic(linkedItem), effKey);
+      if(v && v.parts && v.parts.length) addPlain(v.parts.length > 1 ? 'с антресолями' : 'с антресолью');
+      if(v && v.led) addPlain('с подсветкой');
+    }
+  }
+
   return parts.join('; ');
 }
 
@@ -6881,7 +7462,7 @@ function formatModuleMessageLine(qty, m){
   const linkedItem = m && m.id ? findItemById(m.id) : null;
   const title = (m && m.title) || '—';
   const details = getModuleMessageDetails(m, linkedItem);
-  let unitPrice = linkedItem ? getBedCardDisplayPrice(linkedItem, m.price) : Number((m && m.price) || 0);
+  let unitPrice = linkedItem ? getModuleCardDisplayPrice(linkedItem, m.price) : Number((m && m.price) || 0);
   // V40_133: если у тумбы выбрано «с мягким сиденьем» — добавляем суффикс и плюсуем цену
   let seatSuffix = '';
   if(linkedItem && typeof shouldShowSeatOption === 'function' && shouldShowSeatOption(linkedItem) && isSeatOptionOn(linkedItem.id)){
@@ -7237,10 +7818,11 @@ function augmentKitchenPoolWithCountertops(it, pool){
 function augmentSystemPoolWithFamilyModules(it, pool){
   if(!isModularSystemOwner(it)) return Array.isArray(pool) ? pool.slice() : [];
   const src = Array.isArray(pool) ? pool.slice() : [];
-  const expected = getExpectedBuilderSeries(it);
+  const expected = getBuilderSeriesForOwner(it);
   if(!expected) return src;
   const ownerSheet = String((it && (it.sheet || it.c || '')) || '').trim();
   const ownerFactory = normBuilderToken(it && it.f);
+  const kitOwnerRec2 = (typeof getWardrobeCoupe === 'function') ? getWardrobeCoupe(it) : null;
   const seen = new Set(src.map(row => String((row && (row.avito_id || row.item_id)) || '').trim()).filter(Boolean));
 
   (window.CATALOG || []).forEach(rowItem => {
@@ -7250,6 +7832,8 @@ function augmentSystemPoolWithFamilyModules(it, pool){
 
     const rowSeries = getBuilderMultiTail(rowItem.mu) || getBuilderModelName(rowItem) || '';
     if(rowSeries !== expected) return;
+    // Готовые комплекты (купе / шкаф с антресолью / комплекты Норд) — не «модули» серии.
+    if(window.__WARDROBE_COUPE__ && window.__WARDROBE_COUPE__[rowId]) return;
     const rowFactory = normBuilderToken(rowItem.f || '');
     if(ownerFactory && rowFactory && rowFactory !== ownerFactory) return;
 
@@ -7284,7 +7868,10 @@ function augmentSystemPoolWithFamilyModules(it, pool){
     };
 
     // Добавляем только то, что после нормализации реально разрешено для текущей системы.
-    const normalizedType = normalizeSystemBuilderType(raw.type || '', rowItem, raw, ownerSheet);
+    // Шкафные комплекты Миф нормализуем гарнитурной веткой (различает Антресоли/Стеллажи),
+    // лишнее (Тумбы ТВ/Комоды/Полки) отсечёт allowed-список шкафной тематики.
+    const normSheet = (kitOwnerRec2 && kitOwnerRec2.display === 'kit' && ownerSheet === 'Шкафы и буфеты') ? 'Гарнитуры и комплекты' : ownerSheet;
+    const normalizedType = normalizeSystemBuilderType(raw.type || '', rowItem, raw, normSheet);
     if(!normalizedType || !getBuilderAllowedTypesForItem(it).includes(normalizedType)) return;
 
     raw.type = normalizedType;
@@ -7298,21 +7885,79 @@ function renderKitPool(it){
   const box=document.getElementById('mKitPool');
   if(!box) return;
   const rawPool = (window.__KITCHEN_POOL__ || {})[String(it.id)] || [];
+  // «Собрать из модулей» — только у карточек-СИСТЕМ (заказчик 06.09): кухня, гарнитур,
+  // карточка с готовым пулом/составом или комплект связки (display:'kit'). Одиночки
+  // (прихожие Визит/Лика/Лира, отдельные шкафы и тумбы) блока не получают.
+  const gateSheet = String((it && (it.sheet || it.c)) || '').trim();
+  const gateComp = (window.__KITCHEN_COMP__ || {})[String(it.id)] || [];
+  const gateKit = (typeof getWardrobeCoupe === 'function') ? getWardrobeCoupe(it) : null;
+  const isSystemOwnerCard = gateSheet === 'Кухни'
+    || gateSheet === 'Гарнитуры и комплекты'
+    || gateSheet === 'Спальные гарнитуры'
+    || (rawPool && rawPool.length > 0)
+    || (gateComp && gateComp.length > 0)
+    || !!(gateKit && gateKit.display === 'kit');
+  if(!isSystemOwnerCard){
+    box.style.display='none';
+    BUILDER.ownerId = null;
+    BUILDER.pool = [];
+    // Корзину калькулятора тоже чистим (Codex р.10): иначе на одиночке любой
+    // renderCalcPanel (например, после галочки подсветки) поднимал состав ПРЕДЫДУЩЕГО
+    // комплекта, и ВК-кнопка слала его вместо товара. Сессия владельца цела в BUILDER_STORE.
+    BUILDER_CART = {};
+    hideCalcPanel();
+    return;
+  }
   const pool = filterBuilderPoolForItem(it, augmentSystemPoolWithFamilyModules(it, augmentKitchenPoolWithCountertops(it, augmentAgavaPoolWithAllColorModules(it, augmentKitchenPoolWithFamilyModules(it, augmentBuilderPoolWithComposition(it, filterBuilderPoolForItem(it, rawPool)))))));
   if(!pool || !pool.length){
     box.style.display='none';
     BUILDER.ownerId = null;
     BUILDER.pool = [];
+    BUILDER_CART = {};
     hideCalcPanel();
     return;
   }
 
   BUILDER.ownerId = String(it.id);
   BUILDER.pool = pool.map(m => normalizeModule(m, it)).filter(m => isBuilderModuleAllowed(it, m));
+  // Шкафные комплекты Миф: в конструкторе только шкафная тематика —
+  // Шкафы + Антресоли + Стеллажи (заказчик 06.09), без тумб ТВ/комодов/полок.
+  const wardrobeKitRec = (typeof getWardrobeCoupe === 'function') ? getWardrobeCoupe(it) : null;
+  const ownerSheetKit = String((it && (it.sheet || it.c)) || '').trim();
+  if(wardrobeKitRec && wardrobeKitRec.display === 'kit' && ownerSheetKit !== 'Шкафы и буфеты'){
+    // Гостиные/спальни/прихожие Миф: пул серии обычный, но псевдо-модулям СОСТАВА
+    // нормализуем тип по родной категории (иначе вкладка «ТВ-зона» из группы связки).
+    const allowedT = new Set(getBuilderAllowedTypesForItem(it));
+    BUILDER.pool.forEach(m => {
+      if(!(m && m._raw && String(m._raw.comp_owner_id || '') === String(it.id || ''))) return;
+      if(allowedT.has(String(m.type || ''))) return;
+      const linked = m.id ? findItemById(m.id) : null;
+      const nt = normalizeSystemBuilderType(String(m.type || ''), linked, m._raw || m, ownerSheetKit);
+      m.type = (nt && allowedT.has(nt)) ? nt : (allowedT.size ? allowedT.values().next().value : m.type);
+    });
+  }
+  if(wardrobeKitRec && wardrobeKitRec.display === 'kit' && ownerSheetKit === 'Шкафы и буфеты'){
+    const WARDROBE_POOL_TYPES = new Set(['Шкафы','Антресоли','Стеллажи и этажерки','Пеналы','Терминалы']);
+    BUILDER.pool = BUILDER.pool.filter(m => {
+      if(WARDROBE_POOL_TYPES.has(String(m.type || ''))) return true;
+      // Псевдо-модули СОСТАВА этого комплекта (тип «Хранение» из связки) не выкидываем —
+      // иначе «Взять состав комплекта» теряет точные расцветки (белый глянец → кашемир):
+      // их id уже занял seen, а каталожные дубли не добавились. Тип нормализуем в шкафный.
+      const ownComp = !!(m && m._raw && String(m._raw.comp_owner_id || '') === String(it.id || ''));
+      if(ownComp){
+        const linked = m.id ? findItemById(m.id) : null;
+        const nt = normalizeSystemBuilderType(String(m.type || ''), linked, m._raw || m, 'Гарнитуры и комплекты');
+        m.type = (nt && WARDROBE_POOL_TYPES.has(nt)) ? nt : 'Шкафы';
+        return true;
+      }
+      return false;
+    });
+  }
   if(!BUILDER.pool.length){
     box.style.display='none';
     BUILDER.ownerId = null;
     BUILDER.pool = [];
+    BUILDER_CART = {};
     hideCalcPanel();
     return;
   }
@@ -7591,7 +8236,7 @@ function renderBuilderGrid(){
   // Рендер карточек. Ограничим 120 штук для производительности
   list.innerHTML = arr.slice(0,120).map((m, idx) => {
     const linkedItem = m.linked ? findItemById(m.id) : null;
-    const _gpBase = linkedItem ? getBedCardDisplayPrice(linkedItem, m.price) : Number(m.price || 0);
+    const _gpBase = linkedItem ? getModuleCardDisplayPrice(linkedItem, m.price) : Number(m.price || 0);
     const _gpSeatX = (linkedItem && typeof getSeatOptionExtraPrice === 'function') ? getSeatOptionExtraPrice(linkedItem.id) : 0;
     const priceTxt = (_gpBase + _gpSeatX) ? ((_gpBase + _gpSeatX).toLocaleString('ru-RU')+' ₽') : (m.price ? (Number(m.price).toLocaleString('ru-RU')+' ₽') : '—');
     const dims = formatModuleDims(m);
@@ -7611,6 +8256,8 @@ function renderBuilderGrid(){
     const bedOptSummary = (linkedItem && shouldShowBedOptions(linkedItem)) ? getBedOptionShortBadge(linkedItem) : '';
     const seatOptBtn = (linkedItem && shouldShowSeatOption(linkedItem)) ? `<button type="button" class="kitCard-bedopt" data-seatopt="${esc(linkedItem.id)}">Опции</button>` : '';
     const seatOptSummary = (linkedItem && shouldShowSeatOption(linkedItem)) ? getSeatOptionShortBadge(linkedItem) : '';
+    const waLedBtn = (linkedItem && typeof shouldShowWardrobeLedOption === 'function' && shouldShowWardrobeLedOption(linkedItem)) ? `<button type="button" class="kitCard-bedopt" data-waledopt="${esc(linkedItem.id)}">Опции</button>` : '';
+    const waLedSummary = (waLedBtn && isWardrobeLedOn(linkedItem)) ? '<span class="kitCard-seatbadge on">+ Подсветка</span>' : '';
     return `<div class="kitCard${m.linked?'':' disabled'}${activeCls}" data-mk="${esc(mk)}" data-idx="${idx}" ${clickAttr}${hi?' style="box-shadow:0 0 0 2px rgba(45,125,255,.5) inset;border-color:var(--accent)"':''}>
       <div class="kitCard-ph">
         ${m.photo?`<img ${imgAttrs(m.photo, 400)} alt="${esc(m.type||'')}">`:'<div class="noph">📦</div>'}
@@ -7618,12 +8265,13 @@ function renderBuilderGrid(){
         ${chosenBadge}
         ${bedOptSummary}
         ${seatOptSummary}
+        ${waLedSummary}
       </div>
       <div class="kitCard-body">
         <div class="kitCard-title">${esc(m.title||'—')}</div>
         ${renderModuleCardDetailsHtml(cardDetails)}
         <div class="kitCard-meta">${dims?dims:''}${m.factory?(dims?' · ':'')+esc(m.factory):''}</div>
-        ${(bedOptBtn||seatOptBtn) ? `<div class="kitCard-bedrow">${bedOptBtn}${seatOptBtn}</div>` : ''}
+        ${(bedOptBtn||seatOptBtn||waLedBtn) ? `<div class="kitCard-bedrow">${bedOptBtn}${seatOptBtn}${waLedBtn}</div>` : ''}
       </div>
       <div class="kitCard-foot">
         ${stockBadge}
@@ -7646,6 +8294,8 @@ function renderBuilderGrid(){
     if(bedBtn){ openMiniBedOptionPopup(ev, bedBtn.dataset.bedopt); return; }
     const seatBtn = ev.target.closest('[data-seatopt]');
     if(seatBtn){ openMiniSeatOptionPopup(ev, seatBtn.dataset.seatopt); return; }
+    const waBtn = ev.target.closest('[data-waledopt]');
+    if(waBtn){ openMiniWardrobeLedPopup(ev, waBtn.dataset.waledopt); return; }
     const card = ev.target.closest('.kitCard');
     if(!card) return;
     const idx = Number(card.dataset.idx);
@@ -7716,6 +8366,7 @@ function closeM(){
   // Если модалку закрыли полностью — выбор сбрасывается для следующего открытия.
   KIT_COMP_CHOICE = {};
   WARDROBE_ATTIC_CHOICE = {};
+  WARDROBE_LED_CHOICE = {};
   BED_OPTION_CHOICE = {};
   SEAT_OPTION_CHOICE = {};
   SEAT_OPTION_VARIANT = {};

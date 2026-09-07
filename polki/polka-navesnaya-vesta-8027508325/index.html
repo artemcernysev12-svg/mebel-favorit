@@ -191,17 +191,17 @@
      Это решает блокировку Cloudflare без VPN и устраняет внешний кэш
      прокси, из-за которого новые фото долго не подменялись. -->
 <!-- Preload каталога: он всё равно нужен сразу, но начнёт качаться параллельно с HTML -->
-<link rel="preload" href="catalog.js?v=d8bc1b99" as="fetch">
+<link rel="preload" href="catalog.js?v=1ea3dddc" as="fetch">
 <link rel="preload" href="assets/fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/golos.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=acb25bf3">
+<link rel="stylesheet" href="styles.css?v=c74a912a">
 
 
 
 
 
 
-  <link rel="preload" href="app.js?v=4c45bd6d" as="script">
+  <link rel="preload" href="app.js?v=45f212fe" as="script">
 <meta property="product:price:amount" content="1367"/><meta property="product:price:currency" content="RUB"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://мебель-фаворит.рф/"}, {"@type": "ListItem", "position": 2, "name": "Полки", "item": "https://мебель-фаворит.рф/polki/"}, {"@type": "ListItem", "position": 3, "name": "Полка навесная Веста", "item": "https://мебель-фаворит.рф/polki/polka-navesnaya-vesta-8027508325/"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "Полка навесная Веста", "sku": "8027508325", "category": "Полки", "url": "https://мебель-фаворит.рф/polki/polka-navesnaya-vesta-8027508325/", "description": "Полка навесная Веста · производитель Микон · Ш 90 · Г 23 · В 25 см · цена от 1 367 ₽ · Мебель Фаворит: доставка по Стерлитамаку и районам до 60 км, консультация в сообщениях.", "image": ["https://artemcernysev12-svg.github.io/catalog-favorit1/items/Polki/Mikon/Vesta/8027508325/01.webp"], "offers": {"@type": "Offer", "priceCurrency": "RUB", "url": "https://мебель-фаворит.рф/polki/polka-navesnaya-vesta-8027508325/", "availability": "https://schema.org/PreOrder", "itemCondition": "https://schema.org/NewCondition", "price": 1367}, "brand": {"@type": "Brand", "name": "Микон"}}</script>
 </head>
 <body>
@@ -493,7 +493,7 @@
       <p>Доставка, сборка, оплата, гарантия и сроки — нажмите на карточку, чтобы узнать подробности</p>
     </div>
     <div class="favTrustGrid">
-      <div class="favTrustCard" onclick="favOpenDelivery()"><div class="favTrustIco">🚚</div><div class="favTrustTxt"><div class="favTrustT">Доставка</div><div class="favTrustS">По городу 800 ₽, грузчики от 900 ₽. За город — по прайсу.</div><span class="favTrustMore">Подробнее →</span></div></div>
+      <div class="favTrustCard" onclick="favOpenDelivery()"><div class="favTrustIco">🚚</div><div class="favTrustTxt"><div class="favTrustT">Доставка</div><div class="favTrustS">По городу 900 ₽, грузчики от 1000 ₽. За город — по прайсу.</div><span class="favTrustMore">Подробнее →</span></div></div>
       <div class="favTrustCard" onclick="favOpenAssembly()"><div class="favTrustIco">🔧</div><div class="favTrustTxt"><div class="favTrustT">Сборка</div><div class="favTrustS">Корпусная — 10%, кухни — 15% от стоимости.</div><span class="favTrustMore">Подробнее →</span></div></div>
       <div class="favTrustCard" onclick="favOpenPayment()"><div class="favTrustIco">💳</div><div class="favTrustTxt"><div class="favTrustT">Оплата</div><div class="favTrustS">Наличные, карта, кредитка, рассрочка от банка.</div><span class="favTrustMore">Подробнее →</span></div></div>
       <div class="favTrustCard" onclick="favOpenWarranty()"><div class="favTrustIco">🛡️</div><div class="favTrustTxt"><div class="favTrustT">Гарантия</div><div class="favTrustS">Корпусная — 12 мес., мягкая — 18 мес.</div><span class="favTrustMore">Подробнее →</span></div></div>
@@ -799,6 +799,11 @@ if(document.readyState === 'loading'){
             <div class="mMulti-h">Вид товара</div>
             <div class="mMulti-tabs" id="mMultiKindTabs"></div>
           </div>
+          <!-- Шкафы: выбор комплектации «Без антресоли / С антресолью» (раунд 11, заказчик 07.09) -->
+          <div class="mMulti-section" id="mMultiAttic" style="display:none">
+            <div class="mMulti-h">Комплектация</div>
+            <div class="mMulti-tabs" id="mMultiAtticTabs"></div>
+          </div>
           <div class="mMulti-section" id="mMultiSizes" style="display:none">
             <div class="mMulti-h">Размер / исполнение</div>
             <div class="mMulti-controls">
@@ -960,7 +965,7 @@ if(document.readyState === 'loading'){
 /* V41_115 (TBT): каталог парсится в Web Worker — главный поток не блокируется 2.2МБ.
    Готово -> window.CATALOG + событие catalog-ready. Фолбэк: обычный <script defer>. */
 (function(){
-  var URL_='catalog.js?v=d8bc1b99';
+  var URL_='catalog.js?v=1ea3dddc';
   var settled=false;
   function ready(arr,meta){
     if(settled) return; settled=true;
@@ -988,12 +993,14 @@ if(document.readyState === 'loading'){
 })();
 </script>
 <script src="catalog-data/wardrobe-attic.js?v=50114bf1" defer></script>
+<script src="catalog-data/wardrobe-attic-mif.js?v=837bbb1e" defer></script>
 <!-- bed-options.js (261КБ) + mattress-options.js (172КБ) с v41_102 грузятся ЛЕНИВО (requestIdleCallback),
      не на критическом пути — см. блок «ленивая дозагрузка опций кроватей/матрасов» перед </body>. -->
 <script src="catalog-data/wardrobe-coupe.js?v=8293ba42" defer></script>
+<script src="catalog-data/wardrobe-coupe-mif.js?v=90cbff3c" defer></script>
 <script src="catalog-data/seat-options.js?v=8076a9a2" defer></script>
-<script src="/chpu-routes.js?v=f3dd39d3"></script>
-<script src="app.js?v=4c45bd6d"></script>
+<script src="/chpu-routes.js?v=66c1afc7"></script>
+<script src="app.js?v=45f212fe"></script>
 
 <!-- Универсальная цель Метрики "avito_click" + "lead_any".
      Скрипт находит на странице ВСЕ ссылки на Авито (avito.ru, avito.com)
@@ -1086,7 +1093,7 @@ function favFilterDeliv(q){
   // Если человек ищет сам Стерлитамак (в т.ч. с опечаткой) — подсказываем про город
   if(q.length>=6 && favFuzzyMatch('стерлитамак', q)){
     var el=document.getElementById('favDelivList');
-    if(el) el.innerHTML='<div style="padding:14px;font-size:13px">Стерлитамак — это наш город \ud83d\ude0a По городу: доставка <b>800 \u20bd</b>, грузчики <b>от 900 \u20bd</b>.</div>';
+    if(el) el.innerHTML='<div style="padding:14px;font-size:13px">Стерлитамак — это наш город \ud83d\ude0a По городу: доставка <b>900 \u20bd</b>, грузчики <b>от 1000 \u20bd</b>.</div>';
     return;
   }
   var rows=window.__DELIVERY_PRICES__.filter(function(r){ return favFuzzyMatch(r[0].toLowerCase().replace(/\u0451/g,'\u0435'), q); });
@@ -1095,7 +1102,7 @@ function favFilterDeliv(q){
 function favOpenDelivery(){
   var body='<div style="background:rgba(45,125,255,.1);border:1px solid rgba(45,125,255,.25);border-radius:12px;padding:12px 14px;margin-bottom:14px">'
     +'<div style="font-weight:700;margin-bottom:6px">По городу Стерлитамак</div>'
-    +'<div>Доставка — <b>800 \u20bd</b> &middot; Грузчики — <b>от 900 \u20bd</b></div></div>'
+    +'<div>Доставка — <b>900 \u20bd</b> &middot; Грузчики — <b>от 1000 \u20bd</b></div></div>'
     +'<div style="font-weight:700;margin-bottom:8px">Доставка за город — найдите свой посёлок:</div>'
     +'<input id="favDelivSearch" type="search" placeholder="Начните вводить название…" oninput="favFilterDeliv(this.value)" style="width:100%;padding:11px 13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;color:#e8edf8;font-size:14px;outline:none;margin-bottom:10px">'
     +'<div id="favDelivList" style="max-height:300px;overflow:auto;border:1px solid rgba(255,255,255,.08);border-radius:10px"></div>'
@@ -1247,7 +1254,7 @@ function favLeadTimingText(){
   if(m==='mixed') return '\u23f1\ufe0f Часть товаров <b>в наличии</b> — ближайший привоз в Стерлитамак в пятницу, <b>'+favRuDate(b.fri)+'</b>. Часть <b>под заказ</b> — обычно 2\u20134 недели. Можно получать по мере готовности или всё сразу — обсудим при звонке.';
   return '';
 }
-function favCities(){ if(!window.__FAV_CITIES__) window.__FAV_CITIES__=[['Стерлитамак (город)',800]].concat(window.__DELIVERY_PRICES__||[]); return window.__FAV_CITIES__; }
+function favCities(){ if(!window.__FAV_CITIES__) window.__FAV_CITIES__=[['Стерлитамак (город)',900]].concat(window.__DELIVERY_PRICES__||[]); return window.__FAV_CITIES__; }
 function favRub(n){ return (Number(n)||0).toLocaleString('ru-RU')+' \u20bd'; }
 function favGv(){ var e=document.getElementById('favGetVal'); return e?e.dataset:{}; }
 function favGetMode(m){
@@ -1308,7 +1315,7 @@ function favSumCalc(){
     rows.push(['Доставка ('+gv.city+')', favRub(gv.price)]); total+=Number(gv.price)||0;
     var ld=document.getElementById('favLoaders');
     if(ld && ld.checked){
-      if(favSterl(gv.city)){ rows.push(['Грузчики', favRub(900)]); total+=900; }
+      if(favSterl(gv.city)){ rows.push(['Грузчики', favRub(1000)]); total+=1000; }
       else { rows.push(['Грузчики','уточним']); approx=true; }
     }
   }
@@ -1319,8 +1326,8 @@ function favSumUpdate(){
   var ld=document.getElementById('favLoaders'); var note=document.getElementById('favLoadersNote');
   var gv=favGv();
   if(note){
-    if(gv.mode==='delivery' && gv.city) note.textContent=favSterl(gv.city)?'— 900 \u20bd':'— за город, уточним при звонке';
-    else note.textContent='— 900 \u20bd по Стерлитамаку, за город уточним при звонке';
+    if(gv.mode==='delivery' && gv.city) note.textContent=favSterl(gv.city)?'— 1000 \u20bd':'— за город, уточним при звонке';
+    else note.textContent='— 1000 \u20bd по Стерлитамаку, за город уточним при звонке';
   }
   var c=favSumCalc();
   if(c.rows.length<=1){ box.innerHTML=''; box.style.display='none'; return; }
@@ -1364,7 +1371,7 @@ function favLeadForm(withCart, preset){
       +'<div id="favCityList" style="display:none;position:absolute;left:0;right:0;top:calc(100% + 4px);background:#0d1220;border:1px solid rgba(45,125,255,.35);border-radius:10px;z-index:7;max-height:200px;overflow:auto;box-shadow:0 10px 30px rgba(0,0,0,.55)"></div>'
       +'</div>'
       +'<input id="favAddrInp" type="text" placeholder="Улица, дом, квартира" style="'+inp+';margin-bottom:8px">'
-      +'<label style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(232,237,248,.8);margin:0 0 10px;cursor:pointer"><input id="favLoaders" type="checkbox" onchange="favSumUpdate()" style="width:17px;height:17px;accent-color:#2d7dff;flex-shrink:0">Нужны грузчики <span id="favLoadersNote" style="color:rgba(232,237,248,.55)">— 900 \u20bd по Стерлитамаку, за город уточним при звонке</span></label>'
+      +'<label style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(232,237,248,.8);margin:0 0 10px;cursor:pointer"><input id="favLoaders" type="checkbox" onchange="favSumUpdate()" style="width:17px;height:17px;accent-color:#2d7dff;flex-shrink:0">Нужны грузчики <span id="favLoadersNote" style="color:rgba(232,237,248,.55)">— 1000 \u20bd по Стерлитамаку, за город уточним при звонке</span></label>'
       +'</div>'
       +'<div style="'+lbl+'">Оплата:</div>'
       +'<div style="display:flex;gap:6px;margin-bottom:6px">'
@@ -1446,7 +1453,7 @@ function favLeadSubmit(withCart){
     else {
       L.push('Получение: Доставка \u2014 '+gv.city+' ('+favRub(gv.price)+')');
       L.push('Адрес: '+addr);
-      L.push('Грузчики: '+(loaders?(favSterl(gv.city)?'нужны (900 \u20bd)':'нужны (за город \u2014 уточним)'):'не нужны'));
+      L.push('Грузчики: '+(loaders?(favSterl(gv.city)?'нужны (1000 \u20bd)':'нужны (за город \u2014 уточним)'):'не нужны'));
     }
     L.push('Оплата: '+gv.pay);
     var stm=favCartStockSummary();
@@ -1596,6 +1603,20 @@ function favCartAddFromModal(){
       if(bedTxt) det=(det?det+' · ':'')+bedTxt;
     }
   }catch(_){ }
+  // Шкафы с опциями (антресоль Альте/Норд/Ирис, подсветка пеналов): цена и комплектация
+  // выбранного варианта — иначе в корзину уходила базовая цена без опции (Codex 06.09).
+  // Эффективный ключ = радио «антресоль» × галочка «подсветка» (раунд 10).
+  try{
+    if(typeof hasWardrobeAtticOption==='function' && hasWardrobeAtticOption(it)){
+      var wRec=getWardrobeAttic(it), wCh=(typeof getWardrobeAtticEffectiveKey==='function')?getWardrobeAtticEffectiveKey(it):getWardrobeAtticChoice(it);
+      if(wCh && wCh!=='base'){
+        var wV=getWardrobeAtticVariantByKey(wRec,wCh);
+        if(wV && Number(wV.price)>0) price=Number(wV.price);
+        // Комплектацию НЕ дописываем: getModuleMessageDetails выше уже добавил
+        // «с антресолью»/«с подсветкой» — иначе в строке корзины дубль (раунд 10).
+      }
+    }
+  }catch(_){ }
   favCartAdd({id:it.id, title:it.t||'', price:price+ex, detail:det, img:it.img||'', va:mArts||undefined, mv:mArts!==null?1:undefined});
   // Подтверждение на кнопке: «✓ Добавлено», затем открываем корзину
   var btn=document.getElementById('mAddCart');
@@ -1620,7 +1641,7 @@ function favCalcToCart(){
     items.forEach(function(en){ if(!en||!en.m) return; var m=en.m; var li=null;
       try{ li=m.id?findItemById(m.id):null; }catch(_){ }
       var unit=Number(m.price)||0;
-      try{ if(li){ var u=Number(getBedCardDisplayPrice(li, m.price)); if(u) unit=u; } }catch(_){ }
+      try{ if(li){ var u=Number((typeof getModuleCardDisplayPrice==='function'?getModuleCardDisplayPrice:getBedCardDisplayPrice)(li, m.price)); if(u) unit=u; } }catch(_){ }
       var ex=0; try{ if(li&&typeof getSeatOptionExtraPrice==='function') ex=Number(getSeatOptionExtraPrice(li.id))||0; }catch(_){ }
       var det=''; try{ det=String(getModuleMessageDetails(m, li)||''); }catch(_){ }
       favCartAdd({id:(m.id||('m_'+String(m.title||m.t||''))), title:String(m.title||m.t||(li&&li.t)||'Модуль'), price:unit+ex, detail:det, img:String(m.img||(li&&li.img)||''), qty:Number(en.qty)||1});

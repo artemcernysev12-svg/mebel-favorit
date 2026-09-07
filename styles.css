@@ -1529,6 +1529,7 @@ a.favRevCard-src:hover{background:rgba(45,125,255,.15)}
   /* ВЫБОР (мульти) — компактный */
   .mInf #mMulti{display:flex;flex-direction:column;padding:8px 0 2px;margin-top:6px;border-top:1px solid var(--line);background:none}
   #mMultiKind{order:1}
+  #mMultiAttic{order:1} /* ряд антресоли — сразу после «Вида» (DOM-порядок решает) */
   #mMultiColors{order:2}
   #mMultiSizes{order:3}
   body[data-mv="b"] #mMultiSizes{order:2}
@@ -1668,3 +1669,6 @@ a.favRevCard-src:hover{background:rgba(45,125,255,.15)}
 .bedOpt-check-line{display:inline-flex;align-items:center;gap:6px;flex-wrap:nowrap;white-space:nowrap}
 .bedOpt-check-line b{white-space:nowrap}
 .bedOpt-check-body .bedOpt-avail{margin-top:0}
+
+/* Раунд 11: пояснение под рядом «Комплектация» (антресоль) у шкафов */
+.mMulti-note{font-size:11px;color:var(--muted);margin:-4px 0 10px;line-height:1.45;max-width:520px}
