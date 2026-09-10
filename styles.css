@@ -1674,3 +1674,6 @@ a.favRevCard-src:hover{background:rgba(45,125,255,.15)}
 
 /* Раунд 11: пояснение под рядом «Комплектация» (антресоль) у шкафов */
 .mMulti-note{font-size:11px;color:var(--muted);margin:-4px 0 10px;line-height:1.45;max-width:520px}
+
+/* V41_146: видимый фокус у полей в диалогах (инлайн-стили задают outline:none) */
+#favInfoDlg input:focus-visible,#favInfoDlg textarea:focus-visible,#favInfoDlg select:focus-visible{outline:2px solid #2d7dff !important;outline-offset:2px}

@@ -5,7 +5,8 @@
 self.onmessage = function(e){
   var url = e && e.data && e.data.url;
   if(!url){ self.postMessage({ok:false, error:'no url'}); return; }
-  fetch(url)
+  // V41_146: приоритет low — 3,2 МБ каталога не мешают CSS и первому фото
+  fetch(url, {priority:'low'})
     .then(function(r){ if(!r.ok) throw new Error('http '+r.status); return r.text(); })
     .then(function(t){
       var K='window.CATALOG=', M='window.CATALOG_META=';

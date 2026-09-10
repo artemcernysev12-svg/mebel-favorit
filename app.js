@@ -59,11 +59,17 @@ async function ensureXLSX(){
       if(typeof apply === 'function') apply();
     }).catch(()=>{});
   };
-  if('requestIdleCallback' in window){
-    setTimeout(()=>requestIdleCallback(start, {timeout:6000}), 3000);
-  } else {
-    setTimeout(start, 4000);
-  }
+  // V41_146: отсчёт от ПОЛНОЙ загрузки страницы (load), а не от парсинга app.js —
+  // 4,4 МБ кухонных данных не толкаются с картинками первого экрана.
+  const kick = ()=>{
+    if('requestIdleCallback' in window){
+      setTimeout(()=>requestIdleCallback(start, {timeout:6000}), 3000);
+    } else {
+      setTimeout(start, 4000);
+    }
+  };
+  if(document.readyState === 'complete') kick();
+  else window.addEventListener('load', kick, {once:true});
 })();
 // ==========================================================
 
@@ -161,9 +167,21 @@ function seoSetProductJsonLd(it){
     '@type': 'Offer',
     priceCurrency: 'RUB',
     url: seoUrlItem(it),
-    availability: (it._inStock || (it._stockQty && Number(it._stockQty) > 0)) ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder'
+    // V41_146: пока остатки не загружены — наличие не указываем; для комплектов
+    // наличие считается из состава (getDisplayAvailability), не из _inStock
+    availability: (function(){
+      if(typeof STOCK === 'undefined' || !STOCK.loaded) return undefined;
+      try{
+        if(typeof getDisplayAvailability === 'function'){
+          const st = getDisplayAvailability(it);
+          if(st && st.loaded) return 'https://schema.org/' + (st.className === 'instock' ? 'InStock' : 'PreOrder');
+        }
+      }catch(_){}
+      return (it._inStock || (it._stockQty && Number(it._stockQty) > 0)) ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder';
+    })()
   };
   if(it.p) offer.price = String(Number(it.p));
+  if(!offer.availability) delete offer.availability;
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -223,7 +241,23 @@ function updateSeoForState(){
     updateSeoProduct(window.__CUR_ITEM__);
   } else if(typeof S !== 'undefined' && S.cat){
     const cnt = (typeof filtered !== 'undefined' && Array.isArray(filtered)) ? filtered.length : (Array.isArray(window.CATALOG) ? CATALOG.filter(x=>x.c===S.cat).length : 0);
-    updateSeoCategory(S.cat, cnt);
+    // V41_146: если состояние фильтров совпадает с SEO-подборкой (/кат/фильтр/) —
+    // canonical и title подборки, а не голой категории (раньше страница
+    // /divany/bezhevye/ после первого же apply получала canonical /divany/).
+    let _fdef = null, _fkey = '';
+    try{
+      _fkey = (typeof chpuFilterPathForState==='function' ? chpuFilterPathForState() : '').replace(/^\/|\/$/g,'');
+      _fdef = _fkey && window.CHPU_FILTERS ? window.CHPU_FILTERS[_fkey] : null;
+    }catch(_){}
+    if(_fdef && _fdef.n){
+      seoRemoveProductJsonLd();
+      seoApply({
+        title: _fdef.n + ' — купить в Стерлитамаке | Мебель Фаворит',
+        description: _fdef.n + ' в каталоге «Мебель Фаворит»' + (cnt ? (': ' + cnt + ' товаров с фото и размерами. ') : '. ') + 'Доставка по Стерлитамаку и районам до 60 км.',
+        url: SEO_BASE_URL.replace(/\/$/,'') + '/' + _fkey + '/',
+        type: 'website'
+      });
+    } else updateSeoCategory(S.cat, cnt);
   } else {
     updateSeoHome();
   }
@@ -423,7 +457,7 @@ function renderAdminPanel(){
         <div class="admin-section">
           <div class="admin-section-h">📦 Файл остатков</div>
           ${(()=>{
-            const stockLoaded = window.STOCK && STOCK.loaded;
+            const stockLoaded = typeof STOCK !== 'undefined' && STOCK.loaded;
             const date = stockLoaded ? (STOCK.date || '—') : null;
             const stockSize = stockLoaded ? Object.keys(STOCK.map||{}).length : 0;
             const cat = window.CATALOG || [];
@@ -506,12 +540,22 @@ const CI={
   'Диваны':'🛋️','Кресла':'💺','Подвесные кресла':'🪑','Матрасы':'🛌','Стулья':'🪑','Подставки':'📦'
 };
 const S={q:'',cat:'',fac:'',sort:'',pMin:'',pMax:'',wMin:'',wMax:'',hMin:'',hMax:'',dMin:'',dMax:'',tvLenMin:'',tvLenMax:'',op:false,od:false,os:false,oa:false,attrs:{},facetSearch:{}};
+// V41_146: «эффективная» цена для фильтра и сортировки. У матрасов плитка
+// показывает «от N ₽» по вариантам размера — фильтр и сортировка должны
+// использовать ту же цену, а не базовое it.p (Элит Актив: «от 21 000», но
+// товар проходил фильтр «до 8 400»). До загрузки mattress-options — как раньше.
+function effPrice(it){
+  if(it && it.c==='Матрасы' && typeof mattressMinPrice==='function'){
+    try{ const p=Number(mattressMinPrice(it))||0; if(p>0) return p; }catch(_){}
+  }
+  return (it && it.p) || 0;
+}
 let page=1,filtered=[],mPh=[],mPhI=0;
 
 // Глобальный тост
 window.showToast = function(text, ms){
   let t = document.getElementById('favToast');
-  if(!t){ t=document.createElement('div'); t.id='favToast'; t.className='fav-toast'; document.body.appendChild(t); }
+  if(!t){ t=document.createElement('div'); t.id='favToast'; t.className='fav-toast'; t.setAttribute('role','status'); t.setAttribute('aria-live','polite'); document.body.appendChild(t); }
   t.textContent = text||''; t.classList.add('show');
   clearTimeout(window.__favToastTimer__);
   window.__favToastTimer__ = setTimeout(()=>t.classList.remove('show'), ms||4200);
@@ -561,7 +605,7 @@ window.showVkPrepareDialog = function(opts){
   `;
   document.body.appendChild(wrap);
 
-  const close = ()=>{ wrap.remove(); };
+  const close = ()=>{ wrap.remove(); document.removeEventListener('keydown', onKey); };
   wrap.querySelector('.vkp-close').onclick = close;
   wrap.querySelector('.vkp-bd').onclick = close;
 
@@ -588,7 +632,7 @@ window.showVkPrepareDialog = function(opts){
 
   // Esc закрывает
   const onKey = (e)=>{
-    if(e.key === 'Escape'){ close(); document.removeEventListener('keydown', onKey); }
+    if(e.key === 'Escape'){ close(); }
   };
   document.addEventListener('keydown', onKey);
 };
@@ -1736,9 +1780,10 @@ function matchesCurrentFilters(it, opts){
   if(S.cat && it.c!==S.cat) return false;
   if(S.q && !favItemMatchesQ(it, S.q)) return false;
   if(S.fac && it.f!==S.fac) return false;
-  if(opts.excludeRange!=='price'){
-    if(S.pMin!=='' && !(it.p>= +S.pMin)) return false;
-    if(S.pMax!=='' && !(it.p<= +S.pMax)) return false;
+  if(opts.excludeRange!=='price' && (S.pMin!=='' || S.pMax!=='')){
+    const _ep = effPrice(it);
+    if(S.pMin!=='' && !(_ep>= +S.pMin)) return false;
+    if(S.pMax!=='' && !(_ep<= +S.pMax)) return false;
   }
   if(opts.excludeRange!=='w' && !inRange(it,'w',S.wMin,S.wMax)) return false;
   if(opts.excludeRange!=='h' && !inRange(it,'h',S.hMin,S.hMax)) return false;
@@ -1780,7 +1825,7 @@ function updateRangeHints(){
   Object.entries(defs).forEach(([rangeKey,[minId,maxId,defMin,defMax]])=>{
     const items = CATALOG.filter(it=>matchesCurrentFilters(it,{excludeRange:rangeKey}));
     const field = rangeKey==='price' ? 'p' : rangeKey;
-    let vals; if(field==='p'){ vals=items.map(it=>Number(it.p)).filter(v=>Number.isFinite(v)&&v>0); } else { vals=[]; items.forEach(function(it){ rangeFieldValues(it,field).forEach(function(v){ if(Number.isFinite(v)&&v>0) vals.push(v); }); }); }
+    let vals; if(field==='p'){ vals=items.map(it=>Number(effPrice(it))).filter(v=>Number.isFinite(v)&&v>0); } else { vals=[]; items.forEach(function(it){ rangeFieldValues(it,field).forEach(function(v){ if(Number.isFinite(v)&&v>0) vals.push(v); }); }); }
     const minEl = document.getElementById(minId);
     const maxEl = document.getElementById(maxId);
     if(!minEl || !maxEl) return;
@@ -2092,8 +2137,8 @@ function apply(){
   var __sy=(typeof window!=='undefined'&&window.scrollY)||0;
   enrichMattressFacets();
   let items=CATALOG.filter(it=>matchesCurrentFilters(it));
-  if(S.sort==='pa')items.sort((a,b)=>(a.p||0)-(b.p||0));
-  else if(S.sort==='pd')items.sort((a,b)=>(b.p||0)-(a.p||0));
+  if(S.sort==='pa')items.sort((a,b)=>effPrice(a)-effPrice(b));
+  else if(S.sort==='pd')items.sort((a,b)=>effPrice(b)-effPrice(a));
   else if(S.sort==='az')items.sort((a,b)=>a.t.localeCompare(b.t,'ru'));
   else if(S.q){
     // Поиск активен: как у маркетплейсов, сортируем по релевантности
@@ -2211,7 +2256,7 @@ function renderGrid(){
 <div class="pc-title">${esc(it.t)}</div>
 ${(()=>{ const mts=(it.c==='Матрасы'&&typeof mattressTileSizes==='function')?mattressTileSizes(it):null;
   if(mts) return `<div class="pc-meta pc-msizes">📐 ${mts.sizes.map(s=>`<span class="pcms${s.inStock?' in':''}">${mts.stockLoaded&&s.inStock?'✓ ':''}${esc(s.size)}</span>`).join('')}</div>`;
-  return dims?`<div class="pc-meta">📐 ${dims}</div>`:''; })()}
+  return dims?`<div class="pc-meta">📐 ${esc(dims)}</div>`:''; })()}
 ${it.f?`<div class="pc-meta">🏭 ${esc(it.f)}</div>`:''}
 ${chips.length?`<div class="pc-chips">${chips.map(c=>`<span class="pch">${esc(c)}</span>`).join('')}</div>`:''}
 </div>
@@ -3595,7 +3640,7 @@ function bedOptionCustomerLabel(rec, variant){
   if(hasBox && !/(дно|короб)/i.test(label)){
     label += ' + дно для белья';
   }else if(hasBox){
-    label = label.replace(/\bдно\b/gi, 'дно для белья').replace(/короб\/?дно/gi, 'дно для белья');
+    label = label.replace(/(?<![а-яё])дно(?![а-яё])/gi, 'дно для белья').replace(/короб\/?дно/gi, 'дно для белья');
   }
   return label.replace(/\s*\+\s*/g,' + ').replace(/\s+/g,' ').trim();
 }
@@ -4543,12 +4588,7 @@ function openM(id, opts){
     stockEl = document.createElement('div'); stockEl.id='mStock';
     tit.parentNode.insertBefore(stockEl, tit.nextSibling);
   }
-  const stockState = getDisplayAvailability(it);
-  if(stockState.loaded){
-    stockEl.className = stockState.className === 'instock' ? 'm-stock ok' : 'm-stock none';
-    stockEl.textContent = stockState.label;
-    stockEl.style.display = 'inline-flex';
-  } else { stockEl.style.display='none'; }
+  updateModalStockBadge(it, stockEl);
   document.getElementById('mPri').textContent=getItemInitialPriceText(it);
   renderModalAttrs(it);
   syncMobileCardLayout();
@@ -4657,6 +4697,9 @@ function openM(id, opts){
       if(window.__CUR_ITEM__ === it){
         renderKitComposition(it);
         renderKitPool(it);
+        // V41_146: наличие комплекта считается из состава — данные только что
+        // приехали, бейдж «В наличии/Под заказ» надо пересчитать.
+        try{ if(typeof updateModalStockBadge === 'function') updateModalStockBadge(it); }catch(_){}
       }
     }).catch(err=>{
       console.warn('[kitchen] не удалось загрузить данные модулей', err);
@@ -4727,36 +4770,15 @@ function getItemCanonicalUrl(it){
   return SITE_ORIGIN + '/?item=' + encodeURIComponent(it.id);
 }
 function injectProductJsonLd(it){
+  // V41_146: единый генератор Product JSON-LD — seoSetProductJsonLd (id=seoProductJsonLd).
+  // Раньше здесь жил ВТОРОЙ генератор (id=dynamicProductJsonLd) с другой логикой
+  // наличия и ценой «0» при неизвестной цене — поисковик видел два противоречивых
+  // Product одновременно.
   if(!it) return;
-  removeProductJsonLd();
-  const inStock = !!(it._inStock);
-  const stockStatus = inStock ? 'InStock' : (typeof STOCK !== 'undefined' && STOCK && STOCK.loaded ? 'PreOrder' : 'InStock');
-  const ld = {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    "name": it.t || 'Товар',
-    "image": it.img || (SITE_ORIGIN + '/og-preview.jpg'),
-    "description": it.t + (it.c ? ' (' + it.c + ')' : '') + (it.f ? ' — ' + it.f : ''),
-    "brand": { "@type": "Brand", "name": it.f || 'Мебель Фаворит' },
-    "category": it.c || '',
-    "offers": {
-      "@type": "Offer",
-      "url": getItemCanonicalUrl(it),
-      "priceCurrency": "RUB",
-      "price": String(Number(it.p || 0)),
-      "availability": "https://schema.org/" + stockStatus,
-      "itemCondition": "https://schema.org/NewCondition",
-      "seller": { "@type": "Organization", "name": "Мебель Фаворит" }
-    }
-  };
-  if(it.art) ld.sku = String(it.art);
-  const tag = document.createElement('script');
-  tag.type = 'application/ld+json';
-  tag.id = 'dynamicProductJsonLd';
-  tag.textContent = JSON.stringify(ld);
-  document.head.appendChild(tag);
+  try{ seoSetProductJsonLd(it); }catch(_){}
 }
 function removeProductJsonLd(){
+  try{ seoRemoveProductJsonLd(); }catch(_){}
   const tag = document.getElementById('dynamicProductJsonLd');
   if(tag) tag.remove();
 }
@@ -5171,6 +5193,68 @@ function selectKitCompVariant(ownerId, groupKey, itemId, ev){
   }
 }
 window.selectKitCompVariant = selectKitCompVariant;
+// V41_146: источник остатка строки состава. Один модуль/артикул может стоять
+// в составе НЕСКОЛЬКИМИ строками — потребность надо суммировать, иначе один
+// остаток считается дважды (прихожая 8155873368: модуль 8155475164 в 2 строках).
+function kitRowStockSources(row, modItem){
+  // Возвращает источники остатка строки: [{key, qty}] — на 1 модуль строки
+  // нужна 1 единица КАЖДОГО источника (модуль = корпус + фасад и т.п.).
+  // null — источник неизвестен (нет ни товара, ни артикулов).
+  if(modItem) return [{key:'id:'+String(modItem.id), qty: Math.max(0, Number(modItem._stockQty)||0)}];
+  if(row && Array.isArray(row.component_arts) && row.component_arts.length){
+    const out=[];
+    for(const artRaw of row.component_arts){
+      const k=normArt(artRaw);
+      if(!k) return null; // неизвестный обязательный компонент — строка недоступна
+      out.push({key:'art:'+k, qty: Math.max(0, Number(getStockQtyByArt(k))||0)});
+    }
+    return out;
+  }
+  const art = row && (row.module_art || row.supplier_art || row.art || '');
+  const na = art ? normArt(art) : '';
+  return na ? [{key:'art:'+na, qty: Math.max(0, Number(getStockQtyByArt(na))||0)}] : null;
+}
+// Общий расчёт наличия состава: суммирует потребность ПО КАЖДОМУ артикулу
+// (один фасад в трёх модулях не считается трижды), юниты раздаёт жадно по
+// строкам. Возвращает {totalRequired, inStockUnits, minKits, anyRow}.
+function kitCompStockSummary(rows, getNeed, getModItem){
+  let totalRequired=0, inStockUnits=0, minKits=null, anyRow=false, missing=false;
+  const needByKey=new Map();
+  const parsed=[];
+  for(const row of rows){
+    if(!row) continue;
+    anyRow=true;
+    const need=Math.max(1, Number(getNeed(row))||1);
+    totalRequired+=need;
+    const modItem=getModItem(row);
+    const src=kitRowStockSources(row, modItem);
+    parsed.push({need, src});
+    if(src){
+      for(const s of src){
+        const rec=needByKey.get(s.key);
+        if(rec) rec.need+=need; else needByKey.set(s.key,{need:need, qty:s.qty});
+      }
+    } else missing=true;
+  }
+  for(const rec of needByKey.values()){
+    const kits=Math.floor(rec.qty/rec.need);
+    minKits = minKits===null ? kits : Math.min(minKits, kits);
+  }
+  if(missing) minKits=0;
+  // жадная раздача юнитов строкам (для «В наличии X/Y» и inStockUnits)
+  const free=new Map();
+  needByKey.forEach((rec,k)=>free.set(k, rec.qty));
+  for(const r of parsed){
+    if(!r.src) continue; // 0 юнитов
+    let m=r.need;
+    for(const s of r.src) m=Math.min(m, free.get(s.key)||0);
+    if(m>0){
+      inStockUnits+=m;
+      for(const s of r.src) free.set(s.key,(free.get(s.key)||0)-m);
+    }
+  }
+  return {totalRequired, inStockUnits, minKits: minKits===null?0:minKits, anyRow};
+}
 function getCompositeAvailability(it){
   const comp = getCompositeRows(it);
   if(!comp.length) return null;
@@ -5182,21 +5266,15 @@ function getCompositeAvailability(it){
   // как в составе комплекта (getKitCompRowStockQty): по связанному товару, либо
   // по component_arts / module_art. Готовые кухни (напр. Хозяюшка) идут по
   // component_arts без прямого item_id — иначе ложно показывали «под заказ».
-  let totalRequired = 0;
-  let inStockUnits = 0;
-  let minKits = null;
-  let anyRow = false;
-  for(const row of smartRows){
-    if(!row) continue;
-    anyRow = true;
-    const need = Math.max(1, Number(row.qty) || 1);
-    totalRequired += need;
-    const modItem = findItemById(row.module_avito_id || row.module_item_id);
-    const stockQty = Math.max(0, Number(getKitCompRowStockQty(row, modItem)) || 0);
-    inStockUnits += Math.min(need, stockQty);
-    const kits = Math.floor(stockQty / need);
-    minKits = minKits === null ? kits : Math.min(minKits, kits);
-  }
+  // V41_146: по-артикульная агрегация (общий фасад в разных модулях не
+  // считается многократно) — общий расчёт kitCompStockSummary
+  const sum = kitCompStockSummary(smartRows,
+    row=>row.qty,
+    row=>findItemById(row.module_avito_id || row.module_item_id));
+  const totalRequired = sum.totalRequired;
+  const inStockUnits = sum.inStockUnits;
+  const minKits = sum.minKits;
+  const anyRow = sum.anyRow;
   if(!anyRow || !totalRequired) return null;
   const available = inStockUnits === totalRequired;
   const qty = available ? Math.max(0, minKits || 0) : 0;
@@ -6811,9 +6889,14 @@ function renderKitComposition(it){
       const extra = getSeatOptionExtraPrice(m.id);
       if(extra > 0) kitSum += extra * q;
     }
-    const stockQty = getKitCompRowStockQty(row, m);
-    inStockCount += Math.min(q, stockQty);
   });
+  // V41_146: «В наличии X/Y» — по-артикульная агрегация, общий компонент
+  // разных строк не считается многократно (kitCompStockSummary)
+  if(hasStock){
+    inStockCount = kitCompStockSummary(activeRows,
+      row=>row.qty,
+      row=>findItemById(row.module_avito_id || row.module_item_id)).inStockUnits;
+  }
 
   // Статистика сверху
   const statsHtml = [
@@ -8512,7 +8595,7 @@ function renderBuilderGrid(){
       <div class="kitCard-body">
         <div class="kitCard-title">${esc(m.title||'—')}</div>
         ${renderModuleCardDetailsHtml(cardDetails)}
-        <div class="kitCard-meta">${dims?dims:''}${m.factory?(dims?' · ':'')+esc(m.factory):''}</div>
+        <div class="kitCard-meta">${dims?esc(dims):''}${m.factory?(dims?' · ':'')+esc(m.factory):''}</div>
         ${(bedOptBtn||seatOptBtn||waLedBtn) ? `<div class="kitCard-bedrow">${bedOptBtn}${seatOptBtn}${waLedBtn}</div>` : ''}
       </div>
       <div class="kitCard-foot">
@@ -8559,11 +8642,20 @@ function renderBuilderGrid(){
   };
 }
 function setPhoto(i){
+  if(!mPh.length){
+    // V41_146: у товара нет фото — убираем изображение предыдущего товара
+    const imgEl=document.getElementById('mImg');
+    if(imgEl){ imgEl.removeAttribute('src'); imgEl.removeAttribute('data-orig'); imgEl.alt=''; }
+    const cnt=document.getElementById('mCnt'); if(cnt) cnt.textContent='';
+    return;
+  }
   if(!mPh[i])return;
   mPhI=i;
   const imgEl=document.getElementById('mImg');
   imgEl.src=imgU(mPh[i], 1200);
   imgEl.dataset.orig=mPh[i];
+  // V41_146: осмысленный alt — название товара и номер фото
+  try{ var _ct=window.__CUR_ITEM__&&window.__CUR_ITEM__.t; imgEl.alt=_ct?(_ct+' — фото '+(i+1)):'Фото товара'; }catch(_){}
   document.querySelectorAll('.mth').forEach((el,j)=>el.classList.toggle('on',j===i));
   const cnt=document.getElementById('mCnt'); if(cnt) cnt.textContent=(i+1)+' / '+mPh.length;
 }
@@ -8616,8 +8708,23 @@ function closeM(){
   const b=document.getElementById('mBack'); if(b) b.style.display='none';
   hideCalcPanel();
   if(typeof updateSeoForState === 'function') updateSeoForState();
+  // V41_146: карточка закрыта — текущего товара больше нет. Иначе callback
+  // ensureKitchenData (сравнение __CUR_ITEM__ === it) оживлял закрытую карточку.
+  window.__CUR_ITEM__ = null;
 }
 function mOutClick(e){if(e.target===document.getElementById('mOv'))closeM()}
+// V41_146: бейдж наличия открытой карточки — вынесен из openM, чтобы обновлять
+// его и после поздней загрузки остатков / данных модулей (applyStock, ensureKitchenData).
+function updateModalStockBadge(it, stockEl){
+  stockEl = stockEl || document.getElementById('mStock');
+  if(!stockEl || !it) return;
+  const stockState = getDisplayAvailability(it);
+  if(stockState.loaded){
+    stockEl.className = stockState.className === 'instock' ? 'm-stock ok' : 'm-stock none';
+    stockEl.textContent = stockState.label;
+    stockEl.style.display = 'inline-flex';
+  } else { stockEl.style.display='none'; }
+}
 
 // Стек истории товаров для кнопки "← Назад"
 let NAV_STACK = [];
@@ -8718,13 +8825,9 @@ function pvSetZoom(on){
   pvApplyTransform();
 }
 function pvToggleZoom(){ pvSetZoom(!pvZoom.on); }
-// ESC закрывает просмотрщик, стрелки листают
-document.addEventListener('keydown', e => {
-  if(!window.__PV_OPEN__) return;
-  if(e.key === 'Escape'){ pvClose(); }
-  else if(e.key === 'ArrowLeft'){ pvPrev(); }
-  else if(e.key === 'ArrowRight'){ pvNext(); }
-});
+// ESC/стрелки просмотрщика обрабатывает ЕДИНЫЙ document.keydown ниже
+// (V41_146: дублирующий обработчик удалён — стрелка листала сразу два фото,
+// а Esc закрывал и просмотрщик, и карточку одним нажатием).
 
 // Подсчёт активных фильтров — показывается красным кружком на иконке
 // фильтров в sticky-панели и в FAB. Помогает пользователю понимать, что
@@ -8734,12 +8837,15 @@ function countActiveFilters(){
   if(S.cat) n++;
   if(S.fac) n++;
   if(S.q) n++;
-  if(S.priceMin || S.priceMax) n++;
+  if(S.pMin || S.pMax) n++;
   if(S.wMin || S.wMax) n++;
   if(S.hMin || S.hMax) n++;
   if(S.dMin || S.dMax) n++;
   if(S.tvLenMin || S.tvLenMax) n++;
-  if(S.inStock) n++;
+  if(S.os) n++;
+  if(S.op) n++;
+  if(S.od) n++;
+  if(S.oa) n++;
   if(S.attrs){
     for(const k in S.attrs){
       const arr = S.attrs[k];
@@ -9190,7 +9296,14 @@ function chpuNavCard(e, id){
 function chpuDropSeoBlock(full){
   try{
     var lst=document.getElementById('chpuSeoListBlock'); if(lst) lst.remove();
-    if(full){ var b=document.getElementById('chpuSeoBlock'); if(b) b.remove(); }
+    if(full){
+      var b=document.getElementById('chpuSeoBlock'); if(b) b.remove();
+      // V41_146: статический Product JSON-LD страницы товара тоже убираем —
+      // иначе при открытии ДРУГОГО товара поисковик видит два разных Product
+      document.querySelectorAll('script[type="application/ld+json"]:not([id])').forEach(function(s){
+        if(/"@type"\s*:\s*"Product"/.test(s.textContent||'')) s.remove();
+      });
+    }
   }catch(_){ }
 }
 // Путь товара по id (когда под рукой только id, а не объект): ищем в CATALOG.
@@ -9575,6 +9688,17 @@ function applyStock(){
       if(typeof updateWardrobeAtticSelection === 'function') updateWardrobeAtticSelection(cur);
       if(typeof renderWardrobeCoupeKit === 'function') renderWardrobeCoupeKit(cur);
       if(typeof renderTumbaSeatOption === 'function') renderTumbaSeatOption(cur);
+      // V41_146: остатки пришли ПОСЛЕ открытия карточки — обновляем бейдж
+      // наличия, состав комплекта и пул конструктора (раньше висело старое).
+      try{ if(typeof updateModalStockBadge === 'function') updateModalStockBadge(cur); }catch(_){}
+      try{ if(typeof renderKitComposition === 'function') renderKitComposition(cur); }catch(_){}
+      try{
+        const poolBox = document.getElementById('mKitPool');
+        if(poolBox && poolBox.style.display !== 'none' && typeof renderKitPool === 'function'){
+          if(typeof saveBuilderSession === 'function') saveBuilderSession();
+          renderKitPool(cur);
+        }
+      }catch(_){}
     }
   }catch(_){}
 }
@@ -9586,7 +9710,9 @@ async function tryLoadStock(){
       // Сначала пробуем скачать сам файл остатков. Если его нет — не тянем SheetJS.
       // Работает на GitHub Pages / сервере. Если сайт открыт как file://, браузер
       // может запретить автодоступ к соседнему XLSX. Для проверки лучше открывать сайт через локальный сервер.
-      const res = await fetch(path + '?t=' + Date.now(), {cache:'no-store'});
+      // V41_146: кэш-окно 30 минут (бот обновляет файл раз в сутки) —
+      // раньше no-store перекачивал 263 КБ при каждом открытии сайта
+      const res = await fetch(path + '?t=' + Math.floor(Date.now()/18e5));
       if(!res.ok) continue;
       const buf = await res.arrayBuffer();
       await ensureXLSX();
@@ -9658,7 +9784,18 @@ document.addEventListener('DOMContentLoaded',()=>{
         var refreshed = false;
         navigator.serviceWorker.addEventListener('controllerchange', () => {
           if(refreshed) return; refreshed = true;
-          window.location.reload();
+          // V41_146: перезагружаем сразу только ВИДИМУЮ вкладку. Фоновые вкладки
+          // (у людей часто открыто несколько карточек) перезагрузятся тихо,
+          // когда человек в них вернётся — а не все разом в момент обновления.
+          if(document.visibilityState === 'visible'){ window.location.reload(); }
+          else {
+            document.addEventListener('visibilitychange', function onVis(){
+              if(document.visibilityState === 'visible'){
+                document.removeEventListener('visibilitychange', onVis);
+                window.location.reload();
+              }
+            });
+          }
         });
 
         // C-страховка: фоновая проверка обновления раз в 30 мин (для висящих вкладок)
@@ -9782,6 +9919,10 @@ document.addEventListener('DOMContentLoaded',()=>{
       if(!ready){
         if(attempts < maxAttempts){
           setTimeout(tryApply, 50);
+        } else {
+          // V41_146: медленная сеть — каталог может приехать позже 8 секунд
+          // (воркер-фолбэк ждёт до 15с). Диплинк не бросаем: применим по событию.
+          document.addEventListener('catalog-ready', ()=>tryApply(), {once:true});
         }
         return;
       }
@@ -10173,8 +10314,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     }, {passive:true});
   }
 
-  // Подгружаем остатки из stock-data/stock.xlsx (если файл рядом)
-  tryLoadStock();
+  // Подгружаем остатки из stock-data/stock.xlsx (если файл рядом).
+  // V41_146: не в момент DOMContentLoaded, а после первой отрисовки — Excel-парсер
+  // (SheetJS) не конкурирует за процессор с отрисовкой каталога.
+  if('requestIdleCallback' in window) requestIdleCallback(()=>tryLoadStock(), {timeout:2500});
+  else setTimeout(tryLoadStock, 800);
 
   // Свайп вниз закрывает мобильный фильтр
   setupSidebarSwipeClose();

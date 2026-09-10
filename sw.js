@@ -7,20 +7,18 @@
 //   - sitemap.xml / stock.xlsx — network-first без кэширования при ошибке
 // Версия кэша поднимается при обновлении сайта — старые кэши удаляются автоматически.
 
-const SW_VERSION = 'mf-v41-145';
+const SW_VERSION = 'mf-v41-146';
 const PRECACHE = SW_VERSION + '-precache';
 const RUNTIME  = SW_VERSION + '-runtime';
 
-// Минимальный набор ресурсов для оффлайн-загрузки
+// Минимальный набор ресурсов для оффлайн-загрузки.
+// V41_146: тяжёлые JS убраны — они качались при установке SW ПО ГОЛЫМ путям
+// (без ?v=хэш), никогда не матчились с запросами страницы и добавляли ~4 МБ
+// лишнего трафика на каждое обновление версии. Оффлайн обслуживает RUNTIME-кэш,
+// который заполняется правильными URL (с ?v=) при первом визите.
 const PRECACHE_URLS = [
   '/',
   '/index.html',
-  '/catalog.js',
-  '/app.js',
-  '/styles.css',
-  '/catalog-data/wardrobe-attic.js',
-  '/catalog-data/wardrobe-coupe.js',
-  '/catalog-data/seat-options.js',
   '/og-preview.jpg',
   '/manifest.json'
 ];
@@ -42,7 +40,8 @@ self.addEventListener('activate', event => {
   event.waitUntil((async () => {
     // Удаляем старые кэши (любая версия кроме текущей)
     const keys = await caches.keys();
-    await Promise.all(keys.filter(k => k !== PRECACHE && k !== RUNTIME).map(k => caches.delete(k)));
+    // V41_146: чистим только кэши нашего префикса — чужие имена не трогаем
+    await Promise.all(keys.filter(k => k.startsWith('mf-v41-') && k !== PRECACHE && k !== RUNTIME).map(k => caches.delete(k)));
     await self.clients.claim();
   })());
 });
@@ -74,7 +73,10 @@ self.addEventListener('fetch', event => {
       fetch(req).then(resp => {
         if(resp && resp.status === 200){
           const copy = resp.clone();
-          caches.open(RUNTIME).then(cache => cache.put(req, copy));
+          event.waitUntil(caches.open(RUNTIME).then(cache => cache.put(req, copy)).catch(()=>{}));
+        } else if(resp && resp.status >= 500){
+          // V41_146: сервер временно отвечает ошибкой — отдаём рабочую копию из кэша
+          return caches.match(req).then(r => r || resp);
         }
         return resp;
       }).catch(() => caches.match(req))
@@ -88,8 +90,14 @@ self.addEventListener('fetch', event => {
   if(isHTML){
     event.respondWith(
       fetch(req).then(resp => {
-        const copy = resp.clone();
-        caches.open(RUNTIME).then(cache => cache.put(req, copy));
+        // V41_146: кэшируем только успешный ответ — временная 500-страница
+        // не должна затирать рабочую копию в кэше
+        if(resp && resp.ok){
+          const copy = resp.clone();
+          event.waitUntil(caches.open(RUNTIME).then(cache => cache.put(req, copy)).catch(()=>{}));
+        } else if(resp && resp.status >= 500){
+          return caches.match(req).then(r => r || resp);
+        }
         return resp;
       }).catch(() => caches.match(req).then(r => r || caches.match('/index.html')))
     );
@@ -103,10 +111,13 @@ self.addEventListener('fetch', event => {
         const fetchPromise = fetch(req).then(resp => {
           if(resp && resp.status === 200){
             const copy = resp.clone();
-            caches.open(RUNTIME).then(cache => cache.put(req, copy));
+            event.waitUntil(caches.open(RUNTIME).then(cache => cache.put(req, copy)).catch(()=>{}));
           }
           return resp;
         }).catch(() => cached);
+        // V41_146: фоновую ревалидацию удерживаем, чтобы браузер не убил SW
+        // до завершения записи в кэш
+        if(cached) event.waitUntil(fetchPromise.catch(()=>{}));
         return cached || fetchPromise;
       })
     );
@@ -120,7 +131,7 @@ self.addEventListener('fetch', event => {
       return fetch(req).then(resp => {
         if(resp && (resp.status === 200 || resp.type === 'opaque')){
           const copy = resp.clone();
-          caches.open(RUNTIME).then(cache => cache.put(req, copy));
+          event.waitUntil(caches.open(RUNTIME).then(cache => cache.put(req, copy)).catch(()=>{}));
         }
         return resp;
       }).catch(() => cached);
