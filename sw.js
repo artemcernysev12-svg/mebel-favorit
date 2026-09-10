@@ -7,7 +7,7 @@
 //   - sitemap.xml / stock.xlsx — network-first без кэширования при ошибке
 // Версия кэша поднимается при обновлении сайта — старые кэши удаляются автоматически.
 
-const SW_VERSION = 'mf-v41-150';
+const SW_VERSION = 'mf-v41-151';
 const PRECACHE = SW_VERSION + '-precache';
 const RUNTIME  = SW_VERSION + '-runtime';
 // V41_147: кэш ВЕРСИОНИРОВАННЫХ данных каталога (catalog.js?v=… и
@@ -60,7 +60,7 @@ self.addEventListener('fetch', event => {
   if(url.pathname.startsWith('/api/') || url.search.includes('admin=')) return;
 
   // 1. stock.xlsx и sitemap.xml — network-first без записи в кэш при неудаче
-  if(url.pathname.includes('stock.xlsx') || url.pathname.includes('sitemap')){
+  if(url.pathname.includes('stock.xlsx') || url.pathname.includes('stock.json') || url.pathname.includes('sitemap')){
     event.respondWith(
       fetch(req).catch(() => caches.match(req))
     );

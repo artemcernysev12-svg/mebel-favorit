@@ -9737,7 +9737,37 @@ function applyStock(){
   }catch(_){}
 }
 const STOCK_AUTO_PATHS = ['stock-data/stock.xlsx', 'stock.xlsx'];
+// V41_151: лёгкая «шпаргалка» остатков вместо Excel. Ночной бот выписывает
+// stock-data/stock.json (~64 КБ, {date, map:{артикул:кол-во}}) — браузеру не
+// нужны ни файл на 263 КБ, ни читалка Excel на 900 КБ. При любой проблеме
+// (файла нет, битый, пустой) молча работает прежний путь через stock.xlsx.
+async function tryLoadStockJson(){
+  try{
+    const res = await fetch('stock-data/stock.json?t=' + Math.floor(Date.now()/18e5));
+    if(!res.ok) return false;
+    const j = await res.json();
+    if(!j || typeof j.map !== 'object' || !j.map) return false;
+    const map = {}; let n = 0;
+    for(const k in j.map){
+      const na = normArt(k);
+      if(!na) continue;
+      const q = Number(j.map[k]);
+      map[na] = Number.isFinite(q) ? q : 0;
+      n++;
+    }
+    if(!n) return false;
+    STOCK.loaded = true;
+    STOCK.date = String(j.date || '');
+    STOCK.map = map;
+    applyStock();
+    const el = document.getElementById('ftStock');
+    if(el) el.textContent = 'остатки обновляются автоматически';
+    console.log('[stock] loaded from stock-data/stock.json (' + n + ' позиций)');
+    return true;
+  }catch(_){ return false; }
+}
 async function tryLoadStock(){
+  if(await tryLoadStockJson()) return true;
   let lastErr = null;
   for(const path of STOCK_AUTO_PATHS){
     try {
