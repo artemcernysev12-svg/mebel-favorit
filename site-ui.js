@@ -169,7 +169,7 @@ function favOpenInfo(title, bodyHtml, headerExtra){
 function favPhoneAction(){ if(/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)){location.href='tel:+79930526654';}else{favCloseInfo(); if(typeof openPhoneDlg==='function') openPhoneDlg();} }
 function favContactBtns(){
   return '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px">'
-    +'<a href="#" onclick="favPhoneAction();return false;" style="flex:1;min-width:140px;text-align:center;padding:12px;background:#2d7dff;color:#fff;border-radius:12px;font-weight:700;text-decoration:none">\ud83d\udcde Позвонить</a>'
+    +'<a href="#" onclick="favPhoneAction();return false;" style="flex:1;min-width:140px;text-align:center;padding:12px;background:#2165d6;color:#fff;border-radius:12px;font-weight:700;text-decoration:none">\ud83d\udcde Позвонить</a>'
     +'<a href="https://vk.com/club77061353" target="_blank" rel="noopener" style="flex:1;min-width:140px;text-align:center;padding:12px;background:rgba(37,211,102,.14);border:1px solid rgba(37,211,102,.3);color:#e8edf8;border-radius:12px;font-weight:700;text-decoration:none"><img src="assets/icons/vk.png" class="bIco" alt=""> Написать в ВК</a></div>';
 }
 function favRenderDeliv(rows){
@@ -450,6 +450,7 @@ function favSumUpdate(){
 }
 function favLeadForm(withCart, preset){
   var inp='width:100%;padding:13px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:10px;color:#e8edf8;font-size:15px;outline:none;margin-bottom:10px;font-family:inherit;box-sizing:border-box';
+  var lbl='display:block;font-size:12px;color:#9fb0cc;margin:0 0 5px 2px;font-weight:600'; // V41_149: подписи полей
   var lbl='font-size:12.5px;color:rgba(232,237,248,.65);margin:2px 0 6px';
   var pr=favProfileLoad();
   var esc=function(x){ return String(x||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); };
@@ -484,7 +485,7 @@ function favLeadForm(withCart, preset){
       +'<div id="favCityList" style="display:none;position:absolute;left:0;right:0;top:calc(100% + 4px);background:#0d1220;border:1px solid rgba(45,125,255,.35);border-radius:10px;z-index:7;max-height:200px;overflow:auto;box-shadow:0 10px 30px rgba(0,0,0,.55)"></div>'
       +'</div>'
       +'<input id="favAddrInp" type="text" placeholder="Улица, дом, квартира" style="'+inp+';margin-bottom:8px">'
-      +'<label style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(232,237,248,.8);margin:0 0 10px;cursor:pointer"><input id="favLoaders" type="checkbox" onchange="favSumUpdate()" style="width:17px;height:17px;accent-color:#2d7dff;flex-shrink:0">Нужны грузчики <span id="favLoadersNote" style="color:rgba(232,237,248,.55)">— 1000 \u20bd по Стерлитамаку, за город уточним при звонке</span></label>'
+      +'<label style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(232,237,248,.8);margin:0 0 10px;cursor:pointer"><input id="favLoaders" type="checkbox" onchange="favSumUpdate()" style="width:17px;height:17px;accent-color:#2165d6;flex-shrink:0">Нужны грузчики <span id="favLoadersNote" style="color:rgba(232,237,248,.55)">— 1000 \u20bd по Стерлитамаку, за город уточним при звонке</span></label>'
       +'</div>'
       +'<div style="'+lbl+'">Оплата:</div>'
       +'<div style="display:flex;gap:6px;margin-bottom:6px">'
@@ -495,15 +496,19 @@ function favLeadForm(withCart, preset){
   }
   favOpenInfo('Оформить заявку',
     cartNote
-    +'<input id="favLeadName" type="text" placeholder="Ваше ФИО (Фамилия Имя Отчество)" value="'+esc(pr.fio)+'" style="'+inp+'">'
-    +'<input id="favLeadPhone" type="tel" placeholder="Телефон, например 8 912 345-67-89" value="'+esc(pr.p1)+'" style="'+inp+'">'
-    +'<label style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(232,237,248,.8);margin:-2px 0 10px;cursor:pointer"><input id="favLeadNoMsg" type="checkbox" onchange="favLeadToggleP2()"'+(pr.p2?' checked':'')+' style="width:17px;height:17px;accent-color:#2d7dff;flex-shrink:0">На этом номере нет WhatsApp / Telegram / MAX</label>'
-    +'<div id="favLeadP2Wrap" style="display:'+(pr.p2?'block':'none')+'"><input id="favLeadPhone2" type="tel" placeholder="Телефон для мессенджеров (WhatsApp/Telegram/MAX)" value="'+esc(pr.p2)+'" style="'+inp+'"></div>'
+    /* V41_149: постоянные подписи над полями — placeholder исчезает при вводе */
+    +'<label for="favLeadName" style="'+lbl+'">Ваше ФИО</label>'
+    +'<input id="favLeadName" type="text" autocomplete="name" placeholder="Фамилия Имя Отчество" value="'+esc(pr.fio)+'" style="'+inp+'">'
+    +'<label for="favLeadPhone" style="'+lbl+'">Телефон</label>'
+    +'<input id="favLeadPhone" type="tel" autocomplete="tel" placeholder="8 912 345-67-89" value="'+esc(pr.p1)+'" style="'+inp+'">'
+    +'<label style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(232,237,248,.8);margin:-2px 0 10px;cursor:pointer"><input id="favLeadNoMsg" type="checkbox" onchange="favLeadToggleP2()"'+(pr.p2?' checked':'')+' style="width:17px;height:17px;accent-color:#2165d6;flex-shrink:0">На этом номере нет WhatsApp / Telegram / MAX</label>'
+    +'<div id="favLeadP2Wrap" style="display:'+(pr.p2?'block':'none')+'"><label for="favLeadPhone2" style="'+lbl+'">Телефон для мессенджеров</label><input id="favLeadPhone2" type="tel" autocomplete="tel" placeholder="WhatsApp / Telegram / MAX" value="'+esc(pr.p2)+'" style="'+inp+'"></div>'
     +docSel
     +getPay
-    +'<textarea id="favLeadComment" rows="2" placeholder="'+(withCart?'Комментарий (необязательно)':'Что нужно: диван, шкаф, кухня\u2026 и какие размеры?')+'" style="'+inp+';resize:vertical">'+esc(preset||'')+'</textarea>'
+    +'<label for="favLeadComment" style="'+lbl+'">'+(withCart?'Комментарий (необязательно)':'Что нужно?')+'</label>'
+    +'<textarea id="favLeadComment" rows="2" placeholder="'+(withCart?'Например: позвонить после 18:00':'Диван, шкаф, кухня\u2026 и какие размеры?')+'" style="'+inp+';resize:vertical">'+esc(preset||'')+'</textarea>'
     +'<div id="favLeadErr" style="display:none;color:#ff8a8a;font-size:12.5px;margin:-4px 0 8px"></div>'
-    +'<button id="favLeadBtn" onclick="favLeadSubmit('+(withCart?'true':'false')+')" style="width:100%;padding:13px;border-radius:12px;border:none;background:#2d7dff;color:#fff;font-weight:800;font-size:15px;cursor:pointer">Отправить заявку</button>'
+    +'<button id="favLeadBtn" onclick="favLeadSubmit('+(withCart?'true':'false')+')" style="width:100%;padding:13px;border-radius:12px;border:none;background:#2165d6;color:#fff;font-weight:800;font-size:15px;cursor:pointer">Отправить заявку</button>'
     +favMoreBtn()
     +'<div style="font-size:11.5px;color:rgba(232,237,248,.5);margin-top:8px;text-align:center">Перезвоним в рабочее время. Никакого спама.</div>',
     backBtn);
@@ -600,7 +605,7 @@ function favLeadSubmit(withCart){
         ? 'Заявки уходят слишком часто — это защита от спама. Подождите минутку и нажмите «Отправить ещё раз».'
         : 'Похоже, нет связи. Попробуйте отправить ещё раз — или скопируйте текст заявки и отправьте нам в ВК, или просто позвоните, всё оформим по телефону.';
       favOpenInfo('\u26a0\ufe0f Не получилось отправить', '<div>'+info+'</div>'
-        +'<button id="favLeadRetryBtn" onclick="window.__LEAD_RETRY__&&window.__LEAD_RETRY__()" style="width:100%;margin-top:14px;padding:13px;border-radius:12px;border:none;background:#2d7dff;color:#fff;font-weight:800;font-size:15px;cursor:pointer">\ud83d\udd04 Отправить ещё раз</button>'
+        +'<button id="favLeadRetryBtn" onclick="window.__LEAD_RETRY__&&window.__LEAD_RETRY__()" style="width:100%;margin-top:14px;padding:13px;border-radius:12px;border:none;background:#2165d6;color:#fff;font-weight:800;font-size:15px;cursor:pointer">\ud83d\udd04 Отправить ещё раз</button>'
         +'<button id="favLeadCopyBtn" onclick="favLeadCopyFail()" style="width:100%;margin-top:8px;padding:12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:#fff;font-weight:700;cursor:pointer">\ud83d\udccb Скопировать заявку</button>'
         +favContactBtns());
     }
@@ -656,7 +661,7 @@ function favCartOpen(){
   var body;
   if(!keys.length){
     body='<div style="text-align:center;padding:18px 6px;color:rgba(232,237,248,.7)">Корзина пока пуста.<br>Откройте товар и нажмите «\ud83d\uded2 В корзину» — соберите свой список, он сохранится в браузере.</div>'
-      +'<button onclick="favCloseInfo();goCat()" style="width:100%;margin-top:6px;padding:13px;border-radius:12px;border:none;background:#2d7dff;color:#fff;font-weight:800;font-size:15px;cursor:pointer">Перейти в каталог</button>';
+      +'<button onclick="favCloseInfo();goCat()" style="width:100%;margin-top:6px;padding:13px;border-radius:12px;border:none;background:#2165d6;color:#fff;font-weight:800;font-size:15px;cursor:pointer">Перейти в каталог</button>';
   } else {
     var rows='';
     keys.forEach(function(k,idx){ var e=SITE_CART[k];
@@ -674,7 +679,7 @@ function favCartOpen(){
     body=rows
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><b>Итого:</b><b style="font-size:17px;color:#7fb3ff">'+favCartTotal().toLocaleString('ru-RU')+' \u20bd</b></div>'
       +'<div style="font-size:11.5px;color:rgba(232,237,248,.45);margin-top:4px">Нажмите на товар — откроется его карточка</div>'
-      +'<button onclick="favLeadForm(true)" style="width:100%;margin-top:12px;padding:13px;border-radius:12px;border:none;background:#2d7dff;color:#fff;font-weight:800;font-size:15px;cursor:pointer">\ud83d\udce8 Оформить заявку</button>'
+      +'<button onclick="favLeadForm(true)" style="width:100%;margin-top:12px;padding:13px;border-radius:12px;border:none;background:#2165d6;color:#fff;font-weight:800;font-size:15px;cursor:pointer">\ud83d\udce8 Оформить заявку</button>'
       +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">'
       +'<button id="favCartCopyBtn" onclick="favCartCopy()" style="flex:1;min-width:108px;padding:12px 8px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:#fff;font-weight:700;cursor:pointer;font-size:13px">\ud83d\udccb Скопировать</button>'
       +'<a href="https://vk.com/club77061353" target="_blank" rel="noopener" style="flex:1;min-width:108px;text-align:center;padding:12px 8px;background:rgba(37,211,102,.14);border:1px solid rgba(37,211,102,.3);color:#e8edf8;border-radius:12px;font-weight:700;text-decoration:none;font-size:13px"><img src="assets/icons/vk.png" class="bIco" alt=""> ВК</a>'
