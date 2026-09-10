@@ -7,9 +7,14 @@
 //   - sitemap.xml / stock.xlsx — network-first без кэширования при ошибке
 // Версия кэша поднимается при обновлении сайта — старые кэши удаляются автоматически.
 
-const SW_VERSION = 'mf-v41-147';
+const SW_VERSION = 'mf-v41-148';
 const PRECACHE = SW_VERSION + '-precache';
 const RUNTIME  = SW_VERSION + '-runtime';
+// V41_147: кэш ВЕРСИОНИРОВАННЫХ данных каталога (catalog.js?v=… и
+// catalog-data/*?v=…). Живёт МЕЖДУ релизами: имя без номера версии, activate
+// его не чистит. Версия зашита в ?v= (хэш содержимого, sync_versions):
+// совпал URL — данные точно те же, сеть не нужна вовсе.
+const DATA_CACHE = 'mf-data-v1';
 
 // Минимальный набор ресурсов для оффлайн-загрузки.
 // V41_146: тяжёлые JS убраны — они качались при установке SW ПО ГОЛЫМ путям
@@ -59,6 +64,47 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       fetch(req).catch(() => caches.match(req))
     );
+    return;
+  }
+
+  // 1a2. V41_147: версионированные данные каталога — cache-first по точному
+  // URL с ?v=хэш. Свежесть гарантирует index.html (network-first): новый релиз
+  // приносит новые ?v=, старые версии файла вычищаются при загрузке новой.
+  const isVersionedData = (url.pathname.endsWith('/catalog.js') || url.pathname.includes('/catalog-data/'))
+                        && /(^|[?&])v=/.test(url.search);
+  if(isVersionedData){
+    event.respondWith((async () => {
+      const cache = await caches.open(DATA_CACHE);
+      const hit = await cache.match(req);
+      if(hit) return hit;
+      try{
+        // Чистый запрос по URL, а не исходный req: script-теги несут условные
+        // заголовки (If-Modified-Since) и сервер отвечает 304 без тела — такой
+        // ответ невозможно положить в кэш. fetch по URL всегda даёт 200 с телом
+        // (из HTTP-кэша браузера или из сети).
+        const resp = await fetch(url.href, {cache: 'default'});
+        if(resp && resp.status === 200){
+          // Ошибка ХРАНИЛИЩА (квота и т.п.) не должна подменять свежий ответ
+          // старьём — сохраняем в фоне, ответ отдаём в любом случае (Codex).
+          event.waitUntil((async () => {
+            await cache.put(req, resp.clone());
+            // старые версии того же файла больше не нужны — чистим, чтобы
+            // хранилище не росло на мегабайты с каждым релизом
+            const keys = await cache.keys();
+            await Promise.all(keys.filter(k => {
+              const u = new URL(k.url);
+              return u.pathname === url.pathname && u.search !== url.search;
+            }).map(k => cache.delete(k)));
+          })().catch(()=>{}));
+        }
+        return resp;
+      }catch(_){
+        // сеть упала: любая сохранённая версия файла лучше, чем ничего
+        const any = (await cache.keys()).find(k => new URL(k.url).pathname === url.pathname);
+        if(any) return cache.match(any);
+        throw _;
+      }
+    })());
     return;
   }
 

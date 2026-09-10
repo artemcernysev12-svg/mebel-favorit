@@ -24,5 +24,13 @@ self.onmessage = function(e){
       }
       self.postMessage({ok:true, catalog:catalog, meta:meta});
     })
-    .catch(function(err){ self.postMessage({ok:false, error:String(err&&err.message||err)}); });
+    .catch(function(err){
+      // V41_147: каталог скачался, но не распарсился (битый ответ) — выбрасываем
+      // запись из кэша данных, иначе повреждённый файл закрепился бы до
+      // следующего релиза (и фолбэк-скрипт получил бы его же из кэша).
+      try{
+        caches.open('mf-data-v1').then(function(cc){ cc.delete(new Request(url)); }).catch(function(){});
+      }catch(_){}
+      self.postMessage({ok:false, error:String(err&&err.message||err)});
+    });
 };

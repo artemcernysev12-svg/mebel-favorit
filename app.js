@@ -32,9 +32,9 @@ async function ensureKitchenData(){
     // Составы шкафных комплектов Миф мерджатся ПОСЛЕ kitchen-comp.js —
     // тот присваивает __KITCHEN_COMP__ целиком и затёр бы мердж при обратном порядке.
     loadScriptOnce('catalog-data/kitchen-comp.js?v=01844a0b')
-      .then(()=>loadScriptOnce('catalog-data/wardrobe-kits-mif.js?v=mifk6')),
-    loadScriptOnce('catalog-data/kitchen-pools.js?v=4ef74692'),
-    loadScriptOnce('catalog-data/agava-modules.js?v=9b91d0ce')
+      .then(()=>loadScriptOnce('catalog-data/wardrobe-kits-mif.js?v=9489f102')),
+    loadScriptOnce('catalog-data/kitchen-pools.js?v=cc84161b'),
+    loadScriptOnce('catalog-data/agava-modules.js?v=f239de04')
   ]);
 }
 async function ensureXLSX(){
@@ -9781,7 +9781,19 @@ document.addEventListener('DOMContentLoaded',()=>{
   //  - тихо применяем при следующем естественном действии: переход/открытие
   //    или закрытие карточки/смена категории (A) — человек не замечает рывка;
   //  - плюс фоновая проверка обновления раз в 30 минут (для открытых вкладок).
-  if('serviceWorker' in navigator && location.protocol === 'https:'){
+  // V41_147: на localhost SW включается ТОЛЬКО по флагу (?sw в адресе или
+  // localStorage.mfSwDev=1) — обычное превью работает без SW, чтобы кэш данных
+  // не прятал свежие правки; без флага старые регистрации и кэш снимаются.
+  const __swLocal = location.hostname === 'localhost';
+  const __swWanted = !__swLocal
+    || (function(){ try{ return new URLSearchParams(location.search).has('sw') || localStorage.getItem('mfSwDev') === '1'; }catch(_){ return false; } })();
+  if('serviceWorker' in navigator && __swLocal && !__swWanted){
+    try{
+      navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister()));
+      if(window.caches && caches.delete) caches.delete('mf-data-v1').catch(()=>{});
+    }catch(_){}
+  }
+  if('serviceWorker' in navigator && (location.protocol === 'https:' || __swLocal) && __swWanted){
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js').then(reg => {
         window.__SW_REG__ = reg;
