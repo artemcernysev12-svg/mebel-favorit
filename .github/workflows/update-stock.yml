@@ -39,6 +39,7 @@ jobs:
             /scripts/
             /requirements-stock.txt
             /stock-data/stock.xlsx
+            /stock-data/stock.json
           sparse-checkout-cone-mode: false
 
       - name: Set up Python
@@ -60,9 +61,22 @@ jobs:
           STOCK_MAX_EMAIL_AGE_HOURS: "72"
         run: python scripts/update_stock_from_yandex.py
 
+      - name: Build lightweight stock.json for the site
+        # Сайт читает лёгкую «шпаргалку» вместо Excel (V41_151). Сбой или
+        # зависание конвертера НЕ останавливает обновление stock.xlsx, но
+        # битая/устаревшая шпаргалка УДАЛЯЕТСЯ — иначе она перекрывала бы
+        # свежий Excel (у сайта автоматический фолбэк на чтение stock.xlsx).
+        # Шаг идёт и при неизменном xlsx: так json восстанавливается после
+        # сбоя, а идемпотентный конвертер лишних правок не делает.
+        shell: bash
+        run: |
+          if ! timeout 120s python scripts/stock_to_json.py; then
+            echo "::warning::stock.json generation failed; site will fall back to XLSX"
+            rm -f -- stock-data/stock.json
+          fi
+
       - name: Commit and push a changed stock workbook
         id: commit
-        if: steps.stock.outputs.changed == 'true'
         shell: bash
         env:
           TARGET_BRANCH: ${{ github.ref_name }}
@@ -70,6 +84,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -- stock-data/stock.xlsx
+          if [ -f stock-data/stock.json ]; then
+            git add -- stock-data/stock.json
+          else
+            # конвертер удалил битую шпаргалку — удаление тоже должно уехать
+            git rm --ignore-unmatch --quiet -- stock-data/stock.json || true
+          fi
 
           if git diff --cached --quiet; then
             echo "pushed=false" >> "$GITHUB_OUTPUT"
