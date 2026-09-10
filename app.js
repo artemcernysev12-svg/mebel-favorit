@@ -6119,6 +6119,9 @@ function renderMulti(it){
   let curTvExec = '';
   let curFilling = '';
   let curDrawers = '';
+  // V41_147: активная система вкладок текущего размера — чтобы при смене размера
+  // удержать выбранное исполнение (labelOf: метка варианта, cur: выбранная вкладка)
+  let sizeKeepTab = null;
 
   function getCurrentBucket(){
     return sizeBuckets.get(curSizeKey) || sizes[0] || { key:'', label:'Размер', items:[it] };
@@ -6421,7 +6424,9 @@ function renderMulti(it){
       const bedAttrExec = v => {
         const t = low(v && v.t);
         if(low(battr(v,'Наличие подъемного механизма')) === 'есть' || t.includes('подъемн')) return 'С подъёмником';
-        if(low(battr(v,'Что есть у кровати')).includes('ящик') || t.includes('ящик')) return 'С ящиками';
+        // V41_147: у Ростока ящики лежат в атрибуте «Кол-во ящиков» (КД-1.8:
+        // версия без подъёмника — с 2 ящиками, подпись «Обычная» вводила в заблуждение)
+        if(low(battr(v,'Что есть у кровати')).includes('ящик') || Number(battr(v,'Кол-во ящиков'))>0 || Number(battr(v,'Количество ящиков'))>0 || t.includes('ящик')) return 'С ящиками';
         if(low(battr(v,'Каркас')).includes('обивк') || t.includes('мягк')) return 'Мягкое изголовье';
         return '';
       };
@@ -6579,6 +6584,21 @@ function renderMulti(it){
     // 03.09: цветовые вкладки остаются ТОЛЬКО у диванов (их не трогаем) — у всех
     // остальных категорий цвета показываются сеткой, как у ТВ-тумб и Кроватей.
     const hasColorTabs = isSofaHere && !hasTvExecTabs && !hasMirrorTabs && !hasFillingTabs && !hasDrawerTabs && options.length > 2 && colors.length > 1 && hasRepeatedColorVariants;
+
+    // V41_147: запоминаем активную систему вкладок — при смене размера selector
+    // подбирает вариант ИЗ ТОЙ ЖЕ вкладки (кровати: «С подъёмником» не должна
+    // превращаться в «Обычную»). Метки атрибутные и работают на вариантах любого
+    // размера; если в новом размере такой вкладки нет — сработает прежний фолбэк.
+    sizeKeepTab = null;
+    if(hasTvExecTabs && typeof tvExecOf === 'function'){
+      sizeKeepTab = { labelOf: tvExecOf, cur: () => curTvExec };
+    } else if(hasMirrorTabs){
+      sizeKeepTab = { labelOf: v => mirrorLabel(v, options), cur: () => curMirror };
+    } else if(hasFillingTabs){
+      sizeKeepTab = { labelOf: v => fillingLabel(v), cur: () => curFilling };
+    } else if(hasDrawerTabs){
+      sizeKeepTab = { labelOf: v => drawersLabel(v), cur: () => curDrawers };
+    }
 
     if(hasTvExecTabs){
       const currentExec = tvExecOf ? tvExecOf(it) : '';
@@ -6747,6 +6767,20 @@ function renderMulti(it){
         const sameHood = items.filter(v => kitchenExecFlags(v, items).hood === myHood);
         if(sameHood.length) items = sameHood;
       }
+    } else if(sizeKeepTab && typeof sizeKeepTab.labelOf === 'function'){
+      // V41_147: остальные категории с вкладками (кровати, ТВ «Металл», шкафы,
+      // ящики, зеркала, наполнение) — держим ВЫБРАННУЮ вкладку, а не вкладку
+      // товара: человек мог кликнуть вкладку и сразу сменить размер.
+      try{
+        const want = normTokenLocal(String(sizeKeepTab.cur() || sizeKeepTab.labelOf(it) || ''));
+        if(want){
+          const sameTab = items.filter(v => {
+            try{ return normTokenLocal(String(sizeKeepTab.labelOf(v) || '')) === want; }
+            catch(_){ return false; }
+          });
+          if(sameTab.length) items = sameTab;
+        }
+      }catch(_){}
     }
     const target = chooseTarget(items, colorKey(it));
     if(target && String(target.id) !== String(it.id)) navOpen(target.id);

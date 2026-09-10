@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-09-10 11:31">
+<yml_catalog date="2026-09-10 14:44">
   <shop>
     <name>Мебель Фаворит</name>
     <company>Мебель Фаворит</company>
@@ -36823,8 +36823,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhni/Era/Era/1.8m/7963384423/02.webp</picture>
       <vendor>Эра</vendor>
       <name>Кухня Эра 1.8 м</name>
-      <description>Кухня Эра 1.8 м. Фабрика Эра. Размер 181х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
-      <param name="Ширина">181 см</param>
+      <description>Кухня Эра 1.8 м. Фабрика Эра. Размер 180х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">180 см</param>
       <param name="Высота">200 см</param>
       <param name="Цвет">Коричневый</param>
     </offer>
@@ -37273,8 +37273,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhni/Era/Malva/1.6m/7963020879/02.webp</picture>
       <vendor>Эра</vendor>
       <name>Кухня Мальва 1.6 м</name>
-      <description>Кухня Мальва 1.6 м. Фабрика Эра. Размер 161х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
-      <param name="Ширина">161 см</param>
+      <description>Кухня Мальва 1.6 м. Фабрика Эра. Размер 160х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">160 см</param>
       <param name="Высота">200 см</param>
       <param name="Цвет">Коричневый</param>
     </offer>
@@ -37309,8 +37309,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhni/Era/Malva/2.0m/7963014026/02.webp</picture>
       <vendor>Эра</vendor>
       <name>Кухня Мальва 2.0 м</name>
-      <description>Кухня Мальва 2.0 м. Фабрика Эра. Размер 201х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
-      <param name="Ширина">201 см</param>
+      <description>Кухня Мальва 2.0 м. Фабрика Эра. Размер 200х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">200 см</param>
       <param name="Высота">200 см</param>
       <param name="Цвет">Коричневый</param>
     </offer>
@@ -37484,8 +37484,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhni/Era/Brauni/1.6m/7931038546/02.webp</picture>
       <vendor>Эра</vendor>
       <name>Кухня Брауни 1.6 м</name>
-      <description>Кухня Брауни 1.6 м. Фабрика Эра. Размер 161х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
-      <param name="Ширина">161 см</param>
+      <description>Кухня Брауни 1.6 м. Фабрика Эра. Размер 160х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">160 см</param>
       <param name="Высота">200 см</param>
       <param name="Цвет">Золотой</param>
     </offer>
@@ -37525,8 +37525,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhni/Era/Brauni/2.0m/7931605575/02.webp</picture>
       <vendor>Эра</vendor>
       <name>Кухня Брауни 2.0 м</name>
-      <description>Кухня Брауни 2.0 м. Фабрика Эра. Размер 201х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
-      <param name="Ширина">201 см</param>
+      <description>Кухня Брауни 2.0 м. Фабрика Эра. Размер 200х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">200 см</param>
       <param name="Высота">200 см</param>
       <param name="Цвет">Золотой</param>
     </offer>
@@ -37584,8 +37584,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kukhni/Era/Brauni/3.0m/7931340959/03.webp</picture>
       <vendor>Эра</vendor>
       <name>Кухня Брауни 3.0 м</name>
-      <description>Кухня Брауни 3.0 м. Фабрика Эра. Размер 301х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
-      <param name="Ширина">301 см</param>
+      <description>Кухня Брауни 3.0 м. Фабрика Эра. Размер 300х200 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">300 см</param>
       <param name="Высота">200 см</param>
       <param name="Цвет">Золотой</param>
     </offer>
@@ -47127,7 +47127,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8219350057" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-odnospalnaya-kd-1-8pm-90x200-8219350057/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-odnospalnaya-kd-1-8-90x200-8219350057/</url>
       <price>10385</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -47135,14 +47135,14 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Rostok/kd-1.8/s%20PM/90x200/Venge%20-%20dub%20molochnyy/8219350057/02.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>06044-00015609</vendorCode>
-      <name>Кровать односпальная КД-1.8ПМ 90×200</name>
-      <description>Кровать односпальная КД-1.8ПМ 90×200. Фабрика Росток. Размер 95х70 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать односпальная КД-1.8 90×200</name>
+      <description>Кровать односпальная КД-1.8 90×200. Фабрика Росток. Размер 95х70 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">95 см</param>
       <param name="Высота">70 см</param>
       <param name="Цвет">Коричневый\Бежевый</param>
     </offer>
     <offer id="8219772407" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-odnospalnaya-kd-1-8pm-90x200-8219772407/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-odnospalnaya-kd-1-8-90x200-8219772407/</url>
       <price>11108</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -47151,14 +47151,14 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Rostok/kd-1.8/s%20PM/90x200/Dub%20barrik/8219772407/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>06044-00028771</vendorCode>
-      <name>Кровать односпальная КД-1.8ПМ 90×200</name>
-      <description>Кровать односпальная КД-1.8ПМ 90×200. Фабрика Росток. Размер 95х70 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать односпальная КД-1.8 90×200</name>
+      <description>Кровать односпальная КД-1.8 90×200. Фабрика Росток. Размер 95х70 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">95 см</param>
       <param name="Высота">70 см</param>
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8218873018" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-odnospalnaya-kd-1-8pm-90x200-8218873018/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-odnospalnaya-kd-1-8-90x200-8218873018/</url>
       <price>11108</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -47167,8 +47167,8 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Rostok/kd-1.8/s%20PM/90x200/Dub%20kraft%20belyy/8218873018/03.webp</picture>
       <vendor>Росток</vendor>
       <vendorCode>06044-00032670</vendorCode>
-      <name>Кровать односпальная КД-1.8ПМ 90×200</name>
-      <description>Кровать односпальная КД-1.8ПМ 90×200. Фабрика Росток. Размер 95х70 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <name>Кровать односпальная КД-1.8 90×200</name>
+      <description>Кровать односпальная КД-1.8 90×200. Фабрика Росток. Размер 95х70 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">95 см</param>
       <param name="Высота">70 см</param>
       <param name="Цвет">Белый</param>
