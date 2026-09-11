@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-09-11 18:16">
+<yml_catalog date="2026-09-11 19:13">
   <shop>
     <name>Мебель Фаворит</name>
     <company>Мебель Фаворит</company>
@@ -9501,7 +9501,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8123696438" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-adel-160x200-8123696438/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-adel-8123696438/</url>
       <price>33598</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9517,7 +9517,7 @@
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="8123776341" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-afina-160x200-8123776341/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-afina-8123776341/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9532,7 +9532,7 @@
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="8123004260" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-meleta-160x200-8123004260/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-meleta-8123004260/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9548,7 +9548,7 @@
       <param name="Цвет">Голубой</param>
     </offer>
     <offer id="8123315520" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-meleta-2-160x200-8123315520/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-meleta-2-8123315520/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9564,7 +9564,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8123876872" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-neta-160x200-8123876872/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-neta-8123876872/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9580,7 +9580,7 @@
       <param name="Цвет">Зелёный</param>
     </offer>
     <offer id="8123104211" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-polutornaya-neta-2-120x200-8123104211/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-polutornaya-neta-2-8123104211/</url>
       <price>28843</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9596,7 +9596,7 @@
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="8123833560" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-neta-2-160x200-8123833560/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-neta-2-8123833560/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9612,7 +9612,7 @@
       <param name="Цвет">Серый</param>
     </offer>
     <offer id="8122999042" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-reya-160x200-8122999042/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-reya-8122999042/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9628,7 +9628,7 @@
       <param name="Цвет">Синий</param>
     </offer>
     <offer id="8123579983" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-sara-160x200-8123579983/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-sara-8123579983/</url>
       <price>25832</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9644,7 +9644,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8123161536" available="true">
-      <url>https://мебель-фаворит.рф/krovati/krovat-polutornaya-sara-120x200-8123161536/</url>
+      <url>https://мебель-фаворит.рф/krovati/krovat-polutornaya-sara-8123161536/</url>
       <price>24247</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9660,7 +9660,7 @@
       <param name="Цвет">Бежевый</param>
     </offer>
     <offer id="8123512767" available="true">
-      <url>https://мебель-фаворит.рф/krovati/detskaya-krovat-odnospalnaya-teddi-90x200-8123512767/</url>
+      <url>https://мебель-фаворит.рф/krovati/detskaya-krovat-odnospalnaya-teddi-8123512767/</url>
       <price>24247</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
@@ -9678,7 +9678,7 @@
       <param name="Цвет">Голубой</param>
     </offer>
     <offer id="8123125658" available="true">
-      <url>https://мебель-фаворит.рф/krovati/detskaya-krovat-odnospalnaya-teddi-p-90x200-8123125658/</url>
+      <url>https://мебель-фаворит.рф/krovati/detskaya-krovat-odnospalnaya-teddi-p-8123125658/</url>
       <price>26625</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>

@@ -199,7 +199,7 @@
 /* V41_115 (TBT): каталог парсится в Web Worker — главный поток не блокируется 2.2МБ.
    Готово -> window.CATALOG + событие catalog-ready. Фолбэк: обычный <script defer>. */
 (function(){
-  var URL_='catalog.js?v=ca198630';
+  var URL_='catalog.js?v=77a678af';
   var settled=false;
   function ready(arr,meta){
     if(settled) return; settled=true;
@@ -228,8 +228,8 @@
 </script>
 <!-- V41_146: сайтовые скрипты с defer — HTML разбирается без остановок,
      раньше парсер стоял на 718 КБ JS в середине страницы. -->
-<script src="/chpu-routes.js?v=b3d5e2a3" defer></script>
-<script src="app.js?v=c81a50aa" defer></script>
+<script src="/chpu-routes.js?v=a13f04a5" defer></script>
+<script src="app.js?v=8a1960e3" defer></script>
 <link rel="stylesheet" href="styles.css?v=f1d35557">
 
 
@@ -888,6 +888,6 @@
      Имя цели должно совпадать с настроенным в кабинете Метрики. --><!-- V41_146: карта, корзина, доставка, отзывы, заявка, фокус-ловушка и ленивые
      загрузчики вынесены в site-ui.js — общий кэшируемый файл вместо инлайна
      в каждой сгенерированной странице. -->
-<script src="site-ui.js?v=bb1fd478" defer></script>
+<script src="site-ui.js?v=ec1708cc" defer></script>
 </body>
 </html>
