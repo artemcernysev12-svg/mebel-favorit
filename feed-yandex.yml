@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-09-14 10:48">
+<yml_catalog date="2026-09-19 12:23">
   <shop>
     <name>Мебель Фаворит</name>
     <company>Мебель Фаворит</company>
@@ -4204,6 +4204,42 @@
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Бежевый\Белый</param>
     </offer>
+    <offer id="8274419829" available="true">
+      <url>https://мебель-фаворит.рф/tv-tumby/tumba-tv-milena-2500-8274419829/</url>
+      <price>14833</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>24</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Veles/Milena/8274419829/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Veles/Milena/8274419829/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Veles/Milena/8274419829/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00048523</vendorCode>
+      <name>Тумба ТВ Милена 2500</name>
+      <description>Тумба ТВ Милена 2500. Фабрика Велес. Размер 250х42х50 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">250 см</param>
+      <param name="Глубина">42 см</param>
+      <param name="Высота">50 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8251102155" available="true">
+      <url>https://мебель-фаворит.рф/tv-tumby/tumba-tv-milena-2000-8251102155/</url>
+      <price>12183</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>24</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Veles/Milena/8251102155/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Veles/Milena/8251102155/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Veles/Milena/8251102155/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049146</vendorCode>
+      <name>Тумба ТВ Милена 2000</name>
+      <description>Тумба ТВ Милена 2000. Фабрика Велес. Размер 200х42х50 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">200 см</param>
+      <param name="Глубина">42 см</param>
+      <param name="Высота">50 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
     <offer id="7739241089" available="true">
       <url>https://мебель-фаворит.рф/tv-tumby/tumba-tv-siciliya-7739241089/</url>
       <price>10242</price>
@@ -5637,6 +5673,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155054029/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155054029/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155054029/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155054029/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Тумба навесная Норд</name>
       <description>Тумба навесная Норд. Фабрика Миф. Размер 80х34х33 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
@@ -5656,6 +5693,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155791338/03.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155791338/04.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155791338/05.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155791338/06.webp</picture>
       <vendor>Миф</vendor>
       <name>Тумба навесная Норд</name>
       <description>Тумба навесная Норд. Фабрика Миф. Размер 80х34х33 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
@@ -5672,6 +5710,7 @@
       <categoryId>24</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155672953/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155672953/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155672953/03.webp</picture>
       <vendor>Миф</vendor>
       <name>Тумба навесная Норд</name>
       <description>Тумба навесная Норд. Фабрика Миф. Размер 80х34х33 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
@@ -5689,6 +5728,7 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155077006/01.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155077006/02.webp</picture>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155077006/03.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby%20pod%20televizor/Mif/Nord/Tumba%20navesnaya/8155077006/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Тумба навесная Норд</name>
       <description>Тумба навесная Норд. Фабрика Миф. Размер 80х34х33 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
@@ -7050,6 +7090,84 @@
       <description>Кровать односпальная Милана 80×200. Фабрика Велес. Размер 83х70 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">83 см</param>
       <param name="Высота">70 см</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8345137464" available="true">
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-milena-140h200-8345137464/</url>
+      <price>14167</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>9</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/140x200/8345137464/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/140x200/8345137464/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/140x200/8345137464/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00048524</vendorCode>
+      <name>Кровать двуспальная Милена 140х200</name>
+      <description>Кровать двуспальная Милена 140х200. Фабрика Велес. Размер 156х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">156 см</param>
+      <param name="Высота">102 см</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8449376350" available="true">
+      <url>https://мебель-фаворит.рф/krovati/krovat-odnospalnaya-milena-80h200-8449376350/</url>
+      <price>13733</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>9</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/80x200/8449376350/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/80x200/8449376350/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/80x200/8449376350/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Кровать односпальная Милена 80х200</name>
+      <description>Кровать односпальная Милена 80х200. Фабрика Велес. Размер 83х72 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">83 см</param>
+      <param name="Высота">72 см</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8314326551" available="true">
+      <url>https://мебель-фаворит.рф/krovati/krovat-odnospalnaya-milena-90h200-8314326551/</url>
+      <price>6617</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>9</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/90x200/8314326551/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/90x200/8314326551/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/90x200/8314326551/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Кровать односпальная Милена 90х200</name>
+      <description>Кровать односпальная Милена 90х200. Фабрика Велес. Размер 105х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">105 см</param>
+      <param name="Высота">102 см</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8251863360" available="true">
+      <url>https://мебель-фаворит.рф/krovati/krovat-polutornaya-milena-120h200-8251863360/</url>
+      <price>13433</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>9</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/120x200/8251863360/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/120x200/8251863360/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/120x200/8251863360/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00048833</vendorCode>
+      <name>Кровать полуторная Милена 120х200</name>
+      <description>Кровать полуторная Милена 120х200. Фабрика Велес. Размер 136х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">136 см</param>
+      <param name="Высота">102 см</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8416218571" available="true">
+      <url>https://мебель-фаворит.рф/krovati/krovat-dvuspalnaya-milena-160h200-8416218571/</url>
+      <price>14900</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>9</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/160x200/8416218571/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/160x200/8416218571/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Krovati/Veles/Milena/160x200/8416218571/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00048525</vendorCode>
+      <name>Кровать двуспальная Милена 160х200</name>
+      <description>Кровать двуспальная Милена 160х200. Фабрика Велес. Размер 176х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">176 см</param>
+      <param name="Высота">102 см</param>
       <param name="Цвет">Бежевый\Белый</param>
     </offer>
     <offer id="7995300140" available="true">
@@ -11461,6 +11579,160 @@
       <param name="Материал">ЛДСП</param>
       <param name="Цвет">Бежевый\Белый</param>
     </offer>
+    <offer id="8349718522" available="true">
+      <url>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-milena-n1-modulnaya-veles-8349718522/</url>
+      <price>90484</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>19</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Milena/Vzroslaya/8349718522/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Спальня Милена №1 модульная (Велес)</name>
+      <description>Спальня Милена №1 модульная (Велес). Фабрика Велес. Размер 176х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">176 см</param>
+      <param name="Высота">102 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8304357472" available="true">
+      <url>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-milena-n2-modulnaya-veles-8304357472/</url>
+      <price>93701</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>19</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Milena/Vzroslaya/8304357472/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Спальня Милена №2 модульная (Велес)</name>
+      <description>Спальня Милена №2 модульная (Велес). Фабрика Велес. Размер 176х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">176 см</param>
+      <param name="Высота">102 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8344318585" available="true">
+      <url>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-milena-n3-modulnaya-veles-8344318585/</url>
+      <price>101833</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>19</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Milena/Vzroslaya/8344318585/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Спальня Милена №3 модульная (Велес)</name>
+      <description>Спальня Милена №3 модульная (Велес). Фабрика Велес. Размер 176х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">176 см</param>
+      <param name="Высота">102 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8402932689" available="true">
+      <url>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-milena-n4-modulnaya-veles-8402932689/</url>
+      <price>68201</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>19</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Milena/Vzroslaya/8402932689/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Спальня Милена №4 модульная (Велес)</name>
+      <description>Спальня Милена №4 модульная (Велес). Фабрика Велес. Размер 176х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">176 см</param>
+      <param name="Высота">102 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8251077263" available="true">
+      <url>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-milena-n5-modulnaya-veles-8251077263/</url>
+      <price>78233</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>19</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Milena/Vzroslaya/8251077263/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Спальня Милена №5 модульная (Велес)</name>
+      <description>Спальня Милена №5 модульная (Велес). Фабрика Велес. Размер 176х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">176 см</param>
+      <param name="Высота">102 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8302764447" available="true">
+      <url>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-milena-n6-modulnaya-veles-8302764447/</url>
+      <price>78135</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>19</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Milena/Vzroslaya/8302764447/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Спальня Милена №6 модульная (Велес)</name>
+      <description>Спальня Милена №6 модульная (Велес). Фабрика Велес. Размер 176х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">176 см</param>
+      <param name="Высота">102 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8374193038" available="true">
+      <url>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-milena-n7-modulnaya-veles-8374193038/</url>
+      <price>108283</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>19</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Milena/Vzroslaya/8374193038/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Спальня Милена №7 модульная (Велес)</name>
+      <description>Спальня Милена №7 модульная (Велес). Фабрика Велес. Размер 136х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">136 см</param>
+      <param name="Высота">102 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8276297022" available="true">
+      <url>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-milena-n8-modulnaya-veles-8276297022/</url>
+      <price>54801</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>19</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Milena/Vzroslaya/8276297022/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Спальня Милена №8 модульная (Велес)</name>
+      <description>Спальня Милена №8 модульная (Велес). Фабрика Велес. Размер 156х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">156 см</param>
+      <param name="Высота">102 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8367659084" available="true">
+      <url>https://мебель-фаворит.рф/spalnye-garnitury/molodezhnaya-spalnya-milena-n1-modulnaya-veles-8367659084/</url>
+      <price>66399</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>19</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Milena/Molodezhnaya/8367659084/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Молодёжная спальня Милена №1 модульная (Велес)</name>
+      <description>Молодёжная спальня Милена №1 модульная (Велес). Фабрика Велес. Размер 83х72 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">83 см</param>
+      <param name="Высота">72 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8377340387" available="true">
+      <url>https://мебель-фаворит.рф/spalnye-garnitury/molodezhnaya-spalnya-milena-n2-modulnaya-veles-8377340387/</url>
+      <price>68333</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>19</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Milena/Molodezhnaya/8377340387/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Молодёжная спальня Милена №2 модульная (Велес)</name>
+      <description>Молодёжная спальня Милена №2 модульная (Велес). Фабрика Велес. Размер 83х72 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">83 см</param>
+      <param name="Высота">72 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8419601963" available="true">
+      <url>https://мебель-фаворит.рф/spalnye-garnitury/molodezhnaya-spalnya-milena-n3-modulnaya-veles-8419601963/</url>
+      <price>61884</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>19</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Spalnye%20garnitury/Veles/Milena/Molodezhnaya/8419601963/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Молодёжная спальня Милена №3 модульная (Велес)</name>
+      <description>Молодёжная спальня Милена №3 модульная (Велес). Фабрика Велес. Размер 105х102 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">105 см</param>
+      <param name="Высота">102 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
     <offer id="7739789546" available="true">
       <url>https://мебель-фаворит.рф/spalnye-garnitury/spalnya-siciliya-modulnaya-veles-7739789546/</url>
       <price>76854</price>
@@ -12239,6 +12511,25 @@
       <param name="Ширина">49 см</param>
       <param name="Глубина">46 см</param>
       <param name="Высота">45 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Ящики | Полки</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8421099487" available="true">
+      <url>https://мебель-фаворит.рф/prikrovatnye-tumby/tumba-prikrovatnaya-milena-8421099487/</url>
+      <price>4017</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>16</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Veles/Milena/8421099487/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Veles/Milena/8421099487/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikrovatnye%20tumby/Veles/Milena/8421099487/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049013</vendorCode>
+      <name>Тумба прикроватная Милена</name>
+      <description>Тумба прикроватная Милена. Фабрика Велес. Размер 50х42х44 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">50 см</param>
+      <param name="Глубина">42 см</param>
+      <param name="Высота">44 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Ящики | Полки</param>
       <param name="Цвет">Бежевый\Белый</param>
@@ -14256,6 +14547,335 @@
       <param name="Ширина">30 см</param>
       <param name="Глубина">60 см</param>
       <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8326150817" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-milena-8326150817/</url>
+      <price>32600</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/4-kh%20stvorchatyy/8326150817/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/4-kh%20stvorchatyy/8326150817/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/4-kh%20stvorchatyy/8326150817/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049001</vendorCode>
+      <name>Шкаф 4-х створчатый Милена</name>
+      <description>Шкаф 4-х створчатый Милена. Фабрика Велес. Размер 200х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">200 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8314706503" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-3-h-stvorchatyy-milena-s-zerkalom-8314706503/</url>
+      <price>28750</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/3-kh%20stvorchatyy%20s%20Zerkalom/8314706503/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/3-kh%20stvorchatyy%20s%20Zerkalom/8314706503/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/3-kh%20stvorchatyy%20s%20Zerkalom/8314706503/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049088</vendorCode>
+      <name>Шкаф 3-х створчатый Милена с зеркалом</name>
+      <description>Шкаф 3-х створчатый Милена с зеркалом. Фабрика Велес. Размер 150х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8395104910" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-milena-s-2-yaschikami-8395104910/</url>
+      <price>22083</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/2-kh%20stvorchatyy%20s%202%20Yaschikami/8395104910/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/2-kh%20stvorchatyy%20s%202%20Yaschikami/8395104910/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/2-kh%20stvorchatyy%20s%202%20Yaschikami/8395104910/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049003</vendorCode>
+      <name>Шкаф 2-х створчатый Милена с 2 ящиками</name>
+      <description>Шкаф 2-х створчатый Милена с 2 ящиками. Фабрика Велес. Размер 100х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">100 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8301996952" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-milena-s-polkami-i-shtangoy-8301996952/</url>
+      <price>17517</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/2-kh%20stvorchatyy%20s%20Polkami%20i%20Shtangoy/8301996952/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/2-kh%20stvorchatyy%20s%20Polkami%20i%20Shtangoy/8301996952/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/2-kh%20stvorchatyy%20s%20Polkami%20i%20Shtangoy/8301996952/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049002</vendorCode>
+      <name>Шкаф 2-х створчатый Милена с полками и штангой</name>
+      <description>Шкаф 2-х створчатый Милена с полками и штангой. Фабрика Велес. Размер 100х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">100 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8304003829" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-milena-s-polkami-i-shtangoy-8304003829/</url>
+      <price>20467</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/4-kh%20stvorchatyy%20s%20Polkami%20i%20Shtangoy/8304003829/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/4-kh%20stvorchatyy%20s%20Polkami%20i%20Shtangoy/8304003829/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/4-kh%20stvorchatyy%20s%20Polkami%20i%20Shtangoy/8304003829/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049004</vendorCode>
+      <name>Шкаф 4-х створчатый Милена с полками и штангой</name>
+      <description>Шкаф 4-х створчатый Милена с полками и штангой. Фабрика Велес. Размер 100х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">100 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8447933246" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-4-h-stvorchatyy-milena-so-shtangoy-8447933246/</url>
+      <price>16500</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/4-kh%20stvorchatyy%20so%20Shtangoy/8447933246/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/4-kh%20stvorchatyy%20so%20Shtangoy/8447933246/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/4-kh%20stvorchatyy%20so%20Shtangoy/8447933246/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00048832</vendorCode>
+      <name>Шкаф 4-х створчатый Милена со штангой</name>
+      <description>Шкаф 4-х створчатый Милена со штангой. Фабрика Велес. Размер 100х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">100 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8479354351" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-uglovoy-milena-8479354351/</url>
+      <price>13900</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Uglovoy/8479354351/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Uglovoy/8479354351/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Uglovoy/8479354351/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049005</vendorCode>
+      <name>Шкаф угловой Милена</name>
+      <description>Шкаф угловой Милена. Фабрика Велес. Размер 80х80х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">80 см</param>
+      <param name="Глубина">80 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Угловой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8448018228" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-milena-1350-8448018228/</url>
+      <price>10000</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/2-kh%20stvorchatyy%201350/8448018228/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/2-kh%20stvorchatyy%201350/8448018228/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/2-kh%20stvorchatyy%201350/8448018228/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Шкаф 2-х створчатый Милена 1350</name>
+      <description>Шкаф 2-х створчатый Милена 1350. Фабрика Велес. Размер 100х52х135 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">100 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">135 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8402892046" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-2-h-stvorchatyy-milena-950-8402892046/</url>
+      <price>7417</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/2-kh%20stvorchatyy%20950/8402892046/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/2-kh%20stvorchatyy%20950/8402892046/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/2-kh%20stvorchatyy%20950/8402892046/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Шкаф 2-х створчатый Милена 950</name>
+      <description>Шкаф 2-х створчатый Милена 950. Фабрика Велес. Размер 100х52х95 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">100 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">95 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8419382789" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-1-stvorchatyy-milena-s-nishey-8419382789/</url>
+      <price>14467</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Odnostvorchatyy%20s%20Nishey/8419382789/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Odnostvorchatyy%20s%20Nishey/8419382789/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Odnostvorchatyy%20s%20Nishey/8419382789/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Шкаф 1-створчатый Милена с нишей</name>
+      <description>Шкаф 1-створчатый Милена с нишей. Фабрика Велес. Размер 75х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">75 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8460837062" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/shkaf-milena-3-m-modulnyy-veles-8460837062/</url>
+      <price>68917</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Veles/Milena/8460837062/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Шкаф Милена 3 м модульный (Велес)</name>
+      <description>Шкаф Милена 3 м модульный (Велес). Фабрика Велес. Размер 300х53х260 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">300 см</param>
+      <param name="Глубина">53 см</param>
+      <param name="Высота">260 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8251385316" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/servant-milena-8251385316/</url>
+      <price>29367</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Servant/8251385316/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Servant/8251385316/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Servant/8251385316/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049071</vendorCode>
+      <name>Сервант Милена</name>
+      <description>Сервант Милена. Фабрика Велес. Размер 100х42х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">100 см</param>
+      <param name="Глубина">42 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП | Стекло</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8367284370" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/penal-milena-s-polkami-i-shtangoy-8367284370/</url>
+      <price>10450</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Penal/8367284370/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Penal/8367284370/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Penal/8367284370/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Пенал Милена с полками и штангой</name>
+      <description>Пенал Милена с полками и штангой. Фабрика Велес. Размер 50х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">50 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8341804602" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/penal-nadstroyka-milena-8341804602/</url>
+      <price>11833</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Penal%20nadstroyka/8341804602/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Penal%20nadstroyka/8341804602/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Penal%20nadstroyka/8341804602/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Пенал-надстройка Милена</name>
+      <description>Пенал-надстройка Милена. Фабрика Велес. Размер 50х42х135 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">50 см</param>
+      <param name="Глубина">42 см</param>
+      <param name="Высота">135 см</param>
+      <param name="Материал">ЛДСП | Стекло</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8481014204" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/antresol-2-h-stvorchataya-milena-8481014204/</url>
+      <price>4150</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Antresol/2-kh%20stvorchataya/8481014204/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Antresol/2-kh%20stvorchataya/8481014204/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Antresol/2-kh%20stvorchataya/8481014204/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Антресоль 2-х створчатая Милена</name>
+      <description>Антресоль 2-х створчатая Милена. Фабрика Велес. Размер 100х52х40 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">100 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">40 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8276093081" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/antresol-1-stvorchataya-milena-8276093081/</url>
+      <price>3233</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Antresol/1-stvorchataya/8276093081/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Antresol/1-stvorchataya/8276093081/02.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Антресоль 1-створчатая Милена</name>
+      <description>Антресоль 1-створчатая Милена. Фабрика Велес. Размер 50х52х40 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">50 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">40 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Прямой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8264280181" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/antresol-uglovaya-milena-8264280181/</url>
+      <price>3950</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Antresol/Uglovaya/8264280181/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Antresol/Uglovaya/8264280181/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Antresol/Uglovaya/8264280181/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Антресоль угловая Милена</name>
+      <description>Антресоль угловая Милена. Фабрика Велес. Размер 80х80х40 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">80 см</param>
+      <param name="Глубина">80 см</param>
+      <param name="Высота">40 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Форма">Угловой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8375096225" available="true">
+      <url>https://мебель-фаворит.рф/shkafy/antresol-1-stvorchataya-milena-dlya-nadstroyki-8375096225/</url>
+      <price>2800</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>25</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Antresol/1-stvorchataya%20dlya%20nadstroyki/8375096225/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Antresol/1-stvorchataya%20dlya%20nadstroyki/8375096225/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Antresol/1-stvorchataya%20dlya%20nadstroyki/8375096225/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Антресоль 1-створчатая Милена для надстройки</name>
+      <description>Антресоль 1-створчатая Милена для надстройки. Фабрика Велес. Размер 50х42х40 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">50 см</param>
+      <param name="Глубина">42 см</param>
+      <param name="Высота">40 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Форма">Прямой</param>
       <param name="Цвет">Бежевый\Белый</param>
@@ -27660,6 +28280,81 @@
       <param name="Особенности">Ящики | Полки</param>
       <param name="Цвет">Бежевый</param>
     </offer>
+    <offer id="8318375820" available="true">
+      <url>https://мебель-фаворит.рф/komody/komod-milena-4-dveri-s-nishey-8318375820/</url>
+      <price>15183</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>5</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/4%20dveri%20s%20nishey/8318375820/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/4%20dveri%20s%20nishey/8318375820/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/4%20dveri%20s%20nishey/8318375820/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Комод Милена 4 двери с нишей</name>
+      <description>Комод Милена 4 двери с нишей. Фабрика Велес. Размер 200х53х85 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">200 см</param>
+      <param name="Глубина">53 см</param>
+      <param name="Высота">85 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Полки</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8479139839" available="true">
+      <url>https://мебель-фаворит.рф/komody/komod-milena-3-dveri-8479139839/</url>
+      <price>13233</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>5</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/3%20dveri/8479139839/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/3%20dveri/8479139839/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/3%20dveri/8479139839/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00048522</vendorCode>
+      <name>Комод Милена 3 двери</name>
+      <description>Комод Милена 3 двери. Фабрика Велес. Размер 150х53х85 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">53 см</param>
+      <param name="Высота">85 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Полки</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8418223146" available="true">
+      <url>https://мебель-фаворит.рф/komody/komod-milena-2-dveri-8418223146/</url>
+      <price>10583</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>5</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/2%20dveri/8418223146/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/2%20dveri/8418223146/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/2%20dveri/8418223146/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00048521</vendorCode>
+      <name>Комод Милена 2 двери</name>
+      <description>Комод Милена 2 двери. Фабрика Велес. Размер 100х53х85 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">100 см</param>
+      <param name="Глубина">53 см</param>
+      <param name="Высота">85 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Полки</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8373863165" available="true">
+      <url>https://мебель-фаворит.рф/komody/komod-milena-4-yaschika-8373863165/</url>
+      <price>11867</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>5</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/4%20yaschika/8373863165/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/4%20yaschika/8373863165/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/4%20yaschika/8373863165/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049008</vendorCode>
+      <name>Комод Милена 4 ящика</name>
+      <description>Комод Милена 4 ящика. Фабрика Велес. Размер 80х46х93 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">80 см</param>
+      <param name="Глубина">46 см</param>
+      <param name="Высота">93 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Ящики</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
     <offer id="7995515742" available="true">
       <url>https://мебель-фаворит.рф/komody/komod-siciliya-4-yaschika-7995515742/</url>
       <price>11048</price>
@@ -30684,6 +31379,61 @@
       <param name="Особенности">Полки</param>
       <param name="Цвет">Бежевый</param>
     </offer>
+    <offer id="8421513893" available="true">
+      <url>https://мебель-фаворит.рф/tumby-obuvnicy/tumba-2-stv-milena-s-yaschikom-8421513893/</url>
+      <price>9500</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>23</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/2%20dveri%201%20yaschik/8421513893/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/2%20dveri%201%20yaschik/8421513893/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/2%20dveri%201%20yaschik/8421513893/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Тумба 2-ств Милена с ящиком</name>
+      <description>Тумба 2-ств Милена с ящиком. Фабрика Велес. Размер 100х53х85 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">100 см</param>
+      <param name="Глубина">53 см</param>
+      <param name="Высота">85 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Ящики | Полки</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8481067489" available="true">
+      <url>https://мебель-фаворит.рф/tumby-obuvnicy/tumba-1-stv-milena-8481067489/</url>
+      <price>4667</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>23</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/1%20dver/8481067489/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/1%20dver/8481067489/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Komody%20i%20tumby/Veles/Milena/1%20dver/8481067489/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Тумба 1-ств Милена</name>
+      <description>Тумба 1-ств Милена. Фабрика Велес. Размер 80х46х48 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">80 см</param>
+      <param name="Глубина">46 см</param>
+      <param name="Высота">48 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Полки</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8327738839" available="true">
+      <url>https://мебель-фаворит.рф/tumby-obuvnicy/konsol-s-yaschikom-milena-8327738839/</url>
+      <price>5300</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>23</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby/Veles/Milena/8327738839/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby/Veles/Milena/8327738839/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Tumby/Veles/Milena/8327738839/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049218</vendorCode>
+      <name>Консоль с ящиком Милена</name>
+      <description>Консоль с ящиком Милена. Фабрика Велес. Размер 100х46х16 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">100 см</param>
+      <param name="Глубина">46 см</param>
+      <param name="Высота">16 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Ящики</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
     <offer id="7995021581" available="true">
       <url>https://мебель-фаворит.рф/tumby-obuvnicy/konsol-s-yaschikom-siciliya-7995021581/</url>
       <price>4823</price>
@@ -31837,6 +32587,56 @@
       <param name="Материал">ЛДСП</param>
       <param name="Цвет">Бежевый</param>
     </offer>
+    <offer id="8417921806" available="true">
+      <url>https://мебель-фаворит.рф/prihozhie/penal-milena-s-yaschikom-i-zerkalom-8417921806/</url>
+      <price>9433</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>17</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Veles/Milena/8417921806/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Veles/Milena/8417921806/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Veles/Milena/8417921806/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Пенал Милена с ящиком и зеркалом</name>
+      <description>Пенал Милена с ящиком и зеркалом. Фабрика Велес. Размер 40х45х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">40 см</param>
+      <param name="Глубина">45 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Зеркало</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8274779179" available="true">
+      <url>https://мебель-фаворит.рф/prihozhie/modulnaya-prihozhaya-milena-n1-veles-8274779179/</url>
+      <price>19633</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>17</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Veles/Milena/8274779179/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Модульная прихожая Милена №1 (Велес)</name>
+      <description>Модульная прихожая Милена №1 (Велес). Фабрика Велес. Размер 120х46х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">120 см</param>
+      <param name="Глубина">46 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Зеркало</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8394600469" available="true">
+      <url>https://мебель-фаворит.рф/prihozhie/modulnaya-prihozhaya-milena-n2-veles-8394600469/</url>
+      <price>43783</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>17</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Veles/Milena/8394600469/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Модульная прихожая Милена №2 (Велес)</name>
+      <description>Модульная прихожая Милена №2 (Велес). Фабрика Велес. Размер 200х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">200 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Зеркало</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
     <offer id="7995874206" available="true">
       <url>https://мебель-фаворит.рф/prihozhie/prihozhaya-s-penalom-i-antresolyu-siciliya-levaya-7995874206/</url>
       <price>28097</price>
@@ -32457,8 +33257,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/160%20sm/8155222551/02.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд 160 см дуб крафт</name>
-      <description>Модульная прихожая Норд 160 см дуб крафт. Фабрика Миф. Размер 160х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд 160 см дуб крафт. Фабрика Миф. Размер 160х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">160 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32472,8 +33273,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N1/8155816866/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №1 белый / белый глянец</name>
-      <description>Модульная прихожая Норд №1 белый / белый глянец. Фабрика Миф. Размер 200х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №1 белый / белый глянец. Фабрика Миф. Размер 200х51х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">200 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">265 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32487,8 +33289,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N1/8155443558/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №1 графит</name>
-      <description>Модульная прихожая Норд №1 графит. Фабрика Миф. Размер 200х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №1 графит. Фабрика Миф. Размер 200х51х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">200 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">265 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32506,8 +33309,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N1/8155416890/05.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №1 графит / изумрудный</name>
-      <description>Модульная прихожая Норд №1 графит / изумрудный. Фабрика Миф. Размер 200х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №1 графит / изумрудный. Фабрика Миф. Размер 200х51х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">200 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">265 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32521,8 +33325,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N1/8155071548/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №1 дуб крафт</name>
-      <description>Модульная прихожая Норд №1 дуб крафт. Фабрика Миф. Размер 200х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №1 дуб крафт. Фабрика Миф. Размер 200х51х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">200 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">265 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32536,8 +33341,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N1/8155211413/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №1 дуб крафт белый</name>
-      <description>Модульная прихожая Норд №1 дуб крафт белый. Фабрика Миф. Размер 200х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №1 дуб крафт белый. Фабрика Миф. Размер 200х51х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">200 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">265 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32555,8 +33361,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N1/8155010201/05.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №1 кашемир</name>
-      <description>Модульная прихожая Норд №1 кашемир. Фабрика Миф. Размер 200х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №1 кашемир. Фабрика Миф. Размер 200х51х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">200 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">265 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32570,8 +33377,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N2/8155873368/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №2 белый / белый глянец</name>
-      <description>Модульная прихожая Норд №2 белый / белый глянец. Фабрика Миф. Размер 190х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №2 белый / белый глянец. Фабрика Миф. Размер 190х51х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">190 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">265 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32585,8 +33393,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N2/8155627107/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №2 графит</name>
-      <description>Модульная прихожая Норд №2 графит. Фабрика Миф. Размер 190х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №2 графит. Фабрика Миф. Размер 190х51х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">190 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">265 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32604,8 +33413,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N2/8155359675/05.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №2 графит / изумрудный</name>
-      <description>Модульная прихожая Норд №2 графит / изумрудный. Фабрика Миф. Размер 190х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №2 графит / изумрудный. Фабрика Миф. Размер 190х51х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">190 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">265 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32619,8 +33429,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N2/8155248998/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №2 дуб крафт</name>
-      <description>Модульная прихожая Норд №2 дуб крафт. Фабрика Миф. Размер 190х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №2 дуб крафт. Фабрика Миф. Размер 190х51х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">190 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">265 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32634,8 +33445,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N2/8155741789/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №2 дуб крафт белый</name>
-      <description>Модульная прихожая Норд №2 дуб крафт белый. Фабрика Миф. Размер 190х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №2 дуб крафт белый. Фабрика Миф. Размер 190х51х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">190 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">265 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32653,8 +33465,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N2/8155690387/05.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №2 кашемир</name>
-      <description>Модульная прихожая Норд №2 кашемир. Фабрика Миф. Размер 190х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №2 кашемир. Фабрика Миф. Размер 190х51х265 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">190 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">265 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32671,8 +33484,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N3/8154952446/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №3 белый / белый глянец</name>
-      <description>Модульная прихожая Норд №3 белый / белый глянец. Фабрика Миф. Размер 190х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №3 белый / белый глянец. Фабрика Миф. Размер 190х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">190 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32686,8 +33500,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N3/8155124754/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №3 графит</name>
-      <description>Модульная прихожая Норд №3 графит. Фабрика Миф. Размер 190х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №3 графит. Фабрика Миф. Размер 190х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">190 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32704,8 +33519,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N3/8155155994/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №3 графит / изумрудный</name>
-      <description>Модульная прихожая Норд №3 графит / изумрудный. Фабрика Миф. Размер 190х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №3 графит / изумрудный. Фабрика Миф. Размер 190х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">190 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32722,8 +33538,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N3/8155177434/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №3 дуб крафт</name>
-      <description>Модульная прихожая Норд №3 дуб крафт. Фабрика Миф. Размер 190х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №3 дуб крафт. Фабрика Миф. Размер 190х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">190 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32740,8 +33557,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N3/8155722079/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №3 дуб крафт белый</name>
-      <description>Модульная прихожая Норд №3 дуб крафт белый. Фабрика Миф. Размер 190х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №3 дуб крафт белый. Фабрика Миф. Размер 190х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">190 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32758,8 +33576,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N3/8155166711/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №3 кашемир</name>
-      <description>Модульная прихожая Норд №3 кашемир. Фабрика Миф. Размер 190х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №3 кашемир. Фабрика Миф. Размер 190х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">190 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32775,8 +33594,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Modulnaya%20prikhozhaya/N4/8155731159/03.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Норд №4 дуб крафт</name>
-      <description>Модульная прихожая Норд №4 дуб крафт. Фабрика Миф. Размер 160х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Норд №4 дуб крафт. Фабрика Миф. Размер 160х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">160 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32800,8 +33620,9 @@
       <vendor>Миф</vendor>
       <vendorCode>10553-00041369</vendorCode>
       <name>Прихожая Норд</name>
-      <description>Прихожая Норд. Фабрика Миф. Размер 80х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Норд. Фабрика Миф. Размер 80х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32817,8 +33638,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Prikhozhaya/8155666582/03.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Норд</name>
-      <description>Прихожая Норд. Фабрика Миф. Размер 80х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Норд. Фабрика Миф. Размер 80х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32842,8 +33664,9 @@
       <vendor>Миф</vendor>
       <vendorCode>10553-00040179</vendorCode>
       <name>Прихожая Норд</name>
-      <description>Прихожая Норд. Фабрика Миф. Размер 80х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Норд. Фабрика Миф. Размер 80х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32867,8 +33690,9 @@
       <vendor>Миф</vendor>
       <vendorCode>10553-00040181</vendorCode>
       <name>Прихожая Норд</name>
-      <description>Прихожая Норд. Фабрика Миф. Размер 80х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Норд. Фабрика Миф. Размер 80х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32885,8 +33709,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Prikhozhaya/8155819040/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Норд</name>
-      <description>Прихожая Норд. Фабрика Миф. Размер 80х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Норд. Фабрика Миф. Размер 80х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32909,8 +33734,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Prikhozhaya/8155706142/10.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Норд</name>
-      <description>Прихожая Норд. Фабрика Миф. Размер 80х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Норд. Фабрика Миф. Размер 80х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32928,8 +33754,9 @@
       <vendor>Миф</vendor>
       <vendorCode>10553-00040177</vendorCode>
       <name>Прихожая Норд</name>
-      <description>Прихожая Норд. Фабрика Миф. Размер 80х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Норд. Фабрика Миф. Размер 80х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32949,8 +33776,9 @@
       <vendor>Миф</vendor>
       <vendorCode>10553-00040180</vendorCode>
       <name>Прихожая Норд</name>
-      <description>Прихожая Норд. Фабрика Миф. Размер 80х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Норд. Фабрика Миф. Размер 80х51х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
+      <param name="Глубина">51 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32966,8 +33794,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Nord/Tumba%20s%20zerkalom/8155836327/03.webp</picture>
       <vendor>Миф</vendor>
       <name>Тумба с зеркалом Норд</name>
-      <description>Тумба с зеркалом Норд. Фабрика Миф. Размер 80х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Тумба с зеркалом Норд. Фабрика Миф. Размер 80х38х223 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">80 см</param>
+      <param name="Глубина">38 см</param>
       <param name="Высота">223 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -32991,8 +33820,9 @@
       <vendor>Миф</vendor>
       <vendorCode>09529-00037777</vendorCode>
       <name>Прихожая Роджина</name>
-      <description>Прихожая Роджина. Фабрика Миф. Размер 100х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Роджина. Фабрика Миф. Размер 100х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">100 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33009,8 +33839,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Prikhozhaya/8187696589/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Роджина</name>
-      <description>Прихожая Роджина. Фабрика Миф. Размер 100х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Роджина. Фабрика Миф. Размер 100х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">100 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33034,8 +33865,9 @@
       <vendor>Миф</vendor>
       <vendorCode>09529-00034919</vendorCode>
       <name>Прихожая Роджина</name>
-      <description>Прихожая Роджина. Фабрика Миф. Размер 100х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Роджина. Фабрика Миф. Размер 100х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">100 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33059,8 +33891,9 @@
       <vendor>Миф</vendor>
       <vendorCode>09529-00034918</vendorCode>
       <name>Прихожая Роджина</name>
-      <description>Прихожая Роджина. Фабрика Миф. Размер 100х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Роджина. Фабрика Миф. Размер 100х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">100 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33075,8 +33908,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Prikhozhaya/8187227720/02.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Роджина</name>
-      <description>Прихожая Роджина. Фабрика Миф. Размер 100х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Роджина. Фабрика Миф. Размер 100х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">100 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33093,8 +33927,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N1/8187527117/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №1</name>
-      <description>Модульная прихожая Роджина №1. Фабрика Миф. Размер 200х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №1. Фабрика Миф. Размер 200х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">200 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33108,8 +33943,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N2/8187404810/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №2</name>
-      <description>Модульная прихожая Роджина №2. Фабрика Миф. Размер 255х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №2. Фабрика Миф. Размер 255х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">255 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33123,8 +33959,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N2/8187354644/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №2</name>
-      <description>Модульная прихожая Роджина №2. Фабрика Миф. Размер 255х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №2. Фабрика Миф. Размер 255х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">255 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33147,8 +33984,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N2/8187671376/10.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №2</name>
-      <description>Модульная прихожая Роджина №2. Фабрика Миф. Размер 255х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №2. Фабрика Миф. Размер 255х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">255 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33166,8 +34004,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N3/8187607807/05.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №3</name>
-      <description>Модульная прихожая Роджина №3. Фабрика Миф. Размер 310х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №3. Фабрика Миф. Размер 310х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">310 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33184,8 +34023,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N5/8187461445/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №5</name>
-      <description>Модульная прихожая Роджина №5. Фабрика Миф. Размер 250х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №5. Фабрика Миф. Размер 250х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">250 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33199,8 +34039,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N5/8187155784/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №5</name>
-      <description>Модульная прихожая Роджина №5. Фабрика Миф. Размер 250х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №5. Фабрика Миф. Размер 250х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">250 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33214,8 +34055,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N5/8187398146/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №5</name>
-      <description>Модульная прихожая Роджина №5. Фабрика Миф. Размер 250х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №5. Фабрика Миф. Размер 250х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">250 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33233,8 +34075,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N6/8187281627/05.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №6</name>
-      <description>Модульная прихожая Роджина №6. Фабрика Миф. Размер 385х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №6. Фабрика Миф. Размер 385х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">385 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33252,8 +34095,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N6/8187498041/05.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №6</name>
-      <description>Модульная прихожая Роджина №6. Фабрика Миф. Размер 385х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №6. Фабрика Миф. Размер 385х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">385 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33271,8 +34115,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N6/8187371219/05.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №6</name>
-      <description>Модульная прихожая Роджина №6. Фабрика Миф. Размер 385х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №6. Фабрика Миф. Размер 385х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">385 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33289,8 +34134,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N7/8187777788/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №7</name>
-      <description>Модульная прихожая Роджина №7. Фабрика Миф. Размер 380х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №7. Фабрика Миф. Размер 380х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">380 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33307,8 +34153,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N7/8187840095/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №7</name>
-      <description>Модульная прихожая Роджина №7. Фабрика Миф. Размер 380х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №7. Фабрика Миф. Размер 380х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">380 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33325,8 +34172,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Rodzhina/Modulnaya%20prikhozhaya/N7/8187797339/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Роджина №7</name>
-      <description>Модульная прихожая Роджина №7. Фабрика Миф. Размер 380х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Роджина №7. Фабрика Миф. Размер 380х52х240 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">380 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">240 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Зеркало</param>
@@ -33974,6 +34822,23 @@
       <param name="Материал">ЛДСП</param>
       <param name="Цвет">Бежевый</param>
     </offer>
+    <offer id="8375569221" available="true">
+      <url>https://мебель-фаворит.рф/garderobnye/veshalka-milena-800-8375569221/</url>
+      <price>5533</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>1</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garderobnye%20sistemy%20i%20veshalki/Veles/Milena/8375569221/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garderobnye%20sistemy%20i%20veshalki/Veles/Milena/8375569221/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garderobnye%20sistemy%20i%20veshalki/Veles/Milena/8375569221/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Вешалка Милена 800</name>
+      <description>Вешалка Милена 800. Фабрика Велес. Размер 80х22х172 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">80 см</param>
+      <param name="Глубина">22 см</param>
+      <param name="Высота">172 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
     <offer id="8026924022" available="true">
       <url>https://мебель-фаворит.рф/garderobnye/veshalka-arbe-8026924022/</url>
       <price>6815</price>
@@ -34356,6 +35221,61 @@
       <param name="Материал">ЛДСП</param>
       <param name="Особенности">Задняя стенка</param>
       <param name="Цвет">Бежевый</param>
+    </offer>
+    <offer id="8268272989" available="true">
+      <url>https://мебель-фаворит.рф/stellazhi/shkaf-stellazh-milena-8268272989/</url>
+      <price>10250</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>20</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stellazhi%20i%20etazherki/Veles/Milena/8268272989/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stellazhi%20i%20etazherki/Veles/Milena/8268272989/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stellazhi%20i%20etazherki/Veles/Milena/8268272989/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Шкаф-стеллаж Милена</name>
+      <description>Шкаф-стеллаж Милена. Фабрика Велес. Размер 50х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">50 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Задняя стенка</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8276558544" available="true">
+      <url>https://мебель-фаворит.рф/stellazhi/stellazh-milena-8276558544/</url>
+      <price>8717</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>20</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stellazhi%20i%20etazherki/Veles/Milena/8276558544/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stellazhi%20i%20etazherki/Veles/Milena/8276558544/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Stellazhi%20i%20etazherki/Veles/Milena/8276558544/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Стеллаж Милена</name>
+      <description>Стеллаж Милена. Фабрика Велес. Размер 50х50х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">50 см</param>
+      <param name="Глубина">50 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Задняя стенка</param>
+      <param name="Цвет">Бежевый</param>
+    </offer>
+    <offer id="8326191058" available="true">
+      <url>https://мебель-фаворит.рф/stellazhi/penal-milena-s-yaschikom-i-polkami-8326191058/</url>
+      <price>10200</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>20</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Penal%20s%20Yaschikom/8326191058/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Penal%20s%20Yaschikom/8326191058/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Shkafy%20i%20bufety/Veles/Milena/Stvorchatye/Penal%20s%20Yaschikom/8326191058/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049007</vendorCode>
+      <name>Пенал Милена с ящиком и полками</name>
+      <description>Пенал Милена с ящиком и полками. Фабрика Велес. Размер 50х52х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">50 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Особенности">Задняя стенка | Ящики</param>
+      <param name="Цвет">Бежевый\Белый</param>
     </offer>
     <offer id="7995251664" available="true">
       <url>https://мебель-фаворит.рф/stellazhi/penal-stellazh-siciliya-7995251664/</url>
@@ -35549,6 +36469,40 @@
       <param name="Высота">40 см</param>
       <param name="Материал">ЛДСП</param>
       <param name="Цвет">Бежевый</param>
+    </offer>
+    <offer id="8377069291" available="true">
+      <url>https://мебель-фаворит.рф/polki/polka-nastennaya-milena-1500-8377069291/</url>
+      <price>2800</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>15</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Polki/Veles/Milena/8377069291/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Polki/Veles/Milena/8377069291/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Polki/Veles/Milena/8377069291/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Полка настенная Милена 1500</name>
+      <description>Полка настенная Милена 1500. Фабрика Велес. Размер 150х22х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">22 см</param>
+      <param name="Высота">35 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8252082933" available="true">
+      <url>https://мебель-фаворит.рф/polki/polka-nastennaya-milena-1200-8252082933/</url>
+      <price>2183</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>15</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Polki/Veles/Milena/8252082933/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Polki/Veles/Milena/8252082933/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Polki/Veles/Milena/8252082933/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Полка настенная Милена 1200</name>
+      <description>Полка настенная Милена 1200. Фабрика Велес. Размер 120х22х35 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">120 см</param>
+      <param name="Глубина">22 см</param>
+      <param name="Высота">35 см</param>
+      <param name="Материал">ЛДСП</param>
+      <param name="Цвет">Бежевый\Белый</param>
     </offer>
     <offer id="7995383549" available="true">
       <url>https://мебель-фаворит.рф/polki/polka-nastennaya-siciliya-7995383549/</url>
@@ -41365,6 +42319,95 @@
       <param name="Форма">Прямоугольный</param>
       <param name="Цвет">Бежевый</param>
     </offer>
+    <offer id="8314275273" available="true">
+      <url>https://мебель-фаворит.рф/kompyuternye-stoly/stol-pismennyy-milena-2-tumbovyy-8314275273/</url>
+      <price>12300</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>7</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8314275273/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8314275273/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8314275273/03.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Стол письменный Милена 2-тумбовый</name>
+      <description>Стол письменный Милена 2-тумбовый. Фабрика Велес. Размер 150х60х76 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">60 см</param>
+      <param name="Высота">76 см</param>
+      <param name="Форма">Прямоугольный</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8479517139" available="true">
+      <url>https://мебель-фаворит.рф/kompyuternye-stoly/stol-pismennyy-milena-levyy-8479517139/</url>
+      <price>7800</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>7</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8479517139/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8479517139/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8479517139/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049009</vendorCode>
+      <name>Стол письменный Милена левый</name>
+      <description>Стол письменный Милена левый. Фабрика Велес. Размер 120х60х76 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">120 см</param>
+      <param name="Глубина">60 см</param>
+      <param name="Высота">76 см</param>
+      <param name="Форма">Прямоугольный</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8418110883" available="true">
+      <url>https://мебель-фаворит.рф/kompyuternye-stoly/stol-pismennyy-milena-pravyy-8418110883/</url>
+      <price>7800</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>7</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8418110883/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8418110883/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8418110883/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049010</vendorCode>
+      <name>Стол письменный Милена правый</name>
+      <description>Стол письменный Милена правый. Фабрика Велес. Размер 120х60х76 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">120 см</param>
+      <param name="Глубина">60 см</param>
+      <param name="Высота">76 см</param>
+      <param name="Форма">Прямоугольный</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8305336155" available="true">
+      <url>https://мебель-фаворит.рф/kompyuternye-stoly/stol-tumba-milena-levyy-8305336155/</url>
+      <price>16400</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>7</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8305336155/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8305336155/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8305336155/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049017</vendorCode>
+      <name>Стол-тумба Милена левый</name>
+      <description>Стол-тумба Милена левый. Фабрика Велес. Размер 140х100х125 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">140 см</param>
+      <param name="Глубина">100 см</param>
+      <param name="Высота">125 см</param>
+      <param name="Форма">Угловой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8375451016" available="true">
+      <url>https://мебель-фаворит.рф/kompyuternye-stoly/stol-tumba-milena-pravyy-8375451016/</url>
+      <price>16500</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>7</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8375451016/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8375451016/02.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kompyuternye%20stoly/Veles/Milena/8375451016/03.webp</picture>
+      <vendor>Велес</vendor>
+      <vendorCode>11346-00049012</vendorCode>
+      <name>Стол-тумба Милена правый</name>
+      <description>Стол-тумба Милена правый. Фабрика Велес. Размер 140х100х125 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">140 см</param>
+      <param name="Глубина">100 см</param>
+      <param name="Высота">125 см</param>
+      <param name="Форма">Угловой</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
     <offer id="7995124288" available="true">
       <url>https://мебель-фаворит.рф/kompyuternye-stoly/pismennyy-stol-s-yaschikom-siciliya-7995124288/</url>
       <price>7726</price>
@@ -43371,6 +44414,36 @@
       <param name="Форма">Прямоугольное</param>
       <param name="Цвет">Белый</param>
     </offer>
+    <offer id="8324581801" available="true">
+      <url>https://мебель-фаворит.рф/zerkala/zerkalo-milena-1440h800-8324581801/</url>
+      <price>5933</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>4</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Zerkala/Veles/Milena/8324581801/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Zerkala/Veles/Milena/8324581801/02.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Зеркало Милена 1440х800</name>
+      <description>Зеркало Милена 1440х800. Фабрика Велес. Размер 144х80 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">144 см</param>
+      <param name="Высота">80 см</param>
+      <param name="Форма">Прямоугольное</param>
+      <param name="Цвет">Бежевый</param>
+    </offer>
+    <offer id="8274795876" available="true">
+      <url>https://мебель-фаворит.рф/zerkala/zerkalo-milena-800h630-8274795876/</url>
+      <price>2350</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>4</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Zerkala/Veles/Milena/8274795876/01.webp</picture>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Zerkala/Veles/Milena/8274795876/02.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Зеркало Милена 800х630</name>
+      <description>Зеркало Милена 800х630. Фабрика Велес. Размер 80х63 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">80 см</param>
+      <param name="Высота">63 см</param>
+      <param name="Форма">Прямоугольное</param>
+      <param name="Цвет">Бежевый</param>
+    </offer>
     <offer id="7995399079" available="true">
       <url>https://мебель-фаворит.рф/zerkala/zerkalo-siciliya-7995399079/</url>
       <price>4823</price>
@@ -43915,6 +44988,76 @@
       <param name="Глубина">53 см</param>
       <param name="Высота">230 см</param>
       <param name="Цвет">Бежевый</param>
+    </offer>
+    <offer id="8349078367" available="true">
+      <url>https://мебель-фаворит.рф/garnitury/gostinaya-milena-modulnaya-veles-8349078367/</url>
+      <price>70917</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>2</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Veles/Milena/8349078367/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Гостиная Милена модульная (Велес)</name>
+      <description>Гостиная Милена модульная (Велес). Фабрика Велес. Размер 400х42х220 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">400 см</param>
+      <param name="Глубина">42 см</param>
+      <param name="Высота">220 см</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8268694972" available="true">
+      <url>https://мебель-фаворит.рф/garnitury/bufet-milena-1500-modulnyy-veles-8268694972/</url>
+      <price>57132</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>2</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Veles/Milena/8268694972/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Буфет Милена 1500 модульный (Велес)</name>
+      <description>Буфет Милена 1500 модульный (Велес). Фабрика Велес. Размер 150х53х260 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">150 см</param>
+      <param name="Глубина">53 см</param>
+      <param name="Высота">260 см</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8343986806" available="true">
+      <url>https://мебель-фаворит.рф/garnitury/bufet-milena-1000-modulnyy-veles-8343986806/</url>
+      <price>39849</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>2</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Veles/Milena/8343986806/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Буфет Милена 1000 модульный (Велес)</name>
+      <description>Буфет Милена 1000 модульный (Велес). Фабрика Велес. Размер 100х53х260 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">100 см</param>
+      <param name="Глубина">53 см</param>
+      <param name="Высота">260 см</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8252080343" available="true">
+      <url>https://мебель-фаворит.рф/garnitury/stenka-milena-n1-modulnaya-veles-8252080343/</url>
+      <price>118982</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>2</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Veles/Milena/8252080343/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Стенка Милена №1 модульная (Велес)</name>
+      <description>Стенка Милена №1 модульная (Велес). Фабрика Велес. Размер 400х53х260 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">400 см</param>
+      <param name="Глубина">53 см</param>
+      <param name="Высота">260 см</param>
+      <param name="Цвет">Бежевый\Белый</param>
+    </offer>
+    <offer id="8344320038" available="true">
+      <url>https://мебель-фаворит.рф/garnitury/stenka-milena-n2-modulnaya-veles-8344320038/</url>
+      <price>112301</price>
+      <currencyId>RUB</currencyId>
+      <categoryId>2</categoryId>
+      <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Garnitury%20i%20komplekty/Veles/Milena/8344320038/01.webp</picture>
+      <vendor>Велес</vendor>
+      <name>Стенка Милена №2 модульная (Велес)</name>
+      <description>Стенка Милена №2 модульная (Велес). Фабрика Велес. Размер 400х52х260 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <param name="Ширина">400 см</param>
+      <param name="Глубина">52 см</param>
+      <param name="Высота">260 см</param>
+      <param name="Цвет">Бежевый\Белый</param>
     </offer>
     <offer id="7579457483" available="true">
       <url>https://мебель-фаворит.рф/garnitury/gostinaya-tefiya-modulnaya-veles-7579457483/</url>
@@ -53150,8 +54293,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Iris/Prikhozhaya/8186995533/03.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Ирис</name>
-      <description>Прихожая Ирис. Фабрика Миф. Размер 60х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Ирис. Фабрика Миф. Размер 60х41х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">210 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Серый\Бежевый</param>
@@ -53166,8 +54310,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Iris/Prikhozhaya/8187417702/03.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Ирис</name>
-      <description>Прихожая Ирис. Фабрика Миф. Размер 60х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Ирис. Фабрика Миф. Размер 60х41х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">210 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Белый</param>
@@ -53181,8 +54326,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Iris/Prikhozhaya/8187199812/02.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Ирис</name>
-      <description>Прихожая Ирис. Фабрика Миф. Размер 60х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Ирис. Фабрика Миф. Размер 60х41х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">210 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Серый</param>
@@ -53197,8 +54343,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Iris/Prikhozhaya/8187422367/03.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Ирис</name>
-      <description>Прихожая Ирис. Фабрика Миф. Размер 60х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Ирис. Фабрика Миф. Размер 60х41х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">210 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Зелёный</param>
@@ -53212,8 +54359,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Iris/Prikhozhaya/8187772363/02.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Ирис</name>
-      <description>Прихожая Ирис. Фабрика Миф. Размер 60х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Ирис. Фабрика Миф. Размер 60х41х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">210 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Бежевый</param>
@@ -53235,8 +54383,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Flesh/Prikhozhaya/8187410055/10.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Флэш</name>
-      <description>Прихожая Флэш. Фабрика Миф. Размер 60х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Флэш. Фабрика Миф. Размер 60х41х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">213 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Белый</param>
@@ -53258,8 +54407,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Flesh/Prikhozhaya/8186886945/10.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Флэш</name>
-      <description>Прихожая Флэш. Фабрика Миф. Размер 60х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Флэш. Фабрика Миф. Размер 60х41х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">213 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Серый</param>
@@ -53281,8 +54431,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Flesh/Prikhozhaya/8187179317/10.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Флэш</name>
-      <description>Прихожая Флэш. Фабрика Миф. Размер 60х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Флэш. Фабрика Миф. Размер 60х41х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">213 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Зелёный</param>
@@ -53304,8 +54455,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Flesh/Prikhozhaya/8187671264/10.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Флэш</name>
-      <description>Прихожая Флэш. Фабрика Миф. Размер 60х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Флэш. Фабрика Миф. Размер 60х41х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">60 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">213 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Бежевый</param>
@@ -53320,8 +54472,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Vizit/Prikhozhaya/8187417499/03.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Визит</name>
-      <description>Прихожая Визит. Фабрика Миф. Размер 144х205 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Визит. Фабрика Миф. Размер 144х40х205 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">144 см</param>
+      <param name="Глубина">40 см</param>
       <param name="Высота">205 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53345,8 +54498,9 @@
       <vendor>Миф</vendor>
       <vendorCode>09771-00034921</vendorCode>
       <name>Прихожая Визит</name>
-      <description>Прихожая Визит. Фабрика Миф. Размер 144х205 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Визит. Фабрика Миф. Размер 144х40х205 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">144 см</param>
+      <param name="Глубина">40 см</param>
       <param name="Высота">205 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53370,8 +54524,9 @@
       <vendor>Миф</vendor>
       <vendorCode>09771-00034920</vendorCode>
       <name>Прихожая Визит</name>
-      <description>Прихожая Визит. Фабрика Миф. Размер 144х205 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Визит. Фабрика Миф. Размер 144х40х205 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">144 см</param>
+      <param name="Глубина">40 см</param>
       <param name="Высота">205 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53387,8 +54542,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Lika/Prikhozhaya/N1/8187597589/03.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Лика №1</name>
-      <description>Прихожая Лика №1. Фабрика Миф. Размер 150х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Лика №1. Фабрика Миф. Размер 150х37х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">150 см</param>
+      <param name="Глубина">37 см</param>
       <param name="Высота">215 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53403,8 +54559,9 @@
       <vendor>Миф</vendor>
       <vendorCode>08829-00033069</vendorCode>
       <name>Прихожая Лика №1</name>
-      <description>Прихожая Лика №1. Фабрика Миф. Размер 150х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Лика №1. Фабрика Миф. Размер 150х37х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">150 см</param>
+      <param name="Глубина">37 см</param>
       <param name="Высота">215 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53421,8 +54578,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Lika/Prikhozhaya/N1/8187523416/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Лика №1</name>
-      <description>Прихожая Лика №1. Фабрика Миф. Размер 150х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Лика №1. Фабрика Миф. Размер 150х37х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">150 см</param>
+      <param name="Глубина">37 см</param>
       <param name="Высота">215 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53445,8 +54603,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Lika/Prikhozhaya/N1/8187380219/10.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Лика №1</name>
-      <description>Прихожая Лика №1. Фабрика Миф. Размер 150х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Лика №1. Фабрика Миф. Размер 150х37х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">150 см</param>
+      <param name="Глубина">37 см</param>
       <param name="Высота">215 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53470,8 +54629,9 @@
       <vendor>Миф</vendor>
       <vendorCode>08829-00029508</vendorCode>
       <name>Прихожая Лика №1</name>
-      <description>Прихожая Лика №1. Фабрика Миф. Размер 150х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Лика №1. Фабрика Миф. Размер 150х37х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">150 см</param>
+      <param name="Глубина">37 см</param>
       <param name="Высота">215 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53487,8 +54647,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Lika/Prikhozhaya/N2/8187116861/03.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Лика №2</name>
-      <description>Прихожая Лика №2. Фабрика Миф. Размер 120х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Лика №2. Фабрика Миф. Размер 120х36х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
+      <param name="Глубина">36 см</param>
       <param name="Высота">215 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53503,8 +54664,9 @@
       <vendor>Миф</vendor>
       <vendorCode>09103-00031540</vendorCode>
       <name>Прихожая Лика №2</name>
-      <description>Прихожая Лика №2. Фабрика Миф. Размер 120х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Лика №2. Фабрика Миф. Размер 120х36х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
+      <param name="Глубина">36 см</param>
       <param name="Высота">215 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53521,8 +54683,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Lika/Prikhozhaya/N2/8187198578/04.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Лика №2</name>
-      <description>Прихожая Лика №2. Фабрика Миф. Размер 120х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Лика №2. Фабрика Миф. Размер 120х36х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
+      <param name="Глубина">36 см</param>
       <param name="Высота">215 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53545,8 +54708,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Lika/Prikhozhaya/N2/8187815214/10.webp</picture>
       <vendor>Миф</vendor>
       <name>Прихожая Лика №2</name>
-      <description>Прихожая Лика №2. Фабрика Миф. Размер 120х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Лика №2. Фабрика Миф. Размер 120х36х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
+      <param name="Глубина">36 см</param>
       <param name="Высота">215 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53570,8 +54734,9 @@
       <vendor>Миф</vendor>
       <vendorCode>09103-00032560</vendorCode>
       <name>Прихожая Лика №2</name>
-      <description>Прихожая Лика №2. Фабрика Миф. Размер 120х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Лика №2. Фабрика Миф. Размер 120х36х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
+      <param name="Глубина">36 см</param>
       <param name="Высота">215 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53590,8 +54755,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Iris/Modulnaya%20prikhozhaya/8187491402/06.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Ирис (Миф)</name>
-      <description>Модульная прихожая Ирис (Миф). Фабрика Миф. Размер 240х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Ирис (Миф). Фабрика Миф. Размер 240х41х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">240 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">210 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Серый\Бежевый</param>
@@ -53609,8 +54775,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Iris/Modulnaya%20prikhozhaya/8187770758/06.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Ирис (Миф)</name>
-      <description>Модульная прихожая Ирис (Миф). Фабрика Миф. Размер 240х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Ирис (Миф). Фабрика Миф. Размер 240х41х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">240 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">210 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Белый</param>
@@ -53627,8 +54794,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Iris/Modulnaya%20prikhozhaya/8187684948/05.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Ирис (Миф)</name>
-      <description>Модульная прихожая Ирис (Миф). Фабрика Миф. Размер 240х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Ирис (Миф). Фабрика Миф. Размер 240х41х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">240 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">210 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Серый</param>
@@ -53645,8 +54813,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Iris/Modulnaya%20prikhozhaya/8187407786/05.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Ирис (Миф)</name>
-      <description>Модульная прихожая Ирис (Миф). Фабрика Миф. Размер 240х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Ирис (Миф). Фабрика Миф. Размер 240х41х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">240 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">210 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Зелёный</param>
@@ -53663,8 +54832,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Iris/Modulnaya%20prikhozhaya/8187518794/05.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Ирис (Миф)</name>
-      <description>Модульная прихожая Ирис (Миф). Фабрика Миф. Размер 240х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Ирис (Миф). Фабрика Миф. Размер 240х41х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">240 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">210 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Бежевый</param>
@@ -53682,8 +54852,9 @@
       <vendor>Миф</vendor>
       <vendorCode>07039-00036824</vendorCode>
       <name>Прихожая Лира</name>
-      <description>Прихожая Лира. Фабрика Миф. Размер 120х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Лира. Фабрика Миф. Размер 120х52х215 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
+      <param name="Глубина">52 см</param>
       <param name="Высота">215 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53698,8 +54869,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Flesh/Modulnaya%20prikhozhaya/N1/8187307506/02.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Флэш №1</name>
-      <description>Модульная прихожая Флэш №1. Фабрика Миф. Размер 240х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Флэш №1. Фабрика Миф. Размер 240х41х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">240 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">213 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Белый</param>
@@ -53712,8 +54884,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Flesh/Modulnaya%20prikhozhaya/N1/8187661292/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Флэш №1</name>
-      <description>Модульная прихожая Флэш №1. Фабрика Миф. Размер 240х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Флэш №1. Фабрика Миф. Размер 240х41х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">240 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">213 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Серый</param>
@@ -53726,8 +54899,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Flesh/Modulnaya%20prikhozhaya/N1/8187634296/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Флэш №1</name>
-      <description>Модульная прихожая Флэш №1. Фабрика Миф. Размер 240х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Флэш №1. Фабрика Миф. Размер 240х41х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">240 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">213 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Зелёный</param>
@@ -53740,8 +54914,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Flesh/Modulnaya%20prikhozhaya/N1/8187711671/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Флэш №1</name>
-      <description>Модульная прихожая Флэш №1. Фабрика Миф. Размер 240х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Флэш №1. Фабрика Миф. Размер 240х41х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">240 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">213 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Бежевый</param>
@@ -53763,8 +54938,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Flesh/Modulnaya%20prikhozhaya/N2/8187656580/10.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Флэш №2</name>
-      <description>Модульная прихожая Флэш №2. Фабрика Миф. Размер 150х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Флэш №2. Фабрика Миф. Размер 150х41х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">150 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">213 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Бежевый</param>
@@ -53786,8 +54962,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Flesh/Modulnaya%20prikhozhaya/N3/8187224628/10.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Флэш №3</name>
-      <description>Модульная прихожая Флэш №3. Фабрика Миф. Размер 105х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Флэш №3. Фабрика Миф. Размер 105х41х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">105 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">213 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Серый</param>
@@ -53800,8 +54977,9 @@
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Prikhozhie%20i%20obuvnitsy/Mif/Flesh/Modulnaya%20prikhozhaya/N4/8187724070/01.webp</picture>
       <vendor>Миф</vendor>
       <name>Модульная прихожая Флэш №4</name>
-      <description>Модульная прихожая Флэш №4. Фабрика Миф. Размер 105х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Модульная прихожая Флэш №4. Фабрика Миф. Размер 105х41х213 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">105 см</param>
+      <param name="Глубина">41 см</param>
       <param name="Высота">213 см</param>
       <param name="Материал">ЛДСП | МДФ</param>
       <param name="Цвет">Золотой\Зелёный</param>
@@ -53818,8 +54996,9 @@
       <vendor>Росток</vendor>
       <vendorCode>03770-00022907</vendorCode>
       <name>Прихожая Диана-4</name>
-      <description>Прихожая Диана-4. Фабрика Росток. Размер 120х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Диана-4. Фабрика Росток. Размер 120х42х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
+      <param name="Глубина">42 см</param>
       <param name="Высота">210 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
@@ -53837,8 +55016,9 @@
       <vendor>Росток</vendor>
       <vendorCode>03770-00024964</vendorCode>
       <name>Прихожая Диана-4</name>
-      <description>Прихожая Диана-4. Фабрика Росток. Размер 120х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
+      <description>Прихожая Диана-4. Фабрика Росток. Размер 120х42х210 см. В наличии и на заказ, доставка по Стерлитамаку и району.</description>
       <param name="Ширина">120 см</param>
+      <param name="Глубина">42 см</param>
       <param name="Высота">210 см</param>
       <param name="Материал">ЛДСП | Стекло</param>
       <param name="Особенности">Зеркало</param>
