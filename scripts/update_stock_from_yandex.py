@@ -40,6 +40,7 @@ MAILBOX = "INBOX"
 EXPECTED_SENDER = os.environ.get("STOCK_SENDER_EMAIL", "supplier@example.com").strip()
 SUBJECT_FRAGMENT = "Остатки товаров"
 DEFAULT_MAX_AGE_HOURS = 72
+RECENT_SCAN = 150  # сколько последних писем INBOX просматривать напрямую (мимо поиска IMAP)
 TARGET_RELATIVE_PATH = Path("stock-data") / "stock.xlsx"
 
 XLSX_MIME_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -277,8 +278,14 @@ def find_latest_matching_uid(
     *,
     now: datetime,
     max_age_hours: int,
+    total_messages: int | None = None,
 ) -> bytes | None:
-    """Find the newest fresh message after locally verifying From and Subject."""
+    """Find the newest fresh message after locally verifying From and Subject.
+
+    total_messages (число писем в папке из SELECT): дополнительно просматриваем последние
+    RECENT_SCAN писем напрямую по номерам, БЕЗ поиска. 13.10.2026: поиск Яндекса по IMAP
+    отдавал только письма до 11.10 (застрявший индекс) — свежие письма робот не видел.
+    """
     if now.tzinfo is None:
         now = now.replace(tzinfo=timezone.utc)
     now = now.astimezone(timezone.utc)
@@ -298,6 +305,24 @@ def find_latest_matching_uid(
     for block in response or []:
         if isinstance(block, bytes):
             uids.extend(block.split())
+    if total_messages:
+        start = max(1, total_messages - RECENT_SCAN + 1)
+        status, fetched = mailbox.fetch(f"{start}:{total_messages}", "(UID)")
+        if _status_is_ok(status):
+            recent = []
+            for item in fetched or []:
+                raw = item[0] if isinstance(item, tuple) else item
+                if isinstance(raw, bytes):
+                    m = re.search(rb"UID\s+(\d+)", raw)
+                    if m:
+                        recent.append(m.group(1))
+            known = set(uids)
+            added = [u for u in recent if u not in known]
+            uids.extend(added)
+            _diag(f"просмотр последних {total_messages - start + 1} писем без поиска: "
+                  f"добавлено к найденному поиском {len(added)}")
+        else:
+            _diag("просмотр последних писем без поиска не удался; остаёмся на результатах поиска")
     _diag(f"поиск с {format_imap_date(search_start)}: найдено писем от поставщика {len(uids)}; "
           f"окно свежести с {cutoff.isoformat(timespec='minutes')} UTC")
 
@@ -628,11 +653,13 @@ def process_mailbox(
     target: Path,
     now: datetime,
     max_age_hours: int,
+    total_messages: int | None = None,
 ) -> UpdateResult:
     uid = find_latest_matching_uid(
         mailbox,
         now=now,
         max_age_hours=max_age_hours,
+        total_messages=total_messages,
     )
     if uid is None:
         return UpdateResult(Outcome.NO_MESSAGE, changed=False)
@@ -690,11 +717,16 @@ def run() -> UpdateResult:
         status, _response = mailbox.select(MAILBOX, readonly=True)
         if not _status_is_ok(status):
             raise MailboxError("Не удалось открыть папку INBOX в Яндекс Почте.")
+        try:
+            total_messages = int((_response or [b"0"])[0])
+        except (TypeError, ValueError):
+            total_messages = None
         return process_mailbox(
             mailbox,
             target=target,
             now=datetime.now(timezone.utc),
             max_age_hours=max_age_hours,
+            total_messages=total_messages,
         )
     except StockUpdateError:
         raise

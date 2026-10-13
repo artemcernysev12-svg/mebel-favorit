@@ -105,6 +105,28 @@ class TrailingDateIMAP(FakeIMAP):
         return "OK", [(prefix, raw_message), trailing]
 
 
+class StaleSearchIMAP(FakeIMAP):
+    """Яндекс 13.10.2026: SEARCH отдаёт только старые письма, свежие видны лишь по номерам."""
+
+    def __init__(self, messages, search_visible) -> None:
+        super().__init__(messages)
+        self.search_visible = search_visible
+
+    def uid(self, command: str, *args: object):
+        if command == "SEARCH":
+            self.calls.append((command, args))
+            return "OK", [b" ".join(str(u).encode("ascii") for u in self.search_visible)]
+        return super().uid(command, *args)
+
+    def fetch(self, message_set: str, query: str):
+        self.calls.append(("SEQFETCH", (message_set, query)))
+        uids = sorted(self.messages)
+        start, end = (int(x) for x in message_set.split(":"))
+        rows = [f"{seq} (UID {uids[seq - 1]})".encode("ascii")
+                for seq in range(start, end + 1) if 1 <= seq <= len(uids)]
+        return "OK", rows
+
+
 class MimeTests(unittest.TestCase):
     def test_parses_space_padded_single_digit_internaldate(self) -> None:
         parsed = updater.parse_internaldate(
@@ -265,6 +287,25 @@ class MailboxTests(unittest.TestCase):
         fetch_queries = [str(args[1]) for command, args in mailbox.calls if command == "FETCH"]
         self.assertTrue(fetch_queries)
         self.assertTrue(all("BODY.PEEK" in query for query in fetch_queries))
+
+    def test_finds_fresh_message_when_imap_search_index_is_stale(self) -> None:
+        now = datetime(2026, 10, 13, 5, 0, tzinfo=timezone.utc)
+        old_payload = workbook_bytes("11.10")
+        fresh_payload = workbook_bytes("13.10")
+        mailbox = StaleSearchIMAP(
+            {
+                7209: (now - timedelta(hours=57), mail_message(payload=old_payload)),
+                7300: (now - timedelta(hours=9), mail_message(payload=fresh_payload)),
+            },
+            search_visible=[7209],
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "stock.xlsx"
+            result = updater.process_mailbox(
+                mailbox, target=target, now=now, max_age_hours=72, total_messages=2,
+            )
+            self.assertEqual(result.outcome, updater.Outcome.UPDATED)
+            self.assertEqual(target.read_bytes(), fresh_payload)
 
     def test_stale_message_is_a_successful_noop(self) -> None:
         now = datetime(2026, 7, 10, 12, 0, tzinfo=timezone.utc)
