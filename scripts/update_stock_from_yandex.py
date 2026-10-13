@@ -253,6 +253,25 @@ def _message_matches(message: Message) -> bool:
     return _normalized(SUBJECT_FRAGMENT).casefold() in subject.casefold()
 
 
+def _diag_subject(subject: str) -> str:
+    """Тема для журнала диагностики: печатные символы как есть, необычные — кодами U+XXXX
+    (так видны латинские «двойники» букв, неразрывные пробелы и т.п.)."""
+    out = []
+    for ch in subject[:120]:
+        code = ord(ch)
+        if ch == " " or (32 < code < 127) or 0x0400 <= code <= 0x04FF:
+            out.append(ch)
+        else:
+            out.append("<U+%04X>" % code)
+    return "".join(out)
+
+
+def _diag(line: str) -> None:
+    # Диагностика 13.10.2026: какие письма поставщика видит робот и почему отбрасывает.
+    # Адреса и секреты НЕ печатаются; строки очищены от управляющих символов.
+    print("ДИАГНОСТИКА: " + safe_log_filename(line))
+
+
 def find_latest_matching_uid(
     mailbox: Any,
     *,
@@ -279,6 +298,8 @@ def find_latest_matching_uid(
     for block in response or []:
         if isinstance(block, bytes):
             uids.extend(block.split())
+    _diag(f"поиск с {format_imap_date(search_start)}: найдено писем от поставщика {len(uids)}; "
+          f"окно свежести с {cutoff.isoformat(timespec='minutes')} UTC")
 
     matches: list[tuple[datetime, int, bytes]] = []
     for uid in dict.fromkeys(uids):
@@ -292,7 +313,19 @@ def find_latest_matching_uid(
 
         _prefix, header_bytes = _extract_fetch_response(fetch_response)
         received_at = parse_internaldate(_internaldate_fragments(fetch_response))
+        try:
+            header_message = BytesParser(policy=policy.default).parsebytes(header_bytes)
+            _subj = decode_mime_header(header_message.get("Subject", ""))
+            _senders = {a.casefold() for _n, a in getaddresses(
+                [decode_mime_header(v) for v in header_message.get_all("From", [])]) if a}
+            _diag(f"письмо uid={uid.decode(errors='replace')} дата={received_at.isoformat(timespec='minutes')} "
+                  f"отправитель_совпал={EXPECTED_SENDER.casefold() in _senders} "
+                  f"тема_совпала={_normalized(SUBJECT_FRAGMENT).casefold() in _subj.casefold()} "
+                  f"тема=«{_diag_subject(_subj)}»")
+        except Exception as _error:  # диагностика не должна ронять робота
+            _diag(f"письмо uid={uid!r}: заголовки не разобраны для журнала ({type(_error).__name__})")
         if received_at < cutoff or received_at > now + timedelta(minutes=15):
+            _diag("  → отброшено: вне окна свежести")
             continue
 
         try:
@@ -300,6 +333,7 @@ def find_latest_matching_uid(
         except Exception as error:
             raise MailboxError("Не удалось разобрать заголовки найденного письма.") from error
         if not _message_matches(header_message):
+            _diag("  → отброшено: не совпал отправитель или тема")
             continue
 
         try:
