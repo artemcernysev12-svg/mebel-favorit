@@ -290,7 +290,7 @@ function adaptCardImages(scope){const root=scope||document;root.querySelectorAll
 function renderGrid(){const g=document.getElementById('pgrid'),em=document.getElementById('empty'),lm=document.getElementById('lmW');const ri=document.getElementById('rInfo'),rt=document.getElementById('rTitle'),sc=document.getElementById('sbCnt');const shown=filtered.slice(0,page*PG);ri.textContent='Найдено: '+filtered.length+' товаров';sc.textContent=filtered.length+' товаров';if(typeof updateApplyBtnText==='function')updateApplyBtnText();if(typeof updateFilterBadges==='function')updateFilterBadges();rt.textContent=displayCategoryName(S.cat)||'Все товары';if(!filtered.length){g.innerHTML='';em.style.display='block';lm.style.display='none';return}
 em.style.display='none';lm.style.display=shown.length<filtered.length?'block':'none';g.innerHTML=shown.map(it=>{let _gv=null;try{const _gc=(typeof gizFilterContext==='function')?gizFilterContext(it):null;if(_gc)_gv=_gc.best;}catch(_){}
 const pr=getItemInitialPriceText(it);const dims=formatMainDimsShort(_gv?gizPatchedItem(it,_gv):it);const chips=[];const chipSeen=new Set();function addCardChip(v){const s=String(v||'').trim();if(!s)return;const key=s.toLowerCase().replace(/ё/g,'е').replace(/\s+/g,' ');if(chipSeen.has(key))return;chipSeen.add(key);if(chips.length<3)chips.push(s);}
-if(it.a){['Основной цвет','Цвет','Наполнение','Зеркало','Исполнение','Материал','Тип шкафов','Тип стола','Подвид товара'].forEach(k=>addCardChip(it.a[k]))}
+const TILE_CHIP_SHORT={'Независимый пружинный блок':'НПБ','Пенополиуретан (ППУ)':'ППУ'};if(it.a){['Основной цвет','Цвет','Наполнение','Зеркало','Исполнение','Материал','Тип шкафов','Тип стола','Подвид товара'].forEach(k=>addCardChip(k==='Наполнение'&&TILE_CHIP_SHORT[it.a[k]]||it.a[k]))}
 return`<a class="pcard" href="${esc(chpuItemPath(it))}" onclick="return pcardNav(event,'${esc(it.id)}')">
 <div class="pc-img">${(()=>{ const stockState=getCatalogAvailability(it); return `${it.img?`<img ${imgAttrsThumb(it.img)} alt="${esc(it.t)}" data-cat="${esc(it.c)}">`:`<div class="pc-ph">${CI[it.c]||'📦'}</div>`}${stockState.available?'<span class="pc-stock">В наличии</span>':''}${(stockState.available&&typeof mattressTileGift==='function'&&mattressTileGift(it))?'<span class="pc-gift">Подарок</span>':''}${it.pn>1?`<span class="pc-phocount">${it.pn} фото</span>`:''}`; })()}</div>
 <div class="pc-body">
@@ -1430,7 +1430,7 @@ if(favTokenHit(cw[j],tok))best=Math.max(best,45);}
 for(j=0;j<tw.length;j++){var w=tw[j];if(w===tok)best=Math.max(best,j===0?55:40);else if(w.indexOf(tok)===0)best=Math.max(best,j===0?45:30);else if(favStem(w)===favStem(tok))best=Math.max(best,j===0?44:30);else if(best<18&&favTokenHit(w,tok))best=18;}
 sc+=(best||2);}
 var tl=String(it.t||'').toLowerCase().replace(/\u0451/g,'\u0435');if(ql&&tl.indexOf(ql)===0)sc+=25;try{if(getCatalogAvailability(it).available)sc+=3;}catch(_){}
-return sc;}
+if(it.c==='Диваны'&&it.a&&it.a['Подкатегория дивана']==='Кухонные уголки и модули'&&/диван/.test(ql)&&!/кух|уголок|уголк/.test(ql))sc-=40;return sc;}
 function favNegRefine(it,q){var qa=favTok(q),qt=favQTok(q);if(!qt.length)return true;var words=favItemTokens(it);for(var i=0;i<qt.length;i++){var t=qt[i];if(t==='без'||t.length<3)continue;var qNeg=false;for(var k=1;k<qa.length;k++){if(qa[k]===t&&qa[k-1]==='без'){qNeg=true;break;}}
 var pos=0,neg=0;for(var j=0;j<words.length;j++){if(!favTokenHit(words[j],t))continue;if(j>0&&words[j-1]==='без')neg++;else pos++;}
 if(pos+neg===0)continue;if(qNeg){if(!neg)return false;}

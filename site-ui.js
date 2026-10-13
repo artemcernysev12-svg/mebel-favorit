@@ -149,6 +149,7 @@ favOpenInfo('Оформить заявку',cartNote
 +getPay
 +'<label for="favLeadComment" style="'+lbl+'">'+(withCart?'Комментарий (необязательно)':'Что нужно?')+'</label>'
 +'<textarea id="favLeadComment" rows="2" placeholder="'+(withCart?'Например: позвонить после 18:00':'Диван, шкаф, кухня\u2026 и какие размеры?')+'" style="'+inp+';resize:vertical">'+esc(preset||'')+'</textarea>'
++'<label style="display:flex;align-items:flex-start;gap:8px;font-size:12.5px;line-height:1.4;color:rgba(232,237,248,.8);margin:0 0 10px;cursor:pointer"><input id="favLeadAgree" type="checkbox" style="width:17px;height:17px;accent-color:#2165d6;flex-shrink:0;margin:1px 0 0"><span>Согласен(на) на обработку персональных данных по <a href="/politika/" target="_blank" rel="noopener" style="color:#7fb3ff">политике конфиденциальности</a></span></label>'
 +'<div id="favLeadErr" style="display:none;color:#ff8a8a;font-size:12.5px;margin:-4px 0 8px"></div>'
 +'<button id="favLeadBtn" onclick="favLeadSubmit('+(withCart?'true':'false')+')" style="width:100%;padding:13px;border-radius:12px;border:none;background:#2165d6;color:#fff;font-weight:800;font-size:15px;cursor:pointer">Отправить заявку</button>'
 +favMoreBtn()
@@ -167,13 +168,14 @@ else{showErr('Выберите населённый пункт из списка
 addr=g('favAddrInp');if(!addr){showErr('Укажите адрес доставки: улица, дом, квартира');return;}
 loaders=!!(document.getElementById('favLoaders')||{}).checked;}
 if(!gv.pay){showErr('Выберите способ оплаты');return;}}
+if(!(document.getElementById('favLeadAgree')||{}).checked){showErr('Отметьте согласие на обработку персональных данных');return;}
 var last=0;try{last=Number(localStorage.getItem('mf_lead_ts'))||0;}catch(_){}
 if(Date.now()-last<45000){showErr('Заявка только что отправлялась — подождите минутку');return;}
 var sig=d1+'|'+(withCart?Object.keys(SITE_CART).map(function(k){return k+'x'+(SITE_CART[k].qty||1);}).sort().join(';'):'podbor|'+c);try{var dup=JSON.parse(localStorage.getItem('mf_lead_last')||'null');if(dup&&dup.sig===sig&&Date.now()-dup.ts<600000){showErr('Эта заявка уже отправлена. Мы перезвоним в рабочее время.');return;}}catch(_){}
 var no=favLeadNo();var L=['\ud83d\uded2 ЗАЯВКА \u2116'+no+' \u2014 мебель-фаворит.рф',''];L.push('ФИО: '+n);L.push('Телефон: '+p1);L.push('Телефон для мессенджеров: '+(noMsg?p2:'тот же'));L.push('Договор отправить: '+doc+(noMsg?' (на телефон для мессенджеров)':''));if(withCart){L.push('');if(gv.mode==='pickup'){L.push('Получение: Самовывоз (Западная, 16а)');}
 else{L.push('Получение: Доставка \u2014 '+gv.city+' ('+favRub(gv.price)+')');L.push('Адрес: '+addr);L.push('Грузчики: '+(loaders?(favSterl(gv.city)?'нужны (1000 \u20bd)':'нужны (за город \u2014 уточним)'):'не нужны'));}
 L.push('Оплата: '+gv.pay);var stm=favCartStockSummary();if(stm==='stock')L.push('Наличие: всё в наличии (привоз пт, '+favRuDate(favNextBatch().fri)+')');else if(stm==='order')L.push('Наличие: всё под заказ (2\u20134 нед., до 30 раб. дн.)');else if(stm==='mixed')L.push('Наличие: часть в наличии (привоз пт, '+favRuDate(favNextBatch().fri)+'), часть под заказ');}
-if(c)L.push('Комментарий: '+c);if(withCart&&favCartCount()>0){L.push('');L.push(favCartText(true));var sum=favSumCalc();if(sum.total!==favCartTotal()||sum.approx)L.push('Итого с доставкой: '+(sum.approx?'\u2248 ':'')+favRub(sum.total)+(sum.approx?' (грузчики уточнить)':''));}
+if(c)L.push('Комментарий: '+c);L.push('Согласие на обработку ПД: дано на сайте');if(withCart&&favCartCount()>0){L.push('');L.push(favCartText(true));var sum=favSumCalc();if(sum.total!==favCartTotal()||sum.approx)L.push('Итого с доставкой: '+(sum.approx?'\u2248 ':'')+favRub(sum.total)+(sum.approx?' (грузчики уточнить)':''));}
 var msg=L.join('\n');var btn=document.getElementById('favLeadBtn');if(btn){btn.disabled=true;btn.textContent='Отправляем\u2026';}
 var finish=function(ok,errCode){if(ok){try{localStorage.setItem('mf_lead_ts',String(Date.now()));}catch(_){}
 try{localStorage.setItem('mf_lead_last',JSON.stringify({sig:sig,ts:Date.now()}));}catch(_){}
