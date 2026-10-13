@@ -118,7 +118,7 @@ t.textContent=text||'';t.classList.add('show');clearTimeout(window.__favToastTim
       </div>
     </div>
   `;document.body.appendChild(wrap);const close=()=>{wrap.remove();document.removeEventListener('keydown',onKey);};wrap.querySelector('.vkp-close').onclick=close;wrap.querySelector('.vkp-bd').onclick=close;const copyBtn=wrap.querySelector('.vkp-copy');copyBtn.onclick=function(){const ok=copyTextSync(text);if(ok){copyBtn.textContent='✅ Скопировано!';setTimeout(()=>{copyBtn.textContent='📋 Скопировать текст';},2000);}else{const ta=wrap.querySelector('.vkp-text');ta.focus();ta.select();showToast('Зажмите выделенный текст и выберите "Копировать"',5000);}};wrap.querySelector('.vkp-go').onclick=()=>{setTimeout(close,200);};const onKey=(e)=>{if(e.key==='Escape'){close();}};document.addEventListener('keydown',onKey);};function deb(fn,ms){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)}}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
 function uniq(arr){return[...new Set(arr.filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b),'ru'))}
 function imgU(src,w){return src||'';}
 function imgAttrs(src,w){if(!src)return'';return`src="${esc(src)}" data-orig="${esc(src)}" loading="lazy" decoding="async" referrerpolicy="no-referrer"`;}
@@ -302,7 +302,7 @@ ${(()=>{ const mts=(it.c==='Матрасы'&&typeof mattressTileSizes==='functio
 ${it.f?`<div class="pc-meta">🏭 ${esc(it.f)}</div>`:''}
 ${chips.length?`<div class="pc-chips">${chips.map(c=>`<span class="pch">${esc(c)}</span>`).join('')}</div>`:''}
 </div>
-<div class="pc-foot"><div class="pc-price">${pr}</div><button class="btn-ask" onclick="event.preventDefault();event.stopPropagation();openM('${esc(it.id)}')">Узнать</button></div>
+<div class="pc-foot"><div class="pc-price">${String(pr).replace(/^от\s/,'<span class="pc-from">от</span>')}</div><button class="btn-ask" onclick="event.preventDefault();event.stopPropagation();openM('${esc(it.id)}')">Узнать</button></div>
 </a>`;}).join('');adaptCardImages(g);}
 function loadMore(){page++;renderGrid()}
 function tog(k){S[k]=!S[k];const map={op:'togPh',od:'togDm',os:'togSt',oa:'togAv'};const el=document.getElementById(map[k]);if(el)el.classList.toggle('on',S[k]);page=1;apply();}
@@ -1535,11 +1535,11 @@ if(typeof apply==='function')apply();try{const cur=window.__CUR_ITEM__;const mod
 try{if(typeof renderKitComposition==='function')renderKitComposition(cur);}catch(_){}
 try{const poolBox=document.getElementById('mKitPool');if(poolBox&&poolBox.style.display!=='none'&&typeof renderKitPool==='function'){if(typeof saveBuilderSession==='function')saveBuilderSession();renderKitPool(cur);}}catch(_){}}}catch(_){}}
 const STOCK_AUTO_PATHS=['stock-data/stock.xlsx','stock.xlsx'];function applyStockJson(j,source){if(!j||typeof j.map!=='object'||!j.map)return false;const map={};let n=0;for(const k in j.map){const na=normArt(k);if(!na)continue;const q=Number(j.map[k]);map[na]=Number.isFinite(q)?q:0;n++;}
-if(!n)return false;STOCK.loaded=true;STOCK.date=String(j.date||'');STOCK.map=map;applyStock();const el=document.getElementById('ftStock');if(el)el.textContent='остатки обновляются автоматически';console.log('[stock] loaded from '+(source||'stock-data/stock.json')+' ('+n+' позиций)');return true;}
+if(!n)return false;STOCK.loaded=true;STOCK.date=String(j.date||'');STOCK.map=map;applyStock();const el=document.getElementById('ftStock');if(el)el.textContent='остатки обновляются автоматически';return true;}
 function applyStockSnapshot(){try{const c=localStorage.getItem('mf_stock_v1');if(!c)return false;return applyStockJson(JSON.parse(c),'снапшот прошлого визита');}catch(_){return false;}}
 async function tryLoadStockJson(){try{const res=await fetch('stock-data/stock.json?t='+Math.floor(Date.now()/18e5));if(!res.ok)return false;const j=await res.json();if(!applyStockJson(j))return false;try{localStorage.setItem('mf_stock_v1',JSON.stringify(j));}catch(_){}
 return true;}catch(_){return false;}}
-async function tryLoadStock(){if(await tryLoadStockJson())return true;let lastErr=null;for(const path of STOCK_AUTO_PATHS){try{const res=await fetch(path+'?t='+Math.floor(Date.now()/18e5));if(!res.ok)continue;const buf=await res.arrayBuffer();await ensureXLSX();parseAndApplyStockBuffer(buf);const el=document.getElementById('ftStock');if(el)el.textContent='остатки обновляются автоматически';console.log('[stock] loaded from '+path);return true;}catch(e){lastErr=e;}}
+async function tryLoadStock(){if(await tryLoadStockJson())return true;let lastErr=null;for(const path of STOCK_AUTO_PATHS){try{const res=await fetch(path+'?t='+Math.floor(Date.now()/18e5));if(!res.ok)continue;const buf=await res.arrayBuffer();await ensureXLSX();parseAndApplyStockBuffer(buf);const el=document.getElementById('ftStock');if(el)el.textContent='остатки обновляются автоматически';return true;}catch(e){lastErr=e;}}
 if(lastErr)console.warn('[stock] auto load failed',lastErr);return false;}
 function parseAndApplyStockBuffer(buf){const wb=XLSX.read(buf,{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:'',raw:false});const d=extractStockDate(rows);const p=parseStockRows(rows);STOCK.loaded=true;STOCK.date=d;STOCK.map=p.map;applyStock();const el=document.getElementById('ftStock');if(el)el.textContent=d?('остатки от '+d):'остатки загружены';}
 const dApply=deb(()=>{page=1;apply()},260);document.addEventListener('DOMContentLoaded',()=>{const __swLocal=location.hostname==='localhost';const __swWanted=!__swLocal||(function(){try{return new URLSearchParams(location.search).has('sw')||localStorage.getItem('mfSwDev')==='1';}catch(_){return false;}})();if('serviceWorker'in navigator&&__swLocal&&!__swWanted){try{navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));if(window.caches&&caches.delete)caches.delete('mf-data-v1').catch(()=>{});}catch(_){}}
