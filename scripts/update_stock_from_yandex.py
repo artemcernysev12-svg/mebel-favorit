@@ -323,7 +323,7 @@ def find_latest_matching_uid(
                   f"добавлено к найденному поиском {len(added)}")
         else:
             _diag("просмотр последних писем без поиска не удался; остаёмся на результатах поиска")
-    _diag(f"поиск с {format_imap_date(search_start)}: найдено писем от поставщика {len(uids)}; "
+    _diag(f"поиск с {format_imap_date(search_start)}: писем к проверке (поиск + последние) {len(uids)}; "
           f"окно свежести с {cutoff.isoformat(timespec='minutes')} UTC")
 
     matches: list[tuple[datetime, int, bytes]] = []
@@ -343,14 +343,15 @@ def find_latest_matching_uid(
             _subj = decode_mime_header(header_message.get("Subject", ""))
             _senders = {a.casefold() for _n, a in getaddresses(
                 [decode_mime_header(v) for v in header_message.get_all("From", [])]) if a}
-            _diag(f"письмо uid={uid.decode(errors='replace')} дата={received_at.isoformat(timespec='minutes')} "
-                  f"отправитель_совпал={EXPECTED_SENDER.casefold() in _senders} "
-                  f"тема_совпала={_normalized(SUBJECT_FRAGMENT).casefold() in _subj.casefold()} "
-                  f"тема=«{_diag_subject(_subj)}»")
+            # журнал публичного репо: печатаем ТОЛЬКО письма поставщика (чужие темы не светим)
+            if EXPECTED_SENDER.casefold() in _senders:
+                _diag(f"письмо uid={uid.decode(errors='replace')} дата={received_at.isoformat(timespec='minutes')} "
+                      f"отправитель_совпал={EXPECTED_SENDER.casefold() in _senders} "
+                      f"тема_совпала={_normalized(SUBJECT_FRAGMENT).casefold() in _subj.casefold()} "
+                      f"тема=«{_diag_subject(_subj)}»")
         except Exception as _error:  # диагностика не должна ронять робота
             _diag(f"письмо uid={uid!r}: заголовки не разобраны для журнала ({type(_error).__name__})")
         if received_at < cutoff or received_at > now + timedelta(minutes=15):
-            _diag("  → отброшено: вне окна свежести")
             continue
 
         try:
@@ -358,7 +359,6 @@ def find_latest_matching_uid(
         except Exception as error:
             raise MailboxError("Не удалось разобрать заголовки найденного письма.") from error
         if not _message_matches(header_message):
-            _diag("  → отброшено: не совпал отправитель или тема")
             continue
 
         try:
@@ -367,6 +367,7 @@ def find_latest_matching_uid(
             numeric_uid = 0
         matches.append((received_at, numeric_uid, uid))
 
+    _diag(f"подходящих свежих писем: {len(matches)}")
     if not matches:
         return None
     return max(matches, key=lambda item: (item[0], item[1]))[2]
