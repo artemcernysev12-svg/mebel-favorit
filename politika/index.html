@@ -22,7 +22,7 @@
 </head>
 <body>
 <main>
-<a class="back" href="/">← На сайт</a>
+<a class="back" href="/" onclick="try{if(document.referrer&&new URL(document.referrer).host===location.host&&history.length>1){history.back();return false}}catch(e){}">← На сайт</a>
 <h1>Политика обработки персональных данных</h1>
 <p class="muted">Редакция от 13 октября 2026 г.</p>
 
