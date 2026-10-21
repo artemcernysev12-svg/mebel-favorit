@@ -200,7 +200,7 @@
 /* V41_115 (TBT): каталог парсится в Web Worker — главный поток не блокируется 2.2МБ.
    Готово -> window.CATALOG + событие catalog-ready. Фолбэк: обычный <script defer>. */
 (function(){
-  var URL_='catalog.js?v=fae17bcc';
+  var URL_='catalog.js?v=5d81b1e6';
   var settled=false;
   function ready(arr,meta){
     if(settled) return; settled=true;
@@ -230,15 +230,15 @@
 <!-- V41_146: сайтовые скрипты с defer — HTML разбирается без остановок,
      раньше парсер стоял на 718 КБ JS в середине страницы. -->
 <script src="/chpu-routes.js?v=49d1fb6c" defer></script>
-<script src="app.js?v=f9e0de17" defer></script>
-<link rel="stylesheet" href="styles.css?v=5fe2519b">
+<script src="app.js?v=95970f1d" defer></script>
+<link rel="stylesheet" href="styles.css?v=6cbbae44">
 
 
 
 
 
 
-<script id="newsMeta">window.__NEWS__={"date": "2026-10-20", "text": "Новинки: Шкафы и буфеты «Микон»", "btn": "Посмотреть"};</script>
+<script id="newsMeta">window.__NEWS__={"date": "2026-10-21", "text": "Мы сделали сайт удобнее", "btn": "Что изменилось"};</script>
 </head>
 <body>
 
@@ -289,7 +289,7 @@
   <div class="hero-in">
     <div class="hero-txt">
       <div class="hero-badge">🏠 <span id="hBadgeCount">3440</span>+ позиций в наличии и под заказ</div>
-      <h1>Мебель для <b>вашего дома</b><br>в наличии и под заказ</h1>
+      <h1>Мебель для <b>вашего дома</b> <br>в наличии и под заказ</h1>
       <p class="hero-sub">Мебель в Стерлитамаке: Диваны, Шкафы, Кухни, Кровати и многое другое. Доставка по Стерлитамаку и Районам.</p>
       <div class="hero-cta">
         <button class="btn-prim" onclick="goCat()">📦 Смотреть каталог</button>
@@ -891,6 +891,6 @@
      Имя цели должно совпадать с настроенным в кабинете Метрики. --><!-- V41_146: карта, корзина, доставка, отзывы, заявка, фокус-ловушка и ленивые
      загрузчики вынесены в site-ui.js — общий кэшируемый файл вместо инлайна
      в каждой сгенерированной странице. -->
-<script src="site-ui.js?v=64bc0918" defer></script>
+<script src="site-ui.js?v=6e1d70fb" defer></script>
 </body>
 </html>
