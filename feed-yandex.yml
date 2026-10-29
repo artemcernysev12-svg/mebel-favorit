@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-10-29 12:23">
+<yml_catalog date="2026-10-29 19:03">
   <shop>
     <name>Мебель Фаворит</name>
     <company>Мебель Фаворит</company>
@@ -37,7 +37,7 @@
     <offers>
     <offer id="8123795103" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-barselona-raskladnoy-8123795103/</url>
-      <price>113588</price>
+      <price>146200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Barselona/8123795103/01.webp</picture>
@@ -59,7 +59,7 @@
     </offer>
     <offer id="8123590005" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-boston-3-raskladnoy-8123590005/</url>
-      <price>97338</price>
+      <price>125200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Boston/Boston%203/8123590005/01.webp</picture>
@@ -79,7 +79,7 @@
     </offer>
     <offer id="8123387227" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-boston-2-raskladnoy-8123387227/</url>
-      <price>82713</price>
+      <price>106400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Boston/Boston%202/8123387227/01.webp</picture>
@@ -100,7 +100,7 @@
     </offer>
     <offer id="8123381610" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-boston-1-raskladnoy-8123381610/</url>
-      <price>61425</price>
+      <price>79000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Boston/Boston%201/8123381610/01.webp</picture>
@@ -121,7 +121,7 @@
     </offer>
     <offer id="8123495860" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-p-obraznyy-modulnyy-boston-4-raskladnoy-8123495860/</url>
-      <price>119763</price>
+      <price>154000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Boston/Boston%204/8123495860/01.webp</picture>
@@ -141,7 +141,7 @@
     </offer>
     <offer id="8123680074" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-brayton-3-raskladnoy-8123680074/</url>
-      <price>88075</price>
+      <price>113200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Brayton/Brayton%203/8123680074/01.webp</picture>
@@ -165,7 +165,7 @@
     </offer>
     <offer id="8123361657" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-p-obraznyy-modulnyy-brayton-4-raskladnoy-8123361657/</url>
-      <price>111800</price>
+      <price>143800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Brayton/Brayton%204/8123361657/01.webp</picture>
@@ -189,7 +189,7 @@
     </offer>
     <offer id="8122970044" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-brayton-2-raskladnoy-8122970044/</url>
-      <price>76538</price>
+      <price>98400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Brayton/Brayton%202/8122970044/01.webp</picture>
@@ -213,7 +213,7 @@
     </offer>
     <offer id="8122935622" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-brayton-1-raskladnoy-8122935622/</url>
-      <price>57200</price>
+      <price>74800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Brayton/Brayton%201/8122935622/01.webp</picture>
@@ -236,7 +236,7 @@
     </offer>
     <offer id="8123582486" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-bruklin-ud-raskladnoy-8123582486/</url>
-      <price>71663</price>
+      <price>92200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Bruklin/Bruklin%20UD/8123582486/01.webp</picture>
@@ -256,7 +256,7 @@
     </offer>
     <offer id="8123843478" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-bruklin-1-raskladnoy-8123843478/</url>
-      <price>69550</price>
+      <price>89600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Bruklin/Bruklin%201/8123843478/01.webp</picture>
@@ -276,7 +276,7 @@
     </offer>
     <offer id="8123183654" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-bruklin-2-raskladnoy-8123183654/</url>
-      <price>88725</price>
+      <price>114200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Bruklin/Bruklin%202/8123183654/01.webp</picture>
@@ -296,7 +296,7 @@
     </offer>
     <offer id="8123494331" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-bruklin-bd-raskladnoy-8123494331/</url>
-      <price>57525</price>
+      <price>74000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Bruklin/Bruklin%20BD/8123494331/01.webp</picture>
@@ -321,7 +321,7 @@
     </offer>
     <offer id="8123763490" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-vegas-bd-raskladnoy-8123763490/</url>
-      <price>54600</price>
+      <price>70400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Vegas/Vegas%20BD/8123763490/01.webp</picture>
@@ -346,7 +346,7 @@
     </offer>
     <offer id="8123442526" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-vegas-ud-raskladnoy-8123442526/</url>
-      <price>70688</price>
+      <price>91000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Vegas/Vegas%20UD/8123442526/01.webp</picture>
@@ -370,7 +370,7 @@
     </offer>
     <offer id="8123135715" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-verona-310-raskladnoy-8123135715/</url>
-      <price>82063</price>
+      <price>105600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Verona/Verona%203100/8123135715/01.webp</picture>
@@ -394,7 +394,7 @@
     </offer>
     <offer id="8122893802" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-verona-220-raskladnoy-8122893802/</url>
-      <price>56225</price>
+      <price>72400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Verona/Verona%202200/8122893802/01.webp</picture>
@@ -418,7 +418,7 @@
     </offer>
     <offer id="8123289030" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-verona-240-raskladnoy-8123289030/</url>
-      <price>59638</price>
+      <price>76800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Verona/Verona%202400/8123289030/01.webp</picture>
@@ -441,7 +441,7 @@
     </offer>
     <offer id="8123777677" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-verona-280-raskladnoy-8123777677/</url>
-      <price>75400</price>
+      <price>97000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Verona/Verona%202800/8123777677/01.webp</picture>
@@ -465,7 +465,7 @@
     </offer>
     <offer id="8123872589" available="true">
       <url>https://мебель-фаворит.рф/divany/kuhonnyy-ugolok-gloriya-raskladnoy-8123872589/</url>
-      <price>30550</price>
+      <price>41000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Kukhonnye%20ugolki/Gloriya/8123872589/01.webp</picture>
@@ -485,7 +485,7 @@
     </offer>
     <offer id="8123864734" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-dallas-bd-raskladnoy-8123864734/</url>
-      <price>54763</price>
+      <price>67400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Dallas/Dallas%20BD/8123864734/01.webp</picture>
@@ -509,7 +509,7 @@
     </offer>
     <offer id="8123588532" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-dallas-ud-raskladnoy-8123588532/</url>
-      <price>72963</price>
+      <price>97800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Dallas/Dallas%20UD/8123588532/01.webp</picture>
@@ -534,7 +534,7 @@
     </offer>
     <offer id="8123503500" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-dzhersi-raskladnoy-8123503500/</url>
-      <price>55250</price>
+      <price>71200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Dzhersi/8123503500/01.webp</picture>
@@ -559,7 +559,7 @@
     </offer>
     <offer id="8123038480" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-dublin-ud-raskladnoy-8123038480/</url>
-      <price>79138</price>
+      <price>101800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Dublin/Dublin%20L%20udlinennyy/8123038480/01.webp</picture>
@@ -584,7 +584,7 @@
     </offer>
     <offer id="8123351013" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-dublin-2-raskladnoy-8123351013/</url>
-      <price>70688</price>
+      <price>91000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Dublin/Dublin%202/8123351013/01.webp</picture>
@@ -609,7 +609,7 @@
     </offer>
     <offer id="8123348660" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-dublin-raskladnoy-8123348660/</url>
-      <price>72963</price>
+      <price>94000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Dublin/Dublin%20UD/8123348660/01.webp</picture>
@@ -634,7 +634,7 @@
     </offer>
     <offer id="8123596957" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-dublin-bd-raskladnoy-8123596957/</url>
-      <price>60775</price>
+      <price>78200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Dublin/Dublin%20BD/8123596957/01.webp</picture>
@@ -659,7 +659,7 @@
     </offer>
     <offer id="8123490916" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-dublin-3-raskladnoy-8123490916/</url>
-      <price>93438</price>
+      <price>120200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Dublin/Dublin%203/8123490916/01.webp</picture>
@@ -684,7 +684,7 @@
     </offer>
     <offer id="8122936290" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-evro-mini-raskladnoy-8122936290/</url>
-      <price>27300</price>
+      <price>33600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Evro/Evro%20Mini/8122936290/01.webp</picture>
@@ -708,7 +708,7 @@
     </offer>
     <offer id="8123107455" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-evro-md-raskladnoy-8123107455/</url>
-      <price>32175</price>
+      <price>39600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Evro/Evro%20MD%20s%20uzkimi%20podlokotnikami/8123107455/01.webp</picture>
@@ -728,7 +728,7 @@
     </offer>
     <offer id="8123585187" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-evro-md-raskladnoy-8123585187/</url>
-      <price>32175</price>
+      <price>39600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Evro/Evro%20MD/8123585187/01.webp</picture>
@@ -752,7 +752,7 @@
     </offer>
     <offer id="8123227894" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-zheneva-raskladnoy-8123227894/</url>
-      <price>56713</price>
+      <price>73200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Zheneva/8123227894/01.webp</picture>
@@ -777,7 +777,7 @@
     </offer>
     <offer id="8123812963" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-lion-raskladnoy-8123812963/</url>
-      <price>46800</price>
+      <price>60400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Lion/8123812963/01.webp</picture>
@@ -802,7 +802,7 @@
     </offer>
     <offer id="8123458855" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-loft-bd-raskladnoy-8123458855/</url>
-      <price>37375</price>
+      <price>52000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Loft/Loft%20BD/8123458855/01.webp</picture>
@@ -823,7 +823,7 @@
     </offer>
     <offer id="8123391376" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-loft-mini-s-uzkimi-podlokotnikami-raskladnoy-8123391376/</url>
-      <price>25838</price>
+      <price>36000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Loft/Loft%20MD%20s%20uzkim%20podlokotnikom/8123391376/01.webp</picture>
@@ -843,7 +843,7 @@
     </offer>
     <offer id="8123832243" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-loft-mini-raskladnoy-8123832243/</url>
-      <price>25838</price>
+      <price>36000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Loft/Loft%20MD/8123832243/01.webp</picture>
@@ -866,7 +866,7 @@
     </offer>
     <offer id="8123486448" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-loft-bd-raskladnoy-8123486448/</url>
-      <price>37375</price>
+      <price>52000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Loft/Loft%20BD%20s%20uzkim%20podlokotnikom/8123486448/01.webp</picture>
@@ -887,7 +887,7 @@
     </offer>
     <offer id="8123563099" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-madrid-raskladnoy-8123563099/</url>
-      <price>61750</price>
+      <price>79400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Madrid/8123563099/01.webp</picture>
@@ -912,7 +912,7 @@
     </offer>
     <offer id="8123096576" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-mayami-raskladnoy-8123096576/</url>
-      <price>54275</price>
+      <price>73000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Mayami/8123096576/01.webp</picture>
@@ -932,7 +932,7 @@
     </offer>
     <offer id="8123113259" available="true">
       <url>https://мебель-фаворит.рф/divany/kreslo-mariya-kuhonnyy-modul-8123113259/</url>
-      <price>9913</price>
+      <price>12800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Kukhonnye%20ugolki/Mariya/Element%20kresla%20600/8123113259/01.webp</picture>
@@ -953,7 +953,7 @@
     </offer>
     <offer id="8123328581" available="true">
       <url>https://мебель-фаворит.рф/divany/uglovoy-sektor-mariya-kuhonnyy-modul-8123328581/</url>
-      <price>9425</price>
+      <price>12200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Kukhonnye%20ugolki/Mariya/Element%20ugla/8123328581/01.webp</picture>
@@ -972,7 +972,7 @@
     </offer>
     <offer id="8123196094" available="true">
       <url>https://мебель-фаворит.рф/divany/kuhonnyy-ugolok-mariya-8123196094/</url>
-      <price>32663</price>
+      <price>42200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Kukhonnye%20ugolki/Mariya/Kukhonnyy%20ugolok/8123196094/01.webp</picture>
@@ -996,7 +996,7 @@
     </offer>
     <offer id="8123645773" available="true">
       <url>https://мебель-фаворит.рф/divany/mini-divan-mariya-kuhonnyy-modul-8123645773/</url>
-      <price>14300</price>
+      <price>18400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Kukhonnye%20ugolki/Mariya/Element%20divana%201200/8123645773/01.webp</picture>
@@ -1018,7 +1018,7 @@
     </offer>
     <offer id="8123527231" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-marsel-1-raskladnoy-8123527231/</url>
-      <price>92300</price>
+      <price>121000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Marsel/Marsel%201/8123527231/01.webp</picture>
@@ -1040,7 +1040,7 @@
     </offer>
     <offer id="8123447762" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-marsel-3-raskladnoy-8123447762/</url>
-      <price>105463</price>
+      <price>138000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Marsel/Marsel%203/8123447762/01.webp</picture>
@@ -1060,7 +1060,7 @@
     </offer>
     <offer id="8123360472" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-p-obraznyy-modulnyy-marsel-4-raskladnoy-8123360472/</url>
-      <price>135038</price>
+      <price>176800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Marsel/Marsel%204/8123360472/01.webp</picture>
@@ -1080,7 +1080,7 @@
     </offer>
     <offer id="8123338272" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-marsel-2-raskladnoy-8123338272/</url>
-      <price>113750</price>
+      <price>149000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Marsel/Marsel%202/8123338272/01.webp</picture>
@@ -1106,7 +1106,7 @@
     </offer>
     <offer id="8123620667" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-marsel-bd-raskladnoy-8123620667/</url>
-      <price>56713</price>
+      <price>74200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Marsel/Marsel%20MD/8123620667/01.webp</picture>
@@ -1126,7 +1126,7 @@
     </offer>
     <offer id="8123347902" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-milan-raskladnoy-8123347902/</url>
-      <price>51675</price>
+      <price>66600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Milan/Milan%20BD%20s%20myagkimi%20podlokotnikami/8123347902/01.webp</picture>
@@ -1146,7 +1146,7 @@
     </offer>
     <offer id="8123512796" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-milan-raskladnoy-8123512796/</url>
-      <price>53300</price>
+      <price>68600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Milan/Milan%20BD/8123512796/01.webp</picture>
@@ -1171,7 +1171,7 @@
     </offer>
     <offer id="8123530116" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-mishel-raskladnoy-8123530116/</url>
-      <price>36888</price>
+      <price>49400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Mishel/8123530116/01.webp</picture>
@@ -1191,7 +1191,7 @@
     </offer>
     <offer id="8123677715" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-medison-md-raskladnoy-8123677715/</url>
-      <price>26975</price>
+      <price>34800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Medison%20MD/8123677715/01.webp</picture>
@@ -1216,7 +1216,7 @@
     </offer>
     <offer id="8123542247" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-palermo-ud-raskladnoy-8123542247/</url>
-      <price>106275</price>
+      <price>137000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Palermo/8123542247/01.webp</picture>
@@ -1238,7 +1238,7 @@
     </offer>
     <offer id="8123677490" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-pekin-1-raskladnoy-8123677490/</url>
-      <price>62888</price>
+      <price>81000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Pekin/Pekin%201/8123677490/01.webp</picture>
@@ -1258,7 +1258,7 @@
     </offer>
     <offer id="8123527900" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-pekin-2-raskladnoy-8123527900/</url>
-      <price>82550</price>
+      <price>106200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Pekin/Pekin%202/8123527900/01.webp</picture>
@@ -1278,7 +1278,7 @@
     </offer>
     <offer id="8123385682" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-praga-mk-raskladnoy-8123385682/</url>
-      <price>61588</price>
+      <price>83000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Praga/Praga/8123385682/01.webp</picture>
@@ -1300,7 +1300,7 @@
     </offer>
     <offer id="8123701719" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-praga-mk-raskladnoy-8123701719/</url>
-      <price>68900</price>
+      <price>92800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Praga/Praga%20so%20stolikom/8123701719/01.webp</picture>
@@ -1322,7 +1322,7 @@
     </offer>
     <offer id="8123419905" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-rim-raskladnoy-8123419905/</url>
-      <price>31850</price>
+      <price>41000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Rim/8123419905/01.webp</picture>
@@ -1343,7 +1343,7 @@
     </offer>
     <offer id="8123532028" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-rich-3-raskladnoy-8123532028/</url>
-      <price>71988</price>
+      <price>92800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Rich/Rich%203/8123532028/01.webp</picture>
@@ -1368,7 +1368,7 @@
     </offer>
     <offer id="8123206281" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-rich-2-raskladnoy-8123206281/</url>
-      <price>56550</price>
+      <price>72800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Rich/Rich%202/8123206281/01.webp</picture>
@@ -1393,7 +1393,7 @@
     </offer>
     <offer id="8123700317" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-p-obraznyy-modulnyy-rich-4-raskladnoy-8123700317/</url>
-      <price>97338</price>
+      <price>125400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Rich/Rich%204/8123700317/01.webp</picture>
@@ -1418,7 +1418,7 @@
     </offer>
     <offer id="8123307453" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-p-obraznyy-modulnyy-sanremo-4-raskladnoy-8123307453/</url>
-      <price>116188</price>
+      <price>149600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Sanremo/Sanremo%204/8123307453/01.webp</picture>
@@ -1438,7 +1438,7 @@
     </offer>
     <offer id="8123597122" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-sanremo-3-raskladnoy-8123597122/</url>
-      <price>91163</price>
+      <price>117400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Sanremo/Sanremo%203/8123597122/01.webp</picture>
@@ -1458,7 +1458,7 @@
     </offer>
     <offer id="8123146155" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-sanremo-2-raskladnoy-8123146155/</url>
-      <price>65000</price>
+      <price>87200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Sanremo/Sanremo%202/8123146155/01.webp</picture>
@@ -1478,7 +1478,7 @@
     </offer>
     <offer id="8123485462" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-sidney-2-raskladnoy-8123485462/</url>
-      <price>93113</price>
+      <price>119800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Sidney/Sidney%202/8123485462/01.webp</picture>
@@ -1503,7 +1503,7 @@
     </offer>
     <offer id="8123760357" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-sidney-1-raskladnoy-8123760357/</url>
-      <price>71500</price>
+      <price>92000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Sidney/Sidney%201/8123760357/01.webp</picture>
@@ -1529,7 +1529,7 @@
     </offer>
     <offer id="8123362666" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-tokio-3-raskladnoy-8123362666/</url>
-      <price>75888</price>
+      <price>97800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Tokio/Tokio%203/8123362666/01.webp</picture>
@@ -1554,7 +1554,7 @@
     </offer>
     <offer id="8122978875" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-tokio-2-raskladnoy-8122978875/</url>
-      <price>64188</price>
+      <price>82600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Tokio/Tokio%202/8122978875/01.webp</picture>
@@ -1579,7 +1579,7 @@
     </offer>
     <offer id="8123112275" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-p-obraznyy-modulnyy-tokio-4-raskladnoy-8123112275/</url>
-      <price>95550</price>
+      <price>123000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Tokio/Tokio%204/8123112275/01.webp</picture>
@@ -1604,7 +1604,7 @@
     </offer>
     <offer id="8123140972" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-turin-2-raskladnoy-8123140972/</url>
-      <price>86613</price>
+      <price>111400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Turin/Turin%202/8123140972/01.webp</picture>
@@ -1629,7 +1629,7 @@
     </offer>
     <offer id="8123249639" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-turin-1-raskladnoy-8123249639/</url>
-      <price>66138</price>
+      <price>85200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Turin/Turin%201/8123249639/01.webp</picture>
@@ -1654,7 +1654,7 @@
     </offer>
     <offer id="8123646839" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-favorit-4-raskladnoy-8123646839/</url>
-      <price>59313</price>
+      <price>76400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Favorit/Favorit%204/8123646839/01.webp</picture>
@@ -1679,7 +1679,7 @@
     </offer>
     <offer id="8123378709" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-favorit-6-raskladnoy-8123378709/</url>
-      <price>53950</price>
+      <price>69400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Favorit/Favorit%206/8123378709/01.webp</picture>
@@ -1704,7 +1704,7 @@
     </offer>
     <offer id="8123584128" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-p-obraznyy-modulnyy-favorit-2-raskladnoy-8123584128/</url>
-      <price>76538</price>
+      <price>98600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Favorit/Favorit%202/8123584128/01.webp</picture>
@@ -1729,7 +1729,7 @@
     </offer>
     <offer id="8123282013" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-favorit-5-raskladnoy-8123282013/</url>
-      <price>57525</price>
+      <price>74200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Favorit/Favorit%205/8123282013/01.webp</picture>
@@ -1753,7 +1753,7 @@
     </offer>
     <offer id="8122904238" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-favorit-3-raskladnoy-8122904238/</url>
-      <price>63538</price>
+      <price>81800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Favorit/Favorit%203/8122904238/01.webp</picture>
@@ -1777,7 +1777,7 @@
     </offer>
     <offer id="8123884068" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-p-obraznyy-modulnyy-favorit-1-raskladnoy-8123884068/</url>
-      <price>78488</price>
+      <price>101000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Favorit/Favorit%201/8123884068/01.webp</picture>
@@ -1802,7 +1802,7 @@
     </offer>
     <offer id="8123329788" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-yunior-md-raskladnoy-8123329788/</url>
-      <price>23075</price>
+      <price>29800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Yunior/8123329788/01.webp</picture>
@@ -4434,7 +4434,7 @@
     </offer>
     <offer id="4155668774" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-barselona-raskladnoy-4155668774/</url>
-      <price>79000</price>
+      <price>146200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Barselona/4155668774/01.webp</picture>
@@ -4453,7 +4453,7 @@
     </offer>
     <offer id="7387592255" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-barselona-raskladnoy-7387592255/</url>
-      <price>79000</price>
+      <price>146200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Barselona/7387592255/01.webp</picture>
@@ -4479,7 +4479,7 @@
     </offer>
     <offer id="4188343666" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-brayton-1-raskladnoy-4188343666/</url>
-      <price>59800</price>
+      <price>74800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Brayton/Brayton%201/4188343666/01.webp</picture>
@@ -4503,7 +4503,7 @@
     </offer>
     <offer id="7387452486" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-p-obraznyy-modulnyy-brayton-raskladnoy-7387452486/</url>
-      <price>98100</price>
+      <price>130600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Brayton/Brayton%20modulnyy/7387452486/01.webp</picture>
@@ -4530,7 +4530,7 @@
     </offer>
     <offer id="7387272906" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-bruklin-bd-raskladnoy-7387272906/</url>
-      <price>59800</price>
+      <price>74000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Bruklin/Bruklin%20BD/7387272906/01.webp</picture>
@@ -4555,7 +4555,7 @@
     </offer>
     <offer id="4156512923" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-bruklin-bd-raskladnoy-4156512923/</url>
-      <price>57525</price>
+      <price>74000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Bruklin/Bruklin%20BD/4156512923/01.webp</picture>
@@ -4582,7 +4582,7 @@
     </offer>
     <offer id="7387592659" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-bruklin-bd-raskladnoy-7387592659/</url>
-      <price>57525</price>
+      <price>74000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Bruklin/Bruklin%20BD/7387592659/01.webp</picture>
@@ -4603,7 +4603,7 @@
     </offer>
     <offer id="7387836076" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-verona-280-raskladnoy-7387836076/</url>
-      <price>75400</price>
+      <price>97000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Verona/Verona%202800/7387836076/01.webp</picture>
@@ -4630,7 +4630,7 @@
     </offer>
     <offer id="7387070989" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-verona-310-raskladnoy-7387070989/</url>
-      <price>85963</price>
+      <price>105600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Verona/Verona%203100/7387070989/01.webp</picture>
@@ -4657,7 +4657,7 @@
     </offer>
     <offer id="4412329491" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-verona-280-raskladnoy-4412329491/</url>
-      <price>78975</price>
+      <price>97000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Verona/Verona%202800/4412329491/01.webp</picture>
@@ -4684,7 +4684,7 @@
     </offer>
     <offer id="7387321997" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-verona-280-raskladnoy-7387321997/</url>
-      <price>78975</price>
+      <price>97000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Verona/Verona%202800/7387321997/01.webp</picture>
@@ -4711,7 +4711,7 @@
     </offer>
     <offer id="7387563604" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-verona-310-raskladnoy-7387563604/</url>
-      <price>85963</price>
+      <price>105600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Verona/Verona%203100/7387563604/01.webp</picture>
@@ -4738,7 +4738,7 @@
     </offer>
     <offer id="7387255889" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-verona-220-raskladnoy-7387255889/</url>
-      <price>58988</price>
+      <price>72400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Verona/Verona%202200/7387255889/01.webp</picture>
@@ -4762,7 +4762,7 @@
     </offer>
     <offer id="7387219653" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-verona-310-raskladnoy-7387219653/</url>
-      <price>82063</price>
+      <price>105600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Verona/Verona%203100/7387219653/01.webp</picture>
@@ -4789,7 +4789,7 @@
     </offer>
     <offer id="7387712316" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-dublin-bd-raskladnoy-7387712316/</url>
-      <price>60775</price>
+      <price>78200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Dublin/Dublin%20BD/7387712316/01.webp</picture>
@@ -4815,7 +4815,7 @@
     </offer>
     <offer id="4156509822" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-dublin-bd-raskladnoy-4156509822/</url>
-      <price>60775</price>
+      <price>78200</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Dublin/Dublin%20BD/4156509822/01.webp</picture>
@@ -5041,7 +5041,7 @@
     </offer>
     <offer id="4476289875" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-evro-md-raskladnoy-4476289875/</url>
-      <price>33800</price>
+      <price>39600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Evro/Evro%20MD/4476289875/01.webp</picture>
@@ -5067,7 +5067,7 @@
     </offer>
     <offer id="4476494199" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-lion-raskladnoy-4476494199/</url>
-      <price>48425</price>
+      <price>60400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Lion/4476494199/01.webp</picture>
@@ -5092,7 +5092,7 @@
     </offer>
     <offer id="7387814353" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-marsel-2-raskladnoy-7387814353/</url>
-      <price>106925</price>
+      <price>135000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Marsel/Marsel%202/7387814353/01.webp</picture>
@@ -5119,7 +5119,7 @@
     </offer>
     <offer id="4188475319" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-marsel-2-raskladnoy-4188475319/</url>
-      <price>113750</price>
+      <price>149000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Marsel/Marsel%202/4188475319/01.webp</picture>
@@ -5145,7 +5145,7 @@
     </offer>
     <offer id="7387668570" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-milan-raskladnoy-7387668570/</url>
-      <price>55250</price>
+      <price>68600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Milan/Milan%20BD/7387668570/01.webp</picture>
@@ -5172,7 +5172,7 @@
     </offer>
     <offer id="7387948067" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-milan-raskladnoy-7387948067/</url>
-      <price>63213</price>
+      <price>68600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Milan/Milan%20BD/7387948067/01.webp</picture>
@@ -5198,7 +5198,7 @@
     </offer>
     <offer id="4412052414" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-milan-raskladnoy-4412052414/</url>
-      <price>53300</price>
+      <price>68600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Milan/Milan%20BD/4412052414/01.webp</picture>
@@ -5276,7 +5276,7 @@
     </offer>
     <offer id="4187648036" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-medison-md-raskladnoy-4187648036/</url>
-      <price>26975</price>
+      <price>34800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Medison%20MD/4187648036/01.webp</picture>
@@ -5322,7 +5322,7 @@
     </offer>
     <offer id="4156112768" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-rich-2-raskladnoy-4156112768/</url>
-      <price>58663</price>
+      <price>72800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Rich/Rich%202/4156112768/01.webp</picture>
@@ -5345,7 +5345,7 @@
     </offer>
     <offer id="4155787493" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-p-obraznyy-modulnyy-rich-4-raskladnoy-4155787493/</url>
-      <price>100750</price>
+      <price>125400</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Rich/Rich%204/4155787493/01.webp</picture>
@@ -5370,7 +5370,7 @@
     </offer>
     <offer id="7387734350" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-rich-2-raskladnoy-7387734350/</url>
-      <price>56550</price>
+      <price>72800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Rich/Rich%202/7387734350/01.webp</picture>
@@ -5396,7 +5396,7 @@
     </offer>
     <offer id="4156104794" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-sidney-2-raskladnoy-4156104794/</url>
-      <price>97338</price>
+      <price>119800</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Sidney/Sidney%202/4156104794/01.webp</picture>
@@ -5421,7 +5421,7 @@
     </offer>
     <offer id="4156248354" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-sidney-1-raskladnoy-4156248354/</url>
-      <price>71500</price>
+      <price>92000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Sidney/Sidney%201/4156248354/01.webp</picture>
@@ -5444,7 +5444,7 @@
     </offer>
     <offer id="7387476533" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-pryamoy-modulnyy-sidney-1-raskladnoy-7387476533/</url>
-      <price>74913</price>
+      <price>92000</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Sidney/Sidney%201/7387476533/01.webp</picture>
@@ -5471,7 +5471,7 @@
     </offer>
     <offer id="4411649930" available="true">
       <url>https://мебель-фаворит.рф/divany/divan-uglovoy-modulnyy-tokio-2-raskladnoy-4411649930/</url>
-      <price>64188</price>
+      <price>82600</price>
       <currencyId>RUB</currencyId>
       <categoryId>3</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Divany/Amik/Divany/Tokio/Tokio%202/4411649930/01.webp</picture>
@@ -5496,7 +5496,7 @@
     </offer>
     <offer id="8123806861" available="true">
       <url>https://мебель-фаворит.рф/kresla/kreslo-reklayner-brayton-8123806861/</url>
-      <price>38350</price>
+      <price>49400</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kresla/Amik/Reklaynery/Brayton/8123806861/01.webp</picture>
@@ -5514,7 +5514,7 @@
     </offer>
     <offer id="8123023825" available="true">
       <url>https://мебель-фаворит.рф/kresla/kreslo-reklayner-orlean-8123023825/</url>
-      <price>41763</price>
+      <price>54000</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kresla/Amik/Reklaynery/Orlean/8123023825/01.webp</picture>
@@ -5577,7 +5577,7 @@
     </offer>
     <offer id="8123830592" available="true">
       <url>https://мебель-фаворит.рф/kresla/kreslo-provans-8123830592/</url>
-      <price>16575</price>
+      <price>21400</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kresla/Amik/Kresla/Provans/8123830592/01.webp</picture>
@@ -5600,7 +5600,7 @@
     </offer>
     <offer id="4412112194" available="true">
       <url>https://мебель-фаворит.рф/kresla/kreslo-provans-4412112194/</url>
-      <price>16575</price>
+      <price>21400</price>
       <currencyId>RUB</currencyId>
       <categoryId>9</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Kresla/Amik/Kresla/Provans/4412112194/01.webp</picture>
@@ -5641,7 +5641,7 @@
     </offer>
     <offer id="8123818767" available="true">
       <url>https://мебель-фаворит.рф/pufy-i-banketki/puf-kvadratnyy-8123818767/</url>
-      <price>3575</price>
+      <price>4400</price>
       <currencyId>RUB</currencyId>
       <categoryId>20</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Pufy%20i%20banketki/Amik/Puf%20kvadratnyy/8123818767/01.webp</picture>
@@ -5657,7 +5657,7 @@
     </offer>
     <offer id="8123443308" available="true">
       <url>https://мебель-фаворит.рф/pufy-i-banketki/puf-kruglyy-8123443308/</url>
-      <price>3575</price>
+      <price>4400</price>
       <currencyId>RUB</currencyId>
       <categoryId>20</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Pufy%20i%20banketki/Amik/Puf%20kruglyy/8123443308/01.webp</picture>
@@ -5673,7 +5673,7 @@
     </offer>
     <offer id="8123861280" available="true">
       <url>https://мебель-фаворит.рф/pufy-i-banketki/puf-ovalnyy-8123861280/</url>
-      <price>8450</price>
+      <price>10400</price>
       <currencyId>RUB</currencyId>
       <categoryId>20</categoryId>
       <picture>https://artemcernysev12-svg.github.io/catalog-favorit1/items/Pufy%20i%20banketki/Amik/Puf%20ovalnyy/8123861280/01.webp</picture>
